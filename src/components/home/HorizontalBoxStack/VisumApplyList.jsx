@@ -5,7 +5,7 @@ import { ROUTES } from 'res/constants/routes';
 
 export const VisumApplyList = ({ navigation }) => {
     const onPressHandler = () => {
-        navigation.navigate(ROUTES.PROFILE);
+        navigation.navigate(ROUTES.VISA_APP);
     };
 
     return (
