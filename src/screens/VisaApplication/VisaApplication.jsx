@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { RegisterForm } from './steps/RegisterForm';
-import { View, Button } from 'react-native';
+import { ScrollView, View, Button } from 'react-native';
 import { Headline } from 'components/general/Typography/Typography';
 
 export const VisaApplication = () => {
@@ -21,6 +21,7 @@ export const VisaApplication = () => {
                 <View>
                     <Headline>Test</Headline>
                     <Button onPress={() => nextStep()} title='Next' />
+                    <Button onPress={() => previousStep()} title='Back' />
                 </View>
             ),
         },
@@ -30,6 +31,7 @@ export const VisaApplication = () => {
                 <View>
                     <Headline>Test 1</Headline>
                     <Button onPress={() => nextStep()} title='Next' />
+                    <Button onPress={() => previousStep()} title='Back' />
                 </View>
             ),
         },
@@ -44,5 +46,9 @@ export const VisaApplication = () => {
         },
     ];
 
-    return <Layout>{steps[currentStep].content}</Layout>;
+    return (
+        <ScrollView>
+            <Layout>{steps[currentStep].content}</Layout>
+        </ScrollView>
+    );
 };
