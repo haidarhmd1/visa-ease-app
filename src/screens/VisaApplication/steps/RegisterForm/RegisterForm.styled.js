@@ -6,3 +6,8 @@ export const FormInputWrapper = styled.View`
     padding: 15px;
     border-radius: 7px;
 `;
+
+export const StyledSignatureView = styled.View`
+    height: 400px;
+    margin-top: 16;
+`;

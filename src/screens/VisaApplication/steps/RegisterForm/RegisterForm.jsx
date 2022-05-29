@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Formik } from 'formik';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from 'react-native-date-picker';
+import { Picker } from '@react-native-picker/picker';
 import {
     Headline,
     RegularCaption,
 } from 'components/general/Typography/Typography';
-import { View, Button, Picker } from 'react-native';
+import Signature from 'react-native-signature-canvas';
+
+import { View, Button, StyleSheet, TouchableHighlight } from 'react-native';
 import { visaApplicationRegisterValidationSchema } from './RegisterForm.scheme';
 import { customerinitValueForm } from './RegisterForm.helper';
 import { ErrorText, StyledTextInput } from 'components/general/Form';
-import { FormInputWrapper } from './RegisterForm.styled';
+import { FormInputWrapper, StyledSignatureView } from './RegisterForm.styled';
 
-export const RegisterForm = ({ next }) => {
+export const RegisterForm = ({ next, setScrollEnabled }) => {
+    const ref = useRef();
     const [selectedGender, setSelectedGender] = useState();
     const [selectedHasCruise, setSelectedHasCruise] = useState();
     const [
@@ -24,9 +28,32 @@ export const RegisterForm = ({ next }) => {
     ] = useState();
     const [selectedEntireTravelInUAE, setSelectedEntireTravelInUAE] =
         useState();
-    const [selectedStartDate, setSelectedStartDate] = useState('2016-05-15');
-    const [selectedReturnDate, setSelectedReturnDate] =
-        useState(selectedStartDate);
+
+    const [startDate, setStartDate] = useState(new Date());
+    const [returnDate, setReturnDate] = useState(new Date());
+
+    const [startDateModalOpen, setStartDateModalOpen] = useState(false);
+    const [returnDateModalOpen, setReturnDateModalOpen] = useState(false);
+
+    console.log('startDateModalOpen', startDateModalOpen);
+
+    const handleSignature = (signature) => {
+        // console.log(signature);
+        console.log('signature');
+    };
+
+    const handleEmpty = () => {
+        console.log('Empty');
+    };
+
+    const handleClear = () => {
+        console.log('clear success!');
+    };
+
+    const handleEnd = () => {
+        setScrollEnabled(true);
+        ref.current.readSignature();
+    };
 
     return (
         <View>
@@ -278,60 +305,16 @@ export const RegisterForm = ({ next }) => {
                         <FormInputWrapper>
                             <RegularCaption>Travel start date</RegularCaption>
                             <DatePicker
-                                style={{
-                                    width: '100%',
-                                    marginTop: 16,
-                                    marginBottom: 8,
-                                }}
-                                date={selectedStartDate}
-                                mode='date'
-                                placeholder='Select a Start Travel Date'
-                                format='YYYY-MM-DD'
-                                minDate='2020-01-01'
-                                maxDate='2040-06-01'
-                                confirmBtnText='Confirm'
-                                cancelBtnText='Cancel'
-                                customStyles={{
-                                    dateIcon: {
-                                        position: 'absolute',
-                                        left: 0,
-                                        top: 4,
-                                        marginLeft: 0,
-                                    },
-                                }}
-                                onDateChange={(date) => {
-                                    setSelectedStartDate(date);
-                                }}
+                                date={startDate}
+                                onDateChange={setStartDate}
                             />
                         </FormInputWrapper>
 
                         <FormInputWrapper>
                             <RegularCaption>Return Flight Date</RegularCaption>
                             <DatePicker
-                                style={{
-                                    width: '100%',
-                                    marginTop: 16,
-                                    marginBottom: 8,
-                                }}
-                                date={selectedReturnDate}
-                                mode='date'
-                                placeholder='Select a Travel Date'
-                                format='YYYY-MM-DD'
-                                minDate={selectedStartDate}
-                                maxDate='2040-06-01'
-                                confirmBtnText='Confirm'
-                                cancelBtnText='Cancel'
-                                customStyles={{
-                                    dateIcon: {
-                                        position: 'absolute',
-                                        left: 0,
-                                        top: 4,
-                                        marginLeft: 0,
-                                    },
-                                }}
-                                onDateChange={(date) => {
-                                    setSelectedReturnDate(date);
-                                }}
+                                date={returnDate}
+                                onDateChange={setReturnDate}
                             />
                         </FormInputWrapper>
 
@@ -419,16 +402,16 @@ export const RegisterForm = ({ next }) => {
 
                         <FormInputWrapper>
                             <RegularCaption>Signature</RegularCaption>
-                            <StyledTextInput
-                                name='signature'
-                                placeholder='Signature'
-                                onChangeText={handleChange('signature')}
-                                onBlur={handleBlur('signature')}
-                                value={values.signature}
-                            />
-                            {errors.signature && touched.signature && (
-                                <ErrorText>{errors.signature}</ErrorText>
-                            )}
+                            <StyledSignatureView>
+                                <Signature
+                                    ref={ref}
+                                    onEnd={handleEnd}
+                                    onOK={handleSignature}
+                                    onEmpty={handleEmpty}
+                                    onClear={handleClear}
+                                    onBegin={() => setScrollEnabled(false)}
+                                />
+                            </StyledSignatureView>
                         </FormInputWrapper>
                         <Button
                             onPress={handleSubmit}

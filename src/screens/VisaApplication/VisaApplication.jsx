@@ -5,7 +5,10 @@ import { ScrollView, View, Button } from 'react-native';
 import { Headline } from 'components/general/Typography/Typography';
 
 export const VisaApplication = () => {
+    const [scrollEnabled, setScrollEnabled] = useState(true);
     const [currentStep, setCurrentStep] = useState(0);
+
+    console.log('scrollEnabled', scrollEnabled);
 
     const nextStep = () => setCurrentStep(currentStep + 1);
     const previousStep = () => setCurrentStep(currentStep - 1);
@@ -13,7 +16,13 @@ export const VisaApplication = () => {
     const steps = [
         {
             id: 0,
-            content: <RegisterForm next={nextStep} step={currentStep} />,
+            content: (
+                <RegisterForm
+                    next={nextStep}
+                    step={currentStep}
+                    setScrollEnabled={setScrollEnabled}
+                />
+            ),
         },
         {
             id: 1,
@@ -47,7 +56,7 @@ export const VisaApplication = () => {
     ];
 
     return (
-        <ScrollView>
+        <ScrollView scrollEnabled={scrollEnabled}>
             <Layout>{steps[currentStep].content}</Layout>
         </ScrollView>
     );
