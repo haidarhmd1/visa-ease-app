@@ -1,4 +1,2 @@
-import VisaStarHeroImage from './visaStarHeroImage.png';
-import DubaiCardImage from './fredrikOhlanderUnsplash.jpg';
-
-export { VisaStarHeroImage, DubaiCardImage };
+export VisaStarHeroImage from './visaStarHeroImage.png';
+export DubaiCardImage from './fredrikOhlanderUnsplash.jpg';

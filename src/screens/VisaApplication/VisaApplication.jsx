@@ -1,63 +1,41 @@
 import React, { useState } from 'react';
 import { Layout } from 'components/general/Layout/Layout';
-import { RegisterForm } from './steps/RegisterForm';
-import { ScrollView, View, Button } from 'react-native';
-import { Headline } from 'components/general/Typography/Typography';
+import { ScrollView } from 'react-native';
+import { GeneralInformation } from './steps/GeneralInformation';
+import { VisaInformation } from './steps/VisaInformation';
+import { FlightInformation } from './steps/FlightInformation';
+import { Agreement } from './steps/Agreement';
+import { customerinitValueForm } from './RegisterForm.helper';
 
 export const VisaApplication = () => {
-    const [scrollEnabled, setScrollEnabled] = useState(true);
-    const [currentStep, setCurrentStep] = useState(0);
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+  const [data, setData] = useState(customerinitValueForm);
+  const [currentStep, setCurrentStep] = useState(0);
 
-    console.log('scrollEnabled', scrollEnabled);
+  const nextStep = newData => {
+    setData(step => ({ ...step, ...newData }));
+    setCurrentStep(step => step + 1);
+  };
+  const previousStep = newData => {
+    setData(step => ({ ...step, ...newData }));
+    setCurrentStep(step => step - 1);
+  };
 
-    const nextStep = () => setCurrentStep(currentStep + 1);
-    const previousStep = () => setCurrentStep(currentStep - 1);
-
-    const steps = [
-        {
-            id: 0,
-            content: (
-                <RegisterForm
-                    next={nextStep}
-                    step={currentStep}
-                    setScrollEnabled={setScrollEnabled}
-                />
-            ),
-        },
-        {
-            id: 1,
-            content: (
-                <View>
-                    <Headline>Test</Headline>
-                    <Button onPress={() => nextStep()} title='Next' />
-                    <Button onPress={() => previousStep()} title='Back' />
-                </View>
-            ),
-        },
-        {
-            id: 2,
-            content: (
-                <View>
-                    <Headline>Test 1</Headline>
-                    <Button onPress={() => nextStep()} title='Next' />
-                    <Button onPress={() => previousStep()} title='Back' />
-                </View>
-            ),
-        },
-        {
-            id: 3,
-            content: (
-                <View>
-                    <Headline>Test 2</Headline>
-                    <Button onPress={() => nextStep()} title='Next' />
-                </View>
-            ),
-        },
-    ];
-
-    return (
-        <ScrollView scrollEnabled={scrollEnabled}>
-            <Layout>{steps[currentStep].content}</Layout>
-        </ScrollView>
-    );
+  const steps = [
+    <GeneralInformation key={0} next={nextStep} data={data} />,
+    <VisaInformation key={1} next={nextStep} prev={previousStep} data={data} />,
+    <FlightInformation
+      key={2}
+      next={nextStep}
+      prev={previousStep}
+      data={data}
+    />,
+    <Agreement key={3} />,
+  ];
+  console.log('data', data);
+  return (
+    <ScrollView scrollEnabled={scrollEnabled}>
+      <Layout>{steps[currentStep]}</Layout>
+    </ScrollView>
+  );
 };

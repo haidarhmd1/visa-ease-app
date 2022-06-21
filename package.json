@@ -4,13 +4,30 @@
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky install",
+    "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write $PWD/'src/**/*.{js,jsx}'",
+    "lint": "yarn eslint && yarn stylelint",
+    "eslint": "eslint 'src/**/*.{js,jsx}'",
+    "stylelint": "stylelint 'src/**/*.{js,jsx}'",
+    "clean-install": "rm -rf node_modules && yarn && cd ios && pod install --repo-update && cd .."
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": "eslint --quiet"
+  },
+  "eslintConfig": {
+    "extends": [
+      "prettier"
+    ]
   },
   "dependencies": {
+    "@babel/eslint-parser": "7.18.2",
     "@react-native-picker/picker": "^2.4.1",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
+    "@types/recompose": "^0.30.10",
+    "date-fns": "^2.28.0",
     "expo": "~44.0.2",
     "expo-camera": "~12.1.2",
     "expo-cli": "^5.4.7",
@@ -19,10 +36,12 @@
     "expo-status-bar": "~1.2.0",
     "formik": "^2.2.9",
     "global": "^4.4.0",
+    "husky": "^8.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-date-picker": "^4.2.2",
+    "react-native-formik": "^1.7.8",
+    "react-native-masked-text": "^1.13.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-signature-canvas": "^4.3.0",
@@ -30,13 +49,36 @@
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
     "react-native-webview": "^11.18.2",
+    "recompose": "^0.30.0",
     "styled-components": "^5.3.5",
     "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/styled-components": "^5.1.25",
-    "babel-plugin-module-resolver": "^4.1.0"
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-config-react-app": "^7.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.29.2",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-react-native": "4.0.0",
+    "eslint-plugin-sonarjs": "^0.12.0",
+    "eslint-plugin-unicorn": "39",
+    "lint-staged": "13.0.1",
+    "prettier": "2.2.1",
+    "@types/styled-components-react-native": "5.1.1",
+    "stylelint": "13.13.1",
+    "stylelint-config-prettier": "8.0.2",
+    "stylelint-config-recommended": "4.0.0",
+    "stylelint-config-styled-components": "0.1.1",
+    "stylelint-prettier": "1.2.0",
+    "stylelint-processor-styled-components": "1.10.0"
   },
   "private": true
 }

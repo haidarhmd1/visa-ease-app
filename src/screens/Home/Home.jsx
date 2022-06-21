@@ -6,13 +6,13 @@ import { SectionHeader } from 'components/general/SectionHeader';
 import { Layout } from 'components/general/Layout/Layout';
 
 export const Home = ({ navigation }) => {
-    return (
-        <ScrollView>
-            <Layout>
-                <ImageSlider />
-                <SectionHeader title='Visum' />
-                <VisumApplyList navigation={navigation} />
-            </Layout>
-        </ScrollView>
-    );
+  return (
+    <ScrollView>
+      <Layout>
+        <ImageSlider />
+        <SectionHeader title="Visum" />
+        <VisumApplyList navigation={navigation} />
+      </Layout>
+    </ScrollView>
+  );
 };
