@@ -5,6 +5,7 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "eject": "expo eject",
     "prepare": "husky install",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write $PWD/'src/**/*.{js,jsx}'",
     "lint": "yarn eslint && yarn stylelint",
@@ -80,5 +81,7 @@
     "stylelint-prettier": "1.2.0",
     "stylelint-processor-styled-components": "1.10.0"
   },
-  "private": true
+  "private": true,
+  "name": "visastar-expo-app",
+  "version": "1.0.0"
 }
