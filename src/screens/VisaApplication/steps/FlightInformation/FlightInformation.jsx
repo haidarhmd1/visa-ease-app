@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, View } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
@@ -6,6 +6,7 @@ import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInputMask } from 'components/general/Form';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
+import { flightInformationValidationSchema } from './FlightInformation.schema';
 
 export const FlightInformation = ({ next, prev, data }) => {
   const [
@@ -20,7 +21,11 @@ export const FlightInformation = ({ next, prev, data }) => {
 
   return (
     <View>
-      <Formik initialValues={data} onSubmit={values => next(values)}>
+      <Formik
+        initialValues={useMemo(() => data, [data])}
+        // validationSchema={flightInformationValidationSchema}
+        onSubmit={values => next(values)}
+      >
         {({
           handleChange,
           handleBlur,
@@ -37,9 +42,9 @@ export const FlightInformation = ({ next, prev, data }) => {
               <StyledTextInputMask
                 name="travelStartDate"
                 type="datetime"
-                placeholder="YYYY-MM-dd"
+                placeholder="dd/MM/YYYY"
                 options={{
-                  format: 'YYYY-MM-dd',
+                  format: 'dd/MM/YYYY',
                 }}
                 onChangeText={handleChange('travelStartDate')}
                 onBlur={handleBlur('travelStartDate')}
@@ -56,9 +61,9 @@ export const FlightInformation = ({ next, prev, data }) => {
               <StyledTextInputMask
                 name="returnFlightDate"
                 type="datetime"
-                placeholder="YYYY-MM-dd"
+                placeholder="dd/MM/YYYY"
                 options={{
-                  format: 'YYYY-MM-dd',
+                  format: 'dd/MM/YYYY',
                 }}
                 onChangeText={handleChange('returnFlightDate')}
                 onBlur={handleBlur('returnFlightDate')}
@@ -88,7 +93,7 @@ export const FlightInformation = ({ next, prev, data }) => {
 
             <FormInputWrapper>
               <RegularCaption>
-                Invoice Recipient is same as Aplicant?
+                Invoice Recipient is same as Applicant?
               </RegularCaption>
               <Picker
                 selectedValue={selectedInvoiceRecipientSameAsApplicant}

@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button, View } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
+import { visaInformationValidationSchema } from 'screens/VisaApplication/steps/VisaInformation/VisaInformation.schema';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 
 export const VisaInformation = ({ next, prev, data }) => {
   const [selectedHasCruise, setSelectedHasCruise] = useState();
   return (
     <View>
-      <Formik initialValues={data} onSubmit={values => next(values)}>
+      <Formik
+        initialValues={useMemo(() => data, [data])}
+        // validationSchema={visaInformationValidationSchema}
+        onSubmit={values => next(values)}
+      >
         {({
           handleChange,
           handleBlur,
@@ -104,9 +109,6 @@ export const VisaInformation = ({ next, prev, data }) => {
                 editable={false}
                 selectTextOnFocus={false}
               />
-              {errors.kindOfVisa && touched.kindOfVisa && (
-                <ErrorText>{errors.kindOfVisa}</ErrorText>
-              )}
             </FormInputWrapper>
 
             <FormInputWrapper>

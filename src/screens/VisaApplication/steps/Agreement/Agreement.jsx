@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Button, View } from 'react-native';
 import { Formik } from 'formik';
 import { RegularCaption } from 'components/general/Typography/Typography';
@@ -13,6 +13,7 @@ import {
   FormInputWrapper,
   StyledSignatureView,
 } from '../RegisterForm/RegisterForm.styled';
+import { agreementValidationSchema } from './Agreement.schema';
 
 const webStyle = `.m-signature-pad--footer
     {
@@ -23,10 +24,14 @@ const webStyle = `.m-signature-pad--footer
 	}
 `;
 
-export const Agreement = ({ next, setScrollEnabled }) => {
+export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
   return (
     <View>
-      <Formik onSubmit={values => console.log('values', values)}>
+      <Formik
+        initialValues={useMemo(() => data, [data])}
+        validationSchema={agreementValidationSchema}
+        onSubmit={values => next(values)}
+      >
         {({
           handleChange,
           handleBlur,
@@ -57,9 +62,9 @@ export const Agreement = ({ next, setScrollEnabled }) => {
               <StyledTextInputMask
                 name="dateOfSignature"
                 type="datetime"
-                placeholder="YYYY-MM-dd"
+                placeholder="dd/MM/YYYY"
                 options={{
-                  format: 'YYYY-MM-dd',
+                  format: 'dd/MM/YYYY',
                 }}
                 onChangeText={handleChange('dateOfSignature')}
                 onBlur={handleBlur('dateOfSignature')}
@@ -91,7 +96,11 @@ export const Agreement = ({ next, setScrollEnabled }) => {
                 <ErrorText>{errors.signature}</ErrorText>
               )}
             </FormInputWrapper>
-            <Button onPress={handleSubmit} title="Next" disabled={!isValid} />
+            {/* <Button onPress={handleSubmit} title="Next" disabled={!isValid} /> */}
+            <FormInputWrapper>
+              <Button onPress={handleSubmit} title="Next" />
+              <Button onPress={prev} title="Back" />
+            </FormInputWrapper>
           </>
         )}
       </Formik>

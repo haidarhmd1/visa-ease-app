@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
+import { generalInformationValidationSchema } from 'screens/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
-import { generalInformationValidationSchema } from './GeneralInformation.schema';
 
-export const GeneralInformation = ({ next, data }) => {
+export const GeneralInformation = ({ next, prev, data }) => {
   const [selectedGender, setSelectedGender] = useState();
 
   return (
     <Formik
-      initialValues={data}
-      validationSchema={generalInformationValidationSchema}
+      initialValues={useMemo(() => data, [data])}
+      // validationSchema={generalInformationValidationSchema}
       onSubmit={values => next(values)}
     >
       {({
@@ -67,19 +67,6 @@ export const GeneralInformation = ({ next, data }) => {
               <ErrorText>{errors.street}</ErrorText>
             )}
           </FormInputWrapper>
-          {/* <FormInputWrapper>
-                        <RegularCaption>Street Number</RegularCaption>
-                        <StyledTextInput
-                            name='streetNr'
-                            placeholder='Street Number'
-                            onChangeText={handleChange('streetNr')}
-                            onBlur={handleBlur('streetNr')}
-                            value={values.streetNr}
-                        />
-                        {errors.streetNr && touched.streetNr && (
-                            <ErrorText>{errors.streetNr}</ErrorText>
-                        )}
-                    </FormInputWrapper> */}
           <FormInputWrapper>
             <RegularCaption>ZIP Code</RegularCaption>
             <StyledTextInput
@@ -165,6 +152,7 @@ export const GeneralInformation = ({ next, data }) => {
           </FormInputWrapper>
           <FormInputWrapper>
             <Button onPress={handleSubmit} title="Next" />
+            <Button onPress={prev} title="Back" />
           </FormInputWrapper>
         </>
       )}

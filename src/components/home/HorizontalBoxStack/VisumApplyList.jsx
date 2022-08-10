@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { DubaiCardImage } from 'assets/images';
+import { EmiratesCardImage } from 'assets/images';
 import { TouchableCard } from 'components/general/TouchableCard';
 import { ROUTES } from 'res/constants/routes';
 
@@ -13,8 +13,8 @@ export const VisumApplyList = ({ navigation }) => {
     <View>
       <TouchableCard
         isFullWidth={false}
-        backgroundImage={DubaiCardImage}
-        Title="Dubai"
+        backgroundImage={EmiratesCardImage}
+        Title="Verinigte Arabische Emirate"
         onPress={onPressHandler}
       />
     </View>

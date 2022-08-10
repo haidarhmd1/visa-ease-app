@@ -9,7 +9,7 @@ export const Home = ({ navigation }) => {
   return (
     <ScrollView>
       <Layout>
-        <ImageSlider />
+        {/* <ImageSlider /> */}
         <SectionHeader title="Visum" />
         <VisumApplyList navigation={navigation} />
       </Layout>

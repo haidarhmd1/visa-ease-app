@@ -13,7 +13,7 @@ export const TouchableCard = ({
   onPress,
 }) => {
   return (
-    <StyledTouchableOpacity isFullWidth={isFullWidth} onPress={onPress}>
+    <StyledTouchableOpacity isFullWidth onPress={onPress}>
       <StyledImage source={backgroundImage} />
       <TextWrapper>
         <SubHeadline>{Title}</SubHeadline>
