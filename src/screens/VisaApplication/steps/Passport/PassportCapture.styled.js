@@ -1,4 +1,8 @@
-import { SubHeadline } from 'components/general/Typography/Typography';
+import {
+  BodyText,
+  SubHeadline,
+  SubHeadlineBold,
+} from 'components/general/Typography/Typography';
 import { Camera } from 'expo-camera';
 import styled from 'styled-components/native';
 
@@ -6,29 +10,49 @@ export const CameraWrapper = styled.View``;
 
 export const StyledCamera = styled(Camera)`
   position: relative;
-  height: 325px;
-  margin-top: 25px;
+  height: 425px;
   border-radius: 8px;
   overflow: hidden;
-`;
-
-export const CameraOverlay = styled.View`
-  width: 80%;
-  margin: auto;
-  height: 80%;
-  background-color: transparent;
-  border-radius: 8px;
-  border-width: 2px;
-  border-color: white;
-`;
-
-export const InfoCameraTextWrapper = styled.View`
-  position: absolute;
-  bottom: 25px;
-  width: 100%;
 `;
 
 export const StyledSubHeadline = styled(SubHeadline)`
   color: white;
   text-align: center;
+`;
+
+export const StyledImage = styled.Image`
+  width: 100%;
+  height: 425px;
+  border-radius: 8px;
+`;
+
+export const ViewWrapper = styled.View`
+  width: 100%;
+  margin: auto;
+`;
+
+export const StyledInformationCard = styled.View`
+  background-color: white;
+  width: 100%;
+  min-height: 100px;
+  height: auto;
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 8px;
+`;
+
+export const StyledWarningInformationCard = styled(StyledInformationCard)`
+  background-color: #fffbe6;
+`;
+
+export const StyledSubHeadlineBold = styled(SubHeadlineBold)`
+  margin-bottom: 12px;
+`;
+
+export const StyledBodyText = styled(BodyText)`
+  margin-bottom: 8px;
+`;
+
+export const StyledCardItemWrapperText = styled.Text`
+margin
 `;
