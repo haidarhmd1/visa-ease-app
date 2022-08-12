@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button, View } from 'react-native';
+import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { RegularCaption } from 'components/general/Typography/Typography';
 import Signature from 'react-native-signature-canvas';
@@ -9,6 +9,7 @@ import {
   StyledTextInput,
   StyledTextInputMask,
 } from 'components/general/Form';
+import { Layout } from 'components/general/Layout/Layout';
 import {
   FormInputWrapper,
   StyledSignatureView,
@@ -20,16 +21,16 @@ const webStyle = `.m-signature-pad--footer
         padding: 0;
     }
 	.save {
-		display: none;
+		// display: none;
 	}
 `;
 
 export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
   return (
-    <View>
+    <Layout>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        validationSchema={agreementValidationSchema}
+        // validationSchema={agreementValidationSchema}
         onSubmit={values => next(values)}
       >
         {({
@@ -82,8 +83,8 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                   webStyle={webStyle}
                   onEnd={() => setScrollEnabled(true)}
                   descriptionText=""
-                  onOK={signature => {
-                    setFieldValue('signature', signature);
+                  onOK={async signature => {
+                    await setFieldValue('signature', signature);
                     handleChange('signature');
                   }}
                   onClear={() => {
@@ -104,6 +105,6 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
           </>
         )}
       </Formik>
-    </View>
+    </Layout>
   );
 };

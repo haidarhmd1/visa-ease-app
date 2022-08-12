@@ -1,17 +1,20 @@
 import styled from 'styled-components/native';
-import { BodyText, SubHeadlineBold } from '../Typography/Typography';
+import {
+  BodyText,
+  SubHeadlineBold,
+} from '../../../../components/general/Typography/Typography';
 
 export const CardItemWrapper = styled.View`
   background-color: white;
-  border-radius: 8px;
   width: 100%;
   height: 250px;
-  overflow: hidden;
+  position: relative;
 `;
 
 export const StyledImageBackground = styled.ImageBackground`
   flex: 1;
   width: 100%;
+  height: 250px;
 `;
 
 export const StyledInformationCard = styled.View`
@@ -32,10 +35,16 @@ export const StyledSubHeadlineBold = styled(SubHeadlineBold)`
   margin-bottom: 12px;
 `;
 
+export const ImageBackgroundText = styled(StyledSubHeadlineBold)`
+  font-size: 24px;
+  color: white;
+`;
+
 export const StyledBodyText = styled(BodyText)`
   margin-bottom: 8px;
 `;
 
-export const StyledCardItemWrapperText = styled.Text`
-margin
+export const ImageTextWrapper = styled.View`
+  position: absolute;
+  bottom: 0;
 `;

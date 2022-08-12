@@ -1,31 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, Button } from 'react-native';
 import { Camera } from 'expo-camera';
-import { shareAsync } from 'expo-sharing';
-import * as MediaLibrary from 'expo-media-library';
+import { Formik } from 'formik';
+import { Layout } from 'components/general/Layout/Layout';
 import {
   CameraWrapper,
   StyledBodyText,
   StyledCamera,
   StyledImage,
-  StyledInformationCard,
   StyledSubHeadlineBold,
   StyledWarningInformationCard,
   ViewWrapper,
 } from './PassportCapture.styled';
 
-export const Passport = () => {
+export const Passport = ({ next, prev, data }) => {
   const cameraReference = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
   const [photo, setPhoto] = useState();
 
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
       setHasCameraPermission(cameraPermission.status === 'granted');
-      setHasMediaLibraryPermission(mediaLibraryPermission.status === 'granted');
     })();
   }, []);
 
@@ -52,29 +48,36 @@ export const Passport = () => {
   };
 
   if (photo) {
-    const savePhoto = () => {
-      // eslint-disable-next-line promise/catch-or-return
-      MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-        setPhoto();
-      });
+    const savePhoto = async (setFieldValue, handleSubmit) => {
+      await setFieldValue('passportImage', photo.uri);
+      handleSubmit();
+      setPhoto();
     };
 
     return (
-      <ViewWrapper>
-        <StyledImage source={photo} />
-        {hasMediaLibraryPermission ? (
-          <Button title="Save" onPress={savePhoto} />
-        ) : undefined}
-        <Button title="Discard" onPress={() => setPhoto()} />
-      </ViewWrapper>
+      <Layout>
+        <Formik initialValues={data} onSubmit={values => next(values)}>
+          {({ handleSubmit, setFieldValue }) => (
+            <>
+              <StyledImage source={photo} />
+              <Button
+                title="Proceed"
+                onPress={() => savePhoto(setFieldValue, handleSubmit)}
+              />
+              <Button title="Discard" onPress={() => setPhoto()} />
+            </>
+          )}
+        </Formik>
+      </Layout>
     );
   }
 
   return (
-    <CameraWrapper>
+    <Layout>
       <StyledCamera ref={cameraReference} flashMode="on" />
       <View>
         <Button title="Take Pic" onPress={takePic} />
+        {/* <Button title="Back" onPress={prev} /> */}
         <StyledWarningInformationCard>
           <StyledSubHeadlineBold>HINWEIS:</StyledSubHeadlineBold>
           <StyledBodyText>
@@ -83,6 +86,6 @@ export const Passport = () => {
           </StyledBodyText>
         </StyledWarningInformationCard>
       </View>
-    </CameraWrapper>
+    </Layout>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInputMask } from 'components/general/Form';
+import { Layout } from 'components/general/Layout/Layout';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
 
@@ -20,7 +21,7 @@ export const FlightInformation = ({ next, prev, data }) => {
   const [selectedEntireTravelInUAE, setSelectedEntireTravelInUAE] = useState();
 
   return (
-    <View>
+    <Layout>
       <Formik
         initialValues={useMemo(() => data, [data])}
         // validationSchema={flightInformationValidationSchema}
@@ -130,6 +131,6 @@ export const FlightInformation = ({ next, prev, data }) => {
           </>
         )}
       </Formik>
-    </View>
+    </Layout>
   );
 };

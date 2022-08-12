@@ -4,7 +4,7 @@ import { EmiratesCardImage } from 'assets/images';
 import { TouchableCard } from 'components/general/TouchableCard';
 import { ROUTES } from 'res/constants/routes';
 
-export const VisumApplyList = ({ navigation }) => {
+export const VisumApplyCard = ({ navigation }) => {
   const onPressHandler = () => {
     navigation.navigate(ROUTES.VISA_APP);
   };
@@ -14,7 +14,7 @@ export const VisumApplyList = ({ navigation }) => {
       <TouchableCard
         isFullWidth={false}
         backgroundImage={EmiratesCardImage}
-        Title="Verinigte Arabische Emirate"
+        Title="UAE"
         onPress={onPressHandler}
       />
     </View>

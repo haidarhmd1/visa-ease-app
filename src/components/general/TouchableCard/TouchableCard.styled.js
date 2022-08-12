@@ -2,15 +2,24 @@ import styled from 'styled-components/native';
 
 export const StyledTouchableOpacity = styled.TouchableOpacity`
   width: ${({ isFullWidth }) => (isFullWidth ? '100%' : '50%')};
-  box-shadow: 0px 2px 3.84px rgba(0, 0, 0, 0.25);
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border: 2px solid #00bf80;
+  border-radius: 7px;
+  padding: 8px;
+  margin-bottom: 16px;
 `;
 
 export const StyledImage = styled.Image`
-  width: 100%;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 7px;
 `;
 
 export const TextWrapper = styled.View`
-  padding: 8px 0px 8px 0px;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 12px;
 `;

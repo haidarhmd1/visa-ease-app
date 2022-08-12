@@ -1,17 +1,18 @@
 import React, { useMemo, useState } from 'react';
-import { Button, View } from 'react-native';
+import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
 import { visaInformationValidationSchema } from 'screens/VisaApplication/steps/VisaInformation/VisaInformation.schema';
+import { Layout } from 'components/general/Layout/Layout';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 
 export const VisaInformation = ({ next, prev, data }) => {
   const [selectedHasCruise, setSelectedHasCruise] = useState();
   return (
-    <View>
+    <Layout>
       <Formik
         initialValues={useMemo(() => data, [data])}
         // validationSchema={visaInformationValidationSchema}
@@ -118,6 +119,6 @@ export const VisaInformation = ({ next, prev, data }) => {
           </>
         )}
       </Formik>
-    </View>
+    </Layout>
   );
 };

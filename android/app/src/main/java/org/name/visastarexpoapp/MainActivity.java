@@ -1,4 +1,5 @@
 package org.name.visastarexpoapp;
+import android.content.res.Configuration;
 import expo.modules.devmenu.react.DevMenuAwareReactActivity;
 import android.content.Intent;
 import expo.modules.devlauncher.DevLauncherController;

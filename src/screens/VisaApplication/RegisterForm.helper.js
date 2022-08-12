@@ -1,4 +1,5 @@
 export const customerinitValueForm = {
+  visaType: '',
   fullname: '',
   gender: 'male',
   street: '',
@@ -11,7 +12,7 @@ export const customerinitValueForm = {
   fax: '',
   hasCruise: 'yes',
   citizenship: '',
-  residencePermit: '',
+  // residencePermit: '',
   occupation: '',
   destinationCountry: '',
   kindOfVisa: '30 Days Tourist Single Entry',
@@ -23,4 +24,6 @@ export const customerinitValueForm = {
   place: '',
   dateOfSignature: '',
   signature: '',
+  passportImage: '',
+  residencePermitImage: '',
 };

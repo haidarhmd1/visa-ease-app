@@ -1,8 +1,9 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { themeStyle } from 'styles';
-import { MainScreenTabNavigation } from 'navigation';
+import RootStack from 'navigation';
 import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
 
 const MyTheme = {
   // ...DefaultTheme,
@@ -24,9 +25,7 @@ const MyTheme = {
 export default function App() {
   return (
     <SafeAreaView style={themeStyle.container}>
-      <NavigationContainer theme={MyTheme}>
-        <MainScreenTabNavigation />
-      </NavigationContainer>
+      <RootStack />
     </SafeAreaView>
   );
 }
