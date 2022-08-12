@@ -10,11 +10,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		364B41C34AA143C0A32B0B0F /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		78D9693A2B7BFEBE6D1DF82E /* libPods-visastarexpoapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 574E6E0C8FC06EEB3C33B0BE /* libPods-visastarexpoapp.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		364B41C34AA143C0A32B0B0F /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,13 +27,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = visastarexpoapp/main.m; sourceTree = "<group>"; };
 		2FF5B8ACDA73DF7718ADAE09 /* Pods-visastarexpoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-visastarexpoapp.debug.xcconfig"; path = "Target Support Files/Pods-visastarexpoapp/Pods-visastarexpoapp.debug.xcconfig"; sourceTree = "<group>"; };
 		574E6E0C8FC06EEB3C33B0BE /* libPods-visastarexpoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-visastarexpoapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "visastarexpoapp/noop-file.swift"; sourceTree = "<group>"; };
 		A9C9192A699BD9E0A23AE7AA /* Pods-visastarexpoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-visastarexpoapp.release.xcconfig"; path = "Target Support Files/Pods-visastarexpoapp/Pods-visastarexpoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = visastarexpoapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		DE7706DD6EC249B1A8EA343D /* visastarexpoapp-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "visastarexpoapp-Bridging-Header.h"; path = "visastarexpoapp/visastarexpoapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-visastarexpoapp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "visastarexpoapp/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
-		DE7706DD6EC249B1A8EA343D /* visastarexpoapp-Bridging-Header.h */ = {isa = PBXFileReference; name = "visastarexpoapp-Bridging-Header.h"; path = "visastarexpoapp/visastarexpoapp-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,7 +201,6 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				C6FE09D02130412EB605F7E8 /* visastarexpoapp-Bridging-Header.h in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = visastarexpoapp/visastarexpoapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -325,13 +325,12 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.name.visastarexpoapp;
-				PRODUCT_NAME = "visastarexpoapp";
+				PRODUCT_NAME = visastarexpoapp;
+				SWIFT_OBJC_BRIDGING_HEADER = "visastarexpoapp/visastarexpoapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1";
-				SWIFT_OBJC_BRIDGING_HEADER = visastarexpoapp/visastarexpoapp-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = visastarexpoapp/visastarexpoapp.entitlements;
 			};
 			name = Debug;
 		};
@@ -341,6 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = visastarexpoapp/visastarexpoapp.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = visastarexpoapp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -351,12 +351,11 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.name.visastarexpoapp;
-				PRODUCT_NAME = "visastarexpoapp";
+				PRODUCT_NAME = visastarexpoapp;
+				SWIFT_OBJC_BRIDGING_HEADER = "visastarexpoapp/visastarexpoapp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
-				TARGETED_DEVICE_FAMILY = "1";
-				SWIFT_OBJC_BRIDGING_HEADER = visastarexpoapp/visastarexpoapp-Bridging-Header.h;
-				CODE_SIGN_ENTITLEMENTS = visastarexpoapp/visastarexpoapp.entitlements;
 			};
 			name = Release;
 		};
