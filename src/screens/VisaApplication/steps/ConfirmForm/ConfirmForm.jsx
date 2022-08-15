@@ -1,10 +1,11 @@
-import { CardWrapper, Layout } from 'components/general/Layout/Layout';
+import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { CardWrapper, Wrapper } from 'components/general/Layout/Layout';
 import {
   SubHeadline,
   SubHeadlineBold,
 } from 'components/general/Typography/Typography';
 import React from 'react';
-import { Button, Image, Text, View } from 'react-native';
+import { Image } from 'react-native';
 import { StyledSignaturePreview, TextWrapper } from './ConfirmForm.styled';
 
 export const ConfirmForm = ({ data, next, editFromBeginning }) => {
@@ -38,7 +39,7 @@ export const ConfirmForm = ({ data, next, editFromBeginning }) => {
   } = data;
 
   return (
-    <Layout>
+    <Wrapper>
       <CardWrapper>
         <SubHeadlineBold>Type of Visa: </SubHeadlineBold>
         <SubHeadline>{visaType}</SubHeadline>
@@ -166,9 +167,12 @@ export const ConfirmForm = ({ data, next, editFromBeginning }) => {
       </CardWrapper>
 
       <CardWrapper>
-        <Button title="confrim" onPress={next} />
-        <Button title="Edit" onPress={editFromBeginning} />
+        <PrimaryButton onPress={next} style={{ marginBottom: 10 }}>
+          Confirm your Information
+        </PrimaryButton>
+
+        <SecondaryButton onPress={editFromBeginning}>Edit</SecondaryButton>
       </CardWrapper>
-    </Layout>
+    </Wrapper>
   );
 };

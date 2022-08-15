@@ -7,26 +7,11 @@ export const RegularCaption = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: ${({ theme }) => theme.fontSize.caption};
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
-`;
-
-export const RegularCaptionTwo = styled.Text`
-  /* Default/Regular/Caption2 */
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 13px;
-  letter-spacing: 0.066px;
-
-  /* Label Color/Light/Primary */
-
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const SubHeadline = styled.Text`
@@ -34,13 +19,12 @@ export const SubHeadline = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: ${({ theme }) => theme.fontSize.subHeadline};
   letter-spacing: -0.24px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const BodyText = styled.Text`
@@ -48,13 +32,12 @@ export const BodyText = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 17px;
-  line-height: 22px;
+  font-size: ${({ theme }) => theme.fontSize.caption};
   letter-spacing: -0.408px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const Headline = styled.Text`
@@ -62,13 +45,12 @@ export const Headline = styled.Text`
 
   font-style: normal;
   font-weight: 600;
-  font-size: 17px;
-  line-height: 22px;
+  font-size: ${({ theme }) => theme.fontSize.title};
   letter-spacing: -0.408px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const Title = styled.Text`
@@ -76,13 +58,12 @@ export const Title = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 28px;
-  line-height: 34px;
+  font-size: ${({ theme }) => theme.fontSize.title};
   letter-spacing: 0.364px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const SecondaryTitle = styled.Text`
@@ -90,13 +71,12 @@ export const SecondaryTitle = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 22px;
-  line-height: 28px;
+  font-size: ${({ theme }) => theme.fontSize.secondaryText};
   letter-spacing: 0.35px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const LargeTitle = styled.Text`
@@ -104,22 +84,17 @@ export const LargeTitle = styled.Text`
 
   font-style: normal;
   font-weight: 400;
-  font-size: 34px;
-  line-height: 41px;
+  font-size: ${({ theme }) => theme.fontSize.largeTitle};
   letter-spacing: 0.374px;
 
   /* Label Color/Light/Primary */
 
-  color: #000000;
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 // Bold
 
 export const RegularCaptionBold = styled(RegularCaption)`
-  font-weight: 600;
-`;
-
-export const RegularCaptionTwoBold = styled(RegularCaptionTwo)`
   font-weight: 600;
 `;
 

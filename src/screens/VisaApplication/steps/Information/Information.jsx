@@ -1,14 +1,9 @@
 import React from 'react';
-import { Button, ImageBackground, Text, View } from 'react-native';
 
 import { EmiratesCardImage } from 'assets/images';
-import { Layout } from 'components/general/Layout/Layout';
+import { Layout, Wrapper } from 'components/general/Layout/Layout';
+import { PrimaryButton } from 'components/general/Buttons';
 import {
-  BodyText,
-  SubHeadlineBold,
-} from '../../../../components/general/Typography/Typography';
-import {
-  CardItemWrapper,
   ImageBackgroundText,
   ImageTextWrapper,
   StyledBodyText,
@@ -18,17 +13,15 @@ import {
   StyledWarningInformationCard,
 } from './Information.styled';
 
-export const Information = ({ next, data }) => {
+export const Information = ({ next }) => {
   return (
     <>
       <StyledImageBackground source={EmiratesCardImage}>
         <ImageTextWrapper>
-          <ImageBackgroundText style={{ padding: 16 }}>
-            Visum for UAE
-          </ImageBackgroundText>
+          <ImageBackgroundText>Visum for UAE</ImageBackgroundText>
         </ImageTextWrapper>
       </StyledImageBackground>
-      <Layout>
+      <Wrapper>
         <StyledWarningInformationCard>
           <StyledSubHeadlineBold>HINWEIS:</StyledSubHeadlineBold>
           <StyledBodyText>
@@ -71,16 +64,17 @@ export const Information = ({ next, data }) => {
           <StyledSubHeadlineBold>
             Bearbeitung bei uns im Haus:
           </StyledSubHeadlineBold>
-          <Button
+          <PrimaryButton
             onPress={() => next({ visaType: 'express' })}
-            title="Express"
-          />
-          <Button
-            onPress={() => next({ visaType: 'standard' })}
-            title="Standard"
-          />
+            style={{ marginBottom: 10 }}
+          >
+            Express
+          </PrimaryButton>
+          <PrimaryButton onPress={() => next({ visaType: 'standard' })}>
+            Standard
+          </PrimaryButton>
         </StyledInformationCard>
-      </Layout>
+      </Wrapper>
     </>
   );
 };

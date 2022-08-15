@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { RegularCaption } from 'components/general/Typography/Typography';
 import Signature from 'react-native-signature-canvas';
@@ -9,7 +8,8 @@ import {
   StyledTextInput,
   StyledTextInputMask,
 } from 'components/general/Form';
-import { Layout } from 'components/general/Layout/Layout';
+import { Wrapper } from 'components/general/Layout/Layout';
+import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import {
   FormInputWrapper,
   StyledSignatureView,
@@ -27,10 +27,10 @@ const webStyle = `.m-signature-pad--footer
 
 export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
   return (
-    <Layout>
+    <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        // validationSchema={agreementValidationSchema}
+        validationSchema={agreementValidationSchema}
         onSubmit={values => next(values)}
       >
         {({
@@ -97,14 +97,19 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 <ErrorText>{errors.signature}</ErrorText>
               )}
             </FormInputWrapper>
-            {/* <Button onPress={handleSubmit} title="Next" disabled={!isValid} /> */}
             <FormInputWrapper>
-              <Button onPress={handleSubmit} title="Next" />
-              <Button onPress={prev} title="Back" />
+              <PrimaryButton
+                onPress={handleSubmit}
+                style={{ marginBottom: 10 }}
+              >
+                Next
+              </PrimaryButton>
+
+              <SecondaryButton onPress={prev}>Back</SecondaryButton>
             </FormInputWrapper>
           </>
         )}
       </Formik>
-    </Layout>
+    </Wrapper>
   );
 };

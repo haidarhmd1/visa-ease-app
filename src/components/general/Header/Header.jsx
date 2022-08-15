@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { AntDesign, SimpleLineIcons } from '@expo/vector-icons';
 import { ROUTES } from 'res/constants/routes';
-import { Image } from 'react-native';
 import { VisaStarLogo } from 'assets/images';
+import { View } from 'react-native';
 import {
   HeaderLogo,
+  StyledBackIcon,
   StyledHeaderWrapper,
+  StyledSettingsIcon,
   StyledText,
   StyledTouchableOpacity,
+  StyledUserIcon,
 } from './Header.styled';
 
 export const Header = ({
@@ -25,11 +27,11 @@ export const Header = ({
     return (
       <StyledHeaderWrapper>
         <StyledTouchableOpacity onPress={() => console.log(1)}>
-          <SimpleLineIcons name="settings" size={24} color="black" />
+          <StyledSettingsIcon name="settings" size={24} />
         </StyledTouchableOpacity>
         <HeaderLogo source={VisaStarLogo} />
         <StyledTouchableOpacity onPress={profile}>
-          <AntDesign name="user" size={24} color="black" />
+          <StyledUserIcon name="user" size={24} />
         </StyledTouchableOpacity>
       </StyledHeaderWrapper>
     );
@@ -38,11 +40,11 @@ export const Header = ({
   return (
     <StyledHeaderWrapper>
       <StyledTouchableOpacity onPress={goBack}>
-        <AntDesign name="back" size={24} color="black" />
+        <StyledBackIcon name="back" size={24} />
       </StyledTouchableOpacity>
       <StyledText>{title}</StyledText>
       <StyledTouchableOpacity onPress={profile}>
-        <AntDesign name="user" size={24} color="black" />
+        <StyledUserIcon name="user" size={24} />
       </StyledTouchableOpacity>
     </StyledHeaderWrapper>
   );

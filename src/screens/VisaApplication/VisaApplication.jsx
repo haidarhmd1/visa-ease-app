@@ -4,19 +4,22 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Header } from 'components/general/Header';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from 'res/constants/routes';
+import { ScrollView } from 'react-native';
 import { GeneralInformation } from './steps/GeneralInformation';
 import { VisaInformation } from './steps/VisaInformation';
 import { FlightInformation } from './steps/FlightInformation';
 import { Agreement } from './steps/Agreement';
 import { customerinitValueForm } from './RegisterForm.helper';
-import { Passport } from './steps/Passport';
-import { ResidencePermit } from './steps/ResidencePermit';
+import { CaptureDocuments } from './steps/Passport';
 import { ConfirmForm } from './steps/ConfirmForm';
 
 const TOTAL_STEP = 7;
 
 export const VisaApplication = () => {
   const [scrollEnabled, setScrollEnabled] = useState(true);
+
+  const reference = React.useRef(null);
+
   const [data, setData] = useState(customerinitValueForm);
   const [currentStep, setCurrentStep] = useState(0);
   const navigation = useNavigation();
@@ -24,9 +27,11 @@ export const VisaApplication = () => {
   const nextStep = newData => {
     setData(step => ({ ...step, ...newData }));
     setCurrentStep(step => step + 1);
+    reference.current?.scrollTo({ x: 0, y: 0, animated: true });
   };
   const previousStep = () => {
     setCurrentStep(step => step - 1);
+    reference.current?.scrollTo({ x: 0, y: 0, animated: true });
   };
 
   const editFromBeginning = () => {
@@ -48,8 +53,8 @@ export const VisaApplication = () => {
       prev={previousStep}
       data={data}
     />,
-    <Passport key={4} next={nextStep} data={data} />,
-    <ResidencePermit key={5} next={nextStep} data={data} />,
+    <CaptureDocuments key={4} next={nextStep} data={data} isPassportPicture />,
+    <CaptureDocuments key={5} next={nextStep} data={data} />,
     <Agreement
       next={nextStep}
       key={6}
@@ -84,9 +89,9 @@ export const VisaApplication = () => {
           navigation={navigation}
         />
       )}
-      <KeyboardAwareScrollView scrollEnabled={scrollEnabled}>
-        {steps[currentStep]}
-      </KeyboardAwareScrollView>
+      <ScrollView ref={reference} scrollEnabled={scrollEnabled}>
+        <KeyboardAwareScrollView>{steps[currentStep]}</KeyboardAwareScrollView>
+      </ScrollView>
     </>
   );
 };

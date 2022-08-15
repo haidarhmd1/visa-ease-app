@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 export const FormInputWrapper = styled.View`
-  background-color: white;
-  margin-top: 4%;
-  padding: 15px;
-  border-radius: 7px;
+  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  margin-top: ${({ theme }) => theme.marginTop};
+  padding: 12px;
+  border-radius: ${({ theme }) => theme.borderRadius};
 `;
 
 export const StyledSignatureView = styled.View`
   height: 400px;
-  margin-top: 16px;
+  margin-top: ${({ theme }) => theme.marginTop};
 `;

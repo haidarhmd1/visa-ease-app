@@ -1,1 +1,1 @@
-export { Passport } from './Passport';
+export { CaptureDocuments } from './CaptureDocuments';

@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
+import { AntDesign, SimpleLineIcons } from '@expo/vector-icons';
 import { TitleBold } from '../Typography/Typography';
 
 export const StyledTouchableOpacity = styled(TouchableOpacity)`
-  border-radius: 50px;
+  border-radius: ${({ theme }) => theme.circleRadius};
   padding: 12px;
-  background-color: whitesmoke;
+  background-color: ${({ theme }) => theme.colors.backgroundIcon};
 `;
 
 export const StyledHeaderWrapper = styled.View`
@@ -16,15 +17,24 @@ export const StyledHeaderWrapper = styled.View`
 `;
 
 export const StyledText = styled(TitleBold)`
-  width: auto;
   margin: auto;
-  font-size: 17px;
-  align-self: center;
-  justify-content: center;
+  font-size: ${({ theme }) => theme.fontSize.title};
 `;
 
 export const HeaderLogo = styled.Image`
   width: 120;
   height: 25;
   align-self: center;
+`;
+
+export const StyledSettingsIcon = styled(SimpleLineIcons)`
+  color: ${({ theme }) => theme.colors.brandIcon};
+`;
+
+export const StyledUserIcon = styled(AntDesign)`
+  color: ${({ theme }) => theme.colors.brandIcon};
+`;
+
+export const StyledBackIcon = styled(AntDesign)`
+  color: ${({ theme }) => theme.colors.brandIcon};
 `;

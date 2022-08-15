@@ -1,19 +1,18 @@
 import React from 'react';
+import { View } from 'react-native';
+
 import {
-  SubHeadline,
-  SubHeadlineBold,
-} from 'components/general/Typography/Typography';
-import { Text, View } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import {
+  StyledBodyText,
   StyledImage,
+  StyledRightCircle,
+  StyledTitleBold,
   StyledTouchableOpacity,
   TextWrapper,
 } from './TouchableCard.styled';
 
 export const TouchableCard = ({
   backgroundImage,
-  Title,
+  Title: ComponentTitle,
   isFullWidth = true,
   onPress,
 }) => {
@@ -22,17 +21,12 @@ export const TouchableCard = ({
       <StyledImage source={backgroundImage} />
       <TextWrapper>
         <View style={{ flex: 1 }}>
-          <SubHeadlineBold>{Title}</SubHeadlineBold>
-          <SubHeadline>
+          <StyledTitleBold>{ComponentTitle}</StyledTitleBold>
+          <StyledBodyText>
             Apply for a Visa in either Express or Standard
-          </SubHeadline>
+          </StyledBodyText>
         </View>
-        <AntDesign
-          name="rightcircleo"
-          size={24}
-          color="#00BF80"
-          style={{ alignSelf: 'center' }}
-        />
+        <StyledRightCircle name="rightcircleo" size={24} />
       </TextWrapper>
     </StyledTouchableOpacity>
   );

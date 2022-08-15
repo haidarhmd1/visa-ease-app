@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Formik } from 'formik';
 import { Layout } from 'components/general/Layout/Layout';
+import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { Feather } from '@expo/vector-icons';
 import {
-  CameraWrapper,
   StyledBodyText,
   StyledCamera,
+  StyledCameraButtonWrapper,
   StyledImage,
+  StyledInformationCard,
   StyledSubHeadlineBold,
+  StyledTouchableOpacity,
   StyledWarningInformationCard,
-  ViewWrapper,
-} from './PassportCapture.styled';
+} from './CaptureDocuments.styled';
 
-export const Passport = ({ next, prev, data }) => {
+export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
   const cameraReference = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
   const [photo, setPhoto] = useState();
@@ -49,7 +52,10 @@ export const Passport = ({ next, prev, data }) => {
 
   if (photo) {
     const savePhoto = async (setFieldValue, handleSubmit) => {
-      await setFieldValue('passportImage', photo.uri);
+      await setFieldValue(
+        isPassportPicture ? 'passportImage' : 'residencePermitImage',
+        photo.uri
+      );
       handleSubmit();
       setPhoto();
     };
@@ -60,11 +66,16 @@ export const Passport = ({ next, prev, data }) => {
           {({ handleSubmit, setFieldValue }) => (
             <>
               <StyledImage source={photo} />
-              <Button
-                title="Proceed"
+
+              <PrimaryButton
                 onPress={() => savePhoto(setFieldValue, handleSubmit)}
-              />
-              <Button title="Discard" onPress={() => setPhoto()} />
+                style={{ marginTop: 10, marginBottom: 10 }}
+              >
+                Proceed
+              </PrimaryButton>
+              <SecondaryButton onPress={() => setPhoto()}>
+                Discard
+              </SecondaryButton>
             </>
           )}
         </Formik>
@@ -76,8 +87,23 @@ export const Passport = ({ next, prev, data }) => {
     <Layout>
       <StyledCamera ref={cameraReference} flashMode="on" />
       <View>
-        <Button title="Take Pic" onPress={takePic} />
-        {/* <Button title="Back" onPress={prev} /> */}
+        <StyledCameraButtonWrapper>
+          <StyledTouchableOpacity onPress={takePic}>
+            <Feather name="camera" size={24} color="white" />
+          </StyledTouchableOpacity>
+        </StyledCameraButtonWrapper>
+        <StyledInformationCard>
+          <StyledSubHeadlineBold>
+            {isPassportPicture
+              ? 'Reisepass und Foto (biometrisch) Fotografieren:'
+              : 'Aufenthaltserlaubnis Fotografieren'}
+          </StyledSubHeadlineBold>
+          <StyledBodyText>
+            {isPassportPicture
+              ? 'Fotografieren Sie uns mit dem Antrag ein Foto von Ihrem Pass. Bitte gut lesbar.'
+              : 'Falls notwendig bitte Ihre Aufenthaltserlaubis mitsenden.'}
+          </StyledBodyText>
+        </StyledInformationCard>
         <StyledWarningInformationCard>
           <StyledSubHeadlineBold>HINWEIS:</StyledSubHeadlineBold>
           <StyledBodyText>

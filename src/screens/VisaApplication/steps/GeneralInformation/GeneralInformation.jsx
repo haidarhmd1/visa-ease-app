@@ -1,22 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import { Button } from 'react-native';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
 import { generalInformationValidationSchema } from 'screens/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
-import { Layout } from 'components/general/Layout/Layout';
+import { Wrapper } from 'components/general/Layout/Layout';
+import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 
 export const GeneralInformation = ({ next, prev, data }) => {
   const [selectedGender, setSelectedGender] = useState();
 
   return (
-    <Layout>
+    <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        // validationSchema={generalInformationValidationSchema}
+        validationSchema={generalInformationValidationSchema}
         onSubmit={values => next(values)}
       >
         {({
@@ -153,12 +153,17 @@ export const GeneralInformation = ({ next, prev, data }) => {
               {errors.fax && touched.fax && <ErrorText>{errors.fax}</ErrorText>}
             </FormInputWrapper>
             <FormInputWrapper>
-              <Button onPress={handleSubmit} title="Next" />
-              <Button onPress={prev} title="Back" />
+              <PrimaryButton
+                onPress={handleSubmit}
+                style={{ marginBottom: 10 }}
+              >
+                Next
+              </PrimaryButton>
+              <SecondaryButton onPress={prev}>Back</SecondaryButton>
             </FormInputWrapper>
           </>
         )}
       </Formik>
-    </Layout>
+    </Wrapper>
   );
 };
