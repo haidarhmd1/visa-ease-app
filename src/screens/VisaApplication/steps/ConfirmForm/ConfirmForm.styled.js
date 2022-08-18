@@ -8,6 +8,6 @@ export const StyledSignaturePreview = styled.Image`
   align-self: center;
   width: 150;
   height: 150;
-  border: 1px solid ${({ theme }) => theme.colors.errorFont};
+  border: 1px solid ${({ theme }) => theme.colors.error};
   margin-top: ${({ theme }) => theme.marginTop};
 `;

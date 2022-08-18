@@ -1,7 +1,11 @@
+/* eslint-disable complexity */
 import React, { useMemo, useState } from 'react';
 import { Formik } from 'formik';
 import { Picker } from '@react-native-picker/picker';
-import { RegularCaption } from 'components/general/Typography/Typography';
+import {
+  RegularCaption,
+  Headline,
+} from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
 import { generalInformationValidationSchema } from 'screens/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
@@ -37,6 +41,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('fullname')}
                 onBlur={handleBlur('fullname')}
                 value={values.fullname}
+                isError={errors.fullname && touched.fullname}
               />
               {errors.fullname && touched.fullname && (
                 <ErrorText>{errors.fullname}</ErrorText>
@@ -64,6 +69,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('street')}
                 onBlur={handleBlur('street')}
                 value={values.street}
+                isError={errors.street && touched.street}
               />
               {errors.street && touched.street && (
                 <ErrorText>{errors.street}</ErrorText>
@@ -77,6 +83,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('zipCode')}
                 onBlur={handleBlur('zipCode')}
                 value={values.zipCode}
+                isError={errors.zipCode && touched.zipCode}
               />
               {errors.zipCode && touched.zipCode && (
                 <ErrorText>{errors.zipCode}</ErrorText>
@@ -91,6 +98,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('city')}
                 onBlur={handleBlur('city')}
                 value={values.city}
+                isError={errors.city && touched.city}
               />
               {errors.city && touched.city && (
                 <ErrorText>{errors.city}</ErrorText>
@@ -105,6 +113,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('country')}
                 onBlur={handleBlur('country')}
                 value={values.country}
+                isError={errors.country && touched.country}
               />
               {errors.country && touched.country && (
                 <ErrorText>{errors.country}</ErrorText>
@@ -119,6 +128,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onBlur={handleBlur('email')}
                 value={values.email}
                 keyboardType="email-address"
+                isError={errors.email && touched.email}
               />
               {errors.email && touched.email && (
                 <ErrorText>{errors.email}</ErrorText>
@@ -134,6 +144,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onBlur={handleBlur('phone')}
                 value={values.phone}
                 keyboardType="phone-pad"
+                isError={errors.phone && touched.phone}
               />
               {errors.phone && touched.phone && (
                 <ErrorText>{errors.phone}</ErrorText>
@@ -149,6 +160,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
                 onBlur={handleBlur('fax')}
                 value={values.fax}
                 keyboardType="phone-pad"
+                isError={errors.fax && touched.fax}
               />
               {errors.fax && touched.fax && <ErrorText>{errors.fax}</ErrorText>}
             </FormInputWrapper>

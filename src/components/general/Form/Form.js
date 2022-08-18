@@ -2,7 +2,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import styled from 'styled-components/native';
 
 export const StyledTextInput = styled.TextInput.attrs({
-  placeholderTextColor: '#a9a9a9',
+  placeholderTextColor: '#A3A3A3',
 })`
   /* Auto layout */
   display: flex;
@@ -13,6 +13,13 @@ export const StyledTextInput = styled.TextInput.attrs({
   height: 44px;
   margin: 0;
   font-size: ${({ theme }) => theme.fontSize.formControls};
+  border: 1px solid
+    ${({ isError }) =>
+      isError ? ({ theme }) => theme.colors.error : '#e5e5e5'};
+  border-radius: ${({ theme }) => theme.borderFormRadius};
+  padding: 8px;
+  margin-top: 8px;
+  margin-bottom: 4px;
 
   /* System Background/Light/Primary */
   background: ${({ theme }) => theme.colors.primaryBackground};
@@ -20,22 +27,28 @@ export const StyledTextInput = styled.TextInput.attrs({
 
 export const ErrorText = styled.Text`
   font-size: ${({ theme }) => theme.fontSize.tertiaryText};
-  color: ${({ theme }) => theme.colors.errorFont};
+  color: ${({ theme }) => theme.colors.error};
 `;
 
 export const StyledTextInputMask = styled(TextInputMask).attrs({
-  placeholderTextColor: '#a9a9a9',
+  placeholderTextColor: '#A3A3A3',
 })`
   /* Auto layout */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* padding: 0px 0px 0px 16px; */
   margin-top: ${({ theme }) => theme.marginTop};
   font-size: ${({ theme }) => theme.fontSize.formControls};
+  border: 1px solid
+    ${({ isError }) =>
+      isError ? ({ theme }) => theme.colors.error : '#e5e5e5'};
+  border-radius: ${({ theme }) => theme.borderFormRadius};
+  padding: 8px;
   margin: 0;
   width: 100%;
   height: 44px;
+  margin-top: 8px;
+  margin-bottom: 4px;
 
   /* System Background/Light/Primary */
   background: ${({ theme }) => theme.colors.primaryBackground};

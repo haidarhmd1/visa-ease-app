@@ -26,7 +26,6 @@ export const VisaInformation = ({ next, prev, data }) => {
           values,
           errors,
           touched,
-          isValid,
         }) => (
           <>
             <FormInputWrapper>
@@ -51,6 +50,7 @@ export const VisaInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('citizenship')}
                 onBlur={handleBlur('citizenship')}
                 value={values.citizenship}
+                isError={errors.citizenship && touched.citizenship}
               />
               {errors.citizenship && touched.citizenship && (
                 <ErrorText>{errors.citizenship}</ErrorText>
@@ -65,6 +65,7 @@ export const VisaInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('residencePermit')}
                 onBlur={handleBlur('residencePermit')}
                 value={values.residencePermit}
+                isError={errors.residencePermit && touched.residencePermit}
               />
               {errors.residencePermit && touched.residencePermit && (
                 <ErrorText>{errors.residencePermit}</ErrorText>
@@ -79,6 +80,7 @@ export const VisaInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('occupation')}
                 onBlur={handleBlur('occupation')}
                 value={values.occupation}
+                isError={errors.occupation && touched.occupation}
               />
               {errors.occupation && touched.occupation && (
                 <ErrorText>{errors.occupation}</ErrorText>
@@ -93,6 +95,9 @@ export const VisaInformation = ({ next, prev, data }) => {
                 onChangeText={handleChange('destinationCountry')}
                 onBlur={handleBlur('destinationCountry')}
                 value={values.destinationCountry}
+                isError={
+                  errors.destinationCountry && touched.destinationCountry
+                }
               />
               {errors.destinationCountry && touched.destinationCountry && (
                 <ErrorText>{errors.destinationCountry}</ErrorText>

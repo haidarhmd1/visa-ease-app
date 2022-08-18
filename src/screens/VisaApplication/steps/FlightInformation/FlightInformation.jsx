@@ -35,7 +35,6 @@ export const FlightInformation = ({ next, prev, data }) => {
           values,
           errors,
           touched,
-          isValid,
         }) => (
           <>
             <FormInputWrapper>
@@ -51,6 +50,7 @@ export const FlightInformation = ({ next, prev, data }) => {
                 onBlur={handleBlur('travelStartDate')}
                 value={values.travelStartDate}
                 keyboardType="numeric"
+                isError={errors.travelStartDate && touched.travelStartDate}
               />
               {errors.travelStartDate && touched.travelStartDate && (
                 <ErrorText>{errors.travelStartDate}</ErrorText>
@@ -70,6 +70,7 @@ export const FlightInformation = ({ next, prev, data }) => {
                 onBlur={handleBlur('returnFlightDate')}
                 value={values.returnFlightDate}
                 keyboardType="numeric"
+                isError={errors.returnFlightDate && touched.returnFlightDate}
               />
               {errors.returnFlightDate && touched.returnFlightDate && (
                 <ErrorText>{errors.returnFlightDate}</ErrorText>

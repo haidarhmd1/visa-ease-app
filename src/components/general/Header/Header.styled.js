@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
-import { AntDesign, SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { TitleBold } from '../Typography/Typography';
 
 export const StyledTouchableOpacity = styled(TouchableOpacity)`
@@ -25,10 +25,6 @@ export const HeaderLogo = styled.Image`
   width: 120;
   height: 25;
   align-self: center;
-`;
-
-export const StyledSettingsIcon = styled(SimpleLineIcons)`
-  color: ${({ theme }) => theme.colors.brandIcon};
 `;
 
 export const StyledUserIcon = styled(AntDesign)`

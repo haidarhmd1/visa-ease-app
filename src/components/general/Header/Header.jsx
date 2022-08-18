@@ -2,12 +2,10 @@ import React from 'react';
 
 import { ROUTES } from 'res/constants/routes';
 import { VisaStarLogo } from 'assets/images';
-import { View } from 'react-native';
 import {
   HeaderLogo,
   StyledBackIcon,
   StyledHeaderWrapper,
-  StyledSettingsIcon,
   StyledText,
   StyledTouchableOpacity,
   StyledUserIcon,
@@ -26,9 +24,6 @@ export const Header = ({
   if (isMain) {
     return (
       <StyledHeaderWrapper>
-        <StyledTouchableOpacity onPress={() => console.log(1)}>
-          <StyledSettingsIcon name="settings" size={24} />
-        </StyledTouchableOpacity>
         <HeaderLogo source={VisaStarLogo} />
         <StyledTouchableOpacity onPress={profile}>
           <StyledUserIcon name="user" size={24} />
@@ -43,9 +38,6 @@ export const Header = ({
         <StyledBackIcon name="back" size={24} />
       </StyledTouchableOpacity>
       <StyledText>{title}</StyledText>
-      <StyledTouchableOpacity onPress={profile}>
-        <StyledUserIcon name="user" size={24} />
-      </StyledTouchableOpacity>
     </StyledHeaderWrapper>
   );
 };

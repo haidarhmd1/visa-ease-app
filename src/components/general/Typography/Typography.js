@@ -44,8 +44,8 @@ export const Headline = styled.Text`
   /* Default/Regular/Headline */
 
   font-style: normal;
-  font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.title};
+  font-weight: 700;
+  font-size: ${({ theme }) => theme.fontSize.headline};
   letter-spacing: -0.408px;
 
   /* Label Color/Light/Primary */

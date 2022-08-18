@@ -71,7 +71,7 @@ export const MyTheme = {
 
     primaryFont: colorPalette.binary.black,
     secondaryFont: colorPalette.binary.white,
-    errorFont: colorPalette.red.r600,
+    error: colorPalette.red.r600,
 
     primaryBackground: colorPalette.binary.white,
     warningBackground: colorPalette.orange.o50,
@@ -87,6 +87,7 @@ export const MyTheme = {
   },
   fontSize: {
     largeTitle: 34,
+    headline: 22,
     title: 17,
     subHeadline: 15,
     paragraph: 17,
@@ -94,11 +95,12 @@ export const MyTheme = {
     secondaryText: 15,
     tertiaryText: 13,
     caption: 13,
-    formControls: 17,
+    formControls: 14,
     Buttons: 17,
     tabBarActionBar: 10,
   },
   borderRadius: 12,
+  borderFormRadius: 4,
   circleRadius: 50,
   marginTop: 15,
   marginBottom: 15,

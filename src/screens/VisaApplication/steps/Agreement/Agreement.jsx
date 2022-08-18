@@ -41,7 +41,6 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
           values,
           errors,
           touched,
-          isValid,
         }) => (
           <>
             <FormInputWrapper>
@@ -52,6 +51,7 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 onChangeText={handleChange('place')}
                 onBlur={handleBlur('place')}
                 value={values.place}
+                isError={errors.place && touched.place}
               />
               {errors.place && touched.place && (
                 <ErrorText>{errors.place}</ErrorText>
@@ -70,6 +70,7 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 onChangeText={handleChange('dateOfSignature')}
                 onBlur={handleBlur('dateOfSignature')}
                 keyboardType="numeric"
+                isError={errors.dateOfSignature && touched.dateOfSignature}
               />
               {errors.dateOfSignature && touched.dateOfSignature && (
                 <ErrorText>{errors.dateOfSignature}</ErrorText>

@@ -1,22 +1,17 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
 import { VisaApplication } from 'screens';
-import { StatusBar } from 'react-native';
+import { noGestures, noHeader } from 'navigation';
 
 const Stack = createStackNavigator();
 
 export const VisaApplicationStack = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" translucent={false} hidden={false} />
-      <Stack.Navigator
-        initialRouteName={ROUTES.VISA_APP}
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name={ROUTES.VISA_APP} component={VisaApplication} />
-      </Stack.Navigator>
-    </>
+    <Stack.Navigator screenOptions={{ ...noHeader, ...noGestures }}>
+      <Stack.Screen name={ROUTES.VISA_APP} component={VisaApplication} />
+    </Stack.Navigator>
   );
 };
