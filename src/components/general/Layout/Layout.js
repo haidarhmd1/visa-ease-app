@@ -40,3 +40,13 @@ export const TouchableCardOpacity = styled.TouchableOpacity`
   padding: 15px;
   margin-bottom: ${({ theme }) => theme.marginBottom};
 `;
+
+export const Card = styled.View`
+  width: 100%;
+  flex-direction: column;
+  margin-top: ${({ theme }) => theme.marginTop};
+  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  padding: 15px;
+  margin-bottom: ${({ theme }) => theme.marginBottom};
+`;

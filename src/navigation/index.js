@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ProfileStack } from 'navigation/ProfileStack';
 import { VisaApplicationStack } from 'navigation/VisaApplicationStack';
 import { isIOS } from 'res/constants/header';
+import { Account } from 'screens/Account';
 
 const Stack = createStackNavigator();
 

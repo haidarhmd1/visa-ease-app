@@ -26,14 +26,14 @@ export const TextWrapper = styled.View`
 `;
 
 export const StyledTitleBold = styled(TitleBold)`
-  color: ${({ theme }) => theme.colors.secondaryFont};
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const StyledBodyText = styled(BodyText)`
-  color: ${({ theme }) => theme.colors.secondaryFont};
+  color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
 export const StyledRightCircle = styled(AntDesign)`
-  color: ${({ theme }) => theme.colors.secondaryFont};
+  color: ${({ theme }) => theme.colors.primaryFont};
   align-self: center;
 `;

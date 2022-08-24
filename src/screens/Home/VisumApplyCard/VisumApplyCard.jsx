@@ -12,9 +12,9 @@ export const VisumApplyCard = ({ navigation }) => {
   return (
     <View>
       <TouchableCard
-        isFullWidth={false}
         backgroundImage={EmiratesCardImage}
-        Title="UAE"
+        title="UAE"
+        description="Apply for a Visa in either Express or Standard"
         onPress={onPressHandler}
       />
     </View>

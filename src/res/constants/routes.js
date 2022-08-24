@@ -1,5 +1,6 @@
 export const ROUTES = {
-  MAIN: 'Home',
-  PROFILE: 'Profile',
+  MAIN: 'home',
+  PROFILE: 'profile',
+  ACCOUNT: 'account',
   VISA_APP: 'visaApplication',
 };
