@@ -12,7 +12,7 @@ import {
   VERSAND,
   VIP_TOUREN,
 } from 'res/constants/links';
-import { LinkWrapper } from './ProfileLinks.styled';
+import { LinkWrapper } from './AccountLinks.styled';
 
 const externalLink = url => {
   Linking.openURL(url).catch(error => {
@@ -21,7 +21,7 @@ const externalLink = url => {
   });
 };
 
-export const ProfileLinks = () => {
+export const AccountLinks = () => {
   return (
     <Card>
       <LinkWrapper onPress={() => externalLink(FAQ)}>

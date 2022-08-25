@@ -23,3 +23,15 @@ export const SecondaryButton = styled(Button)`
   height: 48px;
   overflow: hidden;
 `;
+
+export const DangerButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.error};
+  border: 2px solid ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.secondaryFont};
+  padding: 12px 20px;
+  border-radius: ${({ theme }) => theme.borderFormRadius};
+  font-weight: 600;
+  font-size: ${({ theme }) => theme.fontSize.Buttons};
+  height: 48px;
+  overflow: hidden;
+`;

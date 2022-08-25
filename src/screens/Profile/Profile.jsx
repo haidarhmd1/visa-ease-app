@@ -1,26 +1,20 @@
 import React from 'react';
 import { HeadlineBold } from 'components/general/Typography/Typography';
-import { Header } from 'components/general/Header';
-import { ScrollView } from 'react-native';
 import { Layout } from 'components/general/Layout/Layout';
-import { ProfileOverview } from './ProfileOverview';
-import { VisaStatus } from './VisaStatus';
-import { ProfileLinks } from './ProfileLinks';
-import { ContactLinks } from './ContactLinks';
-import { SocialMediaLinks } from './SocialMediaLinks';
+import { ScrollView } from 'react-native';
+import { Header } from 'components/general/Header';
+import { ProfileName } from './ProfileName/ProfileName';
+import { AccountDelete } from './AccountDelete';
 
 export const Profile = ({ navigation }) => {
   return (
     <>
-      <Header navigation={navigation} title="Account" />
+      <Header navigation={navigation} title="Profile" />
       <ScrollView>
         <Layout>
           <HeadlineBold> Profile </HeadlineBold>
-          <ProfileOverview navigation={navigation} />
-          <VisaStatus />
-          <ProfileLinks />
-          <ContactLinks />
-          <SocialMediaLinks />
+          <ProfileName />
+          <AccountDelete />
         </Layout>
       </ScrollView>
     </>

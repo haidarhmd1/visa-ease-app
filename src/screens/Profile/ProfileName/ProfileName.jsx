@@ -11,11 +11,10 @@ import {
   StyledTextInput,
   StyledTextInputMask,
 } from 'components/general/Form';
-import { View } from 'react-native';
-import { AccountValidationSchema } from './AccountName.schema';
-import { AccountFormWrapper } from './AccountGeneral.styled';
+import { ProfileValidationSchema } from './ProfileName.schema';
+import { ProfileFormWrapper } from './ProfileGeneral.styled';
 
-export const AccountName = () => {
+export const ProfileName = () => {
   return (
     <Card>
       <TitleBold>General Information</TitleBold>
@@ -25,7 +24,7 @@ export const AccountName = () => {
           dob: '12/05/1992',
           email: 'haidar.hmd1@gmail.com',
         }}
-        validationSchema={AccountValidationSchema}
+        validationSchema={ProfileValidationSchema}
         onSubmit={values => alert(values)}
       >
         {({
@@ -37,7 +36,7 @@ export const AccountName = () => {
           touched,
         }) => (
           <>
-            <AccountFormWrapper>
+            <ProfileFormWrapper>
               <RegularCaption>Full Name</RegularCaption>
               <StyledTextInput
                 name="fullname"
@@ -50,8 +49,8 @@ export const AccountName = () => {
               {errors.fullname && touched.fullname && (
                 <ErrorText>{errors.fullname}</ErrorText>
               )}
-            </AccountFormWrapper>
-            <AccountFormWrapper>
+            </ProfileFormWrapper>
+            <ProfileFormWrapper>
               <RegularCaption>Email</RegularCaption>
               <StyledTextInput
                 name="email"
@@ -65,8 +64,8 @@ export const AccountName = () => {
               {errors.email && touched.email && (
                 <ErrorText>{errors.email}</ErrorText>
               )}
-            </AccountFormWrapper>
-            <AccountFormWrapper>
+            </ProfileFormWrapper>
+            <ProfileFormWrapper>
               <RegularCaption>Date of Birth</RegularCaption>
               <StyledTextInputMask
                 name="dob"
@@ -75,21 +74,23 @@ export const AccountName = () => {
                 options={{
                   format: 'dd/MM/YYYY',
                 }}
-                onChangeText={handleChange('travelStartDate')}
-                onBlur={handleBlur('travelStartDate')}
-                value={values.travelStartDate}
+                onChangeText={handleChange('dob')}
+                onBlur={handleBlur('dob')}
+                value={values.dob}
                 keyboardType="numeric"
-                isError={errors.travelStartDate && touched.travelStartDate}
+                isError={errors.dob && touched.dob}
               />
-            </AccountFormWrapper>
-            <AccountFormWrapper>
+            </ProfileFormWrapper>
+            <ProfileFormWrapper>
               <PrimaryButton
                 onPress={handleSubmit}
                 style={{ marginBottom: 10 }}
+                styleDisabled={{ color: 'white', backgroundColor: '#94e7e0' }}
+                disabled={!!errors.dob || !!errors.email || !!errors.fullname}
               >
                 Save
               </PrimaryButton>
-            </AccountFormWrapper>
+            </ProfileFormWrapper>
           </>
         )}
       </Formik>

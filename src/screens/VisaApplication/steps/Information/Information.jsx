@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { EmiratesCardImage } from 'assets/images';
-import { Layout, Wrapper } from 'components/general/Layout/Layout';
+import { Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import {
   ImageBackgroundText,
@@ -16,7 +16,10 @@ import {
 export const Information = ({ next }) => {
   return (
     <>
-      <StyledImageBackground source={EmiratesCardImage}>
+      <StyledImageBackground
+        style={{ backgroundColor: 'lightgrey' }}
+        source={EmiratesCardImage}
+      >
         <ImageTextWrapper>
           <ImageBackgroundText>Visum for UAE</ImageBackgroundText>
         </ImageTextWrapper>

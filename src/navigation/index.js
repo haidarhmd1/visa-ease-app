@@ -9,10 +9,9 @@ import { ROUTES } from 'res/constants/routes';
 import { Home } from 'screens';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { ProfileStack } from 'navigation/ProfileStack';
+import { ProfileStack } from 'navigation/AccountStack';
 import { VisaApplicationStack } from 'navigation/VisaApplicationStack';
 import { isIOS } from 'res/constants/header';
-import { Account } from 'screens/Account';
 
 const Stack = createStackNavigator();
 

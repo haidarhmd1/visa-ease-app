@@ -10,11 +10,11 @@ import {
   ArrowRight,
   ProfileSubTitle,
   ProfileUserInfo,
-} from '../Profile.styled';
+} from '../Account.styled';
 
 export const ProfileOverview = ({ navigation }) => {
   const onPressHandler = () => {
-    navigation.navigate(ROUTES.ACCOUNT);
+    navigation.navigate(ROUTES.PROFILE);
   };
   return (
     <TouchableCardOpacity onPress={onPressHandler}>

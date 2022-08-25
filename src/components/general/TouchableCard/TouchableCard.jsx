@@ -18,7 +18,10 @@ export const TouchableCard = ({
 }) => {
   return (
     <TouchableCardOpacity onPress={onPress}>
-      <StyledImage source={backgroundImage} />
+      <StyledImage
+        style={{ backgroundColor: 'lightgrey' }}
+        source={backgroundImage}
+      />
       <TextWrapper>
         <View style={{ flex: 1, paddingRight: 15 }}>
           <StyledTitleBold>{title}</StyledTitleBold>

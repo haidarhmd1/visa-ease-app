@@ -1,10 +1,13 @@
 import React from 'react';
 import { HeadlineBold } from 'components/general/Typography/Typography';
-import { Layout } from 'components/general/Layout/Layout';
-import { ScrollView } from 'react-native';
 import { Header } from 'components/general/Header';
-import { AccountName } from './AccountName/AccountName';
-import { AccountDelete } from './AccountDelete';
+import { ScrollView } from 'react-native';
+import { Layout } from 'components/general/Layout/Layout';
+import { ProfileOverview } from './ProfileOverview';
+import { VisaStatus } from './VisaStatus';
+import { AccountLinks } from './AccountLinks';
+import { ContactLinks } from './ContactLinks';
+import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
   return (
@@ -13,8 +16,11 @@ export const Account = ({ navigation }) => {
       <ScrollView>
         <Layout>
           <HeadlineBold> Account </HeadlineBold>
-          <AccountName />
-          <AccountDelete />
+          <ProfileOverview navigation={navigation} />
+          <VisaStatus />
+          <AccountLinks />
+          <ContactLinks />
+          <SocialMediaLinks />
         </Layout>
       </ScrollView>
     </>
