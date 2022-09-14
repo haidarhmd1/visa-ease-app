@@ -69,6 +69,7 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 }}
                 onChangeText={handleChange('dateOfSignature')}
                 onBlur={handleBlur('dateOfSignature')}
+                value={values.dateOfSignature}
                 keyboardType="numeric"
                 isError={errors.dateOfSignature && touched.dateOfSignature}
               />
