@@ -1,0 +1,1 @@
+export { StandardVisaTable } from './StandardVisaTable';
