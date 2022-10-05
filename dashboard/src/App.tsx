@@ -1,8 +1,9 @@
 import { AppShell, Header, MantineProvider } from '@mantine/core';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Account } from './Account';
 import './App.css';
-import { Dashboard } from './components/Dashboard';
+import { Dashboard } from './Dashboard';
 import { Main } from './Main';
 import { Settings } from './Settings/Settings';
 
@@ -22,6 +23,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </AppShell>
     </MantineProvider>

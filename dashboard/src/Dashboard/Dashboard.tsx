@@ -1,7 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Navbar } from '@mantine/core';
-import { IconLayoutDashboard, IconLogout, IconSettings } from '@tabler/icons';
+import {
+  IconLayoutDashboard,
+  IconLogout,
+  IconSettings,
+  IconUser,
+} from '@tabler/icons';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Dashboard.styles';
 
@@ -9,6 +14,7 @@ const mainLinks = [
   { link: '/', label: 'Dashboard', icon: IconLayoutDashboard },
 ];
 const footerLinks = [
+  { link: '/account', label: 'Account', icon: IconUser },
   { link: '/settings', label: 'Settings', icon: IconSettings },
 ];
 
