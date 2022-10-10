@@ -1,10 +1,18 @@
 import React from 'react';
 import { Badge, Group, ScrollArea, Table, Text } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 import { data } from './data.table';
 
 export function ExpressVisaTable() {
+  const navigate = useNavigate();
+
+  const handleTableRowClick = (id: number) => navigate(`${id}`);
   const rows = data.map(item => (
-    <tr key={item.name}>
+    <tr
+      key={item.id}
+      onClick={() => handleTableRowClick(item.id)}
+      style={{ cursor: 'pointer' }}
+    >
       <td>
         <Group spacing="sm">
           <div>

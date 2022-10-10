@@ -2,8 +2,6 @@
   "plugins": [
     "stylelint-prettier"
   ],
-  "processors": [
-  ],
   "extends": [
     "stylelint-config-recommended",
     "stylelint-prettier/recommended"
@@ -15,6 +13,16 @@
       "color-no-invalid-hex": true,
       "unit-no-unknown": true,
       "property-no-unknown": true,
-      "block-no-empty": null
-  }
+      "block-no-empty": null,
+      "function-no-unknown": null
+  },
+  "overrides": [
+    {
+      "files": ["**/*.{js,ts}"],
+      "customSyntax": "@stylelint/postcss-css-in-js",
+      "rules": {
+        "at-rule-no-unknown": null
+      }
+    }
+  ]
 }

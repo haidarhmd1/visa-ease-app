@@ -1,26 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Navbar } from '@mantine/core';
-import {
-  IconLayoutDashboard,
-  IconLogout,
-  IconSettings,
-  IconUser,
-} from '@tabler/icons';
+import { IconLogout } from '@tabler/icons';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Dashboard.styles';
-
-const mainLinks = [
-  { link: '/', label: 'Dashboard', icon: IconLayoutDashboard },
-];
-const footerLinks = [
-  { link: '/account', label: 'Account', icon: IconUser },
-  { link: '/settings', label: 'Settings', icon: IconSettings },
-];
+import { footerLinks, mainLinks } from '../constants/Routes/routes';
 
 export function Dashboard() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('Billing');
+  const [active, setActive] = useState('Dashboard');
 
   const links = mainLinks.map(item => (
     <Link
@@ -54,7 +42,7 @@ export function Dashboard() {
   ));
 
   return (
-    <Navbar width={{ sm: 300 }} p="xs" className={classes.navBar}>
+    <Navbar width={{ sm: 300 }} p="md" className={classes.navBar}>
       <Navbar.Section grow>{links}</Navbar.Section>
 
       <Navbar.Section className={classes.footer}>

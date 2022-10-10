@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from 'react-router-scroll-top';
 import { App } from './App';
 
 import reportWebVitals from './reportWebVitals';
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <BrowserRouter>
-    <App />
+    <ScrollToTop>
+      <App />
+    </ScrollToTop>
   </BrowserRouter>
 );
 
