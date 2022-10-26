@@ -3,6 +3,11 @@
     "name": "visastar-expo-app",
     "slug": "visastar-expo-app",
     "version": "1.0.0",
+    "splash":{
+      "image": "src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
