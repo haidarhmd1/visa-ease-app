@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React, { useCallback, useEffect, useState } from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { themeStyle } from 'styles';
 import RootStack from 'navigation';
 import 'react-native-gesture-handler';
@@ -10,6 +10,9 @@ import Entypo from '@expo/vector-icons/Entypo';
 import * as Icons from '@expo/vector-icons';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
+import { IntlProvider } from 'react-intl';
+import { getLanguage } from 'helpers/language';
+import { messages } from 'res/locales/locales';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -26,13 +29,9 @@ export default function App() {
           ...Icons.Ionicons.font,
           ionicons: require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf'),
           Fontisto: require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Fontisto.ttf'),
-          anticon: require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf'),
+          anticon: require('@expo/vector-icons/build/vendor/react-native-vector-icons'),
         });
-
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
-        // eslint-disable-next-line no-promise-executor-return
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (error) {
         console.warn(error);
       } finally {
@@ -54,7 +53,13 @@ export default function App() {
   return (
     <ThemeProvider theme={MyTheme}>
       <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
-        <RootStack />
+        <IntlProvider
+          locale={getLanguage()}
+          messages={messages[getLanguage()]}
+          wrapRichTextChunksInFragment
+        >
+          <RootStack />
+        </IntlProvider>
       </SafeAreaView>
     </ThemeProvider>
   );

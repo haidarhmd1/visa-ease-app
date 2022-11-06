@@ -9,6 +9,7 @@
     "prepare": "husky install",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write $PWD/'src/**/*.{js,jsx}'",
     "lint": "yarn eslint && yarn stylelint",
+    "update:locales": "./scripts/updateLocales.sh",
     "eslint": "eslint 'src/**/*.{js,jsx}'",
     "stylelint": "stylelint 'src/**/*.{js,jsx}'",
     "clean-install": "rm -rf node_modules && yarn && cd ios && pod install --repo-update && cd .."
@@ -45,6 +46,7 @@
     "husky": "^8.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-intl": "6.2.1",
     "react-native": "0.64.3",
     "react-native-button": "3.0.1",
     "react-native-formik": "^1.7.8",

@@ -1,0 +1,22 @@
+{
+    "home.sectionHeader.title": "Visum",
+    "home.visa.applyCard.description": "Beantragen Sie ein Visum entweder in Express oder Standard",
+    "visaApplication.header.title": "Wählen Sie den Visa-Typ",
+    "visaApplication.header.progress.title": "Abgeschlossen",
+    "visaApplication.steps.information.imageTitle": "Visum für die VAE",
+    "visaApplication.steps.information.note": "HINWEIS:",
+    "visaApplication.steps.information.note.description": "Die Bearbeitungszeiten bei den Behörden/ Konsulaten können\n    naturgemäß nicht garantiert werden, jedoch stehen wir in engem\n    Kontakt und setzen alles daran Ihr Visum rechtzeitig vor\n    Reiseantritt zur Verfügung stellen zu können. Die Gebühren können\n    bei Ablehnung nicht erstattet werden. Sollten Ihre Dokumente nicht\n    den Vorgaben entsprechen, können weitere Kosten zur weiteren\n    Bearbeitung anfallen/ oder die Bearbeitung des Visaantrages kann\n    nicht fortgeführt werden.",
+    "visaApplication.steps.information.infoTitle": "Informationen:",
+    "visaApplication.steps.information.infoBox.info1": "- Gültigkeit des Visa 2 Monate",
+    "visaApplication.steps.information.infoBox.info2": "- 14 Tage einfache Einreise",
+    "visaApplication.steps.information.infoBox.info3": "- 30 Tage einfache und mehrfache Einreise (z.B. bei einer Kreuzfahrt notwendig)",
+    "visaApplication.steps.information.infoBox.info4": "- 90 Tage mehrfache Einreise (z.B. bei einer Kreuzfahrt notwendig)",
+    "visaApplication.steps.information.whatWeNeedBox.title": "Wir benötigen:",
+    "visaApplication.steps.information.whatWeNeedBox.info1": "- wir benötigen eine Farbkopie Ihres Reisepasses in guter Qualität (Reisepass muss mindestens 6 Monate gültig bei Rückreise sein)",
+    "visaApplication.steps.information.whatWeNeedBox.info2": "- Kopie Aufenthaltserlaubnis",
+    "visaApplication.steps.information.whatWeNeedBox.info3": "- Passbild (biometrisch)",
+    "visaApplication.steps.information.whatWeNeedBox.info4": "- ausgefülltes Formular",
+    "visaApplication.steps.information.processing.title": "Bearbeitung bei uns im Haus:",
+    "visaApplication.general.visaType.express": "Express",
+    "visaApplication.general.visaType.standard": "Standard"
+}

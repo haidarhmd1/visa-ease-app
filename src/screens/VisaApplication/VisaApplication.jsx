@@ -5,6 +5,7 @@ import { Header } from 'components/general/Header';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from 'res/constants/routes';
 import { ScrollView } from 'react-native';
+import { useIntl } from 'react-intl';
 import { GeneralInformation } from './steps/GeneralInformation';
 import { VisaInformation } from './steps/VisaInformation';
 import { FlightInformation } from './steps/FlightInformation';
@@ -16,6 +17,7 @@ import { ConfirmForm } from './steps/ConfirmForm';
 const TOTAL_STEP = 7;
 
 export const VisaApplication = () => {
+  const intl = useIntl();
   const [scrollEnabled, setScrollEnabled] = useState(true);
 
   const reference = React.useRef(null);
@@ -79,13 +81,15 @@ export const VisaApplication = () => {
       {currentStep === 0 ? (
         <Header
           goBack={goBack}
-          title="Choose Visa Type"
+          title={intl.formatMessage({ id: 'visaApplication.header.title' })}
           navigation={navigation}
         />
       ) : (
         <Header
           goBack={previousStep}
-          title={`Completed ${currentStep} / ${TOTAL_STEP}`}
+          title={`${intl.formatMessage({
+            id: 'visaApplication.header.progress.title',
+          })} ${currentStep} / ${TOTAL_STEP}`}
           navigation={navigation}
         />
       )}
