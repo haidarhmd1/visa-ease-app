@@ -4,7 +4,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
 import { VisaApplication } from 'screens';
-import { noGestures, noHeader } from 'navigation';
+import { noGestures, noHeader } from 'utils/screenOptions';
 
 const Stack = createStackNavigator();
 

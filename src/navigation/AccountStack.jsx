@@ -1,10 +1,13 @@
-/* eslint-disable import/no-cycle */
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
 import { Account, Profile } from 'screens';
-import { modalScreenOptions, noHeader, stackScreenOptions } from 'navigation';
+import {
+  modalScreenOptions,
+  noHeader,
+  stackScreenOptions,
+} from 'utils/screenOptions';
 
 const Stack = createStackNavigator();
 

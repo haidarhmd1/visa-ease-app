@@ -16,7 +16,6 @@ export const TouchableCard = ({
   description,
   onPress,
 }) => {
-  console.log('backgroundImage', backgroundImage);
   return (
     <TouchableCardOpacity onPress={onPress}>
       <StyledImage
@@ -28,7 +27,7 @@ export const TouchableCard = ({
           <StyledTitleBold>{title}</StyledTitleBold>
           <StyledBodyText>{description}</StyledBodyText>
         </View>
-        <StyledRightCircle name="arrow-forward-outlines" size={24} />
+        <StyledRightCircle name="rightcircleo" size={24} />
       </TextWrapper>
     </TouchableCardOpacity>
   );

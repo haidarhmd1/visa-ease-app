@@ -22,8 +22,8 @@ export const StyledText = styled(TitleBold)`
 `;
 
 export const HeaderLogo = styled.Image`
-  width: 120;
-  height: 25;
+  width: 120px;
+  height: 25px;
   align-self: center;
 `;
 

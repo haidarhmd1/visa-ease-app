@@ -18,5 +18,9 @@
     "visaApplication.steps.information.whatWeNeedBox.info4": "- completed form",
     "visaApplication.steps.information.processing.title": "In-house processing:",
     "visaApplication.general.visaType.express": "Express",
-    "visaApplication.general.visaType.standard": "Standard"
+    "visaApplication.general.visaType.standard": "Standard",
+    "visastar.home.welcome.title": "Welcome to Visa Star",
+    "visastar.home.welcome.description": "We maintain contacts with all embassies in Berlin and consulates throughout Germany. We advise you comprehensively and provide you with your visa for many countries. VISA STAR offers first-class accessibility around the clock and absolutely fair and transparent prices.",
+    "visastar.home.welcome.subDescription": "Your reliable partner for...",
+    "visastar.home.services.headline": "Services"
 }

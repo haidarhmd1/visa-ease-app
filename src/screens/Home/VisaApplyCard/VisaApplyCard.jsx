@@ -5,10 +5,10 @@ import { View } from 'react-native';
 import { TouchableCard } from 'components/general/TouchableCard';
 import { ROUTES } from 'res/constants/routes';
 
-export const VisumApplyCard = ({ visaCountries, navigation }) => {
+export const VisaApplyCard = ({ visaCountries, navigation }) => {
   const intl = useIntl();
 
-  const onPressHandler = async () => {
+  const onPressHandler = () => {
     navigation.navigate(ROUTES.VISA_APP);
   };
 

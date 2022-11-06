@@ -89,16 +89,6 @@ export const requestWithStatusHandlers = (
       }
 
       const jsonBody = await response.json();
-
-      if (jsonBody && jsonBody.rapydErrorCode) {
-        throw new RapydApiError(
-          jsonBody.error,
-          jsonBody.message,
-          jsonBody.rapydErrorCode,
-          jsonBody.statusCode
-        );
-      }
-
       throw new ApiError(response, jsonBody?.message);
     })
     .catch(error => {

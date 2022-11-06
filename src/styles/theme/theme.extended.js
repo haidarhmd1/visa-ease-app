@@ -101,7 +101,7 @@ export const MyTheme = {
   },
   borderRadius: '12px',
   borderFormRadius: '4px',
-  circleRadius: '50',
+  circleRadius: '50px',
   marginTop: '15px',
   marginBottom: '15px',
 };

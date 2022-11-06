@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import { BodyText, TitleBold } from '../Typography/Typography';
 
@@ -33,7 +33,7 @@ export const StyledBodyText = styled(BodyText)`
   color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
-export const StyledRightCircle = styled(Ionicons)`
+export const StyledRightCircle = styled(AntDesign)`
   color: ${({ theme }) => theme.colors.primaryFont};
   align-self: center;
 `;

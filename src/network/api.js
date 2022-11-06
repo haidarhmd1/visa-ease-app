@@ -10,3 +10,19 @@ const headers = {
 
 export const getVisaCountries = () =>
   getRequest(`${API_PATH}/visacountries`, headers);
+
+// export const addVisaApplicationFromUser = data => {
+//   fetch(`${API_PATH}/visaApplication`, {
+//     headers,
+//     method: 'POST',
+//     body: JSON.parse(data),
+//   })
+//     .then(response => {
+//       if (response.ok) {
+//         return response.body();
+//       }
+//     })
+//     .catch(error => {
+//       console.warn(error);
+//     });
+// };

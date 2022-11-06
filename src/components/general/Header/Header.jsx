@@ -17,7 +17,7 @@ export const Header = ({
   navigation,
   isMain = false,
 }) => {
-  const profile = () => {
+  const onProfileHandler = () => {
     navigation.navigate(ROUTES.PROFILE);
   };
 
@@ -25,7 +25,7 @@ export const Header = ({
     return (
       <StyledHeaderWrapper>
         <HeaderLogo source={VisaStarLogo} />
-        <StyledTouchableOpacity onPress={profile}>
+        <StyledTouchableOpacity onPress={onProfileHandler}>
           <StyledUserIcon name="user" size={24} />
         </StyledTouchableOpacity>
       </StyledHeaderWrapper>
