@@ -4,7 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import { RegularCaption } from 'components/general/Typography/Typography';
 
 import { ErrorText, StyledTextInput } from 'components/general/Form';
-import { visaInformationValidationSchema } from 'screens/VisaApplication/steps/VisaInformation/VisaInformation.schema';
+import { visaInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/VisaInformation/VisaInformation.schema';
 import { Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';

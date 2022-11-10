@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
-import { Information } from 'screens/VisaApplication/steps/Information';
+import { Information } from 'screens/Visa/VisaApplication/steps/Information';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useQuery } from 'react-query';
 import { Header } from 'components/general/Header';
-import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from 'res/constants/routes';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { useIntl } from 'react-intl';
+import { getVisaCountry } from 'network/api';
+import { Loader } from 'components/general/Loader';
+import { View } from 'react-native-web';
 import { GeneralInformation } from './steps/GeneralInformation';
 import { VisaInformation } from './steps/VisaInformation';
 import { FlightInformation } from './steps/FlightInformation';
 import { Agreement } from './steps/Agreement';
-import { customerinitValueForm } from './RegisterForm.helper';
+import { customerInitValueForm } from './RegisterForm.helper';
 import { CaptureDocuments } from './steps/Passport';
 import { ConfirmForm } from './steps/ConfirmForm';
 
 const TOTAL_STEP = 7;
 
-export const VisaApplication = () => {
+export const VisaApplication = ({ route, navigation }) => {
   const intl = useIntl();
   const [scrollEnabled, setScrollEnabled] = useState(true);
+  const { id } = route.params;
+
+  const { data: visaCountryData, isLoading, error } = useQuery(
+    ['visaCountry', id],
+    () => getVisaCountry(id)
+  );
 
   const reference = React.useRef(null);
 
-  const [data, setData] = useState(customerinitValueForm);
+  const [data, setData] = useState(customerInitValueForm);
   const [currentStep, setCurrentStep] = useState(0);
-  const navigation = useNavigation();
 
   const nextStep = newData => {
     setData(step => ({ ...step, ...newData }));
@@ -41,7 +49,12 @@ export const VisaApplication = () => {
   };
 
   const steps = [
-    <Information key={0} next={nextStep} data={data} />,
+    <Information
+      key={0}
+      next={nextStep}
+      data={data}
+      visaCountryData={visaCountryData}
+    />,
     <GeneralInformation
       key={1}
       next={nextStep}
@@ -73,8 +86,16 @@ export const VisaApplication = () => {
   ];
 
   const goBack = () => {
-    navigation.navigate(ROUTES.MAIN);
+    navigation.navigate(ROUTES.VISA_HOME);
   };
+
+  if (isLoading) return <Loader />;
+  if (error)
+    return (
+      <View>
+        <Text>Error</Text>
+      </View>
+    );
 
   return (
     <>

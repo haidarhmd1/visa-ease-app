@@ -24,7 +24,6 @@ export const getRequest = (path, headers) => {
     headers,
   })
     .then(async response => {
-      console.log('response', response);
       if (response.ok) {
         return response.text();
       }

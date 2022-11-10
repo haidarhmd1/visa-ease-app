@@ -2,13 +2,12 @@ import React from 'react';
 
 import { ROUTES } from 'res/constants/routes';
 import { VisaStarLogo } from 'assets/images';
+import { FontAwesome5, Ionicons } from '@expo/vector-icons';
 import {
   HeaderLogo,
-  StyledBackIcon,
   StyledHeaderWrapper,
   StyledText,
   StyledTouchableOpacity,
-  StyledUserIcon,
 } from './Header.styled';
 
 export const Header = ({
@@ -26,7 +25,7 @@ export const Header = ({
       <StyledHeaderWrapper>
         <HeaderLogo source={VisaStarLogo} />
         <StyledTouchableOpacity onPress={onProfileHandler}>
-          <StyledUserIcon name="user" size={24} />
+          <FontAwesome5 name="user" size={24} color="black" />
         </StyledTouchableOpacity>
       </StyledHeaderWrapper>
     );
@@ -35,7 +34,7 @@ export const Header = ({
   return (
     <StyledHeaderWrapper>
       <StyledTouchableOpacity onPress={goBack}>
-        <StyledBackIcon name="back" size={24} />
+        <Ionicons name="ios-arrow-back-sharp" size={24} color="black" />
       </StyledTouchableOpacity>
       <StyledText>{title}</StyledText>
     </StyledHeaderWrapper>

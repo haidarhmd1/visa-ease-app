@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import React from 'react';
+import { Image, ScrollView, View } from 'react-native';
 import { SectionHeader } from 'components/general/SectionHeader';
-import { Card, Layout } from 'components/general/Layout/Layout';
+import { Layout } from 'components/general/Layout/Layout';
 import { Header } from 'components/general/Header';
 import { useIntl } from 'react-intl';
-import { getVisaCountries } from 'network/api';
 import {
   Headline,
   SubHeadline,
 } from 'components/general/Typography/Typography';
 import { VisaStarHeroImage } from 'assets/images';
 import { TouchableCard } from 'components/general/TouchableCard';
-import { VisaApplyCard } from './VisaApplyCard';
+import { ROUTES } from 'res/constants/routes';
 
 export const Home = ({ navigation }) => {
   const intl = useIntl();
-  const [loading, isLoading] = useState(true);
-  const [visaCountries, setVisaCountries] = useState();
 
-  useEffect(() => {
-    async function getData() {
-      const visa = await getVisaCountries();
-      setVisaCountries(visa);
-      isLoading(false);
-    }
-    getData();
-  }, []);
-
-  const VisaApplyCardLoader = loading ? (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-  ) : (
-    <VisaApplyCard visaCountries={visaCountries} navigation={navigation} />
-  );
+  const onPressViaHandler = () => {
+    navigation.navigate(ROUTES.VISA_HOME);
+  };
 
   return (
     <>
@@ -72,8 +56,8 @@ export const Home = ({ navigation }) => {
               id: 'visastar.home.services.headline',
             })}
           />
+          <TouchableCard title="Visum" onPress={onPressViaHandler} />
           <TouchableCard title="Legalisierung" />
-          <TouchableCard title="Visum" />
         </Layout>
       </ScrollView>
     </>

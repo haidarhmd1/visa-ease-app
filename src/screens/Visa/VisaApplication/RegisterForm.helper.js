@@ -1,4 +1,5 @@
-export const customerinitValueForm = {
+export const customerInitValueForm = {
+  selectedCountry: '',
   visaType: '',
   fullname: '',
   gender: 'male',

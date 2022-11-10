@@ -1,1 +1,0 @@
-export { VisaApplyCard } from './VisaApplyCard';

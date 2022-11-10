@@ -5,7 +5,7 @@ export const PrimaryButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primaryButtonBackground};
   color: ${({ theme }) => theme.colors.primaryButtonFont};
   padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderFormRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.Buttons};
   height: 48px;
@@ -17,7 +17,7 @@ export const SecondaryButton = styled(Button)`
   border: 2px solid ${({ theme }) => theme.colors.ButtonBorder};
   color: ${({ theme }) => theme.colors.secondaryButtonFont};
   padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderFormRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.Buttons};
   height: 48px;
@@ -29,7 +29,7 @@ export const DangerButton = styled(Button)`
   border: 2px solid ${({ theme }) => theme.colors.error};
   color: ${({ theme }) => theme.colors.secondaryFont};
   padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderFormRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.Buttons};
   height: 48px;

@@ -15,12 +15,14 @@ import { themeStyle } from 'styles';
 import { MyTheme } from 'styles/theme/theme.extended';
 
 import RootStack from 'navigation';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { getLanguage } from 'helpers/language';
 import { messages } from 'res/locales/locales';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
+const queryClient = new QueryClient();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -55,13 +57,15 @@ export default function App() {
   return (
     <ThemeProvider theme={MyTheme}>
       <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
-        <IntlProvider
-          locale={getLanguage()}
-          messages={messages[getLanguage()]}
-          wrapRichTextChunksInFragment
-        >
-          <RootStack />
-        </IntlProvider>
+        <QueryClientProvider client={queryClient}>
+          <IntlProvider
+            locale={getLanguage()}
+            messages={messages[getLanguage()]}
+            wrapRichTextChunksInFragment
+          >
+            <RootStack />
+          </IntlProvider>
+        </QueryClientProvider>
       </SafeAreaView>
     </ThemeProvider>
   );
