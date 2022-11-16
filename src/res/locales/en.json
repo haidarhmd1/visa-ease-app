@@ -22,5 +22,7 @@
     "visastar.home.welcome.title": "Welcome to Visa Star",
     "visastar.home.welcome.description": "We maintain contacts with all embassies in Berlin and consulates throughout Germany. We advise you comprehensively and provide you with your visa for many countries. VISA STAR offers first-class accessibility around the clock and absolutely fair and transparent prices.",
     "visastar.home.welcome.subDescription": "Your reliable partner for...",
-    "visastar.home.services.headline": "Services"
+    "visastar.home.services.headline": "Services",
+    "visastar.home.services.visa": "Visa",
+    "visastar.home.services.legalization": "Legalization"
 }

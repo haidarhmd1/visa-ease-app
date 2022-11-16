@@ -30,7 +30,7 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
     <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        validationSchema={agreementValidationSchema}
+        // validationSchema={agreementValidationSchema}
         onSubmit={values => next(values)}
       >
         {({

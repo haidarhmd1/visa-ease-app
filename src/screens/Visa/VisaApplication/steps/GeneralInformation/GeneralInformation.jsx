@@ -20,7 +20,7 @@ export const GeneralInformation = ({ next, prev, data }) => {
     <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        validationSchema={generalInformationValidationSchema}
+        // validationSchema={generalInformationValidationSchema}
         onSubmit={values => next(values)}
       >
         {({

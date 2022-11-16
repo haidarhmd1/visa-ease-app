@@ -24,7 +24,7 @@ export const FlightInformation = ({ next, prev, data }) => {
     <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        validationSchema={flightInformationValidationSchema}
+        // validationSchema={flightInformationValidationSchema}
         onSubmit={values => next(values)}
       >
         {({

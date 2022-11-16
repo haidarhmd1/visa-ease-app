@@ -15,7 +15,7 @@ export const VisaInformation = ({ next, prev, data }) => {
     <Wrapper>
       <Formik
         initialValues={useMemo(() => data, [data])}
-        validationSchema={visaInformationValidationSchema}
+        // validationSchema={visaInformationValidationSchema}
         onSubmit={values => next(values)}
       >
         {({

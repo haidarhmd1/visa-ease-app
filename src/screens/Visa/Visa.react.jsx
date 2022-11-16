@@ -35,7 +35,7 @@ export const Visa = ({ navigation }) => {
     <>
       <Header
         goBack={() => navigation.goBack()}
-        title="Visa"
+        title={intl.formatMessage({ id: 'visastar.home.services.visa' })}
         navigation={navigation}
       />
       <ScrollView>

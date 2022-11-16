@@ -56,8 +56,15 @@ export const Home = ({ navigation }) => {
               id: 'visastar.home.services.headline',
             })}
           />
-          <TouchableCard title="Visum" onPress={onPressViaHandler} />
-          <TouchableCard title="Legalisierung" />
+          <TouchableCard
+            title={intl.formatMessage({ id: 'visastar.home.services.visa' })}
+            onPress={onPressViaHandler}
+          />
+          <TouchableCard
+            title={intl.formatMessage({
+              id: 'visastar.home.services.legalization',
+            })}
+          />
         </Layout>
       </ScrollView>
     </>
