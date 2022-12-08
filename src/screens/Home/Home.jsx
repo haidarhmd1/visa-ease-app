@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Image, View } from 'react-native';
 import { SectionHeader } from 'components/general/SectionHeader';
-import { Layout } from 'components/general/Layout/Layout';
+import { Layout, StyledScrollView } from 'components/general/Layout/Layout';
 import { Header } from 'components/general/Header';
 import { useIntl } from 'react-intl';
 import {
@@ -22,7 +22,7 @@ export const Home = ({ navigation }) => {
   return (
     <>
       <Header navigation={navigation} isMain />
-      <ScrollView>
+      <StyledScrollView>
         <Layout>
           <Image
             source={VisaStarHeroImage}
@@ -66,7 +66,7 @@ export const Home = ({ navigation }) => {
             })}
           />
         </Layout>
-      </ScrollView>
+      </StyledScrollView>
     </>
   );
 };

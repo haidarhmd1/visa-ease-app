@@ -61,7 +61,7 @@ export const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-
+    defaultBackgroundColor: colorPalette.gray.g50,
     primaryBrandBackground: colorPalette.turquoise.t400,
     primaryBrand: colorPalette.turquoise.tstandard,
     brandFont: colorPalette.turquoise.tstandard,
@@ -109,6 +109,7 @@ export const MyTheme = {
 export const themeStyle = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   sectionTitle: {
     paddingTop: 32,

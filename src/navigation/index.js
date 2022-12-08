@@ -13,7 +13,7 @@ import { AuthNavigation } from './AuthNavigation';
 
 const Stack = createStackNavigator();
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 
 const RootStack = () => {
   return (

@@ -1,3 +1,4 @@
+import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 import { HeadlineBold } from '../Typography/Typography';
 
@@ -49,4 +50,8 @@ export const Card = styled.View`
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 15px;
   margin-bottom: ${({ theme }) => theme.marginBottom};
+`;
+
+export const StyledScrollView = styled(ScrollView)`
+  background-color: ${({ theme }) => theme.colors.defaultBackgroundColor};
 `;
