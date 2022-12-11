@@ -42,6 +42,15 @@ export const TouchableCardOpacity = styled.TouchableOpacity`
   margin-bottom: ${({ theme }) => theme.marginBottom};
 `;
 
+export const TouchableIconCardOpacity = styled.TouchableOpacity`
+  background-color: ${({ theme }) => theme.colors.primaryBackground};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  padding: 15px;
+  height: 100px;
+  width: 48%;
+  margin-bottom: 16px;
+`;
+
 export const Card = styled.View`
   width: 100%;
   flex-direction: column;

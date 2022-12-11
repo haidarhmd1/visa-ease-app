@@ -8,9 +8,9 @@ import {
   StyledHeaderWrapper,
   StyledText,
   StyledTouchableOpacity,
-} from './Header.styled';
+} from './AppHeader.styled';
 
-export const Header = ({
+export const AppHeader = ({
   goBack = () => {},
   title,
   navigation,

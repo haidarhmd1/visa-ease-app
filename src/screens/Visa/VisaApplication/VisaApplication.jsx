@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Information } from 'screens/Visa/VisaApplication/steps/Information';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useQuery } from 'react-query';
-import { Header } from 'components/general/Header';
+import { AppHeader } from 'components/general/AppHeader';
 import { ROUTES } from 'res/constants/routes';
 import { ScrollView, Text } from 'react-native';
 import { useIntl } from 'react-intl';
@@ -89,24 +89,26 @@ export const VisaApplication = ({ route, navigation }) => {
     navigation.navigate(ROUTES.VISA_HOME);
   };
 
-  if (isLoading) return <Loader />;
-  if (error)
-    return (
-      <View>
-        <Text>Error</Text>
-      </View>
-    );
+  const VisaApplicationItems = isLoading ? (
+    <Loader />
+  ) : error ? (
+    <View>
+      <Text>Error</Text>
+    </View>
+  ) : (
+    <KeyboardAwareScrollView>{steps[currentStep]}</KeyboardAwareScrollView>
+  );
 
   return (
     <>
       {currentStep === 0 ? (
-        <Header
+        <AppHeader
           goBack={goBack}
           title={intl.formatMessage({ id: 'visaApplication.header.title' })}
           navigation={navigation}
         />
       ) : (
-        <Header
+        <AppHeader
           goBack={previousStep}
           title={`${intl.formatMessage({
             id: 'visaApplication.header.progress.title',
@@ -115,7 +117,7 @@ export const VisaApplication = ({ route, navigation }) => {
         />
       )}
       <ScrollView ref={reference} scrollEnabled={scrollEnabled}>
-        <KeyboardAwareScrollView>{steps[currentStep]}</KeyboardAwareScrollView>
+        {VisaApplicationItems}
       </ScrollView>
     </>
   );

@@ -1,1 +1,1 @@
-export { Visa } from './Visa.react';
+export { Visa } from './Visa';

@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 
 import * as SplashScreen from 'expo-splash-screen';
 
-import { Font } from 'expo';
+import * as Font from 'expo-font';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Fontisto from '@expo/vector-icons/Fontisto';

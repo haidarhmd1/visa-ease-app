@@ -18,8 +18,7 @@ export const StyledTextInput = styled.TextInput.attrs({
       isError ? ({ theme }) => theme.colors.error : '#e5e5e5'};
   border-radius: ${({ theme }) => theme.borderFormRadius};
   padding: 8px;
-  margin-top: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
 
   /* System Background/Light/Primary */
   background: ${({ theme }) => theme.colors.primaryBackground};

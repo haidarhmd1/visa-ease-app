@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { ScrollView, Text, View } from 'react-native';
 import { Layout } from 'components/general/Layout/Layout';
-import { Header } from 'components/general/Header';
+import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { getVisaCountries } from 'network/api';
 import { TouchableCard } from 'components/general/TouchableCard';
@@ -23,41 +23,41 @@ export const Visa = ({ navigation }) => {
     });
   };
 
-  if (isLoading) return <Loader />;
-  if (error)
-    return (
+  const VisaContent = isLoading ? (
+    <Loader />
+  ) : error ? (
+    <View>
+      <Text>Error...</Text>
+    </View>
+  ) : (
+    <Layout>
       <View>
-        <Text>Error...</Text>
+        {visaCountries?.map(vCountry => {
+          const imageUrl = vCountry.better_featured_image.source_url;
+          return (
+            <TouchableCard
+              key={vCountry.id}
+              backgroundImage={imageUrl}
+              title={vCountry.title.rendered}
+              description={intl.formatMessage({
+                id: 'home.visa.applyCard.description',
+              })}
+              onPress={() => onPressHandler(vCountry.id)}
+            />
+          );
+        })}
       </View>
-    );
+    </Layout>
+  );
 
   return (
     <>
-      <Header
+      <AppHeader
         goBack={() => navigation.goBack()}
         title={intl.formatMessage({ id: 'visastar.home.services.visa' })}
         navigation={navigation}
       />
-      <ScrollView>
-        <Layout>
-          <View>
-            {visaCountries?.map(vCountry => {
-              const imageUrl = vCountry.better_featured_image.source_url;
-              return (
-                <TouchableCard
-                  key={vCountry.id}
-                  backgroundImage={imageUrl}
-                  title={vCountry.title.rendered}
-                  description={intl.formatMessage({
-                    id: 'home.visa.applyCard.description',
-                  })}
-                  onPress={() => onPressHandler(vCountry.id)}
-                />
-              );
-            })}
-          </View>
-        </Layout>
-      </ScrollView>
+      <ScrollView>{VisaContent}</ScrollView>
     </>
   );
 };
