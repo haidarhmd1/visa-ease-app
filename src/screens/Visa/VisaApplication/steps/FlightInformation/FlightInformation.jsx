@@ -6,6 +6,7 @@ import { RegularCaption } from 'components/general/Typography/Typography';
 import { ErrorText, StyledTextInputMask } from 'components/general/Form';
 import { Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { FormItemWrapper } from 'components/general/Form/Form';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
 
@@ -36,8 +37,8 @@ export const FlightInformation = ({ next, prev, data }) => {
           errors,
           touched,
         }) => (
-          <>
-            <FormInputWrapper>
+          <FormInputWrapper>
+            <FormItemWrapper>
               <RegularCaption>Flight start date</RegularCaption>
               <StyledTextInputMask
                 name="travelStartDate"
@@ -55,9 +56,8 @@ export const FlightInformation = ({ next, prev, data }) => {
               {errors.travelStartDate && touched.travelStartDate && (
                 <ErrorText>{errors.travelStartDate}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Return Flight Date</RegularCaption>
               <StyledTextInputMask
                 name="returnFlightDate"
@@ -75,9 +75,8 @@ export const FlightInformation = ({ next, prev, data }) => {
               {errors.returnFlightDate && touched.returnFlightDate && (
                 <ErrorText>{errors.returnFlightDate}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>
                 Arrival airport is the same as departure airport?
               </RegularCaption>
@@ -91,9 +90,8 @@ export const FlightInformation = ({ next, prev, data }) => {
                 <Picker.Item label="Yes" value="yes" />
                 <Picker.Item label="No" value="no" />
               </Picker>
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>
                 Invoice Recipient is same as Applicant?
               </RegularCaption>
@@ -107,9 +105,8 @@ export const FlightInformation = ({ next, prev, data }) => {
                 <Picker.Item label="Yes" value="yes" />
                 <Picker.Item label="No" value="no" />
               </Picker>
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>
                 Will you spend the entire travel period exclusively in the
                 United Arab Emirates?
@@ -124,17 +121,12 @@ export const FlightInformation = ({ next, prev, data }) => {
                 <Picker.Item label="Yes" value="yes" />
                 <Picker.Item label="No" value="no" />
               </Picker>
-            </FormInputWrapper>
-            <FormInputWrapper>
-              <PrimaryButton
-                onPress={handleSubmit}
-                style={{ marginBottom: 10 }}
-              >
-                Next
-              </PrimaryButton>
-              <SecondaryButton onPress={prev}>Back</SecondaryButton>
-            </FormInputWrapper>
-          </>
+            </FormItemWrapper>
+            <PrimaryButton onPress={handleSubmit} style={{ marginBottom: 10 }}>
+              Next
+            </PrimaryButton>
+            <SecondaryButton onPress={prev}>Back</SecondaryButton>
+          </FormInputWrapper>
         )}
       </Formik>
     </Wrapper>

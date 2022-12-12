@@ -18,10 +18,15 @@ export const StyledTextInput = styled.TextInput.attrs({
       isError ? ({ theme }) => theme.colors.error : '#e5e5e5'};
   border-radius: ${({ theme }) => theme.borderFormRadius};
   padding: 8px;
-  margin-bottom: 16px;
+  margin-top: 8px;
+  margin-bottom: 4px;
 
   /* System Background/Light/Primary */
   background: ${({ theme }) => theme.colors.primaryBackground};
+`;
+
+export const FormItemWrapper = styled.View`
+  margin-bottom: 16px;
 `;
 
 export const ErrorText = styled.Text`

@@ -13,18 +13,16 @@ export const getVisaCountries = () =>
 export const getVisaCountry = id =>
   getRequest(`${API_PATH}/visacountries/${id}`, headers);
 
-// export const addVisaApplicationFromUser = data => {
-//   fetch(`${API_PATH}/visaApplication`, {
-//     headers,
-//     method: 'POST',
-//     body: JSON.parse(data),
-//   })
-//     .then(response => {
-//       if (response.ok) {
-//         return response.body();
-//       }
-//     })
-//     .catch(error => {
-//       console.warn(error);
-//     });
-// };
+export const addVisaApplicationFromUser = data => {
+  fetch(`${API_PATH}/visaApplication`, {
+    headers,
+    method: 'POST',
+    body: JSON.parse(data),
+  })
+    .then(response => {
+      if (response.ok) response.body();
+    })
+    .catch(error => {
+      console.warn(error);
+    });
+};

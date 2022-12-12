@@ -4,6 +4,7 @@ import {
   SubHeadline,
   SubHeadlineBold,
 } from 'components/general/Typography/Typography';
+import { addVisaApplicationFromUser } from 'network/api';
 import React from 'react';
 import { Image } from 'react-native';
 import { StyledSignaturePreview, TextWrapper } from './ConfirmForm.styled';
@@ -37,6 +38,14 @@ export const ConfirmForm = ({ data, next, editFromBeginning }) => {
     passportImage,
     residencePermitImage,
   } = data;
+
+  const onSubmit = async () => {
+    try {
+      await addVisaApplicationFromUser(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Wrapper>
@@ -167,7 +176,7 @@ export const ConfirmForm = ({ data, next, editFromBeginning }) => {
       </CardWrapper>
 
       <CardWrapper>
-        <PrimaryButton onPress={next} style={{ marginBottom: 10 }}>
+        <PrimaryButton onPress={onSubmit} style={{ marginBottom: 10 }}>
           Confirm your Information
         </PrimaryButton>
 

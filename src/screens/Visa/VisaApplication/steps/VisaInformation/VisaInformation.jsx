@@ -7,6 +7,7 @@ import { ErrorText, StyledTextInput } from 'components/general/Form';
 import { visaInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/VisaInformation/VisaInformation.schema';
 import { Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { FormItemWrapper } from 'components/general/Form/Form';
 import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
 
 export const VisaInformation = ({ next, prev, data }) => {
@@ -27,8 +28,8 @@ export const VisaInformation = ({ next, prev, data }) => {
           errors,
           touched,
         }) => (
-          <>
-            <FormInputWrapper>
+          <FormInputWrapper>
+            <FormItemWrapper>
               <RegularCaption>Cruise</RegularCaption>
               <Picker
                 selectedValue={selectedHasCruise}
@@ -40,9 +41,8 @@ export const VisaInformation = ({ next, prev, data }) => {
                 <Picker.Item label="Yes" value="yes" />
                 <Picker.Item label="No" value="no" />
               </Picker>
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Citizenship</RegularCaption>
               <StyledTextInput
                 name="citizenship"
@@ -55,9 +55,8 @@ export const VisaInformation = ({ next, prev, data }) => {
               {errors.citizenship && touched.citizenship && (
                 <ErrorText>{errors.citizenship}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Residence Permit</RegularCaption>
               <StyledTextInput
                 name="residencePermit"
@@ -70,9 +69,8 @@ export const VisaInformation = ({ next, prev, data }) => {
               {errors.residencePermit && touched.residencePermit && (
                 <ErrorText>{errors.residencePermit}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Occupation</RegularCaption>
               <StyledTextInput
                 name="occupation"
@@ -85,9 +83,8 @@ export const VisaInformation = ({ next, prev, data }) => {
               {errors.occupation && touched.occupation && (
                 <ErrorText>{errors.occupation}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Destination Country</RegularCaption>
               <StyledTextInput
                 name="destinationCountry"
@@ -102,9 +99,8 @@ export const VisaInformation = ({ next, prev, data }) => {
               {errors.destinationCountry && touched.destinationCountry && (
                 <ErrorText>{errors.destinationCountry}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Kind of Visa</RegularCaption>
               <StyledTextInput
                 name="kindOfVisa"
@@ -115,19 +111,13 @@ export const VisaInformation = ({ next, prev, data }) => {
                 editable={false}
                 selectTextOnFocus={false}
               />
-            </FormInputWrapper>
+            </FormItemWrapper>
+            <PrimaryButton onPress={handleSubmit} style={{ marginBottom: 10 }}>
+              Next
+            </PrimaryButton>
 
-            <FormInputWrapper>
-              <PrimaryButton
-                onPress={handleSubmit}
-                style={{ marginBottom: 10 }}
-              >
-                Next
-              </PrimaryButton>
-
-              <SecondaryButton onPress={prev}>Back</SecondaryButton>
-            </FormInputWrapper>
-          </>
+            <SecondaryButton onPress={prev}>Back</SecondaryButton>
+          </FormInputWrapper>
         )}
       </Formik>
     </Wrapper>

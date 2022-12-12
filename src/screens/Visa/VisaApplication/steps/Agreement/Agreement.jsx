@@ -10,6 +10,8 @@ import {
 } from 'components/general/Form';
 import { Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { View } from 'react-native';
+import { FormItemWrapper } from 'components/general/Form/Form';
 import {
   FormInputWrapper,
   StyledSignatureView,
@@ -42,8 +44,8 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
           errors,
           touched,
         }) => (
-          <>
-            <FormInputWrapper>
+          <FormInputWrapper>
+            <FormItemWrapper>
               <RegularCaption>Place</RegularCaption>
               <StyledTextInput
                 name="place"
@@ -56,9 +58,8 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
               {errors.place && touched.place && (
                 <ErrorText>{errors.place}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Date</RegularCaption>
               <StyledTextInputMask
                 name="dateOfSignature"
@@ -76,9 +77,8 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
               {errors.dateOfSignature && touched.dateOfSignature && (
                 <ErrorText>{errors.dateOfSignature}</ErrorText>
               )}
-            </FormInputWrapper>
-
-            <FormInputWrapper>
+            </FormItemWrapper>
+            <FormItemWrapper>
               <RegularCaption>Signature</RegularCaption>
               <StyledSignatureView>
                 <Signature
@@ -98,18 +98,13 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
               {errors.signature && touched.signature && (
                 <ErrorText>{errors.signature}</ErrorText>
               )}
-            </FormInputWrapper>
-            <FormInputWrapper>
-              <PrimaryButton
-                onPress={handleSubmit}
-                style={{ marginBottom: 10 }}
-              >
-                Next
-              </PrimaryButton>
+            </FormItemWrapper>
+            <PrimaryButton onPress={handleSubmit} style={{ marginBottom: 10 }}>
+              Next
+            </PrimaryButton>
 
-              <SecondaryButton onPress={prev}>Back</SecondaryButton>
-            </FormInputWrapper>
-          </>
+            <SecondaryButton onPress={prev}>Back</SecondaryButton>
+          </FormInputWrapper>
         )}
       </Formik>
     </Wrapper>
