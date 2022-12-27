@@ -9,10 +9,10 @@ import { ServiceItems } from './ServiceItems';
 export const Home = ({ navigation }) => {
   return (
     <>
-      <AppHeader navigation={navigation} isMain />
+      <AppHeader navigation={navigation} role="main" />
       <StyledScrollView>
         <Layout>
-          <Image
+          {/* <Image
             source={VisaStarHeroImage}
             resizeMode="cover"
             style={{
@@ -23,7 +23,7 @@ export const Home = ({ navigation }) => {
               borderRadius: 8,
               marginBottom: 25,
             }}
-          />
+          /> */}
           <Header />
           <ServiceItems navigation={navigation} />
         </Layout>

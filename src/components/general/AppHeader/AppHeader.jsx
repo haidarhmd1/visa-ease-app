@@ -10,17 +10,12 @@ import {
   StyledTouchableOpacity,
 } from './AppHeader.styled';
 
-export const AppHeader = ({
-  goBack = () => {},
-  title,
-  navigation,
-  isMain = false,
-}) => {
+export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   const onProfileHandler = () => {
     navigation.navigate(ROUTES.PROFILE);
   };
 
-  if (isMain) {
+  if (role === 'main') {
     return (
       <StyledHeaderWrapper>
         <HeaderLogo source={VisaStarLogo} />

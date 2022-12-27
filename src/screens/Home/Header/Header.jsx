@@ -2,10 +2,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { View } from 'react-native';
 
-import {
-  Headline,
-  SubHeadline,
-} from 'components/general/Typography/Typography';
+import { Headline } from 'components/general/Typography/Typography';
+import { Card } from 'components/general/Layout/Layout';
 import { StyledSubHeadline } from './Header.styled';
 
 export const Header = () => {
@@ -13,17 +11,16 @@ export const Header = () => {
 
   return (
     <View>
-      <Headline>
-        {intl.formatMessage({ id: 'visastar.home.welcome.title' })}
-      </Headline>
-      <StyledSubHeadline>
-        {intl.formatMessage({ id: 'visastar.home.welcome.description' })}
-      </StyledSubHeadline>
-      <SubHeadline>
-        {intl.formatMessage({
-          id: 'visastar.home.welcome.subDescription',
-        })}
-      </SubHeadline>
+      <Card>
+        <View>
+          <Headline>
+            {intl.formatMessage({ id: 'visastar.home.welcome.title' })}
+          </Headline>
+          <StyledSubHeadline>
+            {intl.formatMessage({ id: 'visastar.home.welcome.description' })}
+          </StyledSubHeadline>
+        </View>
+      </Card>
     </View>
   );
 };

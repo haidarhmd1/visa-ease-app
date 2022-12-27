@@ -2,8 +2,9 @@
   "expo": {
     "name": "visastar-expo-app",
     "slug": "visastar-expo-app",
+    "privacy": "unisted",
     "version": "1.0.0",
-    "splash":{
+    "splash": {
       "image": "src/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
@@ -16,7 +17,10 @@
     },
     "android": {
       "package": "org.name.visastarexpoapp"
-    }
+    },
+    "plugins": [
+      "react-native-document-scanner-plugin"
+    ]
   },
   "name": "visastar-expo-app"
 }

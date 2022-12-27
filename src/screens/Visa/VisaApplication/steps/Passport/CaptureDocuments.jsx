@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
-import { Camera } from 'expo-camera';
-import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { View, Image } from 'react-native';
+import DocumentScanner from 'react-native-document-scanner-plugin';
+
 import { Layout } from 'components/general/Layout/Layout';
-import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+// import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Feather } from '@expo/vector-icons';
 import {
   StyledBodyText,
   StyledCamera,
   StyledCameraButtonWrapper,
-  StyledImage,
   StyledInformationCard,
   StyledSubHeadlineBold,
   StyledTouchableOpacity,
@@ -17,75 +16,92 @@ import {
 } from './CaptureDocuments.styled';
 
 export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
-  const cameraReference = useRef();
-  const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [photo, setPhoto] = useState();
+  // const cameraReference = useRef();
+  // const [hasCameraPermission, setHasCameraPermission] = useState();
+  // const [photo, setPhoto] = useState();
 
-  useEffect(() => {
-    (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === 'granted');
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const cameraPermission = await Camera.requestCameraPermissionsAsync();
+  //     setHasCameraPermission(cameraPermission.status === 'granted');
+  //   })();
+  // }, []);
 
-  if (hasCameraPermission === undefined) {
-    return <Text>Requesting permissions...</Text>;
-  }
-  if (!hasCameraPermission) {
-    return (
-      <Text>
-        Permission for camera not granted. Please change this in settings.
-      </Text>
-    );
-  }
+  // if (hasCameraPermission === undefined) {
+  //   return <Text>Requesting permissions...</Text>;
+  // }
+  // if (!hasCameraPermission) {
+  //   return (
+  //     <Text>
+  //       Permission for camera not granted. Please change this in settings.
+  //     </Text>
+  //   );
+  // }
 
-  const takePic = async () => {
-    const options = {
-      quality: 1,
-      base64: true,
-      exif: false,
-    };
+  // const takePic = async () => {
+  //   const options = {
+  //     quality: 1,
+  //     base64: true,
+  //     exif: false,
+  //   };
 
-    const newPhoto = await cameraReference.current.takePictureAsync(options);
-    setPhoto(newPhoto);
+  //   const newPhoto = await cameraReference.current.takePictureAsync(options);
+  //   setPhoto(newPhoto);
+  // };
+
+  // if (photo) {
+  //   const savePhoto = async (setFieldValue, handleSubmit) => {
+  //     await setFieldValue(
+  //       isPassportPicture ? 'passportImage' : 'residencePermitImage',
+  //       photo.uri
+  //     );
+  //     handleSubmit();
+  //     setPhoto();
+  //   };
+
+  //   return (
+  //     <Layout>
+  //       <Formik initialValues={data} onSubmit={values => next(values)}>
+  //         {({ handleSubmit, setFieldValue }) => (
+  //           <>
+  //             <StyledImage source={photo} />
+
+  //             <PrimaryButton
+  //               onPress={() => savePhoto(setFieldValue, handleSubmit)}
+  //               style={{ marginTop: 10, marginBottom: 10 }}
+  //             >
+  //               Proceed
+  //             </PrimaryButton>
+  //             <SecondaryButton onPress={() => setPhoto()}>
+  //               Discard
+  //             </SecondaryButton>
+  //           </>
+  //         )}
+  //       </Formik>
+  //     </Layout>
+  //   );
+  // }
+  const [scannedImage, setScannedImage] = useState();
+
+  const scanDocument = async () => {
+    // start the document scanner
+    const { scannedImages } = await DocumentScanner.scanDocument();
+
+    // get back an array with scanned image file paths
+    if (scannedImages.length > 0) {
+      // set the img src, so we can view the first scanned image
+      setScannedImage(scannedImages[0]);
+    }
   };
 
-  if (photo) {
-    const savePhoto = async (setFieldValue, handleSubmit) => {
-      await setFieldValue(
-        isPassportPicture ? 'passportImage' : 'residencePermitImage',
-        photo.uri
-      );
-      handleSubmit();
-      setPhoto();
-    };
-
-    return (
-      <Layout>
-        <Formik initialValues={data} onSubmit={values => next(values)}>
-          {({ handleSubmit, setFieldValue }) => (
-            <>
-              <StyledImage source={photo} />
-
-              <PrimaryButton
-                onPress={() => savePhoto(setFieldValue, handleSubmit)}
-                style={{ marginTop: 10, marginBottom: 10 }}
-              >
-                Proceed
-              </PrimaryButton>
-              <SecondaryButton onPress={() => setPhoto()}>
-                Discard
-              </SecondaryButton>
-            </>
-          )}
-        </Formik>
-      </Layout>
-    );
-  }
+  useEffect(() => {
+    // call scanDocument on load
+    scanDocument();
+  }, []);
 
   return (
     <Layout>
-      <StyledCamera ref={cameraReference} flashMode="on" />
+      {/* <StyledCamera ref={cameraReference} flashMode="on" />
       <View>
         <StyledCameraButtonWrapper>
           <StyledTouchableOpacity onPress={takePic}>
@@ -111,7 +127,11 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
             clear
           </StyledBodyText>
         </StyledWarningInformationCard>
-      </View>
+      </View> */}
+      <Image
+        style={{ width: '100%', height: '100%' }}
+        source={{ uri: scannedImage }}
+      />
     </Layout>
   );
 };

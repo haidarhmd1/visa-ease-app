@@ -69,7 +69,7 @@ export const VisaApplication = ({ route, navigation }) => {
       data={data}
     />,
     <CaptureDocuments key={4} next={nextStep} data={data} isPassportPicture />,
-    <CaptureDocuments key={5} next={nextStep} data={data} />,
+    // <CaptureDocuments key={5} next={nextStep} data={data} />,
     <Agreement
       next={nextStep}
       key={6}

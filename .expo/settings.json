@@ -1,10 +1,10 @@
 {
-  "hostType": "tunnel",
+  "hostType": "lan",
   "lanType": "ip",
   "dev": true,
   "minify": false,
   "urlRandomness": "xn-q3j",
   "https": false,
   "scheme": "org.name.visastarexpoapp",
-  "devClient": true
+  "devClient": false
 }

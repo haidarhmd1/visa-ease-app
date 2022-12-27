@@ -13,7 +13,7 @@ export const customerInitValueForm = {
   fax: '',
   hasCruise: 'yes',
   citizenship: '',
-  // residencePermit: '',
+  residencePermit: '',
   occupation: '',
   destinationCountry: '',
   kindOfVisa: '30 Days Tourist Single Entry',

@@ -109,7 +109,7 @@ export const MyTheme = {
 export const themeStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colorPalette.gray.g50,
   },
   sectionTitle: {
     paddingTop: 32,
