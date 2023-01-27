@@ -1,37 +1,22 @@
+import { Button } from 'react-native-paper';
 import styled from 'styled-components/native';
-import Button from 'react-native-button';
 
-export const PrimaryButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primaryButtonBackground};
-  color: ${({ theme }) => theme.colors.primaryButtonFont};
-  padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.Buttons};
-  height: 48px;
-  overflow: hidden;
+export const PrimaryButton = styled(Button).attrs({
+  mode: 'contained',
+  dark: true,
+  buttonColor: '#00bf80',
+})``;
+
+export const SecondaryButton = styled(Button).attrs({
+  mode: 'contained',
+  buttonColor: 'white',
+  textColor: '#00bf80',
+})`
+  border: 2px solid #00bf80;
 `;
 
-export const SecondaryButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.secondaryButtonBackground};
-  border: 2px solid ${({ theme }) => theme.colors.ButtonBorder};
-  color: ${({ theme }) => theme.colors.secondaryButtonFont};
-  padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.Buttons};
-  height: 48px;
-  overflow: hidden;
-`;
-
-export const DangerButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.error};
-  border: 2px solid ${({ theme }) => theme.colors.error};
-  color: ${({ theme }) => theme.colors.secondaryFont};
-  padding: 12px 20px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.Buttons};
-  height: 48px;
-  overflow: hidden;
-`;
+export const DangerButton = styled(Button).attrs({
+  mode: 'contained',
+  buttonColor: '#ff0000',
+  textColor: 'white',
+})``;

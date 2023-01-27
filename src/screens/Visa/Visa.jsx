@@ -1,54 +1,28 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { ScrollView, Text, View } from 'react-native';
-import { Layout } from 'components/general/Layout/Layout';
+import { ScrollView, View } from 'react-native';
+import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
-import { getVisaCountries } from 'network/api';
-import { TouchableCard } from 'components/general/TouchableCard';
 import { ROUTES } from 'res/constants/routes';
-import { Loader } from 'components/general/Loader';
+import { ArrowRight } from 'screens/Account/Account.styled';
+
+const visaCountries = [
+  { id: 1, title: 'UAE', image: '' },
+  { id: 2, title: 'China', image: '' },
+  { id: 3, title: 'Cuba', image: '' },
+];
+const RightContent = properties => (
+  <ArrowRight {...properties} name="right" size={18} />
+);
 
 export const Visa = ({ navigation }) => {
   const intl = useIntl();
-
-  const { data: visaCountries, isLoading, error } = useQuery(
-    ['visaCountries'],
-    getVisaCountries
-  );
 
   const onPressHandler = id => {
     navigation.navigate(ROUTES.VISA_APP, {
       id,
     });
   };
-
-  const VisaContent = isLoading ? (
-    <Loader />
-  ) : error ? (
-    <View>
-      <Text>Error...</Text>
-    </View>
-  ) : (
-    <Layout>
-      <View>
-        {visaCountries?.map(vCountry => {
-          const imageUrl = vCountry.better_featured_image.source_url;
-          return (
-            <TouchableCard
-              key={vCountry.id}
-              backgroundImage={imageUrl}
-              title={vCountry.title.rendered}
-              description={intl.formatMessage({
-                id: 'home.visa.applyCard.description',
-              })}
-              onPress={() => onPressHandler(vCountry.id)}
-            />
-          );
-        })}
-      </View>
-    </Layout>
-  );
 
   return (
     <>
@@ -57,7 +31,40 @@ export const Visa = ({ navigation }) => {
         title={intl.formatMessage({ id: 'visastar.home.services.visa' })}
         navigation={navigation}
       />
-      <ScrollView>{VisaContent}</ScrollView>
+      <ScrollView>
+        <Layout>
+          <View>
+            {visaCountries?.map(vCountry => {
+              return (
+                <StyledCard
+                  key={vCountry.id}
+                  onPress={() => onPressHandler(vCountry.id)}
+                >
+                  <StyledCard.Content
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                    }}
+                  >
+                    <StyledCard.Cover
+                      style={{ width: 100, height: 100 }}
+                      source={{ uri: 'https://picsum.photos/700' }}
+                    />
+                    <StyledCard.Title
+                      style={{ flex: 1 }}
+                      title={vCountry.title}
+                      subtitle={intl.formatMessage({
+                        id: 'home.visa.applyCard.description',
+                      })}
+                      right={RightContent}
+                    />
+                  </StyledCard.Content>
+                </StyledCard>
+              );
+            })}
+          </View>
+        </Layout>
+      </ScrollView>
     </>
   );
 };

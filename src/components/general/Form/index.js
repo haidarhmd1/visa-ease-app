@@ -1,1 +1,1 @@
-export { StyledTextInput, ErrorText, StyledTextInputMask } from './Form';
+export { StyledTextInput } from './Form';

@@ -1,23 +1,16 @@
 import React from 'react';
-import { Card } from 'components/general/Layout/Layout';
-import {
-  RegularCaption,
-  TitleBold,
-} from 'components/general/Typography/Typography';
+import { StyledCard } from 'components/general/Layout/Layout';
 import { Formik } from 'formik';
 import { PrimaryButton } from 'components/general/Buttons';
-import {
-  ErrorText,
-  StyledTextInput,
-  StyledTextInputMask,
-} from 'components/general/Form';
+import { StyledTextInput } from 'components/general/Form';
+import { HelperText } from 'react-native-paper';
 import { ProfileValidationSchema } from './ProfileName.schema';
 import { ProfileFormWrapper } from './ProfileGeneral.styled';
 
 export const ProfileName = () => {
   return (
-    <Card>
-      <TitleBold>General Information</TitleBold>
+    <StyledCard>
+      <StyledCard.Title title="General Information" />
       <Formik
         initialValues={{
           fullname: 'Haidar Hammoud',
@@ -35,39 +28,42 @@ export const ProfileName = () => {
           errors,
           touched,
         }) => (
-          <>
+          <StyledCard.Content>
             <ProfileFormWrapper>
-              <RegularCaption>Full Name</RegularCaption>
               <StyledTextInput
+                mode="outlined"
+                label="Full Name"
                 name="fullname"
-                placeholder="Full Name"
                 onChangeText={handleChange('fullname')}
                 onBlur={handleBlur('fullname')}
                 value={values.fullname}
+                error={errors.fullname && touched.fullname}
                 isError={errors.fullname && touched.fullname}
               />
               {errors.fullname && touched.fullname && (
-                <ErrorText>{errors.fullname}</ErrorText>
+                <HelperText type="error">{errors.fullname}</HelperText>
               )}
             </ProfileFormWrapper>
             <ProfileFormWrapper>
-              <RegularCaption>Email</RegularCaption>
               <StyledTextInput
+                mode="outlined"
+                label="Email"
                 name="email"
-                placeholder="Email Address"
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
                 keyboardType="email-address"
                 isError={errors.email && touched.email}
+                error={errors.email && touched.email}
               />
               {errors.email && touched.email && (
-                <ErrorText>{errors.email}</ErrorText>
+                <HelperText type="error">{errors.email}</HelperText>
               )}
             </ProfileFormWrapper>
             <ProfileFormWrapper>
-              <RegularCaption>Date of Birth</RegularCaption>
-              <StyledTextInputMask
+              <StyledTextInput
+                mode="outlined"
+                label="Date of Birth"
                 name="dob"
                 type="datetime"
                 placeholder="dd/MM/YYYY"
@@ -78,8 +74,12 @@ export const ProfileName = () => {
                 onBlur={handleBlur('dob')}
                 value={values.dob}
                 keyboardType="numeric"
+                error={errors.dob && touched.dob}
                 isError={errors.dob && touched.dob}
               />
+              {errors.email && touched.email && (
+                <HelperText type="error">{errors.dob}</HelperText>
+              )}
             </ProfileFormWrapper>
             <ProfileFormWrapper>
               <PrimaryButton
@@ -91,9 +91,9 @@ export const ProfileName = () => {
                 Save
               </PrimaryButton>
             </ProfileFormWrapper>
-          </>
+          </StyledCard.Content>
         )}
       </Formik>
-    </Card>
+    </StyledCard>
   );
 };

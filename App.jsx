@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SafeAreaView } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 import 'react-native-gesture-handler';
 
 import * as SplashScreen from 'expo-splash-screen';
@@ -55,18 +56,20 @@ export default function App() {
   if (!appIsReady) return null;
 
   return (
-    <ThemeProvider theme={MyTheme}>
-      <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
-        <QueryClientProvider client={queryClient}>
-          <IntlProvider
-            locale={getLanguage()}
-            messages={messages[getLanguage()]}
-            wrapRichTextChunksInFragment
-          >
-            <RootStack />
-          </IntlProvider>
-        </QueryClientProvider>
-      </SafeAreaView>
-    </ThemeProvider>
+    <PaperProvider>
+      <ThemeProvider theme={MyTheme}>
+        <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
+          <QueryClientProvider client={queryClient}>
+            <IntlProvider
+              locale={getLanguage()}
+              messages={messages[getLanguage()]}
+              wrapRichTextChunksInFragment
+            >
+              <RootStack />
+            </IntlProvider>
+          </QueryClientProvider>
+        </SafeAreaView>
+      </ThemeProvider>
+    </PaperProvider>
   );
 }

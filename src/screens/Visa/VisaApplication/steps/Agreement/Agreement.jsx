@@ -1,21 +1,12 @@
 import React, { useMemo } from 'react';
 import { Formik } from 'formik';
-import { RegularCaption } from 'components/general/Typography/Typography';
 import Signature from 'react-native-signature-canvas';
 
-import {
-  ErrorText,
-  StyledTextInput,
-  StyledTextInputMask,
-} from 'components/general/Form';
-import { Wrapper } from 'components/general/Layout/Layout';
+import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
-import { View } from 'react-native';
-import { FormItemWrapper } from 'components/general/Form/Form';
-import {
-  FormInputWrapper,
-  StyledSignatureView,
-} from '../RegisterForm/RegisterForm.styled';
+import { HelperText, Text } from 'react-native-paper';
+import { StyledTextInput } from 'components/general/Form';
+import { StyledSignatureView } from '../RegisterForm/RegisterForm.styled';
 import { agreementValidationSchema } from './Agreement.schema';
 
 const webStyle = `.m-signature-pad--footer
@@ -44,26 +35,27 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
           errors,
           touched,
         }) => (
-          <FormInputWrapper>
-            <FormItemWrapper>
-              <RegularCaption>Place</RegularCaption>
+          <StyledCard>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
               <StyledTextInput
+                mode="outlined"
                 name="place"
-                placeholder="Place"
+                label="Place"
                 onChangeText={handleChange('place')}
                 onBlur={handleBlur('place')}
                 value={values.place}
                 isError={errors.place && touched.place}
               />
               {errors.place && touched.place && (
-                <ErrorText>{errors.place}</ErrorText>
+                <HelperText type="error">{errors.place}</HelperText>
               )}
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>Date</RegularCaption>
-              <StyledTextInputMask
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <StyledTextInput
+                mode="outlined"
                 name="dateOfSignature"
                 type="datetime"
+                label="Date"
                 placeholder="dd/MM/YYYY"
                 options={{
                   format: 'dd/MM/YYYY',
@@ -75,11 +67,11 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 isError={errors.dateOfSignature && touched.dateOfSignature}
               />
               {errors.dateOfSignature && touched.dateOfSignature && (
-                <ErrorText>{errors.dateOfSignature}</ErrorText>
+                <HelperText type="error">{errors.dateOfSignature}</HelperText>
               )}
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>Signature</RegularCaption>
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <Text variant="labelMedium">Signature</Text>
               <StyledSignatureView>
                 <Signature
                   webStyle={webStyle}
@@ -96,15 +88,20 @@ export const Agreement = ({ next, prev, setScrollEnabled, data }) => {
                 />
               </StyledSignatureView>
               {errors.signature && touched.signature && (
-                <ErrorText>{errors.signature}</ErrorText>
+                <HelperText type="error">{errors.signature}</HelperText>
               )}
-            </FormItemWrapper>
-            <PrimaryButton onPress={handleSubmit} style={{ marginBottom: 10 }}>
-              Next
-            </PrimaryButton>
+            </StyledCard.Content>
+            <StyledCard.Content>
+              <PrimaryButton
+                onPress={handleSubmit}
+                style={{ marginBottom: 10 }}
+              >
+                Next
+              </PrimaryButton>
 
-            <SecondaryButton onPress={prev}>Back</SecondaryButton>
-          </FormInputWrapper>
+              <SecondaryButton onPress={prev}>Back</SecondaryButton>
+            </StyledCard.Content>
+          </StyledCard>
         )}
       </Formik>
     </Wrapper>

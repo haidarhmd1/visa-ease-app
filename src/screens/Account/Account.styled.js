@@ -1,13 +1,8 @@
 import { AntDesign } from '@expo/vector-icons';
-import { CardWrapper } from 'components/general/Layout/Layout';
-import { RegularCaption } from 'components/general/Typography/Typography';
+import { Text } from 'react-native-paper';
 import styled from 'styled-components/native';
 
-export const ProfileCardWrapper = styled(CardWrapper)`
-  flex-direction: row;
-`;
-
-export const ProfileSubTitle = styled(RegularCaption)`
+export const ProfileSubTitle = styled(Text)`
   color: #a3a3a3;
 `;
 

@@ -7,6 +7,9 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { modalScreenOptions, noHeader } from 'utils/screenOptions';
 import { Visa } from 'screens/Visa';
+import { Legalization } from 'screens/Legalization';
+import { Translation } from 'screens/Translation';
+import { Rates } from 'screens/Rates';
 import { ProfileStack } from './AccountStack';
 import { AuthNavigation } from './AuthNavigation';
 // import { VisaApplicationStack } from './VisaApplicationStack';
@@ -27,6 +30,9 @@ const RootStack = () => {
           <>
             <Stack.Screen name={ROUTES.MAIN} component={Home} />
             <Stack.Screen name={ROUTES.VISA_HOME} component={Visa} />
+            <Stack.Screen name={ROUTES.LEGALIZATION} component={Legalization} />
+            <Stack.Screen name={ROUTES.TRANSLATION} component={Translation} />
+            <Stack.Screen name={ROUTES.RATES} component={Rates} />
             <Stack.Group screenOptions={modalScreenOptions}>
               <Stack.Screen
                 name={ROUTES.VISA_APP}

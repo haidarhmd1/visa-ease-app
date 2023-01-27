@@ -2,25 +2,25 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { View } from 'react-native';
 
-import { Headline } from 'components/general/Typography/Typography';
-import { Card } from 'components/general/Layout/Layout';
-import { StyledSubHeadline } from './Header.styled';
+import { StyledCard } from 'components/general/Layout/Layout';
+import { Divider, Text } from 'react-native-paper';
 
 export const Header = () => {
   const intl = useIntl();
 
   return (
     <View>
-      <Card>
-        <View>
-          <Headline>
+      <StyledCard>
+        <StyledCard.Content>
+          <Text variant="headlineLarge">
             {intl.formatMessage({ id: 'visastar.home.welcome.title' })}
-          </Headline>
-          <StyledSubHeadline>
+          </Text>
+          <Divider style={{ marginTop: 16, marginBottom: 16 }} />
+          <Text>
             {intl.formatMessage({ id: 'visastar.home.welcome.description' })}
-          </StyledSubHeadline>
-        </View>
-      </Card>
+          </Text>
+        </StyledCard.Content>
+      </StyledCard>
     </View>
   );
 };

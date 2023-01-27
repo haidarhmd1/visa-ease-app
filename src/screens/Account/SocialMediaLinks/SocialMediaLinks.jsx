@@ -1,9 +1,14 @@
 import React from 'react';
-import { Card } from 'components/general/Layout/Layout';
-import { Title } from 'components/general/Typography/Typography';
-import { Entypo } from '@expo/vector-icons';
+import { StyledCard } from 'components/general/Layout/Layout';
 import { Linking } from 'react-native';
-import { LinkWrapper } from '../AccountLinks/AccountLinks.styled';
+import { List } from 'react-native-paper';
+
+const InstagramIcon = properties => (
+  <List.Icon {...properties} icon="instagram" />
+);
+const FacebookIcon = properties => (
+  <List.Icon {...properties} icon="facebook" />
+);
 
 const externalLink = (type, value) => {
   const typeValue = type === 'email' ? `mailTo:${value}` : `tel:${value}`;
@@ -15,15 +20,20 @@ const externalLink = (type, value) => {
 
 export const SocialMediaLinks = () => {
   return (
-    <Card>
-      <LinkWrapper onPress={() => externalLink('phone', '+49 030 27578642')}>
-        <Title>Visit us on Instagram</Title>
-        <Entypo name="instagram" size={24} color="black" />
-      </LinkWrapper>
-      <LinkWrapper onPress={() => externalLink('phone', '+49 170 8 90 8 770')}>
-        <Title>Visit us on Facebook</Title>
-        <Entypo name="facebook" size={24} color="black" />
-      </LinkWrapper>
-    </Card>
+    <StyledCard>
+      <List.Section>
+        <List.Subheader>Social Media</List.Subheader>
+        <List.Item
+          onPress={() => externalLink('phone', '+49 030 27578642')}
+          title="Visit us on Instagram"
+          right={InstagramIcon}
+        />
+        <List.Item
+          onPress={() => externalLink('phone', '+49 170 8 90 8 770')}
+          title="Visit us on Facebook"
+          right={FacebookIcon}
+        />
+      </List.Section>
+    </StyledCard>
   );
 };

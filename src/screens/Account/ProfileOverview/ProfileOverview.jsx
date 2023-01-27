@@ -1,11 +1,7 @@
 import React from 'react';
-import { TitleBold } from 'components/general/Typography/Typography';
-import {
-  Avatar,
-  AvatarInitials,
-  TouchableCardOpacity,
-} from 'components/general/Layout/Layout';
+import { StyledCard } from 'components/general/Layout/Layout';
 import { ROUTES } from 'res/constants/routes';
+import { Avatar, Text } from 'react-native-paper';
 import {
   ArrowRight,
   ProfileSubTitle,
@@ -17,15 +13,15 @@ export const ProfileOverview = ({ navigation }) => {
     navigation.navigate(ROUTES.PROFILE);
   };
   return (
-    <TouchableCardOpacity onPress={onPressHandler}>
-      <Avatar>
-        <AvatarInitials> HH </AvatarInitials>
-      </Avatar>
-      <ProfileUserInfo>
-        <TitleBold>Test</TitleBold>
-        <ProfileSubTitle>Test@test.com</ProfileSubTitle>
-      </ProfileUserInfo>
-      <ArrowRight name="right" size={18} />
-    </TouchableCardOpacity>
+    <StyledCard onPress={onPressHandler}>
+      <StyledCard.Content style={{ flexDirection: 'row' }}>
+        <Avatar.Text label="HH" />
+        <ProfileUserInfo>
+          <Text variant="titleLarge">Test</Text>
+          <ProfileSubTitle variant="labelSmall">Test@test.com</ProfileSubTitle>
+        </ProfileUserInfo>
+        <ArrowRight name="right" size={18} />
+      </StyledCard.Content>
+    </StyledCard>
   );
 };

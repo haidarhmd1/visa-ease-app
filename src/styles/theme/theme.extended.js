@@ -7,8 +7,8 @@ const colorPalette = {
     t100: '#ccf0f1',
     t200: '#94e7e0',
     t300: '#5acdbc',
-    t400: '#00bf804d;',
-    tstandard: '#00bf80;',
+    t400: '#00bf804d',
+    tstandard: '#00bf80',
     t500: '#179669',
     t600: '#158052',
     t700: '#156241',
@@ -109,7 +109,7 @@ export const MyTheme = {
 export const themeStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colorPalette.gray.g50,
+    backgroundColor: 'white',
   },
   sectionTitle: {
     paddingTop: 32,

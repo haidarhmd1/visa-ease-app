@@ -7,4 +7,7 @@ export const ROUTES = {
   ACCOUNT: 'accountScreen',
   VISA_HOME: 'visaHome',
   VISA_APP: 'visaApplicationScreen',
+  LEGALIZATION: 'legalization',
+  TRANSLATION: 'translation',
+  RATES: 'rates',
 };

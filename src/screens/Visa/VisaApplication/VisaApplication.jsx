@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { Information } from 'screens/Visa/VisaApplication/steps/Information';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useQuery } from 'react-query';
 import { AppHeader } from 'components/general/AppHeader';
 import { ROUTES } from 'res/constants/routes';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useIntl } from 'react-intl';
-import { getVisaCountry } from 'network/api';
-import { Loader } from 'components/general/Loader';
-import { View } from 'react-native-web';
 import { GeneralInformation } from './steps/GeneralInformation';
 import { VisaInformation } from './steps/VisaInformation';
 import { FlightInformation } from './steps/FlightInformation';
@@ -24,11 +20,6 @@ export const VisaApplication = ({ route, navigation }) => {
   const [scrollEnabled, setScrollEnabled] = useState(true);
   const { id } = route.params;
 
-  const { data: visaCountryData, isLoading, error } = useQuery(
-    ['visaCountry', id],
-    () => getVisaCountry(id)
-  );
-
   const reference = React.useRef(null);
 
   const [data, setData] = useState(customerInitValueForm);
@@ -37,6 +28,9 @@ export const VisaApplication = ({ route, navigation }) => {
   const nextStep = newData => {
     setData(step => ({ ...step, ...newData }));
     setCurrentStep(step => step + 1);
+    if (currentStep === TOTAL_STEP - 1) {
+      console.log(1);
+    }
     reference.current?.scrollTo({ x: 0, y: 0, animated: true });
   };
   const previousStep = () => {
@@ -49,12 +43,7 @@ export const VisaApplication = ({ route, navigation }) => {
   };
 
   const steps = [
-    <Information
-      key={0}
-      next={nextStep}
-      data={data}
-      visaCountryData={visaCountryData}
-    />,
+    <Information key={0} next={nextStep} data={data} />,
     <GeneralInformation
       key={1}
       next={nextStep}
@@ -69,7 +58,7 @@ export const VisaApplication = ({ route, navigation }) => {
       data={data}
     />,
     <CaptureDocuments key={4} next={nextStep} data={data} isPassportPicture />,
-    // <CaptureDocuments key={5} next={nextStep} data={data} />,
+    <CaptureDocuments key={5} next={nextStep} data={data} />,
     <Agreement
       next={nextStep}
       key={6}
@@ -89,16 +78,6 @@ export const VisaApplication = ({ route, navigation }) => {
     navigation.navigate(ROUTES.VISA_HOME);
   };
 
-  const VisaApplicationItems = isLoading ? (
-    <Loader />
-  ) : error ? (
-    <View>
-      <Text>Error</Text>
-    </View>
-  ) : (
-    <KeyboardAwareScrollView>{steps[currentStep]}</KeyboardAwareScrollView>
-  );
-
   return (
     <>
       {currentStep === 0 ? (
@@ -117,7 +96,7 @@ export const VisaApplication = ({ route, navigation }) => {
         />
       )}
       <ScrollView ref={reference} scrollEnabled={scrollEnabled}>
-        {VisaApplicationItems}
+        <KeyboardAwareScrollView>{steps[currentStep]}</KeyboardAwareScrollView>
       </ScrollView>
     </>
   );

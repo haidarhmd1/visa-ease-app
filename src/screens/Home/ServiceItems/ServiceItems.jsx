@@ -3,19 +3,34 @@ import { View } from 'react-native';
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
 import { TouchableIconCard } from 'components/general/TouchableCard/TouchableCard';
-import { SectionHeader } from 'components/general/SectionHeader';
+import { Text } from 'react-native-paper';
 
-const services = [
+const mainServices = [
   {
     id: 1,
     title: 'visastar.home.services.visa',
     route: ROUTES.VISA_HOME,
     icon: '',
   },
+];
+
+const services = [
   {
     id: 2,
     title: 'visastar.home.services.legalization',
-    route: ROUTES.VISA_HOME,
+    route: ROUTES.LEGALIZATION,
+    icon: '',
+  },
+  {
+    id: 3,
+    title: 'Übersetzungen',
+    route: ROUTES.TRANSLATION,
+    icon: '',
+  },
+  {
+    id: 4,
+    title: 'Preise',
+    route: ROUTES.RATES,
     icon: '',
   },
 ];
@@ -28,12 +43,32 @@ export const ServiceItems = ({ navigation }) => {
   };
 
   return (
-    <>
-      <SectionHeader
-        title={intl.formatMessage({
+    <View style={{ marginTop: 21, marginBottom: 21 }}>
+      <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
+        Main Services
+      </Text>
+      <View
+        style={{
+          flexWrap: 'wrap',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        {mainServices.map(({ id, title, route }) => (
+          <TouchableIconCard
+            key={id}
+            title={intl.formatMessage({ id: title })}
+            onPress={() => onPressViaHandler(route)}
+          />
+        ))}
+      </View>
+
+      <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
+        Other{' '}
+        {intl.formatMessage({
           id: 'visastar.home.services.headline',
         })}
-      />
+      </Text>
       <View
         style={{
           flexWrap: 'wrap',
@@ -49,6 +84,6 @@ export const ServiceItems = ({ navigation }) => {
           />
         ))}
       </View>
-    </>
+    </View>
   );
 };

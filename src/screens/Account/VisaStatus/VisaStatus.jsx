@@ -1,15 +1,10 @@
+import { StyledCard } from 'components/general/Layout/Layout';
 import React from 'react';
-import { Card } from 'components/general/Layout/Layout';
-import {
-  RegularCaption,
-  TitleBold,
-} from 'components/general/Typography/Typography';
 
 export const VisaStatus = () => {
   return (
-    <Card>
-      <TitleBold>Visa Status</TitleBold>
-      <RegularCaption>In Progress...</RegularCaption>
-    </Card>
+    <StyledCard>
+      <StyledCard.Title title="Visa Status" subtitle="In Progress.." />
+    </StyledCard>
   );
 };

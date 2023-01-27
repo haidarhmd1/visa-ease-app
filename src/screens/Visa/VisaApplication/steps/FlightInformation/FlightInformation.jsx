@@ -1,25 +1,24 @@
 import React, { useMemo, useState } from 'react';
 import { Formik } from 'formik';
-import { Picker } from '@react-native-picker/picker';
-import { RegularCaption } from 'components/general/Typography/Typography';
 
-import { ErrorText, StyledTextInputMask } from 'components/general/Form';
-import { Wrapper } from 'components/general/Layout/Layout';
+import { StyledTextInput } from 'components/general/Form';
+import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
-import { FormItemWrapper } from 'components/general/Form/Form';
-import { FormInputWrapper } from '../RegisterForm/RegisterForm.styled';
+import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
 
 export const FlightInformation = ({ next, prev, data }) => {
   const [
     selectedArrivalSameasDepartureAirport,
     setSelectedArrivalSameasDepartureAirport,
-  ] = useState();
+  ] = useState('yes');
   const [
     selectedInvoiceRecipientSameAsApplicant,
     setSelectedInvoiceRecipientSameAsApplicant,
-  ] = useState();
-  const [selectedEntireTravelInUAE, setSelectedEntireTravelInUAE] = useState();
+  ] = useState('yes');
+  const [selectedEntireTravelInUAE, setSelectedEntireTravelInUAE] = useState(
+    'yes'
+  );
 
   return (
     <Wrapper>
@@ -37,12 +36,13 @@ export const FlightInformation = ({ next, prev, data }) => {
           errors,
           touched,
         }) => (
-          <FormInputWrapper>
-            <FormItemWrapper>
-              <RegularCaption>Flight start date</RegularCaption>
-              <StyledTextInputMask
+          <StyledCard>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <StyledTextInput
+                mode="outlined"
                 name="travelStartDate"
                 type="datetime"
+                label="Flight start Date"
                 placeholder="dd/MM/YYYY"
                 options={{
                   format: 'dd/MM/YYYY',
@@ -54,14 +54,15 @@ export const FlightInformation = ({ next, prev, data }) => {
                 isError={errors.travelStartDate && touched.travelStartDate}
               />
               {errors.travelStartDate && touched.travelStartDate && (
-                <ErrorText>{errors.travelStartDate}</ErrorText>
+                <HelperText type="error">{errors.travelStartDate}</HelperText>
               )}
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>Return Flight Date</RegularCaption>
-              <StyledTextInputMask
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <StyledTextInput
+                mode="outlined"
                 name="returnFlightDate"
                 type="datetime"
+                label="Return Flight Date"
                 placeholder="dd/MM/YYYY"
                 options={{
                   format: 'dd/MM/YYYY',
@@ -73,60 +74,69 @@ export const FlightInformation = ({ next, prev, data }) => {
                 isError={errors.returnFlightDate && touched.returnFlightDate}
               />
               {errors.returnFlightDate && touched.returnFlightDate && (
-                <ErrorText>{errors.returnFlightDate}</ErrorText>
+                <HelperText type="error">{errors.returnFlightDate}</HelperText>
               )}
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <Text variant="labelMedium">
                 Arrival airport is the same as departure airport?
-              </RegularCaption>
-              <Picker
-                selectedValue={selectedArrivalSameasDepartureAirport}
+              </Text>
+
+              <RadioButton.Group
                 onValueChange={(itemValue, itemIndex) => {
                   setFieldValue('arrivalSameasDepartureAirport', itemValue);
                   setSelectedArrivalSameasDepartureAirport(itemValue);
                 }}
+                value={selectedArrivalSameasDepartureAirport}
               >
-                <Picker.Item label="Yes" value="yes" />
-                <Picker.Item label="No" value="no" />
-              </Picker>
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>
+                <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
+                <RadioButton.Item color="#00bf80" label="No" value="no" />
+              </RadioButton.Group>
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <Text variant="labelMedium">
                 Invoice Recipient is same as Applicant?
-              </RegularCaption>
-              <Picker
-                selectedValue={selectedInvoiceRecipientSameAsApplicant}
+              </Text>
+
+              <RadioButton.Group
                 onValueChange={(itemValue, itemIndex) => {
                   setFieldValue('invoiceRecipientSameAsApplicant', itemValue);
                   setSelectedInvoiceRecipientSameAsApplicant(itemValue);
                 }}
+                value={selectedInvoiceRecipientSameAsApplicant}
               >
-                <Picker.Item label="Yes" value="yes" />
-                <Picker.Item label="No" value="no" />
-              </Picker>
-            </FormItemWrapper>
-            <FormItemWrapper>
-              <RegularCaption>
+                <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
+                <RadioButton.Item color="#00bf80" label="No" value="no" />
+              </RadioButton.Group>
+            </StyledCard.Content>
+            <StyledCard.Content style={{ marginBottom: 16 }}>
+              <Text variant="labelMedium">
                 Will you spend the entire travel period exclusively in the
                 United Arab Emirates?
-              </RegularCaption>
-              <Picker
-                selectedValue={selectedEntireTravelInUAE}
+              </Text>
+
+              <RadioButton.Group
                 onValueChange={(itemValue, itemIndex) => {
                   setFieldValue('entireTravelInUAE', itemValue);
                   setSelectedEntireTravelInUAE(itemValue);
                 }}
+                value={selectedEntireTravelInUAE}
               >
-                <Picker.Item label="Yes" value="yes" />
-                <Picker.Item label="No" value="no" />
-              </Picker>
-            </FormItemWrapper>
-            <PrimaryButton onPress={handleSubmit} style={{ marginBottom: 10 }}>
-              Next
-            </PrimaryButton>
-            <SecondaryButton onPress={prev}>Back</SecondaryButton>
-          </FormInputWrapper>
+                <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
+                <RadioButton.Item color="#00bf80" label="No" value="no" />
+              </RadioButton.Group>
+            </StyledCard.Content>
+
+            <StyledCard.Content>
+              <PrimaryButton
+                onPress={handleSubmit}
+                style={{ marginBottom: 10 }}
+              >
+                Next
+              </PrimaryButton>
+              <SecondaryButton onPress={prev}>Back</SecondaryButton>
+            </StyledCard.Content>
+          </StyledCard>
         )}
       </Formik>
     </Wrapper>

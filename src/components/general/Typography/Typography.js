@@ -14,19 +14,6 @@ export const RegularCaption = styled.Text`
   color: ${({ theme }) => theme.colors.primaryFont};
 `;
 
-export const SubHeadline = styled.Text`
-  /* Default/Regular/Subheadline */
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: ${({ theme }) => theme.fontSize.subHeadline};
-  letter-spacing: -0.24px;
-
-  /* Label Color/Light/Primary */
-
-  color: ${({ theme }) => theme.colors.primaryFont};
-`;
-
 export const BodyText = styled.Text`
   /* Default/Regular/Body */
 
@@ -95,10 +82,6 @@ export const LargeTitle = styled.Text`
 // Bold
 
 export const RegularCaptionBold = styled(RegularCaption)`
-  font-weight: 600;
-`;
-
-export const SubHeadlineBold = styled(SubHeadline)`
   font-weight: 600;
 `;
 

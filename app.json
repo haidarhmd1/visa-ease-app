@@ -19,7 +19,12 @@
       "package": "org.name.visastarexpoapp"
     },
     "plugins": [
-      "react-native-document-scanner-plugin"
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ]
     ]
   },
   "name": "visastar-expo-app"

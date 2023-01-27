@@ -2,13 +2,8 @@ import React from 'react';
 
 import { ROUTES } from 'res/constants/routes';
 import { VisaStarLogo } from 'assets/images';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
-import {
-  HeaderLogo,
-  StyledHeaderWrapper,
-  StyledText,
-  StyledTouchableOpacity,
-} from './AppHeader.styled';
+import { Appbar } from 'react-native-paper';
+import { HeaderLogo } from './AppHeader.styled';
 
 export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   const onProfileHandler = () => {
@@ -17,21 +12,17 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
 
   if (role === 'main') {
     return (
-      <StyledHeaderWrapper>
-        <HeaderLogo source={VisaStarLogo} />
-        <StyledTouchableOpacity onPress={onProfileHandler}>
-          <FontAwesome5 name="user" size={24} color="black" />
-        </StyledTouchableOpacity>
-      </StyledHeaderWrapper>
+      <Appbar.Header statusBarHeight={0}>
+        <Appbar.Content title={<HeaderLogo source={VisaStarLogo} />} />
+        <Appbar.Action icon="account-outline" onPress={onProfileHandler} />
+      </Appbar.Header>
     );
   }
 
   return (
-    <StyledHeaderWrapper>
-      <StyledTouchableOpacity onPress={goBack}>
-        <Ionicons name="ios-arrow-back-sharp" size={24} color="black" />
-      </StyledTouchableOpacity>
-      <StyledText>{title}</StyledText>
-    </StyledHeaderWrapper>
+    <Appbar.Header statusBarHeight={0}>
+      <Appbar.BackAction onPress={goBack} />
+      <Appbar.Content title={title} />
+    </Appbar.Header>
   );
 };

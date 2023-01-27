@@ -1,8 +1,3 @@
-import {
-  BodyText,
-  SubHeadline,
-  SubHeadlineBold,
-} from 'components/general/Typography/Typography';
 import { Camera } from 'expo-camera';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
@@ -14,11 +9,6 @@ export const StyledCamera = styled(Camera)`
   height: 425px;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-`;
-
-export const StyledSubHeadline = styled(SubHeadline)`
-  color: white;
-  text-align: center;
 `;
 
 export const StyledImage = styled.Image`
@@ -45,14 +35,6 @@ export const StyledInformationCard = styled.View`
 export const StyledWarningInformationCard = styled(StyledInformationCard)`
   background-color: ${({ theme }) => theme.colors.warningBackground};
   border: 2px solid ${({ theme }) => theme.colors.warningBorder};
-`;
-
-export const StyledSubHeadlineBold = styled(SubHeadlineBold)`
-  margin-bottom: ${({ theme }) => theme.marginBottom};
-`;
-
-export const StyledBodyText = styled(BodyText)`
-  margin-bottom: ${({ theme }) => theme.marginBottom};
 `;
 
 export const StyledTouchableOpacity = styled(TouchableOpacity)`

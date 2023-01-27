@@ -1,21 +1,18 @@
 import React from 'react';
 
-import { Card, Wrapper } from 'components/general/Layout/Layout';
+import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { Formik } from 'formik';
-import {
-  RegularCaption,
-  TitleBold,
-} from 'components/general/Typography/Typography';
-import { ErrorText, StyledTextInput } from 'components/general/Form';
+import { RegularCaption } from 'components/general/Typography/Typography';
+import { StyledTextInput } from 'components/general/Form';
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { FormInputWrapper } from 'screens/Visa/VisaApplication/steps/RegisterForm/RegisterForm.styled';
-import { TextInput } from 'react-native';
+import { HelperText } from 'react-native-paper';
 
 const LoginRaw = () => {
   return (
     <Wrapper>
-      <Card>
-        <TitleBold>Login</TitleBold>
+      <StyledCard>
+        <StyledCard.Title title="Login" />
         <Formik
           initialValues={{
             username: 'username',
@@ -31,7 +28,7 @@ const LoginRaw = () => {
             errors,
             touched,
           }) => {
-            <>
+            <StyledCard.Content>
               <FormInputWrapper>
                 <RegularCaption>Username</RegularCaption>
                 <StyledTextInput
@@ -43,7 +40,7 @@ const LoginRaw = () => {
                   isError={errors.username && touched.username}
                 />
                 {errors.username && touched.username && (
-                  <ErrorText>{errors.username}</ErrorText>
+                  <HelperText type="error">{errors.username}</HelperText>
                 )}
               </FormInputWrapper>
               <FormInputWrapper>
@@ -57,7 +54,7 @@ const LoginRaw = () => {
                   isError={errors.password && touched.password}
                 />
                 {errors.password && touched.password && (
-                  <ErrorText>{errors.password}</ErrorText>
+                  <HelperText type="error">{errors.password}</HelperText>
                 )}
               </FormInputWrapper>
               <FormInputWrapper>
@@ -69,10 +66,10 @@ const LoginRaw = () => {
                 </PrimaryButton>
                 <SecondaryButton onPress={() => alert(1)}>Back</SecondaryButton>
               </FormInputWrapper>
-            </>;
+            </StyledCard.Content>;
           }}
         </Formik>
-      </Card>
+      </StyledCard>
     </Wrapper>
   );
 };
