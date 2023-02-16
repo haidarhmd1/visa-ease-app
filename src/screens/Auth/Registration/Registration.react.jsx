@@ -5,13 +5,12 @@ import { Formik } from 'formik';
 import { addUserProfile } from 'network/api';
 import React, { useState } from 'react';
 import CountryPicker from 'react-native-country-picker-modal';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
-import { AppHeader } from 'components/general/AppHeader';
 import { generalInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
 import { RModal } from 'components/general/CustomModals';
-import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
+import { BackButton, Background, Logo } from 'components/Login';
 
 export const Registration = ({ navigation }) => {
   const [modalStatus, setModalStatus] = useState({
@@ -24,7 +23,6 @@ export const Registration = ({ navigation }) => {
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
   const [countryModalVisible, setCountryModalVisible] = useState(false);
-  const [selectedMaritalStatus, setSelectedMaritalStatus] = useState('single');
 
   const handleFormSubmit = async values => {
     setModalStatus({ ...modalStatus, loading: true, visible: true });
@@ -58,26 +56,23 @@ export const Registration = ({ navigation }) => {
   };
 
   return (
-    <>
-      <AppHeader
-        navigation={navigation}
-        goBack={() => navigation.goBack()}
-        title="Register"
-      />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <BackButton goBack={() => navigation.goBack()} />
+      <View style={style.logoContainer}>
+        <Logo style={style.center} />
+      </View>
+      <Text variant="titleLarge" style={[style.center, style.marginBottom]}>
+        Registration
+      </Text>
       <ScrollView>
-        <Wrapper>
+        <Background>
           <Formik
             initialValues={{
               fullname: '',
-              maritalStatus: 'single',
               gender: 'male',
-              street: '',
-              zipCode: '',
-              city: '',
               country: 'Germany',
               email: '',
               phone: '',
-              fax: '',
             }}
             validationSchema={generalInformationValidationSchema}
             onSubmit={handleFormSubmit}
@@ -91,8 +86,8 @@ export const Registration = ({ navigation }) => {
               errors,
               touched,
             }) => (
-              <StyledCard>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+              <>
+                <View style={[style.inputWidth, style.marginBottom]}>
                   <StyledTextInput
                     name="fullname"
                     label="Full Name*"
@@ -104,8 +99,25 @@ export const Registration = ({ navigation }) => {
                   {errors.fullname && touched.fullname && (
                     <HelperText type="error">{errors.fullname}</HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                </View>
+
+                <View style={[style.inputWidth, style.marginBottom]}>
+                  <StyledTextInput
+                    mode="outlined"
+                    name="email"
+                    label="Email Address*"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values?.email}
+                    keyboardType="email-address"
+                    error={errors.email && touched.email}
+                  />
+                  {errors.email && touched.email && (
+                    <HelperText type="error">{errors.email}</HelperText>
+                  )}
+                </View>
+
+                <View style={[style.inputWidth, style.marginBottom]}>
                   <Text variant="labelMedium">Gender*</Text>
                   <RadioButton.Group
                     onValueChange={(itemValue, itemIndex) => {
@@ -130,83 +142,9 @@ export const Registration = ({ navigation }) => {
                       value="divers"
                     />
                   </RadioButton.Group>
-                </StyledCard.Content>
+                </View>
 
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Marital Status*</Text>
-                  <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue('maritalStatus', itemValue);
-                      setSelectedMaritalStatus(itemValue);
-                    }}
-                    value={selectedMaritalStatus}
-                  >
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Single"
-                      value="single"
-                    />
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Married"
-                      value="married"
-                    />
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Divorced"
-                      value="divorced"
-                    />
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Widowed"
-                      value="widowed"
-                    />
-                  </RadioButton.Group>
-                </StyledCard.Content>
-
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    name="street"
-                    mode="outlined"
-                    label="Street, house nr.*"
-                    onChangeText={handleChange('street')}
-                    onBlur={handleBlur('street')}
-                    value={values?.street}
-                    error={errors.street && touched.street}
-                  />
-                  {errors.street && touched.street && (
-                    <HelperText type="error">{errors.street}</HelperText>
-                  )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="zipCode"
-                    label="ZIP Code*"
-                    onChangeText={handleChange('zipCode')}
-                    onBlur={handleBlur('zipCode')}
-                    value={values?.zipCode}
-                    error={errors.zipCode && touched.zipCode}
-                  />
-                  {errors.zipCode && touched.zipCode && (
-                    <HelperText type="error">{errors.zipCode}</HelperText>
-                  )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="city"
-                    label="City*"
-                    onChangeText={handleChange('city')}
-                    onBlur={handleBlur('city')}
-                    value={values?.city}
-                    error={errors.city && touched.city}
-                  />
-                  {errors.city && touched.city && (
-                    <HelperText type="error">{errors.city}</HelperText>
-                  )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                <View style={[style.inputWidth, style.marginBottom]}>
                   <Text variant="labelMedium">Country*</Text>
                   <CountryPicker
                     withFilter
@@ -235,23 +173,9 @@ export const Registration = ({ navigation }) => {
                   {errors.country && touched.country && (
                     <HelperText type="error">{errors.country}</HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="email"
-                    label="Email Address*"
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-                    value={values?.email}
-                    keyboardType="email-address"
-                    error={errors.email && touched.email}
-                  />
-                  {errors.email && touched.email && (
-                    <HelperText type="error">{errors.email}</HelperText>
-                  )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                </View>
+
+                <View style={[style.inputWidth, style.marginBottom]}>
                   <StyledTextInput
                     mode="outlined"
                     name="phone"
@@ -265,35 +189,20 @@ export const Registration = ({ navigation }) => {
                   {errors.phone && touched.phone && (
                     <HelperText type="error">{errors.phone}</HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="fax"
-                    label="Fax (optional)"
-                    onChangeText={handleChange('fax')}
-                    onBlur={handleBlur('fax')}
-                    value={values?.fax}
-                    keyboardType="phone-pad"
-                    error={errors.fax && touched.fax}
-                  />
-                  {errors.fax && touched.fax && (
-                    <HelperText type="error">{errors.fax}</HelperText>
-                  )}
-                </StyledCard.Content>
+                </View>
 
-                <StyledCard.Content>
+                <View style={[style.inputWidth, style.marginBottom]}>
                   <PrimaryButton
                     onPress={handleSubmit}
                     style={{ marginBottom: 10 }}
                   >
-                    Next
+                    Register
                   </PrimaryButton>
-                </StyledCard.Content>
-              </StyledCard>
+                </View>
+              </>
             )}
           </Formik>
-        </Wrapper>
+        </Background>
       </ScrollView>
       <RModal
         visible={modalStatus.visible}
@@ -301,6 +210,29 @@ export const Registration = ({ navigation }) => {
         success={modalStatus.success}
         loading={modalStatus.loading}
       />
-    </>
+    </View>
   );
 };
+
+const style = StyleSheet.create({
+  inputWidth: {
+    width: '100%',
+  },
+  buttonWidth: {
+    width: 250,
+  },
+  logoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  center: {
+    alignSelf: 'center',
+  },
+  inputMarginBottom: {
+    marginBottom: 8,
+  },
+  marginBottom: {
+    marginBottom: 16,
+  },
+});

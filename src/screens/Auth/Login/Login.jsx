@@ -5,7 +5,7 @@ import { Background, Logo } from 'components/Login';
 import { StyleSheet, View } from 'react-native';
 import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
-import { HelperText } from 'react-native-paper';
+import { HelperText, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
 import { loginSchema } from './Login.schema';
 
@@ -21,7 +21,9 @@ const LoginRaw = ({ navigation }) => {
   return (
     <Background>
       <Logo />
-
+      <Text variant="titleLarge" style={[style.center, style.marginBottom]}>
+        Login
+      </Text>
       <Formik
         initialValues={{
           email: '',
@@ -99,6 +101,9 @@ const style = StyleSheet.create({
   },
   inputMarginBottom: {
     marginBottom: 8,
+  },
+  center: {
+    alignSelf: 'center',
   },
   marginBottom: {
     marginBottom: 16,

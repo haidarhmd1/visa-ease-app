@@ -10,6 +10,8 @@ export const BackButton = ({ goBack }) => (
 
 const styles = StyleSheet.create({
   image: {
+    marginTop: 25,
+    marginLeft: 15,
     width: 24,
     height: 24,
   },
