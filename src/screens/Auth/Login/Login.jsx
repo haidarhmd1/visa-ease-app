@@ -7,20 +7,15 @@ import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
 import { HelperText } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
-import { useDispatch } from 'react-redux';
-import { setSignIn } from 'redux/slices/authSlice';
 import { loginSchema } from './Login.schema';
 
 const LoginRaw = ({ navigation }) => {
-  const dispatch = useDispatch();
-
   const handleFormSubmit = values => {
     const user = {
       isLoggedIn: true,
       email: values.email,
     };
-
-    dispatch(setSignIn(user));
+    console.log(user);
   };
 
   return (

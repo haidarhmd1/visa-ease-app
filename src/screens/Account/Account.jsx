@@ -3,8 +3,6 @@ import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { DangerButton } from 'components/general/Buttons';
-import { useDispatch } from 'react-redux';
-import { setSignOut } from 'redux/slices/authSlice';
 import { ProfileOverview } from './ProfileOverview';
 import { VisaStatus } from './VisaStatus';
 import { AccountLinks } from './AccountLinks';
@@ -12,9 +10,8 @@ import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
-  const dispatcher = useDispatch();
   const onLogoutHandler = () => {
-    dispatcher(setSignOut());
+    console.log(1);
   };
 
   return (
