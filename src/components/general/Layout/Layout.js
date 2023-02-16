@@ -1,14 +1,23 @@
 import { ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 import styled from 'styled-components/native';
-import { HeadlineBold } from '../Typography/Typography';
 
 export const Layout = styled.View`
-  margin: 5%;
+  padding-left: 16;
+  padding-right: 16;
+  padding-top: 8;
+  padding-bottom: 8;
 `;
 
 export const Wrapper = styled.View`
-  margin: 0 5%;
+  padding-left: 16;
+  padding-right: 16;
+  padding-top: 8;
+  padding-bottom: 8;
+`;
+
+export const Spacer = styled.View`
+  padding: 8px;
 `;
 
 export const TouchableIconCardOpacity = styled.TouchableOpacity`
@@ -23,9 +32,8 @@ export const TouchableIconCardOpacity = styled.TouchableOpacity`
 export const StyledCard = styled(Card).attrs(properties => ({
   mode: 'contained',
 }))`
-  margin-top: ${({ theme }) => theme.marginTop};
+  margin-bottom: 8px;
   background-color: ${({ theme }) => theme.colors.primaryBackground};
-  /* margin-bottom: ${({ theme }) => theme.marginBottom}; */
 `;
 
 export const StyledScrollView = styled(ScrollView)`

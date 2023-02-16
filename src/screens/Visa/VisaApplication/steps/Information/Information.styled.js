@@ -11,6 +11,7 @@ export const StyledImageBackground = styled.ImageBackground`
   flex: 1;
   width: 100%;
   height: 175px;
+  margin-bottom: 8px;
 `;
 
 export const StyledInformationCard = styled.View`
@@ -30,6 +31,7 @@ export const StyledWarningInformationCard = styled(StyledInformationCard)`
   border: 2px solid ${({ theme }) => theme.colors.warningBorder};
   background-color: ${({ theme }) => theme.colors.warningBackground};
   margin-top: 0;
+  margin-bottom: 8px;
 `;
 
 export const ImageTextWrapper = styled.View`

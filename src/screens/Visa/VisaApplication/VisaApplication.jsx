@@ -2,7 +2,7 @@ import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import { ROUTES } from 'res/constants/routes';
@@ -119,7 +119,6 @@ export const VisaApplication = ({ navigation }) => {
               <PrimaryButton disabled> Submit </PrimaryButton>
             </StyledCard.Content>
           </StyledCard>
-          <View style={{ marginTop: 16, marginBottom: 16 }} />
           {visaCountryData?.notice ? (
             <StyledWarningInformationCard>
               <Text
@@ -135,41 +134,37 @@ export const VisaApplication = ({ navigation }) => {
               </StyledCard.Content>
             </StyledWarningInformationCard>
           ) : null}
-          <View style={{ marginTop: 16 }} />
 
           <StyledCard>
-            <StyledCard.Content>
-              <List.Section>
-                <List.Accordion
-                  style={{ backgroundColor: 'white' }}
-                  title={intl.formatMessage({
-                    id: 'visaApplication.steps.information.infoTitle',
-                  })}
-                >
-                  <List.Item
-                    descriptionNumberOfLines={100}
-                    title=""
-                    description={visaCountryData?.information}
-                  />
-                </List.Accordion>
+            <List.Section>
+              <List.Accordion
+                style={{ backgroundColor: 'white' }}
+                title={intl.formatMessage({
+                  id: 'visaApplication.steps.information.infoTitle',
+                })}
+              >
+                <List.Item
+                  descriptionNumberOfLines={100}
+                  title=""
+                  description={visaCountryData?.information}
+                />
+              </List.Accordion>
 
-                <Divider marginBottom={12} marginTop={12} />
-                <List.Accordion
-                  style={{ backgroundColor: 'white' }}
-                  title={intl.formatMessage({
-                    id: 'visaApplication.steps.information.whatWeNeedBox.title',
-                  })}
-                >
-                  <List.Item
-                    descriptionNumberOfLines={100}
-                    title=""
-                    description={visaCountryData?.what_we_need}
-                  />
-                </List.Accordion>
-              </List.Section>
-            </StyledCard.Content>
+              <Divider marginBottom={12} marginTop={12} />
+              <List.Accordion
+                style={{ backgroundColor: 'white' }}
+                title={intl.formatMessage({
+                  id: 'visaApplication.steps.information.whatWeNeedBox.title',
+                })}
+              >
+                <List.Item
+                  descriptionNumberOfLines={100}
+                  title=""
+                  description={visaCountryData?.what_we_need}
+                />
+              </List.Accordion>
+            </List.Section>
           </StyledCard>
-          <View style={{ marginTop: 16 }} />
         </Layout>
       </ScrollView>
     </>
