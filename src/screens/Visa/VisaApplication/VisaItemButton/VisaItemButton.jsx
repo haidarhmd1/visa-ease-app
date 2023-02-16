@@ -18,7 +18,7 @@ export const VisaItemButton = ({
     <Button
       mode="outlined"
       style={{
-        borderRadius: 14,
+        borderRadius: 10,
         borderColor: 'lightgrey',
         color: 'black',
         marginBottom: 14,
