@@ -74,7 +74,8 @@
     "react-query": "3.39.2",
     "recompose": "npm:react-recompose",
     "styled-components": "^5.3.5",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zustand": "4.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
