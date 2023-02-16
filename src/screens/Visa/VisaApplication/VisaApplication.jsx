@@ -2,7 +2,7 @@ import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import { ROUTES } from 'res/constants/routes';
@@ -11,6 +11,7 @@ import {
   StyledImageBackground,
   StyledWarningInformationCard,
 } from './steps/Information/Information.styled';
+import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {
   id: 1,
@@ -28,17 +29,8 @@ const visaCountryData = {
   slug: 'uae',
 };
 
-const ProgessSuccess = properties => (
-  <List.Icon icon="progress-check" color="green" />
-);
-const ProgessPending = properties => (
-  <List.Icon icon="progress-pencil" color="lightgray" />
-);
-
 export const VisaApplication = ({ navigation }) => {
   const intl = useIntl();
-
-  const onPressHandler = route => navigation.navigate(route);
 
   return (
     <>
@@ -64,74 +56,70 @@ export const VisaApplication = ({ navigation }) => {
         <Layout>
           <StyledCard>
             <StyledCard.Content>
-              <List.Section>
-                <List.Subheader>Information</List.Subheader>
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.generalInformation)
-                  }
-                  title="General Information"
-                  left={ProgessSuccess}
-                />
-                <Divider />
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.visaInformation)
-                  }
-                  title="Visa Information"
-                  left={ProgessPending}
-                />
-                <Divider />
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.flightInformation)
-                  }
-                  title="Flight Information"
-                  left={ProgessPending}
-                />
-              </List.Section>
-              <List.Section>
-                <List.Subheader>Dokumente</List.Subheader>
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.passportPicture)
-                  }
-                  title="Passport Picture"
-                  left={ProgessPending}
-                />
-                <Divider />
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.residencePermit)
-                  }
-                  title="Aufenthaltserlaubnis"
-                  left={ProgessPending}
-                />
-                <Divider />
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.biometricImage)
-                  }
-                  title="Biometic Image"
-                  left={ProgessPending}
-                />
-              </List.Section>
-              <List.Section>
-                <List.Subheader>Agreement</List.Subheader>
-                <List.Item
-                  onPress={() =>
-                    onPressHandler(ROUTES.VISA_INFORMATION.agreement)
-                  }
-                  title="Agreement"
-                  left={ProgessPending}
-                />
-              </List.Section>
+              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+                Information
+              </Text>
+              <VisaItemButton
+                title="General Information"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.generalInformation}
+                isProgessCompleted
+              />
+
+              <VisaItemButton
+                title="Visa Information"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.visaInformation}
+                isProgessCompleted={false}
+              />
+
+              <VisaItemButton
+                title="Flight Information"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.flightInformation}
+                isProgessCompleted
+              />
+              <Divider marginBottom={12} marginTop={12} />
+              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+                Dokumente
+              </Text>
+              <VisaItemButton
+                title="Passport Picture"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.passportPicture}
+                isProgessCompleted
+              />
+
+              <VisaItemButton
+                title="Aufenthaltserlaubnis"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.residencePermit}
+                isProgessCompleted={false}
+              />
+
+              <VisaItemButton
+                title="Biometic Image"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.biometricImage}
+                isProgessCompleted={false}
+              />
+              <Divider marginBottom={12} marginTop={12} />
+              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+                Agreement
+              </Text>
+
+              <VisaItemButton
+                title="Agreement"
+                navigation={navigation}
+                route={ROUTES.VISA_INFORMATION.agreement}
+                isProgessCompleted={false}
+              />
             </StyledCard.Content>
             <StyledCard.Content>
               <PrimaryButton disabled> Submit </PrimaryButton>
             </StyledCard.Content>
           </StyledCard>
-          <Divider style={{ marginTop: 16, marginBottom: 16 }} />
+          <View style={{ marginTop: 16, marginBottom: 16 }} />
           {visaCountryData?.notice ? (
             <StyledWarningInformationCard>
               <Text
@@ -147,12 +135,13 @@ export const VisaApplication = ({ navigation }) => {
               </StyledCard.Content>
             </StyledWarningInformationCard>
           ) : null}
-          <Divider style={{ marginTop: 16 }} />
+          <View style={{ marginTop: 16 }} />
 
           <StyledCard>
             <StyledCard.Content>
               <List.Section>
                 <List.Accordion
+                  style={{ backgroundColor: 'white' }}
                   title={intl.formatMessage({
                     id: 'visaApplication.steps.information.infoTitle',
                   })}
@@ -164,7 +153,9 @@ export const VisaApplication = ({ navigation }) => {
                   />
                 </List.Accordion>
 
+                <Divider marginBottom={12} marginTop={12} />
                 <List.Accordion
+                  style={{ backgroundColor: 'white' }}
                   title={intl.formatMessage({
                     id: 'visaApplication.steps.information.whatWeNeedBox.title',
                   })}
@@ -178,7 +169,7 @@ export const VisaApplication = ({ navigation }) => {
               </List.Section>
             </StyledCard.Content>
           </StyledCard>
-          <Divider style={{ marginTop: 16 }} />
+          <View style={{ marginTop: 16 }} />
         </Layout>
       </ScrollView>
     </>

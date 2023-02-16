@@ -10,12 +10,52 @@ import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
+import { addUserProfile } from 'network/api';
+import { RModal } from 'components/general/CustomModals';
 
 export const GeneralInformation = ({ navigation }) => {
+  const [modalStatus, setModalStatus] = useState({
+    visible: false,
+    loading: false,
+    success: false,
+    error: false,
+  });
+
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
   const [countryModalVisible, setCountryModalVisible] = useState(false);
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState('single');
+
+  const handleFormSubmit = async values => {
+    setModalStatus({ ...modalStatus, loading: true, visible: true });
+    try {
+      const response = await addUserProfile(values);
+      if (response.status !== 200) throw Error;
+      setModalStatus({
+        ...modalStatus,
+        visible: true,
+        error: false,
+        success: true,
+        loading: false,
+      });
+      navigation.goBack();
+    } catch {
+      setModalStatus({
+        ...modalStatus,
+        visible: true,
+        error: true,
+        success: false,
+        loading: false,
+      });
+    } finally {
+      setTimeout(() => {
+        setModalStatus({
+          ...modalStatus,
+          visible: false,
+        });
+      }, 1000);
+    }
+  };
 
   return (
     <>
@@ -29,7 +69,7 @@ export const GeneralInformation = ({ navigation }) => {
           <Formik
             initialValues={{
               fullname: '',
-              martialStatus: 'single',
+              maritalStatus: 'single',
               gender: 'male',
               street: '',
               zipCode: '',
@@ -39,8 +79,8 @@ export const GeneralInformation = ({ navigation }) => {
               phone: '',
               fax: '',
             }}
-            // validationSchema={generalInformationValidationSchema}
-            onSubmit={values => console.log(values)}
+            validationSchema={generalInformationValidationSchema}
+            onSubmit={handleFormSubmit}
           >
             {({
               handleChange,
@@ -55,21 +95,20 @@ export const GeneralInformation = ({ navigation }) => {
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     name="fullname"
-                    label="Full Name"
+                    label="Full Name*"
                     onChangeText={handleChange('fullname')}
                     onBlur={handleBlur('fullname')}
                     value={values?.fullname}
-                    isError={errors.fullname && touched.fullname}
+                    error={errors.fullname && touched.fullname}
                   />
                   {errors.fullname && touched.fullname && (
                     <HelperText type="error">{errors.fullname}</HelperText>
                   )}
                 </StyledCard.Content>
                 <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Gender</Text>
+                  <Text variant="labelMedium">Gender*</Text>
                   <RadioButton.Group
                     onValueChange={(itemValue, itemIndex) => {
-                      console.log('itemValue', itemValue);
                       setFieldValue('gender', itemValue);
                       setSelectedGender(itemValue);
                     }}
@@ -94,7 +133,7 @@ export const GeneralInformation = ({ navigation }) => {
                 </StyledCard.Content>
 
                 <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Marital Status</Text>
+                  <Text variant="labelMedium">Marital Status*</Text>
                   <RadioButton.Group
                     onValueChange={(itemValue, itemIndex) => {
                       setFieldValue('maritalStatus', itemValue);
@@ -129,11 +168,11 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     name="street"
                     mode="outlined"
-                    label="Street"
+                    label="Street, house nr.*"
                     onChangeText={handleChange('street')}
                     onBlur={handleBlur('street')}
                     value={values?.street}
-                    isError={errors.street && touched.street}
+                    error={errors.street && touched.street}
                   />
                   {errors.street && touched.street && (
                     <HelperText type="error">{errors.street}</HelperText>
@@ -143,11 +182,11 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="zipCode"
-                    label="ZIP Code"
+                    label="ZIP Code*"
                     onChangeText={handleChange('zipCode')}
                     onBlur={handleBlur('zipCode')}
                     value={values?.zipCode}
-                    isError={errors.zipCode && touched.zipCode}
+                    error={errors.zipCode && touched.zipCode}
                   />
                   {errors.zipCode && touched.zipCode && (
                     <HelperText type="error">{errors.zipCode}</HelperText>
@@ -157,28 +196,29 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="city"
-                    label="City"
+                    label="City*"
                     onChangeText={handleChange('city')}
                     onBlur={handleBlur('city')}
                     value={values?.city}
-                    isError={errors.city && touched.city}
+                    error={errors.city && touched.city}
                   />
                   {errors.city && touched.city && (
                     <HelperText type="error">{errors.city}</HelperText>
                   )}
                 </StyledCard.Content>
                 <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Nationality</Text>
+                  <Text variant="labelMedium">Country*</Text>
                   <CountryPicker
                     withFilter
                     withCountryNameButton
                     withModal
                     withAlphaFilter
-                    withEmoji
+                    withEmoji={false}
                     containerButtonStyle={{ display: 'none' }}
                     visible={countryModalVisible}
                     onSelect={({ name }) => {
                       setSelectedCountry(name);
+                      setFieldValue('country', name);
                       setCountryModalVisible(false);
                     }}
                   />
@@ -200,12 +240,12 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="email"
-                    label="Email Address"
+                    label="Email Address*"
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     value={values?.email}
                     keyboardType="email-address"
-                    isError={errors.email && touched.email}
+                    error={errors.email && touched.email}
                   />
                   {errors.email && touched.email && (
                     <HelperText type="error">{errors.email}</HelperText>
@@ -215,12 +255,12 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="phone"
-                    label="Phone"
+                    label="Phone*"
                     onChangeText={handleChange('phone')}
                     onBlur={handleBlur('phone')}
                     value={values?.phone}
                     keyboardType="phone-pad"
-                    isError={errors.phone && touched.phone}
+                    error={errors.phone && touched.phone}
                   />
                   {errors.phone && touched.phone && (
                     <HelperText type="error">{errors.phone}</HelperText>
@@ -230,12 +270,12 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="fax"
-                    label="Fax"
+                    label="Fax (optional)"
                     onChangeText={handleChange('fax')}
                     onBlur={handleBlur('fax')}
                     value={values?.fax}
                     keyboardType="phone-pad"
-                    isError={errors.fax && touched.fax}
+                    error={errors.fax && touched.fax}
                   />
                   {errors.fax && touched.fax && (
                     <HelperText type="error">{errors.fax}</HelperText>
@@ -255,6 +295,12 @@ export const GeneralInformation = ({ navigation }) => {
           </Formik>
         </Wrapper>
       </ScrollView>
+      <RModal
+        visible={modalStatus.visible}
+        error={modalStatus.error}
+        success={modalStatus.success}
+        loading={modalStatus.loading}
+      />
     </>
   );
 };

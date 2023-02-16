@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SafeAreaView } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as ReduxProvider } from 'react-redux';
 import 'react-native-gesture-handler';
 
 import * as SplashScreen from 'expo-splash-screen';
@@ -20,6 +21,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { getLanguage } from 'helpers/language';
 import { messages } from 'res/locales/locales';
+import { store } from 'redux/store';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -56,20 +58,25 @@ export default function App() {
   if (!appIsReady) return null;
 
   return (
-    <PaperProvider>
-      <ThemeProvider theme={MyTheme}>
-        <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
-          <QueryClientProvider client={queryClient}>
-            <IntlProvider
-              locale={getLanguage()}
-              messages={messages[getLanguage()]}
-              wrapRichTextChunksInFragment
-            >
-              <RootStack />
-            </IntlProvider>
-          </QueryClientProvider>
-        </SafeAreaView>
-      </ThemeProvider>
-    </PaperProvider>
+    <ReduxProvider store={store}>
+      <PaperProvider>
+        <ThemeProvider theme={MyTheme}>
+          <SafeAreaView
+            style={themeStyle.container}
+            onLayout={onLayoutRootView}
+          >
+            <QueryClientProvider client={queryClient}>
+              <IntlProvider
+                locale={getLanguage()}
+                messages={messages[getLanguage()]}
+                wrapRichTextChunksInFragment
+              >
+                <RootStack />
+              </IntlProvider>
+            </QueryClientProvider>
+          </SafeAreaView>
+        </ThemeProvider>
+      </PaperProvider>
+    </ReduxProvider>
   );
 }

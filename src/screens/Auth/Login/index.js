@@ -1,1 +1,1 @@
-export { Login } from './Login.react';
+export { Login } from './Login';

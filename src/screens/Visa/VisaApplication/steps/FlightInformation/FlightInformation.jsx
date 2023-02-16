@@ -10,15 +10,7 @@ import { ScrollView } from 'react-native';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
 
 export const FlightInformation = ({ navigation }) => {
-  const [
-    selectedArrivalSameasDepartureAirport,
-    setSelectedArrivalSameasDepartureAirport,
-  ] = useState('yes');
-  const [
-    selectedInvoiceRecipientSameAsApplicant,
-    setSelectedInvoiceRecipientSameAsApplicant,
-  ] = useState('yes');
-  const [selectedEntireTravelInUAE, setSelectedEntireTravelInUAE] = useState(
+  const [selectedInvoiceRecipient, setSelectedInvoiceRecipient] = useState(
     'yes'
   );
 
@@ -33,6 +25,12 @@ export const FlightInformation = ({ navigation }) => {
         <Wrapper>
           <Formik
             // validationSchema={flightInformationValidationSchema}
+            initialValues={{
+              travelStartDate: '',
+              returnFlightDate: '',
+              isInvoiceRecipientSame: 'yes',
+              invoiceAddress: '',
+            }}
             onSubmit={values => console.log(1)}
           >
             {({
@@ -91,58 +89,42 @@ export const FlightInformation = ({ navigation }) => {
                     </HelperText>
                   )}
                 </StyledCard.Content>
-                {/* <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">
-                    Arrival airport is the same as departure airport?
-                  </Text>
 
-                  <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue('arrivalSameasDepartureAirport', itemValue);
-                      setSelectedArrivalSameasDepartureAirport(itemValue);
-                    }}
-                    value={selectedArrivalSameasDepartureAirport}
-                  >
-                    <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
-                    <RadioButton.Item color="#00bf80" label="No" value="no" />
-                  </RadioButton.Group>
-                </StyledCard.Content> */}
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">
-                    Invoice Recipient is same as Applicant?
+                    Invoice Recipient same as Applicant?
                   </Text>
-
                   <RadioButton.Group
                     onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue(
-                        'invoiceRecipientSameAsApplicant',
-                        itemValue
-                      );
-                      setSelectedInvoiceRecipientSameAsApplicant(itemValue);
+                      setFieldValue('isInvoiceRecipientSame', itemValue);
+                      setSelectedInvoiceRecipient(itemValue);
                     }}
-                    value={selectedInvoiceRecipientSameAsApplicant}
+                    value={selectedInvoiceRecipient}
                   >
                     <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
                     <RadioButton.Item color="#00bf80" label="No" value="no" />
                   </RadioButton.Group>
                 </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">
-                    Will you spend the entire travel period exclusively in the
-                    United Arab Emirates?
-                  </Text>
 
-                  <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue('entireTravelInUAE', itemValue);
-                      setSelectedEntireTravelInUAE(itemValue);
-                    }}
-                    value={selectedEntireTravelInUAE}
-                  >
-                    <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
-                    <RadioButton.Item color="#00bf80" label="No" value="no" />
-                  </RadioButton.Group>
-                </StyledCard.Content>
+                {selectedInvoiceRecipient === 'no' && (
+                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                    <StyledTextInput
+                      mode="outlined"
+                      label="Invoice Recipient Address"
+                      name="invoiceAddress"
+                      placeholder="Friedrichstr. 95, 10117 Berlin"
+                      value={values?.invoiceAddress}
+                      onChangeText={handleChange('invoiceAddress')}
+                      onBlur={handleBlur('invoiceAddress')}
+                      isError={errors.invoiceAddress && touched.invoiceAddress}
+                    />
+                    {errors.invoiceAddress && touched.invoiceAddress && (
+                      <HelperText type="error">
+                        {errors.invoiceAddress}
+                      </HelperText>
+                    )}
+                  </StyledCard.Content>
+                )}
 
                 <StyledCard.Content>
                   <PrimaryButton

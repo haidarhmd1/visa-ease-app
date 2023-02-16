@@ -7,12 +7,12 @@ import { HeaderLogo } from './AppHeader.styled';
 
 export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   const onProfileHandler = () => {
-    navigation.navigate(ROUTES.PROFILE);
+    navigation.navigate(ROUTES.ACCOUNT);
   };
 
   if (role === 'main') {
     return (
-      <Appbar.Header statusBarHeight={0}>
+      <Appbar.Header statusBarHeight={0} style={{ backgroundColor: 'white' }}>
         <Appbar.Content title={<HeaderLogo source={VisaStarLogo} />} />
         <Appbar.Action icon="account-outline" onPress={onProfileHandler} />
       </Appbar.Header>
@@ -20,7 +20,7 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   }
 
   return (
-    <Appbar.Header statusBarHeight={0}>
+    <Appbar.Header statusBarHeight={0} style={{ backgroundColor: 'white' }}>
       <Appbar.BackAction onPress={goBack} />
       <Appbar.Content title={title} />
     </Appbar.Header>

@@ -45,6 +45,13 @@ module.exports = {
     'no-console': 1,
     'max-lines': [1, 400],
     complexity: 2,
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['state'],
+      },
+    ],
     'new-cap': 0,
     'require-await': 2,
     'prefer-promise-reject-errors': 0,
@@ -56,6 +63,7 @@ module.exports = {
     'import/prefer-default-export': 0,
     'import/no-default-export': 0,
     'import/no-namespace': 0,
+    'no-use-before-define': 0,
     'react/function-component-definition': 0,
     'unicorn/better-regex': 0,
     'unicorn/consistent-destructuring': 0,

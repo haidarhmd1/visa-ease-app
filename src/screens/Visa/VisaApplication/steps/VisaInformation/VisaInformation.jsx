@@ -13,9 +13,6 @@ import CountryPicker from 'react-native-country-picker-modal';
 export const VisaInformation = ({ navigation }) => {
   const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
   const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
-  const [selectedInvoiceRecipient, setSelectedInvoiceRecipient] = useState(
-    'yes'
-  );
   const [selectedCitizenship, setSelectedCitizenship] = useState('Germany');
   const [selectedDestinationCountry, setSelectedDestinationCountry] = useState(
     'Germany'
@@ -83,6 +80,7 @@ export const VisaInformation = ({ navigation }) => {
                     containerButtonStyle={{ display: 'none' }}
                     visible={citizenshipModalVisible}
                     onSelect={({ name }) => {
+                      setFieldValue('citizenship', name);
                       setSelectedCitizenship(name);
                       setCitizenshipModalVisible(false);
                     }}
@@ -145,6 +143,7 @@ export const VisaInformation = ({ navigation }) => {
                     containerButtonStyle={{ display: 'none' }}
                     visible={destinationCountryModalVisible}
                     onSelect={({ name }) => {
+                      setFieldValue('destinationCountry', name);
                       setSelectedDestinationCountry(name);
                       setDestinationCountryModalVisible(false);
                     }}
@@ -186,42 +185,6 @@ export const VisaInformation = ({ navigation }) => {
                     />
                   </RadioButton.Group>
                 </StyledCard.Content>
-
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">
-                    Invoice Recipient same as Applicant?
-                  </Text>
-                  <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue('isInvoiceRecipientSame', itemValue);
-                      setSelectedInvoiceRecipient(itemValue);
-                    }}
-                    value={selectedInvoiceRecipient}
-                  >
-                    <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
-                    <RadioButton.Item color="#00bf80" label="No" value="no" />
-                  </RadioButton.Group>
-                </StyledCard.Content>
-
-                {selectedInvoiceRecipient === 'no' && (
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
-                    <StyledTextInput
-                      mode="outlined"
-                      label="Invoice Recipient Address"
-                      name="invoiceAddress"
-                      placeholder="Friedrichstr. 95, 10117 Berlin"
-                      value={values?.invoiceAddress}
-                      onChangeText={handleChange('invoiceAddress')}
-                      onBlur={handleBlur('invoiceAddress')}
-                      isError={errors.invoiceAddress && touched.invoiceAddress}
-                    />
-                    {errors.invoiceAddress && touched.invoiceAddress && (
-                      <HelperText type="error">
-                        {errors.invoiceAddress}
-                      </HelperText>
-                    )}
-                  </StyledCard.Content>
-                )}
 
                 <StyledCard.Content>
                   <PrimaryButton
