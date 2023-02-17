@@ -8,7 +8,7 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { RModal } from 'components/general/CustomModals';
-import { BackButton, Background, Logo } from 'components/Login';
+import { BackButton, Background } from 'components/Login';
 import { ROUTES } from 'res/constants/routes';
 import { registrationValidationSchema } from './Registration.schema';
 

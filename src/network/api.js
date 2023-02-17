@@ -20,9 +20,16 @@ export const registerUserProfile = data => {
     .catch(error => error.response);
 };
 
-export const completeUserProfile = data => {
+export const completeUserProfile = (data, id) => {
   return axios
-    .patch(`${BASE_URL}/v1/user/users`, data, { headers })
+    .patch(`${BASE_URL}/v1/user/users/${id}`, data, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const getUser = id => {
+  return axios
+    .get(`${BASE_URL}/v1/user/users/${id}`, { headers })
     .then(response => response)
     .catch(error => error.response);
 };

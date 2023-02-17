@@ -10,16 +10,29 @@ import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
-import { completeUserProfile } from 'network/api';
+import { completeUserProfile, getUser } from 'network/api';
 import { RModal } from 'components/general/CustomModals';
+import { useAuthenticationStore } from 'store/zustand';
+import { useQuery, useQueryClient } from 'react-query';
 
 export const GeneralInformation = ({ navigation }) => {
+  const userId = useAuthenticationStore(state => state.id);
+  const queryClient = useQueryClient();
+  const { data: getUserResponse, isLoading } = useQuery(
+    ['getUser', userId],
+    () => getUser(userId)
+  );
+
   const [modalStatus, setModalStatus] = useState({
     visible: false,
     loading: false,
     success: false,
     error: false,
   });
+
+  if (isLoading) {
+    setModalStatus({ ...modalStatus, loading: true, visible: true });
+  }
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
@@ -29,7 +42,7 @@ export const GeneralInformation = ({ navigation }) => {
   const handleFormSubmit = async values => {
     setModalStatus({ ...modalStatus, loading: true, visible: true });
     try {
-      const response = await completeUserProfile(values);
+      const response = await completeUserProfile(values, userId);
       if (response.status !== 200) throw Error;
       setModalStatus({
         ...modalStatus,
@@ -38,6 +51,7 @@ export const GeneralInformation = ({ navigation }) => {
         success: true,
         loading: false,
       });
+      queryClient.invalidateQueries('getUser', userId);
       navigation.goBack();
     } catch {
       setModalStatus({
@@ -68,16 +82,16 @@ export const GeneralInformation = ({ navigation }) => {
         <Wrapper>
           <Formik
             initialValues={{
-              fullname: '',
-              maritalStatus: 'single',
-              gender: 'male',
-              street: '',
-              zipCode: '',
-              city: '',
-              country: 'Germany',
-              email: '',
-              phone: '',
-              fax: '',
+              fullname: getUserResponse.data.fullname ?? '',
+              maritalStatus: getUserResponse.data.maritalStatus ?? 'single',
+              gender: getUserResponse.data.gender ?? 'male',
+              street: getUserResponse.data.street ?? '',
+              zipCode: getUserResponse.data.zipCode ?? '',
+              city: getUserResponse.data.city ?? '',
+              country: getUserResponse.data.country ?? 'Germany',
+              email: getUserResponse.data.email ?? '',
+              phone: getUserResponse.data.phone ?? '',
+              fax: getUserResponse.data.fax ?? '',
             }}
             validationSchema={generalInformationValidationSchema}
             onSubmit={handleFormSubmit}
@@ -98,7 +112,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="Full Name*"
                     onChangeText={handleChange('fullname')}
                     onBlur={handleBlur('fullname')}
-                    value={values?.fullname}
+                    value={values.fullname}
                     error={errors.fullname && touched.fullname}
                   />
                   {errors.fullname && touched.fullname && (
@@ -171,7 +185,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="Street, house nr.*"
                     onChangeText={handleChange('street')}
                     onBlur={handleBlur('street')}
-                    value={values?.street}
+                    value={values.street}
                     error={errors.street && touched.street}
                   />
                   {errors.street && touched.street && (
@@ -185,7 +199,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="ZIP Code*"
                     onChangeText={handleChange('zipCode')}
                     onBlur={handleBlur('zipCode')}
-                    value={values?.zipCode}
+                    value={values.zipCode}
                     error={errors.zipCode && touched.zipCode}
                   />
                   {errors.zipCode && touched.zipCode && (
@@ -199,7 +213,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="City*"
                     onChangeText={handleChange('city')}
                     onBlur={handleBlur('city')}
-                    value={values?.city}
+                    value={values.city}
                     error={errors.city && touched.city}
                   />
                   {errors.city && touched.city && (
@@ -226,7 +240,7 @@ export const GeneralInformation = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="country"
-                    value={values?.country}
+                    value={values.country}
                     editable={false}
                     selectTextOnFocus={false}
                     onPressIn={() => setCountryModalVisible(true)}
@@ -243,7 +257,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="Email Address*"
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
-                    value={values?.email}
+                    value={values.email}
                     keyboardType="email-address"
                     error={errors.email && touched.email}
                   />
@@ -258,7 +272,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="Phone*"
                     onChangeText={handleChange('phone')}
                     onBlur={handleBlur('phone')}
-                    value={values?.phone}
+                    value={values.phone}
                     keyboardType="phone-pad"
                     error={errors.phone && touched.phone}
                   />
@@ -273,7 +287,7 @@ export const GeneralInformation = ({ navigation }) => {
                     label="Fax (optional)"
                     onChangeText={handleChange('fax')}
                     onBlur={handleBlur('fax')}
-                    value={values?.fax}
+                    value={values.fax}
                     keyboardType="phone-pad"
                     error={errors.fax && touched.fax}
                   />
