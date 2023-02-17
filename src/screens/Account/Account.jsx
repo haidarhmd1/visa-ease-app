@@ -11,10 +11,7 @@ import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
-  const userAuth = useAuthenticationStore(state => state.userAuth);
-  const onLogoutHandler = () => {
-    userAuth('', false);
-  };
+  const userLogout = useAuthenticationStore(state => state.userLogout);
 
   return (
     <>
@@ -32,7 +29,7 @@ export const Account = ({ navigation }) => {
           <SocialMediaLinks />
           <StyledCard>
             <StyledCard.Content>
-              <DangerButton onPress={onLogoutHandler}>Log out</DangerButton>
+              <DangerButton onPress={() => userLogout()}>Log out</DangerButton>
             </StyledCard.Content>
           </StyledCard>
         </Layout>

@@ -1,5 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { View, Button } from 'react-native';
 
 import { Layout } from 'components/general/Layout/Layout';
 import { Camera } from 'expo-camera';
@@ -7,13 +13,26 @@ import { Formik } from 'formik';
 import { IconButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { SecondaryButton } from 'components/general/Buttons';
 import {
   StyledCamera,
   StyledCameraButtonWrapper,
   StyledImage,
+  StyledWarningInformationCard,
 } from './CaptureDocuments.styled';
 
 export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
+  const sheetReference = useRef(null);
+  const snapPoints = useMemo(() => ['90%'], []);
+
+  const handleSnapPress = useCallback(index => {
+    sheetReference.current?.snapToIndex(index);
+  }, []);
+  const handleClosePress = useCallback(() => {
+    sheetReference.current?.close();
+  }, []);
+
   const navigation = useNavigation();
   const cameraReference = useRef();
   const [hasCameraPermission, setHasCameraPermission] = useState();
@@ -65,7 +84,7 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
           goBack={() => navigation.goBack()}
           title="Documents"
         />
-        <Layout style={{ flex: 1, backgroundColor: 'white' }}>
+        <Layout style={{ flex: 1 }}>
           <Formik initialValues={data} onSubmit={values => next(values)}>
             {({ handleSubmit, setFieldValue }) => (
               <>
@@ -128,35 +147,41 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
         goBack={() => navigation.goBack()}
         title="Documents"
       />
-      <Layout style={{ flex: 1, backgroundColor: 'white' }}>
+      <Layout style={{ flex: 1 }}>
         <StyledCamera ref={cameraReference} flashMode="on" />
+        <StyledWarningInformationCard>
+          <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
+            HINWEIS:
+          </Text>
+          <Text>
+            Inorder to proceed with your application, the image needs to be
+            clear
+          </Text>
+        </StyledWarningInformationCard>
+        <View style={{ marginTop: 8, alignSelf: 'center' }}>
+          <SecondaryButton
+            style={{ width: 150 }}
+            icon="animation"
+            onPress={() => handleSnapPress(0)}
+          >
+            Guidelines
+          </SecondaryButton>
+        </View>
         <View
           style={{
             position: 'absolute',
-            bottom: 24,
+            bottom: 8,
             width: 320,
             alignSelf: 'center',
           }}
         >
           <StyledCameraButtonWrapper
             style={{
-              justifyContent: 'space-between',
+              justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
             }}
           >
-            <View>
-              <IconButton
-                icon="restore"
-                containerColor="white"
-                iconColor="black"
-                size={24}
-                onPress={takePic}
-              />
-              <Text variant="labelSmall" style={{ textAlign: 'center' }}>
-                retake
-              </Text>
-            </View>
             <IconButton
               mode="contained"
               icon="plus"
@@ -165,46 +190,46 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
               size={48}
               onPress={takePic}
             />
-            <View>
-              <IconButton
-                icon="arrow-right-thin"
-                containerColor="white"
-                iconColor="black"
-                size={24}
-                onPress={takePic}
-              />
-              <Text variant="labelSmall">Continue</Text>
-            </View>
           </StyledCameraButtonWrapper>
-          {/* <StyledCard>
-            <StyledCard.Content>
-              <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-                {isPassportPicture
-                  ? 'Reisepass und Foto (biometrisch) Fotografieren:'
-                  : 'Aufenthaltserlaubnis Fotografieren'}
-              </Text>
-              <Text>
-                {isPassportPicture
-                  ? 'Fotografieren Sie uns mit dem Antrag ein Foto von Ihrem Pass. Bitte gut lesbar.'
-                  : 'Falls notwendig bitte Ihre Aufenthaltserlaubis mitsenden.'}
-              </Text>
-            </StyledCard.Content>
-          </StyledCard>
-          <StyledWarningInformationCard>
-            <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-              HINWEIS:
-            </Text>
-            <Text>
-              Inorder to proceed with your application, the image needs to be
-              clear
-            </Text>
-          </StyledWarningInformationCard> */}
         </View>
         {/* <Image
         style={{ width: '100%', height: '100%' }}
         source={{ uri: scannedImage }}
       /> */}
       </Layout>
+      <BottomSheet
+        style={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 3,
+          },
+          shadowOpacity: 0.29,
+          shadowRadius: 4.65,
+
+          elevation: 7,
+        }}
+        ref={sheetReference}
+        snapPoints={snapPoints}
+      >
+        <BottomSheetView>
+          <Layout>
+            <View style={{ alignSelf: 'flex-end', padding: 16 }}>
+              <Button title="Got it!" onPress={handleClosePress} />
+            </View>
+            <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
+              {isPassportPicture
+                ? 'Reisepass und Foto (biometrisch) Fotografieren:'
+                : 'Aufenthaltserlaubnis Fotografieren'}
+            </Text>
+            <Text>
+              {isPassportPicture
+                ? 'Fotografieren Sie uns mit dem Antrag ein Foto von Ihrem Pass. Bitte gut lesbar.'
+                : 'Falls notwendig bitte Ihre Aufenthaltserlaubis mitsenden.'}
+            </Text>
+          </Layout>
+        </BottomSheetView>
+      </BottomSheet>
     </>
   );
 };

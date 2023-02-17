@@ -18,9 +18,8 @@ import { useQuery, useQueryClient } from 'react-query';
 export const GeneralInformation = ({ navigation }) => {
   const userId = useAuthenticationStore(state => state.id);
   const queryClient = useQueryClient();
-  const { data: getUserResponse, isLoading } = useQuery(
-    ['getUser', userId],
-    () => getUser(userId)
+  const { data: getUserResponse } = useQuery(['getUser', userId], () =>
+    getUser(userId)
   );
 
   const [modalStatus, setModalStatus] = useState({
@@ -29,10 +28,6 @@ export const GeneralInformation = ({ navigation }) => {
     success: false,
     error: false,
   });
-
-  if (isLoading) {
-    setModalStatus({ ...modalStatus, loading: true, visible: true });
-  }
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
@@ -81,17 +76,18 @@ export const GeneralInformation = ({ navigation }) => {
       <ScrollView>
         <Wrapper>
           <Formik
+            enableReinitialize
             initialValues={{
-              fullname: getUserResponse.data.fullname ?? '',
-              maritalStatus: getUserResponse.data.maritalStatus ?? 'single',
-              gender: getUserResponse.data.gender ?? 'male',
-              street: getUserResponse.data.street ?? '',
-              zipCode: getUserResponse.data.zipCode ?? '',
-              city: getUserResponse.data.city ?? '',
-              country: getUserResponse.data.country ?? 'Germany',
-              email: getUserResponse.data.email ?? '',
-              phone: getUserResponse.data.phone ?? '',
-              fax: getUserResponse.data.fax ?? '',
+              fullname: getUserResponse?.data.fullname,
+              maritalStatus: getUserResponse?.data.maritalStatus ?? 'single',
+              gender: getUserResponse?.data.gender ?? 'male',
+              street: getUserResponse?.data.street ?? '',
+              zipCode: getUserResponse?.data.zipCode ?? '',
+              city: getUserResponse?.data.city ?? '',
+              country: getUserResponse?.data.country ?? 'Germany',
+              email: getUserResponse?.data.email ?? '',
+              phone: getUserResponse?.data.phone ?? '',
+              fax: getUserResponse?.data.fax ?? '',
             }}
             validationSchema={generalInformationValidationSchema}
             onSubmit={handleFormSubmit}

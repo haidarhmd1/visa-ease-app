@@ -8,6 +8,17 @@ import { AuthStack } from './AuthStack';
 
 const RootStack = () => {
   const isLoggedIn = useAuthenticationStore(state => state.isLoggedIn);
+  const userId = useAuthenticationStore(state => state.id);
+  console.log('userId', userId);
+  // const getItem = async () => {
+  //   const value = await AsyncStorage.getItem('authentication-store');
+  //   console.log(JSON.parse(value).state.id);
+  // };
+
+  // useEffect(() => {
+  //   getItem();
+  // }, []);
+
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" translucent={false} hidden={false} />
