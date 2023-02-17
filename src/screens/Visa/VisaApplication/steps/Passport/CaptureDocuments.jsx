@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
-import { Layout, StyledCard } from 'components/general/Layout/Layout';
+import { Layout } from 'components/general/Layout/Layout';
 import { Camera } from 'expo-camera';
 import { Formik } from 'formik';
-import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { IconButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
@@ -12,7 +11,6 @@ import {
   StyledCamera,
   StyledCameraButtonWrapper,
   StyledImage,
-  StyledWarningInformationCard,
 } from './CaptureDocuments.styled';
 
 export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {

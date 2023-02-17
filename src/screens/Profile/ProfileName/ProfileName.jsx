@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, StyledCard } from 'components/general/Layout/Layout';
+import { StyledCard } from 'components/general/Layout/Layout';
 import { Divider, Text } from 'react-native-paper';
 import { VisaItemButton } from 'screens/Visa/VisaApplication/VisaItemButton';
 import { useNavigation } from '@react-navigation/native';
