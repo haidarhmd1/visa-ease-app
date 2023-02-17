@@ -3,6 +3,7 @@ import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { DangerButton } from 'components/general/Buttons';
+import { useAuthenticationStore } from 'store/zustand';
 import { ProfileOverview } from './ProfileOverview';
 import { VisaStatus } from './VisaStatus';
 import { AccountLinks } from './AccountLinks';
@@ -10,8 +11,9 @@ import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
+  const userAuth = useAuthenticationStore(state => state.userAuth);
   const onLogoutHandler = () => {
-    console.log(1);
+    userAuth('', false);
   };
 
   return (

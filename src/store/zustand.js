@@ -1,11 +1,19 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-export const useAuthStore = create(set => ({
-  username: null,
-  setUser: () =>
-    set(state => {
-      // eslint-disable-next-line no-unused-expressions
-      state.username;
+export const useAuthenticationStore = create(
+  persist(
+    set => ({
+      id: '',
+      isLoggedIn: false,
+      userAuth: (registeredId, isLoggedInState) => {
+        set({ id: registeredId, isLoggedIn: isLoggedInState });
+      },
     }),
-  removeUser: () => set({ username: null }),
-}));
+    {
+      name: 'authentication-store',
+      storage: createJSONStorage(() => AsyncStorage),
+    }
+  )
+);

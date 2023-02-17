@@ -9,19 +9,22 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { RModal } from 'components/general/CustomModals';
 import { BackButton, Background, Logo } from 'components/Login';
-import { useAuthStore } from 'store/zustand';
 import { ROUTES } from 'res/constants/routes';
 import { registrationValidationSchema } from './Registration.schema';
 
 export const Registration = ({ navigation }) => {
-  const userAuth = useAuthStore(state => state.username);
-
   const [modalStatus, setModalStatus] = useState({
     visible: false,
     loading: false,
     success: false,
     error: false,
   });
+
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+  const [
+    isPasswordConfirmationSecure,
+    setIsPasswordConfirmationSecure,
+  ] = useState(true);
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
@@ -40,7 +43,6 @@ export const Registration = ({ navigation }) => {
         success: true,
         loading: false,
       });
-      userAuth(response.data.email);
       navigation.navigate(ROUTES.LOGIN);
     } catch {
       setModalStatus({
@@ -63,9 +65,9 @@ export const Registration = ({ navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: 'white' }}>
       <BackButton goBack={() => navigation.goBack()} />
-      <View style={style.logoContainer}>
+      {/* <View style={style.logoContainer}>
         <Logo style={style.center} />
-      </View>
+      </View> */}
       <Text variant="titleLarge" style={[style.center, style.marginBottom]}>
         Registration
       </Text>
@@ -75,12 +77,14 @@ export const Registration = ({ navigation }) => {
             initialValues={{
               fullname: '',
               gender: 'male',
+              password: '',
+              passwordConfirmation: '',
               country: 'Germany',
               email: '',
               phone: '',
             }}
             validationSchema={registrationValidationSchema}
-            onSubmit={values => handleFormSubmit(values)}
+            onSubmit={handleFormSubmit}
           >
             {({
               handleChange,
@@ -113,13 +117,65 @@ export const Registration = ({ navigation }) => {
                     label="Email Address*"
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
-                    value={values?.email}
+                    value={values.email}
                     keyboardType="email-address"
                     error={errors.email && touched.email}
                   />
                   {errors.email && touched.email && (
                     <HelperText type="error">{errors.email}</HelperText>
                   )}
+                </View>
+
+                <View style={[style.inputWidth, style.marginBottom]}>
+                  <StyledTextInput
+                    name="password"
+                    label="Password*"
+                    secureTextEntry={isPasswordSecure}
+                    right={
+                      <StyledTextInput.Icon
+                        onPress={() => setIsPasswordSecure(!isPasswordSecure)}
+                        icon="eye"
+                      />
+                    }
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    error={errors.password && touched.password}
+                  />
+                  {errors.password && touched.password && (
+                    <HelperText type="error">{errors.password}</HelperText>
+                  )}
+                </View>
+
+                <View style={[style.inputWidth, style.marginBottom]}>
+                  <StyledTextInput
+                    name="passwordConfirmation"
+                    label="Confirm Password*"
+                    secureTextEntry={isPasswordConfirmationSecure}
+                    right={
+                      <StyledTextInput.Icon
+                        onPress={() =>
+                          setIsPasswordConfirmationSecure(
+                            !isPasswordConfirmationSecure
+                          )
+                        }
+                        icon="eye"
+                      />
+                    }
+                    onChangeText={handleChange('passwordConfirmation')}
+                    onBlur={handleBlur('passwordConfirmation')}
+                    value={values.passwordConfirmation}
+                    error={
+                      errors.passwordConfirmation &&
+                      touched.passwordConfirmation
+                    }
+                  />
+                  {errors.passwordConfirmation &&
+                    touched.passwordConfirmation && (
+                      <HelperText type="error">
+                        {errors.passwordConfirmation}
+                      </HelperText>
+                    )}
                 </View>
 
                 <View style={[style.inputWidth, style.marginBottom]}>
@@ -184,7 +240,7 @@ export const Registration = ({ navigation }) => {
                   <StyledTextInput
                     mode="outlined"
                     name="phone"
-                    label="Phone*"
+                    label="Phone (optional)"
                     onChangeText={handleChange('phone')}
                     onBlur={handleBlur('phone')}
                     value={values?.phone}

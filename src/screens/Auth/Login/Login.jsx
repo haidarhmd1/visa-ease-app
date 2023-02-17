@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
@@ -7,15 +7,30 @@ import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
 import { HelperText, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
+import { useAuthenticationStore } from 'store/zustand';
+import { login } from 'network/api';
 import { loginSchema } from './Login.schema';
 
 const LoginRaw = ({ navigation }) => {
-  const handleFormSubmit = values => {
-    const user = {
-      isLoggedIn: true,
-      email: values.email,
-    };
-    console.log(user);
+  const userAuth = useAuthenticationStore(state => state.userAuth);
+  const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
+  const [errorMessage, setErrorMessage] = useState({});
+
+  const handleFormSubmit = async values => {
+    try {
+      const response = await login(values);
+      if (response.status !== 200) {
+        setErrorMessage({
+          errStatus: response.status,
+          errMsg: response.data.message,
+        });
+        throw Error;
+      }
+      userAuth(response.data.id, true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -24,6 +39,7 @@ const LoginRaw = ({ navigation }) => {
       <Text variant="titleLarge" style={[style.center, style.marginBottom]}>
         Login
       </Text>
+      <HelperText type="error">{errorMessage.errMsg}</HelperText>
       <Formik
         initialValues={{
           email: '',
@@ -46,9 +62,10 @@ const LoginRaw = ({ navigation }) => {
                 label="email"
                 name="email"
                 mode="outlined"
+                onChange={() => setErrorMessage({})}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
-                value={values?.email}
+                value={values.email}
                 error={errors.email && touched.email}
               />
               {errors.email && touched.email && (
@@ -60,10 +77,18 @@ const LoginRaw = ({ navigation }) => {
               <StyledTextInput
                 label="password"
                 name="password"
+                secureTextEntry={isPasswordSecure}
+                right={
+                  <StyledTextInput.Icon
+                    onPress={() => setIsPasswordSecure(!isPasswordSecure)}
+                    icon="eye"
+                  />
+                }
                 mode="outlined"
+                onChange={() => setErrorMessage({})}
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
-                value={values?.password}
+                value={values.password}
                 error={errors.password && touched.password}
               />
               {errors.password && touched.password && (
