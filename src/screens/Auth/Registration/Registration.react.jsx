@@ -1,18 +1,21 @@
 /* eslint-disable complexity */
+import React, { useState } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
 import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
-import { addUserProfile } from 'network/api';
-import React, { useState } from 'react';
+import { registerUserProfile } from 'network/api';
 import CountryPicker from 'react-native-country-picker-modal';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
-import { ROUTES } from 'res/constants/routes';
-import { generalInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
 import { RModal } from 'components/general/CustomModals';
 import { BackButton, Background, Logo } from 'components/Login';
+import { useAuthStore } from 'store/zustand';
+import { ROUTES } from 'res/constants/routes';
+import { registrationValidationSchema } from './Registration.schema';
 
 export const Registration = ({ navigation }) => {
+  const userAuth = useAuthStore(state => state.username);
+
   const [modalStatus, setModalStatus] = useState({
     visible: false,
     loading: false,
@@ -27,8 +30,9 @@ export const Registration = ({ navigation }) => {
   const handleFormSubmit = async values => {
     setModalStatus({ ...modalStatus, loading: true, visible: true });
     try {
-      const response = await addUserProfile(values);
+      const response = await registerUserProfile(values);
       if (response.status !== 200) throw Error;
+
       setModalStatus({
         ...modalStatus,
         visible: true,
@@ -36,7 +40,8 @@ export const Registration = ({ navigation }) => {
         success: true,
         loading: false,
       });
-      navigation.navigate(ROUTES.MAIN);
+      userAuth(response.data.email);
+      navigation.navigate(ROUTES.LOGIN);
     } catch {
       setModalStatus({
         ...modalStatus,
@@ -74,8 +79,8 @@ export const Registration = ({ navigation }) => {
               email: '',
               phone: '',
             }}
-            validationSchema={generalInformationValidationSchema}
-            onSubmit={handleFormSubmit}
+            validationSchema={registrationValidationSchema}
+            onSubmit={values => handleFormSubmit(values)}
           >
             {({
               handleChange,
@@ -120,7 +125,7 @@ export const Registration = ({ navigation }) => {
                 <View style={[style.inputWidth, style.marginBottom]}>
                   <Text variant="labelMedium">Gender*</Text>
                   <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
+                    onValueChange={itemValue => {
                       setFieldValue('gender', itemValue);
                       setSelectedGender(itemValue);
                     }}

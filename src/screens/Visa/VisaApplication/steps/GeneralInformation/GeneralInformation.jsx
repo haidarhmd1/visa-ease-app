@@ -10,7 +10,7 @@ import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
-import { addUserProfile } from 'network/api';
+import { completeUserProfile } from 'network/api';
 import { RModal } from 'components/general/CustomModals';
 
 export const GeneralInformation = ({ navigation }) => {
@@ -29,7 +29,7 @@ export const GeneralInformation = ({ navigation }) => {
   const handleFormSubmit = async values => {
     setModalStatus({ ...modalStatus, loading: true, visible: true });
     try {
-      const response = await addUserProfile(values);
+      const response = await completeUserProfile(values);
       if (response.status !== 200) throw Error;
       setModalStatus({
         ...modalStatus,
@@ -108,7 +108,7 @@ export const GeneralInformation = ({ navigation }) => {
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Gender*</Text>
                   <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
+                    onValueChange={itemValue => {
                       setFieldValue('gender', itemValue);
                       setSelectedGender(itemValue);
                     }}
@@ -135,7 +135,7 @@ export const GeneralInformation = ({ navigation }) => {
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Marital Status*</Text>
                   <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
+                    onValueChange={itemValue => {
                       setFieldValue('maritalStatus', itemValue);
                       setSelectedMaritalStatus(itemValue);
                     }}

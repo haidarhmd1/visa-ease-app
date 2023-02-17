@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { MainStack } from './MainStack';
 import { AuthStack } from './AuthStack';
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 const RootStack = () => {
   return (
