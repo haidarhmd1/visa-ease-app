@@ -6,15 +6,17 @@ export const CameraWrapper = styled.View``;
 
 export const StyledCamera = styled(Camera)`
   position: relative;
-  height: 425px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  overflow: hidden;
+  width: 320px;
+  height: 440px;
+  border-radius: 18px;
+  align-self: center;
 `;
 
 export const StyledImage = styled.Image`
-  width: 100%;
-  height: 425px;
-  border-radius: ${({ theme }) => theme.borderRadius};
+  width: 320px;
+  height: 440px;
+  border-radius: 18px;
+  align-self: center;
 `;
 
 export const ViewWrapper = styled.View`
@@ -49,6 +51,4 @@ export const StyledTouchableOpacity = styled(TouchableOpacity)`
 
 export const StyledCameraButtonWrapper = styled.View`
   width: 100%;
-  margin-top: ${({ theme }) => theme.marginTop};
-  align-items: center;
 `;

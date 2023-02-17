@@ -9,69 +9,67 @@ export const ProfileName = () => {
   const navigation = useNavigation();
 
   return (
-    <Layout>
-      <StyledCard>
-        <StyledCard.Content>
-          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-            Information
-          </Text>
-          <VisaItemButton
-            title="General Information"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.generalInformation}
-            isProgessCompleted
-          />
+    <StyledCard>
+      <StyledCard.Content>
+        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+          Information
+        </Text>
+        <VisaItemButton
+          title="General Information"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.generalInformation}
+          isProgessCompleted
+        />
 
-          <VisaItemButton
-            title="Visa Information"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.visaInformation}
-            isProgessCompleted={false}
-          />
+        <VisaItemButton
+          title="Visa Information"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.visaInformation}
+          isProgessCompleted={false}
+        />
 
-          <VisaItemButton
-            title="Flight Information"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.flightInformation}
-            isProgessCompleted
-          />
-          <Divider marginBottom={12} marginTop={12} />
-          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-            Dokumente
-          </Text>
-          <VisaItemButton
-            title="Passport Picture"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.passportPicture}
-            isProgessCompleted
-          />
+        <VisaItemButton
+          title="Flight Information"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.flightInformation}
+          isProgessCompleted
+        />
+        <Divider marginBottom={12} marginTop={12} />
+        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+          Dokumente
+        </Text>
+        <VisaItemButton
+          title="Passport Picture"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.passportPicture}
+          isProgessCompleted
+        />
 
-          <VisaItemButton
-            title="Aufenthaltserlaubnis"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.residencePermit}
-            isProgessCompleted={false}
-          />
+        <VisaItemButton
+          title="Aufenthaltserlaubnis"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.residencePermit}
+          isProgessCompleted={false}
+        />
 
-          <VisaItemButton
-            title="Biometic Image"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.biometricImage}
-            isProgessCompleted={false}
-          />
-          <Divider marginBottom={12} marginTop={12} />
-          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-            Agreement
-          </Text>
+        <VisaItemButton
+          title="Biometic Image"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.biometricImage}
+          isProgessCompleted={false}
+        />
+        <Divider marginBottom={12} marginTop={12} />
+        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+          Agreement
+        </Text>
 
-          <VisaItemButton
-            title="Agreement"
-            navigation={navigation}
-            route={ROUTES.VISA_INFORMATION.agreement}
-            isProgessCompleted={false}
-          />
-        </StyledCard.Content>
-      </StyledCard>
-    </Layout>
+        <VisaItemButton
+          title="Agreement"
+          navigation={navigation}
+          route={ROUTES.VISA_INFORMATION.agreement}
+          isProgessCompleted={false}
+        />
+      </StyledCard.Content>
+    </StyledCard>
   );
 };
