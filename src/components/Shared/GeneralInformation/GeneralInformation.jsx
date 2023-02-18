@@ -10,59 +10,45 @@ import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
 import { completeUserProfile, getUser } from 'network/api';
-import { RModal } from 'components/general/CustomModals';
 import { useAuthenticationStore } from 'store/zustand';
 import { useQuery, useQueryClient } from 'react-query';
+import { NotificationToast } from 'components/general/NotificationToast/NotificationToast';
 import { generalInformationValidationSchema } from './GeneralInformation.schema';
 
-export const GeneralInformation = ({ navigation }) => {
+const GeneralInformationRaw = ({ navigation }) => {
   const queryClient = useQueryClient();
   const userId = useAuthenticationStore(state => state.id);
-  const { data: getUserResponse } = useQuery(['getUser', userId], () =>
-    getUser(userId)
-  );
 
-  const [modalStatus, setModalStatus] = useState({
-    visible: false,
-    loading: false,
-    success: false,
-    error: false,
-  });
+  const [showToast, setShowToast] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedCountry, setSelectedCountry] = useState('Germany');
   const [countryModalVisible, setCountryModalVisible] = useState(false);
   const [selectedMaritalStatus, setSelectedMaritalStatus] = useState('single');
 
+  const { data: getUserResponse } = useQuery(['getUser', userId], () =>
+    getUser(userId)
+  );
+
   const handleFormSubmit = async values => {
-    setModalStatus({ ...modalStatus, loading: true, visible: true });
+    setShowToast(true);
+    setIsLoading(true);
     try {
       const response = await completeUserProfile(values, userId);
       if (response.status !== 200) throw Error;
-      setModalStatus({
-        ...modalStatus,
-        visible: true,
-        error: false,
-        success: true,
-        loading: false,
-      });
       queryClient.invalidateQueries('getUser', userId);
-      navigation.goBack();
-    } catch {
-      setModalStatus({
-        ...modalStatus,
-        visible: true,
-        error: true,
-        success: false,
-        loading: false,
-      });
-    } finally {
+
+      setIsLoading(false);
+      setSuccess(true);
       setTimeout(() => {
-        setModalStatus({
-          ...modalStatus,
-          visible: false,
-        });
-      }, 1000);
+        navigation.goBack();
+      }, 1600);
+    } catch {
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -288,12 +274,15 @@ export const GeneralInformation = ({ navigation }) => {
           </Formik>
         </Wrapper>
       </ScrollView>
-      <RModal
-        visible={modalStatus.visible}
-        error={modalStatus.error}
-        success={modalStatus.success}
-        loading={modalStatus.loading}
+      <NotificationToast
+        type="Bottom"
+        error={error}
+        isLoading={isLoading}
+        success={success}
+        showToast={showToast}
       />
     </>
   );
 };
+
+export const GeneralInformation = React.memo(GeneralInformationRaw);

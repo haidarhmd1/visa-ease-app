@@ -7,58 +7,42 @@ import { registerUserProfile } from 'network/api';
 import CountryPicker from 'react-native-country-picker-modal';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
-import { RModal } from 'components/general/CustomModals';
 import { BackButton, Background } from 'components/Login';
 import { ROUTES } from 'res/constants/routes';
+import { NotificationToast } from 'components/general/NotificationToast';
 import { registrationValidationSchema } from './Registration.schema';
 
 export const Registration = ({ navigation }) => {
-  const [modalStatus, setModalStatus] = useState({
-    visible: false,
-    loading: false,
-    success: false,
-    error: false,
-  });
-
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [
     isPasswordConfirmationSecure,
     setIsPasswordConfirmationSecure,
   ] = useState(true);
+  const [showToast, setShowToast] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedNationality, setSelectedNationality] = useState('Germany');
   const [nationalityModalVisible, setNationalityModalVisible] = useState(false);
 
   const handleFormSubmit = async values => {
-    setModalStatus({ ...modalStatus, loading: true, visible: true });
+    setShowToast(true);
+    setIsLoading(true);
     try {
       const response = await registerUserProfile(values);
       if (response.status !== 200) throw Error;
 
-      setModalStatus({
-        ...modalStatus,
-        visible: true,
-        error: false,
-        success: true,
-        loading: false,
-      });
-      navigation.navigate(ROUTES.LOGIN);
-    } catch {
-      setModalStatus({
-        ...modalStatus,
-        visible: true,
-        error: true,
-        success: false,
-        loading: false,
-      });
-    } finally {
+      setIsLoading(false);
+      setSuccess(true);
+
       setTimeout(() => {
-        setModalStatus({
-          ...modalStatus,
-          visible: false,
-        });
-      }, 1000);
+        navigation.navigate(ROUTES.LOGIN);
+      }, 1600);
+    } catch {
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -265,11 +249,12 @@ export const Registration = ({ navigation }) => {
           </Formik>
         </Background>
       </ScrollView>
-      <RModal
-        visible={modalStatus.visible}
-        error={modalStatus.error}
-        success={modalStatus.success}
-        loading={modalStatus.loading}
+      <NotificationToast
+        type="Bottom"
+        error={error}
+        isLoading={isLoading}
+        success={success}
+        showToast={showToast}
       />
     </View>
   );
