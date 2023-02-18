@@ -9,8 +9,8 @@ import { ROUTES } from 'res/constants/routes';
 import {
   ImageTextWrapper,
   StyledImageBackground,
-  StyledWarningInformationCard,
-} from './steps/Information/Information.styled';
+} from 'components/Information/Information.styled';
+import { StyledWarningInformationCard } from 'components/DocumentCapture/DocumentCapture.styled';
 import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {

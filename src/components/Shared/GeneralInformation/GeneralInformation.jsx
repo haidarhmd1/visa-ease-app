@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import CountryPicker from 'react-native-country-picker-modal';
 
-import { generalInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/GeneralInformation/GeneralInformation.schema';
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
@@ -14,6 +13,7 @@ import { completeUserProfile, getUser } from 'network/api';
 import { RModal } from 'components/general/CustomModals';
 import { useAuthenticationStore } from 'store/zustand';
 import { useQuery, useQueryClient } from 'react-query';
+import { generalInformationValidationSchema } from './GeneralInformation.schema';
 
 export const GeneralInformation = ({ navigation }) => {
   const queryClient = useQueryClient();

@@ -8,11 +8,12 @@ import { Visa } from 'screens/Visa';
 import { Legalization } from 'screens/Legalization';
 import { Translation } from 'screens/Translation';
 import { Rates } from 'screens/Rates';
-import { GeneralInformation } from 'components/GeneralInformation';
+import { GeneralInformation } from 'components/Shared/GeneralInformation';
 import { VisaInformation } from 'components/VisaInformation';
 import { FlightInformation } from 'components/FlightInformation';
 import { CaptureDocuments } from 'components/Passport';
 import { Agreement } from 'components/Agreement';
+import { Passport } from 'components/Shared/Passport';
 
 const Stack = createStackNavigator();
 
@@ -47,7 +48,7 @@ export const MainStack = () => {
           />
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.passportPicture}
-            component={CaptureDocuments}
+            component={Passport}
           />
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.residencePermit}

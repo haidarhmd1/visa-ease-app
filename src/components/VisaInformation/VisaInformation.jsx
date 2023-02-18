@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 
-import { visaInformationValidationSchema } from 'screens/Visa/VisaApplication/steps/VisaInformation/VisaInformation.schema';
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
