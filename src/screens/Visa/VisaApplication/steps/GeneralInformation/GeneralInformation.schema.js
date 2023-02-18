@@ -21,5 +21,4 @@ export const generalInformationValidationSchema = yup.object({
     .string()
     .required('phone is required')
     .matches(MobilePhoneRegex, 'e.g. +49 30 27578642'),
-  fax: yup.string().optional(),
 });

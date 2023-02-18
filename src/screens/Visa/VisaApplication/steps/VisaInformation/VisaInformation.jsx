@@ -8,20 +8,10 @@ import { HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
-import CountryPicker from 'react-native-country-picker-modal';
 
 export const VisaInformation = ({ navigation }) => {
   const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
   const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
-  const [selectedCitizenship, setSelectedCitizenship] = useState('Germany');
-  const [selectedDestinationCountry, setSelectedDestinationCountry] = useState(
-    'Germany'
-  );
-  const [
-    destinationCountryModalVisible,
-    setDestinationCountryModalVisible,
-  ] = useState(false);
-  const [citizenshipModalVisible, setCitizenshipModalVisible] = useState(false);
 
   return (
     <>
@@ -38,7 +28,7 @@ export const VisaInformation = ({ navigation }) => {
               citizenship: 'Germany',
               residencePermit: '',
               occupation: '',
-              destinationCountry: 'United Arab Emirates',
+              destinationCountry: '',
               kindOfVisa: 'single_entry',
               isInvoiceRecipientSame: 'yes',
             }}
@@ -58,7 +48,7 @@ export const VisaInformation = ({ navigation }) => {
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Cruise</Text>
                   <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
+                    onValueChange={itemValue => {
                       setFieldValue('hasCruise', itemValue);
                       setSelectedHasCruise(itemValue);
                     }}
@@ -69,38 +59,6 @@ export const VisaInformation = ({ navigation }) => {
                   </RadioButton.Group>
                 </StyledCard.Content>
 
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Citizenship</Text>
-                  <CountryPicker
-                    withFilter
-                    withCountryNameButton
-                    withModal
-                    withAlphaFilter
-                    withEmoji
-                    containerButtonStyle={{ display: 'none' }}
-                    visible={citizenshipModalVisible}
-                    onSelect={({ name }) => {
-                      setFieldValue('citizenship', name);
-                      setSelectedCitizenship(name);
-                      setCitizenshipModalVisible(false);
-                    }}
-                  />
-                </StyledCard.Content>
-
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="citizenship"
-                    value={values?.citizenship}
-                    editable={false}
-                    selectTextOnFocus={false}
-                    onPressIn={() => setCitizenshipModalVisible(true)}
-                    placeholder={selectedCitizenship}
-                  />
-                  {errors.citizenship && touched.citizenship && (
-                    <HelperText type="error">{errors.citizenship}</HelperText>
-                  )}
-                </StyledCard.Content>
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     mode="outlined"
@@ -134,40 +92,11 @@ export const VisaInformation = ({ navigation }) => {
                 </StyledCard.Content>
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Destination Country</Text>
-                  <CountryPicker
-                    withFilter
-                    withCountryNameButton
-                    withModal
-                    withAlphaFilter
-                    withEmoji
-                    containerButtonStyle={{ display: 'none' }}
-                    visible={destinationCountryModalVisible}
-                    onSelect={({ name }) => {
-                      setFieldValue('destinationCountry', name);
-                      setSelectedDestinationCountry(name);
-                      setDestinationCountryModalVisible(false);
-                    }}
-                  />
-
-                  <StyledTextInput
-                    mode="outlined"
-                    name="destinationCountry"
-                    value={values?.destinationCountry}
-                    editable={false}
-                    selectTextOnFocus={false}
-                    onPressIn={() => setDestinationCountryModalVisible(true)}
-                    placeholder={selectedDestinationCountry}
-                  />
-                  {errors.destinationCountry && touched.destinationCountry && (
-                    <HelperText type="error">
-                      {errors.destinationCountry}
-                    </HelperText>
-                  )}
                 </StyledCard.Content>
                 <StyledCard.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Kind of Visa</Text>
                   <RadioButton.Group
-                    onValueChange={(itemValue, itemIndex) => {
+                    onValueChange={itemValue => {
                       setFieldValue('kindOfVisa', itemValue);
                       setSelectedKindOfVisa(itemValue);
                     }}

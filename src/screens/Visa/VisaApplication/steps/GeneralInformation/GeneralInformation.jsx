@@ -16,8 +16,8 @@ import { useAuthenticationStore } from 'store/zustand';
 import { useQuery, useQueryClient } from 'react-query';
 
 export const GeneralInformation = ({ navigation }) => {
-  const userId = useAuthenticationStore(state => state.id);
   const queryClient = useQueryClient();
+  const userId = useAuthenticationStore(state => state.id);
   const { data: getUserResponse } = useQuery(['getUser', userId], () =>
     getUser(userId)
   );
@@ -87,7 +87,6 @@ export const GeneralInformation = ({ navigation }) => {
               country: getUserResponse?.data.country ?? 'Germany',
               email: getUserResponse?.data.email ?? '',
               phone: getUserResponse?.data.phone ?? '',
-              fax: getUserResponse?.data.fax ?? '',
             }}
             validationSchema={generalInformationValidationSchema}
             onSubmit={handleFormSubmit}
@@ -276,22 +275,6 @@ export const GeneralInformation = ({ navigation }) => {
                     <HelperText type="error">{errors.phone}</HelperText>
                   )}
                 </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
-                  <StyledTextInput
-                    mode="outlined"
-                    name="fax"
-                    label="Fax (optional)"
-                    onChangeText={handleChange('fax')}
-                    onBlur={handleBlur('fax')}
-                    value={values.fax}
-                    keyboardType="phone-pad"
-                    error={errors.fax && touched.fax}
-                  />
-                  {errors.fax && touched.fax && (
-                    <HelperText type="error">{errors.fax}</HelperText>
-                  )}
-                </StyledCard.Content>
-
                 <StyledCard.Content>
                   <PrimaryButton
                     onPress={handleSubmit}

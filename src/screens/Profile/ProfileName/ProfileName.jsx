@@ -20,20 +20,6 @@ export const ProfileName = () => {
           route={ROUTES.VISA_INFORMATION.generalInformation}
           isProgessCompleted
         />
-
-        <VisaItemButton
-          title="Visa Information"
-          navigation={navigation}
-          route={ROUTES.VISA_INFORMATION.visaInformation}
-          isProgessCompleted={false}
-        />
-
-        <VisaItemButton
-          title="Flight Information"
-          navigation={navigation}
-          route={ROUTES.VISA_INFORMATION.flightInformation}
-          isProgessCompleted
-        />
         <Divider marginBottom={12} marginTop={12} />
         <Text variant="labelLarge" style={{ marginBottom: 8 }}>
           Dokumente
@@ -56,17 +42,6 @@ export const ProfileName = () => {
           title="Biometic Image"
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.biometricImage}
-          isProgessCompleted={false}
-        />
-        <Divider marginBottom={12} marginTop={12} />
-        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-          Agreement
-        </Text>
-
-        <VisaItemButton
-          title="Agreement"
-          navigation={navigation}
-          route={ROUTES.VISA_INFORMATION.agreement}
           isProgessCompleted={false}
         />
       </StyledCard.Content>

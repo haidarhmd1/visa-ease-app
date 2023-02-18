@@ -15,7 +15,7 @@ export const registrationValidationSchema = yup.object({
     .string()
     .oneOf([yup.ref('password'), null], 'Must match "password" field value'),
   gender: yup.mixed().oneOf(['male', 'female', 'diverse']),
-  country: yup.string().required('Country is required'),
+  nationality: yup.string().required('Nationality is required'),
   email: yup.string().required('email is required').email(),
   phone: yup
     .string()

@@ -27,8 +27,8 @@ export const Registration = ({ navigation }) => {
   ] = useState(true);
 
   const [selectedGender, setSelectedGender] = useState('male');
-  const [selectedCountry, setSelectedCountry] = useState('Germany');
-  const [countryModalVisible, setCountryModalVisible] = useState(false);
+  const [selectedNationality, setSelectedNationality] = useState('Germany');
+  const [nationalityModalVisible, setNationalityModalVisible] = useState(false);
 
   const handleFormSubmit = async values => {
     setModalStatus({ ...modalStatus, loading: true, visible: true });
@@ -206,7 +206,7 @@ export const Registration = ({ navigation }) => {
                 </View>
 
                 <View style={[style.inputWidth, style.marginBottom]}>
-                  <Text variant="labelMedium">Country*</Text>
+                  <Text variant="labelMedium">Nationality*</Text>
                   <CountryPicker
                     withFilter
                     withCountryNameButton
@@ -214,25 +214,25 @@ export const Registration = ({ navigation }) => {
                     withAlphaFilter
                     withEmoji={false}
                     containerButtonStyle={{ display: 'none' }}
-                    visible={countryModalVisible}
+                    visible={nationalityModalVisible}
                     onSelect={({ name }) => {
-                      setSelectedCountry(name);
-                      setFieldValue('country', name);
-                      setCountryModalVisible(false);
+                      setSelectedNationality(name);
+                      setFieldValue('nationality', name);
+                      setNationalityModalVisible(false);
                     }}
                   />
 
                   <StyledTextInput
                     mode="outlined"
-                    name="country"
-                    value={values?.country}
+                    name="nationality"
+                    value={values?.nationality}
                     editable={false}
                     selectTextOnFocus={false}
-                    onPressIn={() => setCountryModalVisible(true)}
-                    placeholder={selectedCountry}
+                    onPressIn={() => setNationalityModalVisible(true)}
+                    placeholder={selectedNationality}
                   />
-                  {errors.country && touched.country && (
-                    <HelperText type="error">{errors.country}</HelperText>
+                  {errors.nationality && touched.nationality && (
+                    <HelperText type="error">{errors.nationality}</HelperText>
                   )}
                 </View>
 

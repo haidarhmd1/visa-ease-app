@@ -32,7 +32,7 @@ export const MainStack = () => {
           <Stack.Screen name={ROUTES.VISA_APP} component={VisaApplication} />
         </Stack.Group>
 
-        <Stack.Group screenOptions={modalScreenOptions}>
+        <Stack.Group>
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.generalInformation}
             component={GeneralInformation}
