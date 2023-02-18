@@ -3,16 +3,16 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
 import { Account, Home, Profile, VisaApplication } from 'screens';
-import { modalScreenOptions, noHeader } from 'utils/screenOptions';
+import { noHeader } from 'utils/screenOptions';
 import { Visa } from 'screens/Visa';
 import { Legalization } from 'screens/Legalization';
 import { Translation } from 'screens/Translation';
 import { Rates } from 'screens/Rates';
-import { GeneralInformation } from 'screens/Visa/VisaApplication/steps/GeneralInformation';
-import { VisaInformation } from 'screens/Visa/VisaApplication/steps/VisaInformation';
-import { FlightInformation } from 'screens/Visa/VisaApplication/steps/FlightInformation';
-import { Agreement } from 'screens/Visa/VisaApplication/steps/Agreement';
-import { CaptureDocuments } from 'screens/Visa/VisaApplication/steps/Passport';
+import { GeneralInformation } from 'components/GeneralInformation';
+import { VisaInformation } from 'components/VisaInformation';
+import { FlightInformation } from 'components/FlightInformation';
+import { CaptureDocuments } from 'components/Passport';
+import { Agreement } from 'components/Agreement';
 
 const Stack = createStackNavigator();
 
