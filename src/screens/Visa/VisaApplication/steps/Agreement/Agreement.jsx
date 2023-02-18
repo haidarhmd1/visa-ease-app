@@ -8,8 +8,8 @@ import { HelperText, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
-import { StyledSignatureView } from '../RegisterForm/RegisterForm.styled';
 import { agreementValidationSchema } from './Agreement.schema';
+import { StyledSignatureView } from './Agreement.styled';
 
 const webStyle = `.m-signature-pad--footer
     {

@@ -1,1 +1,0 @@
-export { ConfirmForm } from './ConfirmForm';

@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 
 import { Layout } from 'components/general/Layout/Layout';
 import { Camera } from 'expo-camera';
@@ -13,8 +13,8 @@ import { Formik } from 'formik';
 import { IconButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { SecondaryButton } from 'components/general/Buttons';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import {
   StyledCamera,
   StyledCameraButtonWrapper,
@@ -24,7 +24,7 @@ import {
 
 export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
   const sheetReference = useRef(null);
-  const snapPoints = useMemo(() => ['90%'], []);
+  const snapPoints = useMemo(() => ['75%'], []);
 
   const handleSnapPress = useCallback(index => {
     sheetReference.current?.snapToIndex(index);
@@ -192,31 +192,16 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
             />
           </StyledCameraButtonWrapper>
         </View>
-        {/* <Image
-        style={{ width: '100%', height: '100%' }}
-        source={{ uri: scannedImage }}
-      /> */}
       </Layout>
       <BottomSheet
-        style={{
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 3,
-          },
-          shadowOpacity: 0.29,
-          shadowRadius: 4.65,
-
-          elevation: 7,
-        }}
+        style={[style.shadow, style.sheetContainer]}
         ref={sheetReference}
         snapPoints={snapPoints}
+        bottomInset={46}
+        detached
       >
-        <BottomSheetView>
-          <Layout>
-            <View style={{ alignSelf: 'flex-end', padding: 16 }}>
-              <Button title="Got it!" onPress={handleClosePress} />
-            </View>
+        <Layout style={style.container}>
+          <View style={style.container}>
             <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
               {isPassportPicture
                 ? 'Reisepass und Foto (biometrisch) Fotografieren:'
@@ -227,9 +212,31 @@ export const CaptureDocuments = ({ next, data, isPassportPicture = false }) => {
                 ? 'Fotografieren Sie uns mit dem Antrag ein Foto von Ihrem Pass. Bitte gut lesbar.'
                 : 'Falls notwendig bitte Ihre Aufenthaltserlaubis mitsenden.'}
             </Text>
-          </Layout>
-        </BottomSheetView>
+          </View>
+          <View>
+            <PrimaryButton onPress={handleClosePress}>Got it!</PrimaryButton>
+          </View>
+        </Layout>
       </BottomSheet>
     </>
   );
 };
+
+const style = StyleSheet.create({
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  sheetContainer: {
+    marginHorizontal: 24,
+  },
+  container: {
+    flex: 1,
+  },
+});
