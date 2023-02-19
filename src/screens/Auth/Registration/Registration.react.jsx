@@ -43,6 +43,12 @@ export const Registration = ({ navigation }) => {
     } catch {
       setIsLoading(false);
       setError(true);
+    } finally {
+      setTimeout(() => {
+        setShowToast(false);
+        setSuccess(false);
+        setError(false);
+      }, 1200);
     }
   };
 
@@ -63,7 +69,7 @@ export const Registration = ({ navigation }) => {
               gender: 'male',
               password: '',
               passwordConfirmation: '',
-              country: 'Germany',
+              nationality: 'Germany',
               email: '',
               phone: '',
             }}

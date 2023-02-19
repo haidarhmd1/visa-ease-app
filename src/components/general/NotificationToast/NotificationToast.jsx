@@ -51,6 +51,8 @@ export const NotificationToast = ({
         styles.commonToastStyle,
         type === ToastType.Top ? styles.topToastStyle : styles.bottomToastStyle,
         animatedStyle,
+        success && styles.successStyle,
+        error && styles.errorStyle,
       ]}
     >
       <View
@@ -60,8 +62,15 @@ export const NotificationToast = ({
         }}
       >
         {isLoading && (
-          <View>
-            <ActivityIndicator animating size="large" color="green" />
+          <View
+            style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}
+          >
+            <ActivityIndicator
+              animating
+              size="small"
+              color="green"
+              style={{ alignSelf: 'center', marginRight: 16 }}
+            />
 
             <Text variant="headlineSmall" style={{ textAlign: 'center' }}>
               Loading...
@@ -69,9 +78,9 @@ export const NotificationToast = ({
           </View>
         )}
         {success && (
-          <View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <IconButton
-              size={64}
+              size={32}
               iconColor="green"
               icon="check-circle-outline"
               style={{ alignSelf: 'center' }}
@@ -82,11 +91,11 @@ export const NotificationToast = ({
           </View>
         )}
         {error && (
-          <View>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <IconButton
               iconColor="red"
               icon="alert-circle-outline"
-              size={64}
+              size={32}
               style={{ alignSelf: 'center' }}
             />
             <Text variant="headlineSmall" style={{ textAlign: 'center' }}>

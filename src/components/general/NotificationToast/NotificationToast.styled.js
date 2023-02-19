@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   commonToastStyle: {
     borderRadius: 8,
     margin: 32,
-    padding: 16,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -25,5 +24,15 @@ export const styles = StyleSheet.create({
   bottomToastStyle: {
     backgroundColor: '#FCFCFC',
     bottom: 0,
+  },
+  successStyle: {
+    borderColor: 'green',
+    borderWidth: 2,
+    borderStyle: 'solid',
+  },
+  errorStyle: {
+    borderColor: 'red',
+    borderWidth: 2,
+    borderStyle: 'solid',
   },
 });

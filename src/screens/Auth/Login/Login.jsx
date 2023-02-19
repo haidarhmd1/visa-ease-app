@@ -19,7 +19,8 @@ const LoginRaw = ({ navigation }) => {
 
   const handleFormSubmit = async values => {
     try {
-      const response = await login(values);
+      const { email, password } = values;
+      const response = await login({ email, password });
       if (response.status !== 200) {
         setErrorMessage({
           errStatus: response.status,
@@ -46,6 +47,7 @@ const LoginRaw = ({ navigation }) => {
           password: '',
         }}
         onSubmit={handleFormSubmit}
+        enableReinitialize
         validationSchema={loginSchema}
       >
         {({
