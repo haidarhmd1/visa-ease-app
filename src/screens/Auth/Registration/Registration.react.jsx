@@ -97,13 +97,6 @@ export const Registration = ({ navigation }) => {
             Kreuzfahrt oder Ihre Geschäftsreise, um das Visum kümmern wir uns.
           </Text>
           <Spacer />
-          <Text variant="bodyMedium">
-            <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
-              Register Now for Free!,
-            </Text>
-            to start travel the world!
-          </Text>
-          <Spacer />
           <Formik
             initialValues={{
               fullname: '',
