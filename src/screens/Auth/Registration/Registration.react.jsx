@@ -5,18 +5,18 @@ import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
 import { registerUserProfile } from 'network/api';
 import CountryPicker from 'react-native-country-picker-modal';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import { HelperText, RadioButton, Text } from 'react-native-paper';
+import { ScrollView, StyleSheet, View, Button } from 'react-native';
+import { Dialog, HelperText, RadioButton, Text } from 'react-native-paper';
 import { BackButton } from 'components/Login';
 import { ROUTES } from 'res/constants/routes';
 import { NotificationToast } from 'components/general/NotificationToast';
 import { Image } from 'expo-image';
 import { PlaneStartingIllustration } from 'assets/illustrations';
 import { Layout, Spacer } from 'components/general/Layout/Layout';
+import { ModalSheet } from 'components/general/ModalSheet';
 import { registrationValidationSchema } from './Registration.schema';
 
-const blurhash =
-  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+const blurhash = '00Q12z';
 
 export const Registration = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -28,6 +28,8 @@ export const Registration = ({ navigation }) => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [openModalSheet, setOpenModalSheet] = useState(false);
 
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedNationality, setSelectedNationality] = useState('Germany');
@@ -204,29 +206,54 @@ export const Registration = ({ navigation }) => {
 
                 <View style={[style.inputWidth, style.marginBottom]}>
                   <Text variant="labelMedium">Gender*</Text>
-                  <RadioButton.Group
-                    onValueChange={itemValue => {
-                      setFieldValue('gender', itemValue);
-                      setSelectedGender(itemValue);
-                    }}
-                    value={selectedGender}
+
+                  <StyledTextInput
+                    mode="outlined"
+                    name="gender"
+                    value={values?.gender}
+                    editable={false}
+                    selectTextOnFocus={false}
+                    onPressIn={() => setOpenModalSheet(true)}
+                    placeholder={selectedGender}
+                    right={<StyledTextInput.Icon icon="menu-down" />}
+                  />
+                  <ModalSheet
+                    handleIndicatorStyle={{ display: 'none' }}
+                    animateOnMount={false}
+                    enablePanDownToClose={false}
+                    title="Gender"
+                    visible={openModalSheet}
+                    setVisible={setOpenModalSheet}
                   >
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Male"
-                      value="male"
-                    />
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Female"
-                      value="female"
-                    />
-                    <RadioButton.Item
-                      color="#00bf80"
-                      label="Divers"
-                      value="divers"
-                    />
-                  </RadioButton.Group>
+                    <ScrollView>
+                      <Dialog.Content>
+                        <RadioButton.Group
+                          onValueChange={itemValue => {
+                            setFieldValue('gender', itemValue);
+                            setSelectedGender(itemValue);
+                            setOpenModalSheet(false);
+                          }}
+                          value={selectedGender}
+                        >
+                          <RadioButton.Item
+                            color="#00bf80"
+                            label="Male"
+                            value="male"
+                          />
+                          <RadioButton.Item
+                            color="#00bf80"
+                            label="Female"
+                            value="female"
+                          />
+                          <RadioButton.Item
+                            color="#00bf80"
+                            label="Divers"
+                            value="divers"
+                          />
+                        </RadioButton.Group>
+                      </Dialog.Content>
+                    </ScrollView>
+                  </ModalSheet>
                 </View>
 
                 <View style={[style.inputWidth, style.marginBottom]}>
@@ -239,6 +266,7 @@ export const Registration = ({ navigation }) => {
                     withEmoji={false}
                     containerButtonStyle={{ display: 'none' }}
                     visible={nationalityModalVisible}
+                    onClose={() => setNationalityModalVisible(false)}
                     onSelect={({ name }) => {
                       setSelectedNationality(name);
                       setFieldValue('nationality', name);
@@ -254,6 +282,7 @@ export const Registration = ({ navigation }) => {
                     selectTextOnFocus={false}
                     onPressIn={() => setNationalityModalVisible(true)}
                     placeholder={selectedNationality}
+                    right={<StyledTextInput.Icon icon="menu-down" />}
                   />
                   {errors.nationality && touched.nationality && (
                     <HelperText type="error">{errors.nationality}</HelperText>
