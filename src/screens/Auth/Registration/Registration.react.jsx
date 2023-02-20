@@ -11,7 +11,13 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import { Dialog, HelperText, RadioButton, Text } from 'react-native-paper';
+import {
+  Dialog,
+  Divider,
+  HelperText,
+  RadioButton,
+  Text,
+} from 'react-native-paper';
 import { BackButton } from 'components/Login';
 import { ROUTES } from 'res/constants/routes';
 import { NotificationToast } from 'components/general/NotificationToast';
@@ -19,6 +25,7 @@ import { Image } from 'expo-image';
 import { PlaneStartingIllustration } from 'assets/illustrations';
 import { Layout, Spacer } from 'components/general/Layout/Layout';
 import { ModalSheet } from 'components/general/ModalSheet';
+import { Checkbox } from 'components/general/Checkbox';
 import { registrationValidationSchema } from './Registration.schema';
 
 const blurhash = '00Q12z';
@@ -39,7 +46,7 @@ export const Registration = ({ navigation }) => {
   const [selectedGender, setSelectedGender] = useState('male');
   const [selectedNationality, setSelectedNationality] = useState('Germany');
   const [nationalityModalVisible, setNationalityModalVisible] = useState(false);
-
+  const [checked, setChecked] = React.useState(false);
   const hideModal = () => setOpenModalSheet(false);
 
   const handleFormSubmit = async values => {
@@ -317,9 +324,29 @@ export const Registration = ({ navigation }) => {
                       <HelperText type="error">{errors.phone}</HelperText>
                     )}
                   </View>
-
+                  <Spacer />
+                  <Divider />
+                  <Spacer />
+                  <View style={[style.inputWidth, style.marginBottom]}>
+                    <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
+                      Your privacy matter to us!
+                    </Text>
+                    <Spacer />
+                    <Text variant="bodyMedium">
+                      Your personal information will be processed in accordance
+                      to our privacy policies
+                    </Text>
+                    <Spacer />
+                    <Checkbox
+                      onPress={() => setChecked(!checked)}
+                      title="I accept the terms and conditions of VISASTAR"
+                      isChecked={checked}
+                    />
+                    <Spacer />
+                  </View>
                   <View style={[style.inputWidth, style.marginBottom]}>
                     <PrimaryButton
+                      disabled={!checked}
                       onPress={handleSubmit}
                       style={{ marginBottom: 10 }}
                     >
