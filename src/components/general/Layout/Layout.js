@@ -29,7 +29,7 @@ export const TouchableIconCardOpacity = styled.TouchableOpacity`
   margin-bottom: 16px;
 `;
 
-export const StyledCard = styled(Card).attrs(properties => ({
+export const StyledCard = styled(Card).attrs(() => ({
   mode: 'contained',
 }))`
   margin-bottom: 8px;

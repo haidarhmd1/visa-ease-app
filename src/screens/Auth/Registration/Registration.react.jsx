@@ -7,10 +7,16 @@ import { registerUserProfile } from 'network/api';
 import CountryPicker from 'react-native-country-picker-modal';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { HelperText, RadioButton, Text } from 'react-native-paper';
-import { BackButton, Background } from 'components/Login';
+import { BackButton } from 'components/Login';
 import { ROUTES } from 'res/constants/routes';
 import { NotificationToast } from 'components/general/NotificationToast';
+import { Image } from 'expo-image';
+import { PlaneStartingIllustration } from 'assets/illustrations';
+import { Layout, Spacer } from 'components/general/Layout/Layout';
 import { registrationValidationSchema } from './Registration.schema';
+
+const blurhash =
+  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
 export const Registration = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -53,16 +59,51 @@ export const Registration = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'white' }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'white',
+      }}
+    >
       <BackButton goBack={() => navigation.goBack()} />
-      {/* <View style={style.logoContainer}>
-        <Logo style={style.center} />
-      </View> */}
-      <Text variant="titleLarge" style={[style.center, style.marginBottom]}>
-        Registration
-      </Text>
       <ScrollView>
-        <Background>
+        <Layout
+          style={{
+            paddingLeft: 32,
+            paddingRight: 32,
+          }}
+        >
+          <Text
+            variant="bodyLarge"
+            style={{ fontWeight: 'bold', textAlign: 'center' }}
+          >
+            Register for Visastar
+          </Text>
+          <View style={{ alignSelf: 'center' }}>
+            <Image
+              style={style.image}
+              source={PlaneStartingIllustration}
+              placeholder={blurhash}
+              contentFit="contain"
+              transition={1000}
+            />
+          </View>
+          <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
+            This will only take a couple of minutes
+          </Text>
+          <Spacer />
+          <Text variant="bodyMedium">
+            Entspannen Sie sich und freuen Sie sich auf Ihren Urlaub, Ihre
+            Kreuzfahrt oder Ihre Geschäftsreise, um das Visum kümmern wir uns.
+          </Text>
+          <Spacer />
+          <Text variant="bodyMedium">
+            <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
+              Register Now for Free!,
+            </Text>
+            to start travel the world!
+          </Text>
+          <Spacer />
           <Formik
             initialValues={{
               fullname: '',
@@ -253,7 +294,7 @@ export const Registration = ({ navigation }) => {
               </>
             )}
           </Formik>
-        </Background>
+        </Layout>
       </ScrollView>
       <NotificationToast
         type="Bottom"
@@ -270,14 +311,6 @@ const style = StyleSheet.create({
   inputWidth: {
     width: '100%',
   },
-  buttonWidth: {
-    width: 250,
-  },
-  logoContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   center: {
     alignSelf: 'center',
   },
@@ -286,5 +319,10 @@ const style = StyleSheet.create({
   },
   marginBottom: {
     marginBottom: 16,
+  },
+  image: {
+    width: 250,
+    height: 250,
+    backgroundColor: '#fff',
   },
 });

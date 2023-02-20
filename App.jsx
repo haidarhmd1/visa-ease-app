@@ -1,7 +1,12 @@
+/* eslint-disable global-require */
 import React, { useCallback, useEffect, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import { SafeAreaView } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
+import {
+  configureFonts,
+  MD3LightTheme,
+  Provider as PaperProvider,
+} from 'react-native-paper';
 import 'react-native-gesture-handler';
 
 import * as SplashScreen from 'expo-splash-screen';
@@ -25,8 +30,58 @@ import { messages } from 'res/locales/locales';
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
 
+const fontConfig = {
+  ...MD3LightTheme,
+  android: {
+    regular: {
+      fontFamily: 'Rajdhani-Regular',
+      fontWeight: 'normal',
+    },
+    medium: {
+      fontFamily: 'Rajdhani-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Rajdhani-Light',
+      fontWeight: 'light',
+    },
+    bold: {
+      fontFamily: 'Rajdhani-Bold',
+      fontWeight: 'bold',
+    },
+  },
+  ios: {
+    regular: {
+      fontFamily: 'Rajdhani-Regular',
+      fontWeight: '500',
+    },
+    medium: {
+      fontFamily: 'Rajdhani-Medium',
+      fontWeight: 'normal',
+    },
+    light: {
+      fontFamily: 'Rajdhani-Light',
+      fontWeight: 'light',
+    },
+    bold: {
+      fontFamily: 'Rajdhani-Bold',
+      fontWeight: 'bold',
+    },
+  },
+};
+
+const theme = {
+  fonts: configureFonts({ config: fontConfig, isV3: true }),
+};
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const [fontsLoaded] = Font.useFonts({
+    'Rajdhani-Medium': require('./src/assets/fonts/Rajdhani-Medium.ttf'),
+    'Rajdhani-Bold': require('./src/assets/fonts/Rajdhani-Bold.ttf'),
+    'Rajdhani-Regular': require('./src/assets/fonts/Rajdhani-Regular.ttf'),
+    'Rajdhani-Light': require('./src/assets/fonts/Rajdhani-Light.ttf'),
+  });
 
   useEffect(() => {
     async function prepare() {
@@ -48,15 +103,15 @@ export default function App() {
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
+    if (appIsReady && fontsLoaded) {
       await SplashScreen.hideAsync();
     }
-  }, [appIsReady]);
+  }, [appIsReady, fontsLoaded]);
 
   if (!appIsReady) return null;
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <ThemeProvider theme={MyTheme}>
         <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
           <QueryClientProvider client={queryClient}>

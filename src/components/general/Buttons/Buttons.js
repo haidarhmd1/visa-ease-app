@@ -6,7 +6,7 @@ export const PrimaryButton = styled(Button).attrs({
   dark: true,
   buttonColor: '#00bf80',
 })`
-  border-radius: 10px;
+  border-radius: 14px;
 `;
 
 export const SecondaryButton = styled(Button).attrs({
@@ -15,7 +15,8 @@ export const SecondaryButton = styled(Button).attrs({
   textColor: '#00bf80',
 })`
   border: 2px solid #00bf80;
-  border-radius: 10px;
+  border-radius: 14px;
+  border-radius: 14px;
 `;
 
 export const DangerButton = styled(Button).attrs({
@@ -23,5 +24,6 @@ export const DangerButton = styled(Button).attrs({
   buttonColor: '#ff0000',
   textColor: 'white',
 })`
-  border-radius: 10px;
+  border-radius: 14px;
+  border-radius: 14px;
 `;
