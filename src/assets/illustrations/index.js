@@ -9,3 +9,9 @@ export { default as RegisterIllustration } from './bwink_tsp_04_single_05.jpg';
 
 // <a href="https://www.freepik.com/free-vector/aircraft-concept-illustration_9793489.htm#page=2&query=flight%20illustrations&position=0&from_view=search&track=ais">Image by storyset</a> on Freepik
 export { default as PlaneStartingIllustration } from './4266773.jpg';
+
+// <a href="https://www.freepik.com/free-vector/online-app-tourism-traveler-with-mobile-phone-passport-booking-buying-plane-ticket_11235774.htm#query=visa%20illustrations&position=25&from_view=search&track=ais">Image by pch.vector</a> on Freepik
+export { default as PersonWaitPlaneIllustration } from './10966.jpg';
+
+// <a href="https://www.freepik.com/free-vector/low-cost-flights-abstract-concept-illustration_11669327.htm#query=visa%20illustrations&position=40&from_view=search&track=ais">Image by vectorjuice</a> on Freepik
+export { default as WorldIllustration } from './20945909.jpg';

@@ -7,8 +7,13 @@ import {
 } from 'components/general/Layout/Layout';
 import { Slideshow } from 'components/Slideshow';
 import { ModalSheet } from 'components/general/ModalSheet';
-import { Dialog, Divider, List } from 'react-native-paper';
-import { ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { Card, Dialog, Divider, List, Text } from 'react-native-paper';
+import {
+  ScrollView,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Button,
+} from 'react-native';
 import { ServiceItems } from './ServiceItems';
 
 const dataSource = [
@@ -34,7 +39,9 @@ const dataSource = [
 
 export const Home = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
+  const [extraContentVisible, setExtraContentVisible] = useState(false);
   const hideModal = () => setVisible(false);
+
   return (
     <>
       <AppHeader
@@ -45,6 +52,23 @@ export const Home = ({ navigation }) => {
       <StyledScrollView>
         <TouchableWithoutFeedback onPress={() => setVisible(false)}>
           <Layout>
+            {extraContentVisible && (
+              <Card mode="elevated" elevation={5} style={styles.container}>
+                <Card.Content>
+                  <Text variant="headlineSmall">Complete you profile</Text>
+                  <Spacer />
+                  <Divider />
+                  <Spacer />
+                  <Text variant="bodyMedium">70% is done</Text>
+                </Card.Content>
+                <Card.Actions>
+                  <Button
+                    title="dismiss"
+                    onPress={() => setExtraContentVisible(false)}
+                  />
+                </Card.Actions>
+              </Card>
+            )}
             <Slideshow dataSource={dataSource} />
             <ServiceItems hideModal={hideModal} navigation={navigation} />
           </Layout>
@@ -92,3 +116,14 @@ export const Home = ({ navigation }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  image: {
+    alignSelf: 'center',
+    width: 250,
+    height: 250,
+  },
+});
