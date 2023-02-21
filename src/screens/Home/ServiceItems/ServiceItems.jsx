@@ -35,7 +35,7 @@ const services = [
   },
 ];
 
-export const ServiceItems = ({ navigation }) => {
+export const ServiceItems = ({ navigation, hideModal }) => {
   const intl = useIntl();
 
   const onPressViaHandler = route => {
@@ -58,13 +58,16 @@ export const ServiceItems = ({ navigation }) => {
           <TouchableIconCard
             key={id}
             title={intl.formatMessage({ id: title })}
-            onPress={() => onPressViaHandler(route)}
+            onPress={() => {
+              onPressViaHandler(route);
+              hideModal();
+            }}
           />
         ))}
       </View>
 
       <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
-        Other{' '}
+        Other
         {intl.formatMessage({
           id: 'visastar.home.services.headline',
         })}
@@ -80,7 +83,10 @@ export const ServiceItems = ({ navigation }) => {
           <TouchableIconCard
             key={id}
             title={intl.formatMessage({ id: title })}
-            onPress={() => onPressViaHandler(route)}
+            onPress={() => {
+              onPressViaHandler(route);
+              hideModal();
+            }}
           />
         ))}
       </View>

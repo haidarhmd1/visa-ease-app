@@ -8,7 +8,7 @@ import {
 import { Slideshow } from 'components/Slideshow';
 import { ModalSheet } from 'components/general/ModalSheet';
 import { Dialog, Divider, List } from 'react-native-paper';
-import { ScrollView } from 'react-native';
+import { ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { ServiceItems } from './ServiceItems';
 
 const dataSource = [
@@ -34,7 +34,7 @@ const dataSource = [
 
 export const Home = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
-
+  const hideModal = () => setVisible(false);
   return (
     <>
       <AppHeader
@@ -43,10 +43,12 @@ export const Home = ({ navigation }) => {
         role="main"
       />
       <StyledScrollView>
-        <Layout>
-          <Slideshow dataSource={dataSource} />
-          <ServiceItems navigation={navigation} />
-        </Layout>
+        <TouchableWithoutFeedback onPress={() => setVisible(false)}>
+          <Layout>
+            <Slideshow dataSource={dataSource} />
+            <ServiceItems hideModal={hideModal} navigation={navigation} />
+          </Layout>
+        </TouchableWithoutFeedback>
       </StyledScrollView>
       <ModalSheet
         detached={false}

@@ -55,7 +55,7 @@ export const AppHeader = ({
       style={{ backgroundColor: 'white' }}
     >
       <Appbar.Action icon="arrow-left" onPress={goBack} />
-      <Appbar.Content title={<Text variant="titleMedium">{title}</Text>} />
+      <Appbar.Content title={title} />
     </Appbar.Header>
   );
 };
