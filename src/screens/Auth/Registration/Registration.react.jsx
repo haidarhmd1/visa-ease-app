@@ -241,6 +241,7 @@ export const Registration = ({ navigation }) => {
                       animateOnMount={false}
                       enablePanDownToClose={false}
                       title="Gender"
+                      bottomInset={46}
                       visible={openModalSheet}
                       setVisible={setOpenModalSheet}
                     >

@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AppHeader } from 'components/general/AppHeader';
-import { Layout, StyledScrollView } from 'components/general/Layout/Layout';
+import {
+  Layout,
+  Spacer,
+  StyledScrollView,
+} from 'components/general/Layout/Layout';
 import { Slideshow } from 'components/Slideshow';
+import { ModalSheet } from 'components/general/ModalSheet';
+import { Dialog, Divider, List } from 'react-native-paper';
+import { ScrollView } from 'react-native';
 import { ServiceItems } from './ServiceItems';
 
 const dataSource = [
@@ -26,15 +33,60 @@ const dataSource = [
 ];
 
 export const Home = ({ navigation }) => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
-      <AppHeader navigation={navigation} role="main" />
+      <AppHeader
+        openNotification={() => setVisible(true)}
+        navigation={navigation}
+        role="main"
+      />
       <StyledScrollView>
         <Layout>
           <Slideshow dataSource={dataSource} />
           <ServiceItems navigation={navigation} />
         </Layout>
       </StyledScrollView>
+      <ModalSheet
+        detached={false}
+        contentMore
+        openModal={() => setVisible(true)}
+        visible={visible}
+        setVisible={setVisible}
+      >
+        <Dialog.Title style={{ fontWeight: 'bold' }}>
+          Notifications
+        </Dialog.Title>
+        <ScrollView>
+          <Layout>
+            <List.Item
+              title="First Item"
+              description="Item description"
+              left={() => <List.Icon icon="message-badge-outline" />}
+            />
+            <Spacer />
+            <Divider />
+            <Spacer />
+            <List.Item
+              title="First Item"
+              description="Item description"
+              left={() => <List.Icon icon="message-badge-outline" />}
+            />
+            <Spacer />
+            <Divider />
+            <Spacer />
+            <List.Item
+              title="First Item"
+              description="Item description"
+              left={() => <List.Icon icon="message-badge-outline" />}
+            />
+            <Spacer />
+            <Divider />
+            <Spacer />
+          </Layout>
+        </ScrollView>
+      </ModalSheet>
     </>
   );
 };

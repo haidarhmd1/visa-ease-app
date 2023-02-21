@@ -10,13 +10,18 @@ export const ModalSheet = ({
   title,
   children,
   visible,
+  contentMore = false,
   setVisible,
+  detached = true,
   ...properties
 }) => {
   // ref
   const bottomSheetReference = useRef(null);
   // variables
-  const snapPoints = useMemo(() => ['25%'], []);
+  const snapPoints = useMemo(
+    () => (contentMore ? ['25%', '50%', '90%'] : ['25%']),
+    [contentMore]
+  );
 
   useEffect(() => {
     if (!visible) {
@@ -34,12 +39,11 @@ export const ModalSheet = ({
           {...properties}
           ref={bottomSheetReference}
           snapPoints={snapPoints}
-          bottomInset={46}
-          detached
-          style={[styles.sheetContainer, styles.shadow]}
+          detached={detached}
+          style={[detached && styles.sheetContainer, styles.shadow]}
         >
           <View style={title ? styles.header : styles.noTitleHeader}>
-            {title && <Text variant="labelMedium">Gender</Text>}
+            {title && <Text variant="labelMedium">{title}</Text>}
             <Button title="close" onPress={() => setVisible(false)} />
           </View>
           <View style={styles.contentContainer}>{children}</View>

@@ -129,6 +129,7 @@ const GeneralInformationRaw = ({ navigation }) => {
                     <ModalSheet
                       handleIndicatorStyle={{ display: 'none' }}
                       animateOnMount={false}
+                      bottomInset={46}
                       enablePanDownToClose={false}
                       title="Gender"
                       visible={openModalSheet}
@@ -182,6 +183,7 @@ const GeneralInformationRaw = ({ navigation }) => {
                       handleIndicatorStyle={{ display: 'none' }}
                       animateOnMount={false}
                       enablePanDownToClose={false}
+                      bottomInset={46}
                       title="Martial Status"
                       visible={openMaritalStatusModalSheet}
                       setVisible={setOpenMaritalStatusModalSheet}
