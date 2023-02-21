@@ -21,3 +21,12 @@ export const useAuthenticationStore = create(
     }
   )
 );
+
+const initialAppbarTitleState = {
+  title: '',
+};
+
+export const useAppbarTitleStore = create(set => ({
+  ...initialAppbarTitleState,
+  appbarTitle: appTitle => set({ title: appTitle }),
+}));
