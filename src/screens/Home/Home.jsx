@@ -37,6 +37,10 @@ const dataSource = [
   },
 ];
 
+const messageBadgeIcon = properties => (
+  <List.Icon {...properties} icon="message-badge-outline" />
+);
+
 export const Home = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
   const [extraContentVisible, setExtraContentVisible] = useState(false);
@@ -89,7 +93,7 @@ export const Home = ({ navigation }) => {
             <List.Item
               title="First Item"
               description="Item description"
-              left={() => <List.Icon icon="message-badge-outline" />}
+              left={messageBadgeIcon}
             />
             <Spacer />
             <Divider />
@@ -97,7 +101,7 @@ export const Home = ({ navigation }) => {
             <List.Item
               title="First Item"
               description="Item description"
-              left={() => <List.Icon icon="message-badge-outline" />}
+              left={messageBadgeIcon}
             />
             <Spacer />
             <Divider />
@@ -105,7 +109,7 @@ export const Home = ({ navigation }) => {
             <List.Item
               title="First Item"
               description="Item description"
-              left={() => <List.Icon icon="message-badge-outline" />}
+              left={messageBadgeIcon}
             />
             <Spacer />
             <Divider />
