@@ -13,10 +13,16 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "org.name.visastarexpoapp"
+      "bundleIdentifier": "org.name.visastarexpoapp",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to access your camera"
+      }
     },
     "android": {
-      "package": "org.name.visastarexpoapp"
+      "package": "org.name.visastarexpoapp",
+      "permissions": [
+        "android.permission.CAMERA"
+      ]
     },
     "plugins": [
       [
@@ -24,8 +30,14 @@
         {
           "iCloudContainerEnvironment": "Production"
         }
-      ]
-    ]
+      ],
+      "react-native-vision-camera"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6910cbbc-532d-463a-81df-5433c179439c"
+      }
+    }
   },
   "name": "visastar-expo-app"
 }
