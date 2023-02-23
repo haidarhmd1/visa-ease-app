@@ -22,7 +22,8 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" translucent={false} hidden={false} />
-      {isLoggedIn ? <MainStack /> : <AuthStack />}
+      {/* {isLoggedIn ? <MainStack /> : <AuthStack />} */}
+      <MainStack />
     </NavigationContainer>
   );
 };

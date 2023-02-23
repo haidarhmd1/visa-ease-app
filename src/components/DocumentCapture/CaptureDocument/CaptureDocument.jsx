@@ -3,20 +3,47 @@ import { Layout } from 'components/general/Layout/Layout';
 import { IconButton, Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { SecondaryButton } from 'components/general/Buttons';
+
+import { useFrameProcessor } from 'react-native-vision-camera';
+
 import {
   StyledCamera,
   StyledCameraButtonWrapper,
   StyledWarningInformationCard,
 } from '../DocumentCapture.styled';
 
+// export function xyz(frame) {
+//   'worklet';
+
+//   return __xyz(frame);
+// }
+
 export const CaptureDocument = ({
   cameraReference,
   handleSnapPress,
+  device,
   takePic,
 }) => {
+  const frameProcessor = useFrameProcessor(frame => {
+    'worklet';
+
+    console.log('frame', frame);
+  }, []);
+
   return (
     <Layout style={style.container}>
-      <StyledCamera ref={cameraReference} flashMode="on" />
+      {/* Camera Element */}
+      <StyledCamera
+        ref={cameraReference}
+        device={device}
+        isActive
+        photo
+        frameProcessor={frameProcessor}
+        frameProcessorFps={1}
+        flashMode="on"
+      />
+      {/* end Camera Element */}
+
       <StyledWarningInformationCard>
         <Text variant="labelLarge" style={style.textBold}>
           HINWEIS:

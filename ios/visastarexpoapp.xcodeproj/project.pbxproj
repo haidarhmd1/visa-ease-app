@@ -10,11 +10,13 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		26D2EF29B47A6F80C99EA46E /* XyzFrameProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C73E512D685F48F49ADA516 /* XyzFrameProcessor.m */; };
 		364B41C34AA143C0A32B0B0F /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		78D9693A2B7BFEBE6D1DF82E /* libPods-visastarexpoapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 574E6E0C8FC06EEB3C33B0BE /* libPods-visastarexpoapp.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		ED60598A8809DFD30F7CAF6F /* XyzFrameProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BEB7506400FDE20E813538 /* XyzFrameProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = visastarexpoapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = visastarexpoapp/main.m; sourceTree = "<group>"; };
 		2FF5B8ACDA73DF7718ADAE09 /* Pods-visastarexpoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-visastarexpoapp.debug.xcconfig"; path = "Target Support Files/Pods-visastarexpoapp/Pods-visastarexpoapp.debug.xcconfig"; sourceTree = "<group>"; };
+		34BEB7506400FDE20E813538 /* XyzFrameProcessor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = XyzFrameProcessor.swift; path = XyzFrameProcessor/XyzFrameProcessor.swift; sourceTree = "<group>"; };
 		574E6E0C8FC06EEB3C33B0BE /* libPods-visastarexpoapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-visastarexpoapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EADB2DE937F4AF6BE80E6B1 /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "visastarexpoapp/noop-file.swift"; sourceTree = "<group>"; };
+		8C73E512D685F48F49ADA516 /* XyzFrameProcessor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = XyzFrameProcessor.m; path = XyzFrameProcessor/XyzFrameProcessor.m; sourceTree = "<group>"; };
 		A9C9192A699BD9E0A23AE7AA /* Pods-visastarexpoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-visastarexpoapp.release.xcconfig"; path = "Target Support Files/Pods-visastarexpoapp/Pods-visastarexpoapp.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = visastarexpoapp/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
@@ -65,6 +69,15 @@
 			name = visastarexpoapp;
 			sourceTree = "<group>";
 		};
+		1637A4933222207FEF24C6A5 /* XyzFrameProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				8C73E512D685F48F49ADA516 /* XyzFrameProcessor.m */,
+				34BEB7506400FDE20E813538 /* XyzFrameProcessor.swift */,
+			);
+			name = XyzFrameProcessor;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +103,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
 				D7E4C46ADA2E9064B798F356 /* ExpoModulesProviders */,
+				1637A4933222207FEF24C6A5 /* XyzFrameProcessor */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -298,6 +312,8 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
 				364B41C34AA143C0A32B0B0F /* noop-file.swift in Sources */,
+				26D2EF29B47A6F80C99EA46E /* XyzFrameProcessor.m in Sources */,
+				ED60598A8809DFD30F7CAF6F /* XyzFrameProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

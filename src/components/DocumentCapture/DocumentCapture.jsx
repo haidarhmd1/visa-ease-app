@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Camera } from 'expo-camera';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
+import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import { Linking } from 'react-native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
@@ -14,14 +15,21 @@ export const DocumentCapture = ({
   submitDocument,
 }) => {
   const navigation = useNavigation();
+
   const cameraReference = useRef(null);
+  const devices = useCameraDevices();
+  const device = devices.back;
+
   const [hasCameraPermission, setHasCameraPermission] = useState();
 
   // set Camera Permissions
   useEffect(() => {
     (async () => {
-      const cameraPermission = await Camera.requestCameraPermissionsAsync();
-      setHasCameraPermission(cameraPermission.status === 'granted');
+      const permission = await Camera.requestCameraPermission();
+      if (permission === 'denied') {
+        await Linking.openSettings();
+      }
+      setHasCameraPermission(permission === 'authorized');
     })();
   }, []);
 
@@ -34,6 +42,11 @@ export const DocumentCapture = ({
         Permission for camera not granted. Please change this in settings.
       </Text>
     );
+  }
+
+  // console.log('device', device);
+  if (device === null) {
+    return <Text variant="labelLarge"> Camera not available </Text>;
   }
 
   // Caputure Image
@@ -75,6 +88,7 @@ export const DocumentCapture = ({
       />
       <CaptureDocument
         cameraReference={cameraReference}
+        device={device}
         handleSnapPress={handleSnapPress}
         takePic={takePic}
       />
