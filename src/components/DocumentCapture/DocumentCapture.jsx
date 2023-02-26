@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import { Camera } from 'expo-camera';
 import { Linking } from 'react-native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
@@ -17,26 +17,26 @@ export const DocumentCapture = ({
   const navigation = useNavigation();
 
   const cameraReference = useRef(null);
-  const devices = useCameraDevices();
-  const device = devices.back;
 
   const [hasCameraPermission, setHasCameraPermission] = useState();
 
   // set Camera Permissions
   useEffect(() => {
     (async () => {
-      const permission = await Camera.requestCameraPermission();
-      if (permission === 'denied') {
+      const permission = await Camera.requestCameraPermissionsAsync();
+      if (permission.status === 'denied') {
         await Linking.openSettings();
       }
-      setHasCameraPermission(permission === 'authorized');
+      setHasCameraPermission(permission.status);
+      console.log('hasCameraPermission', hasCameraPermission);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (hasCameraPermission === undefined) {
     return <Text variant="labelLarge">Requesting permissions...</Text>;
   }
-  if (!hasCameraPermission) {
+  if (hasCameraPermission !== 'granted') {
     return (
       <Text variant="labelLarge">
         Permission for camera not granted. Please change this in settings.
@@ -45,9 +45,9 @@ export const DocumentCapture = ({
   }
 
   // console.log('device', device);
-  if (device === null) {
-    return <Text variant="labelLarge"> Camera not available </Text>;
-  }
+  // if (device === null) {
+  //   return <Text variant="labelLarge"> Camera not available </Text>;
+  // }
 
   // Caputure Image
   const takePic = async () => {
@@ -88,9 +88,7 @@ export const DocumentCapture = ({
       />
       <CaptureDocument
         cameraReference={cameraReference}
-        device={device}
         handleSnapPress={handleSnapPress}
-        takePic={takePic}
       />
     </>
   );

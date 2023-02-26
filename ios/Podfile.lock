@@ -1,6 +1,9 @@
 PODS:
+  - ASN1Decoder (1.8.0)
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
+  - EASClient (0.4.1):
+    - ExpoModulesCore
   - EXApplication (5.0.1):
     - ExpoModulesCore
   - EXCamera (13.1.0):
@@ -15,6 +18,12 @@ PODS:
     - ExpoModulesCore
   - EXFont (11.0.1):
     - ExpoModulesCore
+  - EXGL (12.0.1):
+    - ExpoModulesCore
+    - React-jsi
+  - EXImageLoader (4.0.0):
+    - ExpoModulesCore
+    - React-Core
   - EXJSONUtils (0.4.0)
   - EXManifests (0.4.0):
     - EXJSONUtils
@@ -101,6 +110,9 @@ PODS:
     - SDWebImageAVIFCoder (~> 0.9.4)
     - SDWebImageSVGCoder (~> 1.6.1)
     - SDWebImageWebPCoder (~> 0.9.1)
+  - ExpoImageManipulator (11.0.0):
+    - EXImageLoader
+    - ExpoModulesCore
   - ExpoKeepAwake (11.0.1):
     - ExpoModulesCore
   - ExpoModulesCore (1.0.4):
@@ -110,6 +122,15 @@ PODS:
     - ExpoModulesCore
   - EXSplashScreen (0.17.5):
     - ExpoModulesCore
+    - React-Core
+  - EXStructuredHeaders (3.0.1)
+  - EXUpdates (0.15.6):
+    - ASN1Decoder (~> 1.8)
+    - EASClient
+    - EXManifests
+    - ExpoModulesCore
+    - EXStructuredHeaders
+    - EXUpdatesInterface
     - React-Core
   - EXUpdatesInterface (0.8.1)
   - FBLazyVector (0.70.5)
@@ -429,6 +450,8 @@ PODS:
     - React-Core
   - RNCPicker (2.4.8):
     - React-Core
+  - RNFS (2.20.0):
+    - React-Core
   - RNGestureHandler (2.8.0):
     - React-Core
   - RNReanimated (2.14.4):
@@ -483,6 +506,7 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - EASClient (from `../node_modules/expo-eas-client/ios`)
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -490,6 +514,8 @@ DEPENDENCIES:
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
+  - EXGL (from `../node_modules/expo-gl`)
+  - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - EXMediaLibrary (from `../node_modules/expo-media-library/ios`)
@@ -499,10 +525,13 @@ DEPENDENCIES:
   - expo-dev-menu (from `../node_modules/expo-dev-menu`)
   - expo-dev-menu-interface (from `../node_modules/expo-dev-menu-interface/ios`)
   - ExpoImage (from `../node_modules/expo-image/ios`)
+  - ExpoImageManipulator (from `../node_modules/expo-image-manipulator/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
   - EXSharing (from `../node_modules/expo-sharing/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
+  - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
+  - EXUpdates (from `../node_modules/expo-updates/ios`)
   - EXUpdatesInterface (from `../node_modules/expo-updates-interface/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -539,6 +568,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -548,6 +578,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ASN1Decoder
     - fmt
     - libaom
     - libavif
@@ -563,6 +594,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  EASClient:
+    :path: "../node_modules/expo-eas-client/ios"
   EXApplication:
     :path: "../node_modules/expo-application/ios"
   EXCamera:
@@ -577,6 +610,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
     :path: "../node_modules/expo-font/ios"
+  EXGL:
+    :path: "../node_modules/expo-gl"
+  EXImageLoader:
+    :path: "../node_modules/expo-image-loader/ios"
   EXJSONUtils:
     :path: "../node_modules/expo-json-utils/ios"
   EXManifests:
@@ -595,6 +632,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-dev-menu-interface/ios"
   ExpoImage:
     :path: "../node_modules/expo-image/ios"
+  ExpoImageManipulator:
+    :path: "../node_modules/expo-image-manipulator/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
@@ -603,6 +642,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-sharing/ios"
   EXSplashScreen:
     :path: "../node_modules/expo-splash-screen/ios"
+  EXStructuredHeaders:
+    :path: "../node_modules/expo-structured-headers/ios"
+  EXUpdates:
+    :path: "../node_modules/expo-updates/ios"
   EXUpdatesInterface:
     :path: "../node_modules/expo-updates-interface/ios"
   FBLazyVector:
@@ -673,6 +716,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -687,8 +732,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  ASN1Decoder: 6110fdeacfdb41559b1481457a1645be716610aa
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
+  EASClient: 19efe9e8ef9b3917c5f3dcb3ed82319de4d8c0bd
   EXApplication: 034b1c40a8e9fe1bff76a1e511ee90dff64ad834
   EXCamera: eaf52a96480d4ae1505a9b5e139c244581b5f8ca
   EXConstants: 3c86653c422dd77e40d10cbbabb3025003977415
@@ -696,6 +743,8 @@ SPEC CHECKSUMS:
   EXErrorRecovery: ae43433feb0608a64dc5b1c8363b3e7769a9ea24
   EXFileSystem: 60602b6eefa6873f97172c684b7537c9760b50d6
   EXFont: 319606bfe48c33b5b5063fb0994afdc496befe80
+  EXGL: 5f24aaf2552f784d5d59e960823faf53d120893c
+  EXImageLoader: 84b65e6bd9d3345d6fbb3ab936a546c54496a64d
   EXJSONUtils: 09aef2c1fba1a116ca8c73a2c8299aac00d96b43
   EXManifests: 347f49430b63444579aa013f0ad057d16b8d1cc8
   EXMediaLibrary: b1c4f78878e45f6a359aff3a059e1660c41b73ab
@@ -705,10 +754,13 @@ SPEC CHECKSUMS:
   expo-dev-menu: fa9e67b193032700e2908b4737d9d199c0b43c30
   expo-dev-menu-interface: 45581093393dacd51ce5e7f641cf9ed5064a2e3f
   ExpoImage: a8b564f046f96133db39d7749eec9d6110d11243
+  ExpoImageManipulator: 5f3c1ab8dd81de11491b5051bb925abc91fe57e4
   ExpoKeepAwake: 69b59d0a8d2b24de9f82759c39b3821fec030318
   ExpoModulesCore: 8211c89bcc3ba86e2d02c54b1d31f1fa81acb6de
   EXSharing: e4c5ebc5b36828f1e0dff1415b2b28b23dc770b8
   EXSplashScreen: 3e989924f61a8dd07ee4ea584c6ba14be9b51949
+  EXStructuredHeaders: fb774e45eac2e5d62ba40b28176bfbfba61b843e
+  EXUpdates: e687436502147e80ef13cf6eedd17e3039ef47d6
   EXUpdatesInterface: bffd1ead18f0bab04fa784ca159c115607b8a23c
   FBLazyVector: affa4ba1bfdaac110a789192f4d452b053a86624
   FBReactNativeSpec: fe8b5f1429cfe83a8d72dc8ed61dc7704cac8745
@@ -749,6 +801,7 @@ SPEC CHECKSUMS:
   ReactCommon: c9246996e73bf75a2c6c3ff15f1e16707cdc2da9
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNReanimated: 6668b0587bebd4b15dd849b99e5a9c70fc12ed95
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
