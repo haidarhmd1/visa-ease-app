@@ -1,97 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { IconButton, Text } from 'react-native-paper';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { SecondaryButton } from 'components/general/Buttons';
-import * as tf from '@tensorflow/tfjs';
-import * as cocoSsd from '@tensorflow-models/coco-ssd';
-
-import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
-
-import { Camera } from 'expo-camera';
-// import { getModel, startPrediction } from '../../../utils/tensor.helper';
-
-import { model } from '@tensorflow/tfjs';
 import {
+  StyledCamera,
   StyledCameraButtonWrapper,
   StyledWarningInformationCard,
 } from '../DocumentCapture.styled';
 
-const TensorCamera = cameraWithTensors(Camera);
-// const RESULT_MAPPING = ['rectangle'];
-// const axis = 0;
-const textureDims =
-  Platform.OS === 'ios'
-    ? {
-        height: 1920,
-        width: 1080,
-      }
-    : {
-        height: 1200,
-        width: 1600,
-      };
-
-export const CaptureDocument = ({ handleSnapPress, cameraReference }) => {
-  const [model, setModel] = useState();
-  const requestAnimationFrameId = 0;
-
-  useEffect(() => {
-    return () => {
-      cancelAnimationFrame(requestAnimationFrameId);
-    };
-  }, [requestAnimationFrameId]);
-
-  useEffect(() => {
-    (async () => {
-      await tf.ready();
-      setModel(await cocoSsd.load());
-    })();
-  }, []);
-
-  const handleCameraStream = images => {
-    const loop = async () => {
-      const nextImageTensor = images.next().value;
-      if (!model || !nextImageTensor) throw new Error('no image available');
-      try {
-        const tModel = await model.detect(nextImageTensor);
-        console.log('tModel', tModel);
-      } catch (error) {
-        console.log(error);
-      }
-      requestAnimationFrame(loop);
-    };
-
-    loop();
-  };
-
-  // const drawRectangle = (prediction, nextImageTensor) => {
-  //   console.log('prediction', prediction);
-  // };
-
+export const CaptureDocument = ({
+  cameraReference,
+  handleSnapPress,
+  takePic,
+}) => {
   return (
     <Layout style={style.container}>
-      {/* Camera Element */}
-      <TensorCamera
-        // ref={cameraReference}
-        style={{
-          position: 'relative',
-          width: 320,
-          height: 440,
-          borderRadius: 18,
-          alignSelf: 'center',
-        }}
-        type={Camera.Constants.Type.back}
-        cameraTextureHeight={textureDims.height}
-        cameraTextureWidth={textureDims.width}
-        resizeHeight={224}
-        resizeWidth={224}
-        resizeDepth={3}
-        onReady={images => handleCameraStream(images)}
-        autorender
-        flashMode={Camera.Constants.FlashMode.off}
-      />
-      {/* end Camera Element */}
-
+      <StyledCamera ref={cameraReference} flashMode="on" />
       <StyledWarningInformationCard>
         <Text variant="labelLarge" style={style.textBold}>
           HINWEIS:
@@ -113,8 +38,7 @@ export const CaptureDocument = ({ handleSnapPress, cameraReference }) => {
             containerColor="#00bf80"
             iconColor="white"
             size={48}
-            // onPress={handleImageCapture}
-            onPress={() => {}}
+            onPress={takePic}
           />
         </StyledCameraButtonWrapper>
       </View>
