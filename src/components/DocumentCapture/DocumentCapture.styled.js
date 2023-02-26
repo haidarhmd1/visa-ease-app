@@ -1,4 +1,4 @@
-import { Camera } from 'react-native-vision-camera';
+import { Camera } from 'expo-camera';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 

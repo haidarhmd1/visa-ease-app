@@ -559,6 +559,10 @@ PODS:
   - SDWebImageWebPCoder (0.9.1):
     - libwebp (~> 1.0)
     - SDWebImage/Core (~> 5.13)
+  - VisionCamera (2.15.4):
+    - React
+    - React-callinvoker
+    - React-Core
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -631,6 +635,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - VisionCamera (from `../node_modules/react-native-vision-camera`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -797,6 +802,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  VisionCamera:
+    :path: "../node_modules/react-native-vision-camera"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -893,6 +900,7 @@ SPEC CHECKSUMS:
   SDWebImageAVIFCoder: d759e21cf4efb640cc97250566aa556ad8bb877c
   SDWebImageSVGCoder: 6fc109f9c2a82ab44510fff410b88b1a6c271ee8
   SDWebImageWebPCoder: 18503de6621dd2c420d680e33d46bf8e1d5169b0
+  VisionCamera: e9a95af10e00aaebe99d648ff4519fd336e16ffe
   Yoga: eca980a5771bf114c41a754098cd85e6e0d90ed7
 
 PODFILE CHECKSUM: e9100332dd97d8ed69002ac13c5d4f65d5e85ce4
