@@ -1,35 +1,42 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { View, StyleSheet } from 'react-native';
+
+import { Layout } from 'components/general/Layout/Layout';
+import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
-import { Camera, useCameraDevices } from 'react-native-vision-camera';
-import { Linking } from 'react-native';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { PrimaryButton } from 'components/general/Buttons';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
-export const DocumentCapture = ({
-  photo,
-  setPhoto,
-  title,
-  handleSnapPress,
-  submitDocument,
-}) => {
+export const DocumentCapture = ({ next, fieldValue }) => {
+  const sheetReference = useRef(null);
+  const snapPoints = useMemo(() => ['75%'], []);
+
+  const handleSnapPress = useCallback(index => {
+    sheetReference.current?.snapToIndex(index);
+  }, []);
+  const handleClosePress = useCallback(() => {
+    sheetReference.current?.close();
+  }, []);
+
   const navigation = useNavigation();
-
   const cameraReference = useRef(null);
-  const devices = useCameraDevices();
-  const device = devices.back;
-
   const [hasCameraPermission, setHasCameraPermission] = useState();
+  const [photo, setPhoto] = useState();
 
-  // set Camera Permissions
   useEffect(() => {
     (async () => {
-      const permission = await Camera.requestCameraPermission();
-      if (permission === 'denied') {
-        await Linking.openSettings();
-      }
-      setHasCameraPermission(permission === 'authorized');
+      const cameraPermission = await Camera.requestCameraPermissionsAsync();
+      setHasCameraPermission(cameraPermission.status === 'granted');
     })();
   }, []);
 
@@ -44,12 +51,6 @@ export const DocumentCapture = ({
     );
   }
 
-  // console.log('device', device);
-  if (device === null) {
-    return <Text variant="labelLarge"> Camera not available </Text>;
-  }
-
-  // Caputure Image
   const takePic = async () => {
     const options = {
       quality: 1,
@@ -61,19 +62,19 @@ export const DocumentCapture = ({
     setPhoto(newPhoto);
   };
 
-  // if image is taken render image preview
   if (photo) {
     return (
       <>
         <AppHeader
           navigation={navigation}
           goBack={() => navigation.goBack()}
-          title={title}
+          title="Save Document"
         />
         <SaveDocument
           photo={photo}
           setPhoto={setPhoto}
-          submitDocument={submitDocument}
+          submit={next}
+          fieldValue={fieldValue}
         />
       </>
     );
@@ -84,14 +85,48 @@ export const DocumentCapture = ({
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
-        title={title}
+        title="Document"
       />
       <CaptureDocument
         cameraReference={cameraReference}
-        device={device}
         handleSnapPress={handleSnapPress}
         takePic={takePic}
       />
+      <BottomSheet
+        style={[style.shadow, style.sheetContainer]}
+        ref={sheetReference}
+        snapPoints={snapPoints}
+        bottomInset={46}
+        detached
+      >
+        <Layout style={style.container}>
+          <View style={style.container}>
+            <Text>test</Text>
+          </View>
+          <View>
+            <PrimaryButton onPress={handleClosePress}>Got it!</PrimaryButton>
+          </View>
+        </Layout>
+      </BottomSheet>
     </>
   );
 };
+
+const style = StyleSheet.create({
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+  },
+  sheetContainer: {
+    marginHorizontal: 24,
+  },
+  container: {
+    flex: 1,
+  },
+});

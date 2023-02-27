@@ -1,5 +1,5 @@
+import { Camera } from 'expo-camera';
 import { TouchableOpacity } from 'react-native';
-import { Camera } from 'react-native-vision-camera';
 import styled from 'styled-components/native';
 
 export const CameraWrapper = styled.View``;

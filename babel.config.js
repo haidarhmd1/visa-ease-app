@@ -10,9 +10,9 @@ module.exports = function (api) {
     plugins: [
       'nativewind/babel',
       'react-native-reanimated/plugin',
-      {
-        globals: ['__xyz'],
-      },
+      // {
+      //   globals: ['__xyz'],
+      // },
       [
         'module-resolver',
         {

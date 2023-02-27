@@ -6,5 +6,5 @@
   "urlRandomness": "xn-q3j",
   "https": false,
   "scheme": "org.name.visastarexpoapp",
-  "devClient": false
+  "devClient": true
 }

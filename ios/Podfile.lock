@@ -1,6 +1,9 @@
 PODS:
+  - ASN1Decoder (1.8.0)
   - boost (1.76.0)
   - DoubleConversion (1.1.6)
+  - EASClient (0.4.1):
+    - ExpoModulesCore
   - EXApplication (5.0.1):
     - ExpoModulesCore
   - EXCamera (13.1.0):
@@ -15,6 +18,12 @@ PODS:
     - ExpoModulesCore
   - EXFont (11.0.1):
     - ExpoModulesCore
+  - EXGL (12.0.1):
+    - ExpoModulesCore
+    - React-jsi
+  - EXImageLoader (4.0.0):
+    - ExpoModulesCore
+    - React-Core
   - EXJSONUtils (0.4.0)
   - EXManifests (0.4.0):
     - EXJSONUtils
@@ -101,6 +110,9 @@ PODS:
     - SDWebImageAVIFCoder (~> 0.9.4)
     - SDWebImageSVGCoder (~> 1.6.1)
     - SDWebImageWebPCoder (~> 0.9.1)
+  - ExpoImageManipulator (11.0.0):
+    - EXImageLoader
+    - ExpoModulesCore
   - ExpoKeepAwake (11.0.1):
     - ExpoModulesCore
   - ExpoModulesCore (1.0.4):
@@ -110,6 +122,15 @@ PODS:
     - ExpoModulesCore
   - EXSplashScreen (0.17.5):
     - ExpoModulesCore
+    - React-Core
+  - EXStructuredHeaders (3.0.1)
+  - EXUpdates (0.15.6):
+    - ASN1Decoder (~> 1.8)
+    - EASClient
+    - EXManifests
+    - ExpoModulesCore
+    - EXStructuredHeaders
+    - EXUpdatesInterface
     - React-Core
   - EXUpdatesInterface (0.8.1)
   - FBLazyVector (0.70.5)
@@ -122,6 +143,36 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.70.5)
   - fmt (6.2.1)
   - glog (0.3.5)
+  - GoogleDataTransport (9.2.1):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleMLKit/MLKitCore (2.6.0):
+    - MLKitCommon (~> 5.0.0)
+  - GoogleMLKit/TextRecognition (2.6.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitTextRecognition (~> 1.4.0-beta3)
+  - GoogleToolboxForMac/DebugUtils (2.3.2):
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+  - GoogleToolboxForMac/Defines (2.3.2)
+  - GoogleToolboxForMac/Logger (2.3.2):
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+  - "GoogleToolboxForMac/NSData+zlib (2.3.2)":
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.3.2)":
+    - GoogleToolboxForMac/DebugUtils (= 2.3.2)
+    - GoogleToolboxForMac/Defines (= 2.3.2)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.3.2)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.3.2)"
+  - GoogleUtilities/Environment (7.11.0):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.11.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/UserDefaults (7.11.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilitiesComponents (1.1.0):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.7.2)
   - libaom (2.0.2):
     - libvmaf
   - libavif (0.10.1):
@@ -140,6 +191,37 @@ PODS:
   - libwebp/mux (1.2.4):
     - libwebp/demux
   - libwebp/webp (1.2.4)
+  - MLImage (1.0.0-beta2)
+  - MLKitCommon (5.0.0):
+    - GoogleDataTransport (~> 9.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - GoogleUtilities/UserDefaults (~> 7.0)
+    - GoogleUtilitiesComponents (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.12)
+  - MLKitTextRecognition (1.4.0-beta3):
+    - MLKitCommon (~> 5.0)
+    - MLKitTextRecognitionCommon (= 1.0.0-beta3)
+    - MLKitVision (~> 3.0)
+  - MLKitTextRecognitionCommon (1.0.0-beta3):
+    - MLKitCommon (~> 5.0)
+    - MLKitVision (~> 3.0)
+  - MLKitVision (3.0.0):
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+    - MLImage (= 1.0.0-beta2)
+    - MLKitCommon (~> 5.0)
+    - Protobuf (~> 3.12)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
+  - PromisesObjC (2.2.0)
+  - Protobuf (3.22.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -351,6 +433,9 @@ PODS:
     - glog
   - react-native-document-scanner-plugin (0.7.0):
     - React-Core
+  - react-native-mlkit-ocr (0.2.5):
+    - GoogleMLKit/TextRecognition (= 2.6.0)
+    - React
   - react-native-safe-area-context (4.4.1):
     - RCT-Folly
     - RCTRequired
@@ -427,7 +512,7 @@ PODS:
     - React-perflogger (= 0.70.5)
   - RNCAsyncStorage (1.17.11):
     - React-Core
-  - RNCPicker (2.4.8):
+  - RNFS (2.20.0):
     - React-Core
   - RNGestureHandler (2.8.0):
     - React-Core
@@ -483,6 +568,7 @@ PODS:
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - EASClient (from `../node_modules/expo-eas-client/ios`)
   - EXApplication (from `../node_modules/expo-application/ios`)
   - EXCamera (from `../node_modules/expo-camera/ios`)
   - EXConstants (from `../node_modules/expo-constants/ios`)
@@ -490,6 +576,8 @@ DEPENDENCIES:
   - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
   - EXFileSystem (from `../node_modules/expo-file-system/ios`)
   - EXFont (from `../node_modules/expo-font/ios`)
+  - EXGL (from `../node_modules/expo-gl`)
+  - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
   - EXJSONUtils (from `../node_modules/expo-json-utils/ios`)
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - EXMediaLibrary (from `../node_modules/expo-media-library/ios`)
@@ -499,10 +587,13 @@ DEPENDENCIES:
   - expo-dev-menu (from `../node_modules/expo-dev-menu`)
   - expo-dev-menu-interface (from `../node_modules/expo-dev-menu-interface/ios`)
   - ExpoImage (from `../node_modules/expo-image/ios`)
+  - ExpoImageManipulator (from `../node_modules/expo-image-manipulator/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
   - EXSharing (from `../node_modules/expo-sharing/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
+  - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
+  - EXUpdates (from `../node_modules/expo-updates/ios`)
   - EXUpdatesInterface (from `../node_modules/expo-updates-interface/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -523,6 +614,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-document-scanner-plugin (from `../node_modules/react-native-document-scanner-plugin`)
+  - react-native-mlkit-ocr (from `../node_modules/react-native-mlkit-ocr`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -538,7 +630,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
-  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -548,11 +640,26 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ASN1Decoder
     - fmt
+    - GoogleDataTransport
+    - GoogleMLKit
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GoogleUtilitiesComponents
+    - GTMSessionFetcher
     - libaom
     - libavif
     - libvmaf
     - libwebp
+    - MLImage
+    - MLKitCommon
+    - MLKitTextRecognition
+    - MLKitTextRecognitionCommon
+    - MLKitVision
+    - nanopb
+    - PromisesObjC
+    - Protobuf
     - SDWebImage
     - SDWebImageAVIFCoder
     - SDWebImageSVGCoder
@@ -563,6 +670,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  EASClient:
+    :path: "../node_modules/expo-eas-client/ios"
   EXApplication:
     :path: "../node_modules/expo-application/ios"
   EXCamera:
@@ -577,6 +686,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-file-system/ios"
   EXFont:
     :path: "../node_modules/expo-font/ios"
+  EXGL:
+    :path: "../node_modules/expo-gl"
+  EXImageLoader:
+    :path: "../node_modules/expo-image-loader/ios"
   EXJSONUtils:
     :path: "../node_modules/expo-json-utils/ios"
   EXManifests:
@@ -595,6 +708,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-dev-menu-interface/ios"
   ExpoImage:
     :path: "../node_modules/expo-image/ios"
+  ExpoImageManipulator:
+    :path: "../node_modules/expo-image-manipulator/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
@@ -603,6 +718,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-sharing/ios"
   EXSplashScreen:
     :path: "../node_modules/expo-splash-screen/ios"
+  EXStructuredHeaders:
+    :path: "../node_modules/expo-structured-headers/ios"
+  EXUpdates:
+    :path: "../node_modules/expo-updates/ios"
   EXUpdatesInterface:
     :path: "../node_modules/expo-updates-interface/ios"
   FBLazyVector:
@@ -641,6 +760,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-document-scanner-plugin:
     :path: "../node_modules/react-native-document-scanner-plugin"
+  react-native-mlkit-ocr:
+    :path: "../node_modules/react-native-mlkit-ocr"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -671,8 +792,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
-  RNCPicker:
-    :path: "../node_modules/@react-native-picker/picker"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -687,8 +808,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  ASN1Decoder: 6110fdeacfdb41559b1481457a1645be716610aa
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
+  EASClient: 19efe9e8ef9b3917c5f3dcb3ed82319de4d8c0bd
   EXApplication: 034b1c40a8e9fe1bff76a1e511ee90dff64ad834
   EXCamera: eaf52a96480d4ae1505a9b5e139c244581b5f8ca
   EXConstants: 3c86653c422dd77e40d10cbbabb3025003977415
@@ -696,6 +819,8 @@ SPEC CHECKSUMS:
   EXErrorRecovery: ae43433feb0608a64dc5b1c8363b3e7769a9ea24
   EXFileSystem: 60602b6eefa6873f97172c684b7537c9760b50d6
   EXFont: 319606bfe48c33b5b5063fb0994afdc496befe80
+  EXGL: 5f24aaf2552f784d5d59e960823faf53d120893c
+  EXImageLoader: 84b65e6bd9d3345d6fbb3ab936a546c54496a64d
   EXJSONUtils: 09aef2c1fba1a116ca8c73a2c8299aac00d96b43
   EXManifests: 347f49430b63444579aa013f0ad057d16b8d1cc8
   EXMediaLibrary: b1c4f78878e45f6a359aff3a059e1660c41b73ab
@@ -705,19 +830,36 @@ SPEC CHECKSUMS:
   expo-dev-menu: fa9e67b193032700e2908b4737d9d199c0b43c30
   expo-dev-menu-interface: 45581093393dacd51ce5e7f641cf9ed5064a2e3f
   ExpoImage: a8b564f046f96133db39d7749eec9d6110d11243
+  ExpoImageManipulator: 5f3c1ab8dd81de11491b5051bb925abc91fe57e4
   ExpoKeepAwake: 69b59d0a8d2b24de9f82759c39b3821fec030318
   ExpoModulesCore: 8211c89bcc3ba86e2d02c54b1d31f1fa81acb6de
   EXSharing: e4c5ebc5b36828f1e0dff1415b2b28b23dc770b8
   EXSplashScreen: 3e989924f61a8dd07ee4ea584c6ba14be9b51949
+  EXStructuredHeaders: fb774e45eac2e5d62ba40b28176bfbfba61b843e
+  EXUpdates: e687436502147e80ef13cf6eedd17e3039ef47d6
   EXUpdatesInterface: bffd1ead18f0bab04fa784ca159c115607b8a23c
   FBLazyVector: affa4ba1bfdaac110a789192f4d452b053a86624
   FBReactNativeSpec: fe8b5f1429cfe83a8d72dc8ed61dc7704cac8745
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  GoogleDataTransport: ea169759df570f4e37bdee1623ec32a7e64e67c4
+  GoogleMLKit: 755661c46990a85e42278015f26400286d98ad95
+  GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
+  GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
+  GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
+  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   libaom: 9bb51e0f8f9192245e3ca2a1c9e4375d9cbccc52
   libavif: e242998ccec1c83bcba0bbdc256f460ad5077348
   libvmaf: 8d61aabc2f4ed3e6591cf7406fa00a223ec11289
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
+  MLImage: a454f9f8ecfd537783a12f9488f5be1a68820829
+  MLKitCommon: 3bc17c6f7d25ce3660f030350b46ae7ec9ebca6e
+  MLKitTextRecognition: 8b0e0023a4babc66ca83d8b82864e57931164445
+  MLKitTextRecognitionCommon: 3e84602c928fe2b775fae81376f2136324cbd763
+  MLKitVision: e87dc3f2e456a6ab32361ebd985e078dd2746143
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  Protobuf: 5e6cbc143d02fe08585d86b0098f8b755d2caaab
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: 21229f84411088e5d8538f21212de49e46cc83e2
   RCTTypeSafety: 62eed57a32924b09edaaf170a548d1fc96223086
@@ -733,6 +875,7 @@ SPEC CHECKSUMS:
   React-jsinspector: badd81696361249893a80477983e697aab3c1a34
   React-logger: fdda34dd285bdb0232e059b19d9606fa0ec3bb9c
   react-native-document-scanner-plugin: ede523cf800dd5429e7468597700bf3a053701d2
+  react-native-mlkit-ocr: 02cde72ca7fb2c7e893a5fe4725e20a66b45adf9
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
   react-native-webview: d33e2db8925d090871ffeb232dfa50cb3a727581
   React-perflogger: e68d3795cf5d247a0379735cbac7309adf2fb931
@@ -748,7 +891,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 7401c4a40f8728fd89df4a56104541b760876117
   ReactCommon: c9246996e73bf75a2c6c3ff15f1e16707cdc2da9
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
-  RNCPicker: 0bf8ef8f7800524f32d2bb2a8bcadd53eda0ecd1
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNReanimated: 6668b0587bebd4b15dd849b99e5a9c70fc12ed95
   RNScreens: 34cc502acf1b916c582c60003dc3089fa01dc66d
