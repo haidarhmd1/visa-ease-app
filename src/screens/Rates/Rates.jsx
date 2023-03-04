@@ -2,7 +2,7 @@ import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView, View, Linking, Platform } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
-import { Divider, List, Snackbar, Text } from 'react-native-paper';
+import { Card, Divider, List, Snackbar, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import * as FileSystem from 'expo-file-system';
 
@@ -39,7 +39,7 @@ export const Rates = ({ navigation }) => {
       <ScrollView>
         <Layout>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <Text variant="labelLarge">Abweichende Gebühren</Text>
               <Text variant="titleMedium">Amts- und Konsulargebühren:</Text>
               <View style={{ marginTop: 12, marginBottom: 12 }} />
@@ -134,7 +134,7 @@ export const Rates = ({ navigation }) => {
                   Dokumentenbeglaubigung.
                 </Text>
               </List.AccordionGroup>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
           <Snackbar visible={isDownloadFinish}>Document Downloaded...</Snackbar>
         </Layout>

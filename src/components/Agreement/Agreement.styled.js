@@ -1,6 +1,9 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
+import { MyTheme } from 'styles/theme/theme.extended';
 
-export const StyledSignatureView = styled.View`
-  height: 400px;
-  margin-top: ${({ theme }) => theme.marginTop};
-`;
+export const styles = StyleSheet.create({
+  signatureContainer: {
+    height: 400,
+    marginTop: MyTheme.marginTop
+  }
+})

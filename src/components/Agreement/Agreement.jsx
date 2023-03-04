@@ -4,12 +4,12 @@ import Signature from 'react-native-signature-canvas';
 
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
-import { HelperText, Text } from 'react-native-paper';
+import { Card, HelperText, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
 import { agreementValidationSchema } from './Agreement.schema';
-import { StyledSignatureView } from './Agreement.styled';
+import { styles } from './Agreement.styled';
 
 const webStyle = `.m-signature-pad--footer
     {
@@ -44,7 +44,7 @@ export const Agreement = ({ navigation }) => {
               touched,
             }) => (
               <StyledCard>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     mode="outlined"
                     name="place"
@@ -57,8 +57,8 @@ export const Agreement = ({ navigation }) => {
                   {errors.place && touched.place && (
                     <HelperText type="error">{errors.place}</HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                </Card.Content>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     mode="outlined"
                     name="dateOfSignature"
@@ -79,10 +79,10 @@ export const Agreement = ({ navigation }) => {
                       {errors.dateOfSignature}
                     </HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                </Card.Content>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Signature</Text>
-                  <StyledSignatureView>
+                  <View style={styles.signatureContainer}>
                     <Signature
                       webStyle={webStyle}
                       descriptionText=""
@@ -94,19 +94,19 @@ export const Agreement = ({ navigation }) => {
                         setFieldValue('signature', '');
                       }}
                     />
-                  </StyledSignatureView>
+                  </View>
                   {errors.signature && touched.signature && (
                     <HelperText type="error">{errors.signature}</HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content>
+                </Card.Content>
+                <Card.Content>
                   <PrimaryButton
                     onPress={handleSubmit}
                     style={{ marginBottom: 10 }}
                   >
                     Next
                   </PrimaryButton>
-                </StyledCard.Content>
+                </Card.Content>
               </StyledCard>
             )}
           </Formik>

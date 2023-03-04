@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { StyledTextInput } from 'components/general/Form';
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
-import { HelperText, RadioButton, Text } from 'react-native-paper';
+import { Card, HelperText, RadioButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
@@ -43,7 +43,7 @@ export const FlightInformation = ({ navigation }) => {
               touched,
             }) => (
               <StyledCard>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     mode="outlined"
                     name="travelStartDate"
@@ -64,8 +64,8 @@ export const FlightInformation = ({ navigation }) => {
                       {errors.travelStartDate}
                     </HelperText>
                   )}
-                </StyledCard.Content>
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                </Card.Content>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <StyledTextInput
                     mode="outlined"
                     name="returnFlightDate"
@@ -88,9 +88,9 @@ export const FlightInformation = ({ navigation }) => {
                       {errors.returnFlightDate}
                     </HelperText>
                   )}
-                </StyledCard.Content>
+                </Card.Content>
 
-                <StyledCard.Content style={{ marginBottom: 16 }}>
+                <Card.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">
                     Invoice Recipient same as Applicant?
                   </Text>
@@ -104,10 +104,10 @@ export const FlightInformation = ({ navigation }) => {
                     <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
                     <RadioButton.Item color="#00bf80" label="No" value="no" />
                   </RadioButton.Group>
-                </StyledCard.Content>
+                </Card.Content>
 
                 {selectedInvoiceRecipient === 'no' && (
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <StyledTextInput
                       mode="outlined"
                       label="Invoice Recipient Address"
@@ -123,17 +123,17 @@ export const FlightInformation = ({ navigation }) => {
                         {errors.invoiceAddress}
                       </HelperText>
                     )}
-                  </StyledCard.Content>
+                  </Card.Content>
                 )}
 
-                <StyledCard.Content>
+                <Card.Content>
                   <PrimaryButton
                     onPress={handleSubmit}
                     style={{ marginBottom: 10 }}
                   >
                     Next
                   </PrimaryButton>
-                </StyledCard.Content>
+                </Card.Content>
               </StyledCard>
             )}
           </Formik>

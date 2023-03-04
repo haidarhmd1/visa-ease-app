@@ -9,6 +9,7 @@ import { VisaStatus } from './VisaStatus';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
+import { Card } from 'react-native-paper';
 
 export const Account = ({ navigation }) => {
   const userLogout = useAuthenticationStore(state => state.userLogout);
@@ -28,9 +29,9 @@ export const Account = ({ navigation }) => {
           <ContactLinks />
           <SocialMediaLinks />
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <DangerButton onPress={() => userLogout()}>Log out</DangerButton>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
         </Layout>
       </ScrollView>

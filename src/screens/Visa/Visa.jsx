@@ -4,7 +4,9 @@ import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
-import { ArrowRight } from 'screens/Account/Account.styled';
+import { Card } from 'react-native-paper';
+import { AntDesign } from '@expo/vector-icons';
+import { StyleSheet } from 'react-native';
 
 const visaCountries = [
   { id: 1, title: 'UAE', image: '' },
@@ -12,7 +14,7 @@ const visaCountries = [
   { id: 3, title: 'Cuba', image: '' },
 ];
 const RightContent = properties => (
-  <ArrowRight {...properties} name="right" size={18} />
+  <AntDesign style={styles.arrowRight} {...properties} name="right" size={18} />
 );
 
 export const Visa = ({ navigation }) => {
@@ -40,17 +42,17 @@ export const Visa = ({ navigation }) => {
                   key={vCountry.id}
                   onPress={() => onPressHandler(vCountry.id)}
                 >
-                  <StyledCard.Content
+                  <Card.Content
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
                     }}
                   >
-                    <StyledCard.Cover
+                    <Card.Cover
                       style={{ width: 100, height: 100 }}
                       source={{ uri: 'https://picsum.photos/700' }}
                     />
-                    <StyledCard.Title
+                    <Card.Title
                       style={{ flex: 1 }}
                       title={vCountry.title}
                       subtitle={intl.formatMessage({
@@ -58,7 +60,7 @@ export const Visa = ({ navigation }) => {
                       })}
                       right={RightContent}
                     />
-                  </StyledCard.Content>
+                  </Card.Content>
                 </StyledCard>
               );
             })}
@@ -68,3 +70,11 @@ export const Visa = ({ navigation }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  arrowRight: {
+    color: '#a3a3a3',
+    alignSelf: 'center',
+    marginLeft: 'auto'
+  }
+})

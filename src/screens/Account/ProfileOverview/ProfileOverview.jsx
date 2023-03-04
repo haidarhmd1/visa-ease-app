@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyledCard } from 'components/general/Layout/Layout';
 import { ROUTES } from 'res/constants/routes';
-import { Avatar, Text } from 'react-native-paper';
-import {
-  ArrowRight,
-  ProfileSubTitle,
-  ProfileUserInfo,
-} from '../Account.styled';
+import { Avatar, Card, Text } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 export const ProfileOverview = ({ navigation }) => {
   const onPressHandler = () => {
@@ -14,14 +11,28 @@ export const ProfileOverview = ({ navigation }) => {
   };
   return (
     <StyledCard onPress={onPressHandler}>
-      <StyledCard.Content style={{ flexDirection: 'row' }}>
+      <Card.Content style={{ flexDirection: 'row' }}>
         <Avatar.Text label="HH" />
-        <ProfileUserInfo>
+        <View style={styles.profileUserInfo}>
           <Text variant="titleLarge">Test</Text>
-          <ProfileSubTitle variant="labelSmall">Test@test.com</ProfileSubTitle>
-        </ProfileUserInfo>
-        <ArrowRight name="right" size={18} />
-      </StyledCard.Content>
+          <Text style={styles.profileSubTitle} variant="labelSmall">Test@test.com</Text>
+        </View>
+        <AntDesign style={styles.arrowRight} name="right" size={18} />
+      </Card.Content>
     </StyledCard>
   );
 };
+
+const styles = StyleSheet.create({
+  profileSubTitle: {
+    color: '#a3a3a3'
+  },
+  profileUserInfo: {
+    marginLeft: 18
+  },
+  arrowRight: {
+    color: '#a3a3a3',
+    alignSelf: 'center',
+    marginLeft: 'auto'
+  }
+})

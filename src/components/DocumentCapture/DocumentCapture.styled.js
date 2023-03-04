@@ -1,54 +1,56 @@
-import { Camera } from 'expo-camera';
-import { TouchableOpacity } from 'react-native';
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
+import { MyTheme } from 'styles/theme/theme.extended';
 
-export const CameraWrapper = styled.View``;
-
-export const StyledCamera = styled(Camera)`
-  position: relative;
-  width: 320px;
-  height: 440px;
-  border-radius: 18px;
-  align-self: center;
-`;
-
-export const StyledImage = styled.Image`
-  width: 320px;
-  height: 440px;
-  border-radius: 18px;
-  align-self: center;
-`;
-
-export const ViewWrapper = styled.View`
-  width: 100%;
-  margin: auto;
-`;
-
-export const StyledInformationCard = styled.View`
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
-  width: 100%;
-  min-height: 100px;
-  height: auto;
-  margin-top: ${({ theme }) => theme.marginTop};
-  padding: 16px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-`;
-
-export const StyledWarningInformationCard = styled(StyledInformationCard)`
-  background-color: ${({ theme }) => theme.colors.warningBackground};
-  border: 2px solid ${({ theme }) => theme.colors.warningBorder};
-`;
-
-export const StyledTouchableOpacity = styled(TouchableOpacity)`
-  width: 75px;
-  border-color: ${({ theme }) => theme.colors.primaryBrand};
-  border-width: 2px;
-  border-radius: ${({ theme }) => theme.circleRadius};
-  background-color: ${({ theme }) => theme.colors.primaryBrand};
-  padding: 12px;
-  align-items: center;
-`;
-
-export const StyledCameraButtonWrapper = styled.View`
-  width: 100%;
-`;
+export const styles = StyleSheet.create({
+  camera: {
+  position: 'relative',
+  width: 320,
+  height: 440,
+  borderRadius: 18,
+  alignSelf: 'center',
+  },
+  image: {
+    width: 320,
+    height: 440,
+    borderRadius: 18,
+    alignSelf: 'center',
+  },
+  container: {
+    width: '100%',
+    margin: 'auto'
+  },
+  informationCard: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    minHeight: 100,
+    height: 'auto',
+    marginTop: MyTheme.marginTop,
+    padding: 16,
+    borderRadius: MyTheme.borderRadius,
+  },
+  informationCardWarning: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    minHeight: 100,
+    height: 'auto',
+    marginTop: MyTheme.marginTop,
+    padding: 16,
+    borderRadius: MyTheme.borderRadius,
+    backgroundColor: MyTheme.colors.warningBackground,
+    borderWidth: 2,
+    borderColor: MyTheme.colors.warningBorder,
+    borderStyle: 'solid',
+  },
+  touchableOpacity: {
+    width: 75,
+    borderColor: MyTheme.colors.primaryBrand,
+    borderWidth: 2,
+    borderRadius: MyTheme.circleRadius,
+    backgroundColor: MyTheme.colors.primaryBrand,
+    padding: 12,
+    alignItems: 'center',
+  },
+  cameraWrapper: {
+    width: '100%'
+  }
+})

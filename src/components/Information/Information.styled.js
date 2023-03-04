@@ -1,41 +1,52 @@
-import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
+import { MyTheme } from 'styles/theme/theme.extended';
 
-export const CardItemWrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
-  width: 100%;
-  height: 250px;
-  position: relative;
-`;
-
-export const StyledImageBackground = styled.ImageBackground`
-  flex: 1;
-  width: 100%;
-  height: 175px;
-  margin-bottom: 8px;
-`;
-
-export const StyledInformationCard = styled.View`
-  background-color: ${({ theme }) => theme.colors.primaryBackground};
-  width: 100%;
-  min-height: 100px;
-  height: auto;
-  margin-top: ${({ theme }) => theme.marginTop};
-  padding-top: 8px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 21px;
-  border-radius: ${({ theme }) => theme.borderRadius};
-`;
-
-export const StyledWarningInformationCard = styled(StyledInformationCard)`
-  border: 2px solid ${({ theme }) => theme.colors.warningBorder};
-  background-color: ${({ theme }) => theme.colors.warningBackground};
-  margin-top: 0;
-  margin-bottom: 8px;
-`;
-
-export const ImageTextWrapper = styled.View`
-  position: absolute;
-  bottom: 16px;
-  left: 5%;
-`;
+export const styles = StyleSheet.create({
+  cardItemWrapper: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    height: 250,
+    position: 'relative'
+  },
+  imageBackground: {
+    flex: 1,
+    width: '100%',
+    height: 175,
+    marginBottom: 8
+  },
+  informationCard: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    minHeight: 100,
+    height: 'auto',
+    marginTop: MyTheme.marginTop,
+    paddingTop: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingBottom: 21,
+    borderRadius: MyTheme.borderRadius
+  },
+  warningInformationCard: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    minHeight: 100,
+    height: 'auto',
+    marginTop: MyTheme.marginTop,
+    paddingTop: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingBottom: 21,
+    borderRadius: MyTheme.borderRadius,
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: MyTheme.colors.warningBorder,
+    backgroundColor: MyTheme.colors.warningBackground,
+    marginTop: 0,
+    marginBottom: 8,
+  },
+  imageTextWrapper: {
+    position: 'absolute',
+    bottom: 16,
+    left: '5%',
+  }
+})

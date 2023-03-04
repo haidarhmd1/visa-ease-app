@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledCard } from 'components/general/Layout/Layout';
-import { Divider, Text } from 'react-native-paper';
+import { Card, Divider, Text } from 'react-native-paper';
 import { VisaItemButton } from 'screens/Visa/VisaApplication/VisaItemButton';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from 'res/constants/routes';
@@ -10,7 +10,7 @@ export const ProfileName = () => {
 
   return (
     <StyledCard>
-      <StyledCard.Content>
+      <Card.Content>
         <Text variant="labelLarge" style={{ marginBottom: 8 }}>
           Information
         </Text>
@@ -44,7 +44,7 @@ export const ProfileName = () => {
           route={ROUTES.VISA_INFORMATION.biometricImage}
           isProgessCompleted={false}
         />
-      </StyledCard.Content>
+      </Card.Content>
     </StyledCard>
   );
 };
