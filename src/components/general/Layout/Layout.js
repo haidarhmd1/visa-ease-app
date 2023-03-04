@@ -3,24 +3,24 @@ import { Card } from 'react-native-paper';
 import { MyTheme } from 'styles/theme/theme.extended';
 
 
-export const Layout = ({children, ...properties}) => {
-  return <View {...properties} style={styles.layout}>{children}</View>;
+export const Layout = ({children, style, ...properties}) => {
+  return <View {...properties} style={[style, styles.layout]}>{children}</View>;
 }
 
-export const Wrapper = ({children, ...properties}) => {
-  return <View {...properties} style={styles.layout}>{children}</View>;
+export const Wrapper = ({children, style, ...properties}) => {
+  return <View {...properties} style={[style, styles.layout]}>{children}</View>;
 }
 
-export const Spacer = ({children, ...properties}) => {
-  return <View {...properties} style={styles.spacer}>{children}</View>;
+export const Spacer = ({children, style, ...properties}) => {
+  return <View {...properties} style={[style, styles.spacer]}>{children}</View>;
 }
 
-export const TouchableIconCardOpacity = ({children, ...properties}) => {
-  return <TouchableOpacity {...properties} style={styles.touchableIconCardOpacity}>{children}</TouchableOpacity>;
+export const TouchableIconCardOpacity = ({children, style, ...properties}) => {
+  return <TouchableOpacity {...properties} style={[style, styles.touchableIconCardOpacity]}>{children}</TouchableOpacity>;
 }
 
-export const StyledCard = ({children, ...properties}) => {
-  return <Card {...properties} mode='contained' style={styles.card}>{children}</Card>;
+export const StyledCard = ({children, style, ...properties}) => {
+  return <Card {...properties} mode='contained' style={[style, styles.card]}>{children}</Card>;
 }
 
 export const StyledScrollView = ({children, style, ...properties}) => {

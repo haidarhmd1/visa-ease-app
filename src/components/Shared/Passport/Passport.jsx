@@ -5,7 +5,7 @@ import { PrimaryButton } from 'components/general/Buttons';
 import { View, StyleSheet } from 'react-native';
 
 import { Layout } from 'components/general/Layout/Layout';
-import { Text } from 'react-native-paper';
+import { Modal, Portal, Text } from 'react-native-paper';
 
 export const Passport = () => {
   const [photo, setPhoto] = useState();

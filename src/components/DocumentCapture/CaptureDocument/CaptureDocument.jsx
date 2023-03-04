@@ -2,13 +2,11 @@ import React from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { IconButton, Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import { SecondaryButton } from 'components/general/Buttons';
 import { styles } from '../DocumentCapture.styled';
 import { Camera } from 'expo-camera';
 
 export const CaptureDocument = ({
   cameraReference,
-  handleSnapPress,
   takePic,
 }) => {
   return (
@@ -21,11 +19,6 @@ export const CaptureDocument = ({
         <Text>
           Inorder to proceed with your application, the image needs to be clear
         </Text>
-      </View>
-      <View style={style.guideLineButtonContainer}>
-        <SecondaryButton icon="animation" onPress={() => handleSnapPress(0)}>
-          Guidelines
-        </SecondaryButton>
       </View>
       <View style={style.buttonContainer}>
         <View style={[style.cameraButtonWrapper, styles.cameraWrapper]}>
@@ -50,7 +43,6 @@ const style = StyleSheet.create({
   textBold: {
     fontWeight: 'bold',
   },
-  guideLineButtonContainer: { marginTop: 8, alignSelf: 'center' },
   buttonContainer: {
     position: 'absolute',
     bottom: 8,

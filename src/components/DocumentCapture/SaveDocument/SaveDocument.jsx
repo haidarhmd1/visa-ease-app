@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { Formik } from 'formik';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
 import { styles } from '../DocumentCapture.styled';
 
