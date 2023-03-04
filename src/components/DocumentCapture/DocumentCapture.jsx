@@ -12,12 +12,11 @@ import { useNavigation } from '@react-navigation/native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
-export const DocumentCaptureRaw = ({ next, fieldValue }) => {
+export const DocumentCaptureRaw = ({ submitDocument, photo, setPhoto, fieldValue }) => {
 
   const navigation = useNavigation();
   const cameraReference = useRef(null);
   const [hasCameraPermission, setHasCameraPermission] = useState();
-  const [photo, setPhoto] = useState();
 
   useEffect(() => {
     (async () => {
@@ -59,7 +58,7 @@ export const DocumentCaptureRaw = ({ next, fieldValue }) => {
         <SaveDocument
           photo={photo}
           setPhoto={setPhoto}
-          submit={next}
+          submitDocument={submitDocument}
           fieldValue={fieldValue}
         />
       </>
