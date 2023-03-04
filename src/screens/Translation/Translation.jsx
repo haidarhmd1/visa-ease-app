@@ -2,7 +2,7 @@ import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView, View, Linking } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
-import { Divider, List, Text } from 'react-native-paper';
+import { Card, Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 
 const externalLink = (type, value) => {
@@ -24,7 +24,7 @@ export const Translation = ({ navigation }) => {
       <ScrollView>
         <Layout>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
                 Nutzen Sie unseren Übersetzungsservice
               </Text>
@@ -71,7 +71,7 @@ export const Translation = ({ navigation }) => {
               >
                 Direkt Anfragen
               </PrimaryButton>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
         </Layout>
       </ScrollView>

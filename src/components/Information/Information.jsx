@@ -2,12 +2,9 @@ import React from 'react';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { useIntl } from 'react-intl';
-import { Divider, Text } from 'react-native-paper';
-import {
-  ImageTextWrapper,
-  StyledImageBackground,
-  StyledWarningInformationCard,
-} from './Information.styled';
+import { Card, Divider, Text } from 'react-native-paper';
+import { styles } from './Information.styled';
+import { ImageBackground, View } from 'react-native';
 
 const visaCountryData = {
   id: 1,
@@ -30,21 +27,21 @@ export const Information = ({ next }) => {
 
   return (
     <>
-      <StyledImageBackground style={{ backgroundColor: 'lightgrey' }}>
-        <ImageTextWrapper>
+      <ImageBackground style={[styles.imageBackground,{ backgroundColor: 'lightgrey' }]}>
+        <View style={styles.imageTextWrapper}>
           <Text
             variant="headlineLarge"
             style={{ color: 'white', fontWeight: 'bold' }}
           >
             {visaCountryData?.title}
           </Text>
-        </ImageTextWrapper>
-      </StyledImageBackground>
+        </View>
+      </ImageBackground>
       <Layout>
         <StyledCard>
-          <StyledCard.Content>
+          <Card.Content>
             {visaCountryData?.notice ? (
-              <StyledWarningInformationCard>
+              <View style={styles.warningInformationCard}>
                 <Text
                   variant="labelLarge"
                   style={{ padding: 16, fontWeight: 'bold' }}
@@ -53,10 +50,10 @@ export const Information = ({ next }) => {
                     id: 'visaApplication.steps.information.note',
                   })}
                 </Text>
-                <StyledCard.Content>
+                <Card.Content>
                   <Text>{visaCountryData?.notice}</Text>
-                </StyledCard.Content>
-              </StyledWarningInformationCard>
+                </Card.Content>
+              </View>
             ) : null}
             <Divider style={{ marginTop: 24 }} />
             {visaCountryData?.information ? (
@@ -70,9 +67,9 @@ export const Information = ({ next }) => {
                   })}
                 </Text>
 
-                <StyledCard.Content>
+                <Card.Content>
                   <Text>{visaCountryData?.information}</Text>
-                </StyledCard.Content>
+                </Card.Content>
               </StyledCard>
             ) : null}
             <Divider style={{ marginTop: 21 }} />
@@ -86,9 +83,9 @@ export const Information = ({ next }) => {
                     id: 'visaApplication.steps.information.whatWeNeedBox.title',
                   })}
                 </Text>
-                <StyledCard.Content>
+                <Card.Content>
                   <Text>{visaCountryData?.what_we_need}</Text>
-                </StyledCard.Content>
+                </Card.Content>
               </StyledCard>
             ) : null}
             <Divider style={{ marginTop: 21 }} />
@@ -101,7 +98,7 @@ export const Information = ({ next }) => {
                   id: 'visaApplication.steps.information.processing.title',
                 })}
               </Text>
-              <StyledCard.Content>
+              <Card.Content>
                 <PrimaryButton
                   mode="contained"
                   style={{ marginBottom: 10 }}
@@ -129,9 +126,9 @@ export const Information = ({ next }) => {
                     id: 'visaApplication.general.visaType.standard',
                   })}
                 </PrimaryButton>
-              </StyledCard.Content>
+              </Card.Content>
             </StyledCard>
-          </StyledCard.Content>
+          </Card.Content>
         </StyledCard>
       </Layout>
     </>

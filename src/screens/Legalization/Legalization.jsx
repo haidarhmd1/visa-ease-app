@@ -3,7 +3,7 @@ import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { ScrollView, View, Platform } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
-import { Divider, List, Snackbar, Text } from 'react-native-paper';
+import { Card, Divider, List, Snackbar, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
@@ -66,7 +66,7 @@ export const Legalization = ({ navigation }) => {
       <ScrollView>
         <Layout>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <Text variant="labelLarge" style={{ padding: 16 }}>
                 Already filled it out? Upload here...
               </Text>
@@ -79,10 +79,10 @@ export const Legalization = ({ navigation }) => {
               >
                 Upload
               </PrimaryButton>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <Text variant="labelLarge" style={{ padding: 16 }}>
                 Was benötigen wir von Ihnen? / What do we require from you?
               </Text>
@@ -224,12 +224,12 @@ export const Legalization = ({ navigation }) => {
                   />
                 </List.Accordion>
               </List.AccordionGroup>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <PrimaryButton
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 21 }}
                 icon="file-download-outline"
                 // onPress={documentUpload}
                 onPress={() => downloadPDF('DE')}
@@ -242,7 +242,7 @@ export const Legalization = ({ navigation }) => {
               >
                 Download order form (English Version)
               </PrimaryButton>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
         </Layout>
       </ScrollView>

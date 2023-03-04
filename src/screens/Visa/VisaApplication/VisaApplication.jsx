@@ -2,16 +2,12 @@ import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
-import { ScrollView } from 'react-native';
-import { Divider, List, Text } from 'react-native-paper';
+import { Card, Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import { ROUTES } from 'res/constants/routes';
-import {
-  ImageTextWrapper,
-  StyledImageBackground,
-} from 'components/Information/Information.styled';
-import { StyledWarningInformationCard } from 'components/DocumentCapture/DocumentCapture.styled';
 import { VisaItemButton } from './VisaItemButton';
+import { StyleSheet, ScrollView, View, ImageBackground } from 'react-native';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 const visaCountryData = {
   id: 1,
@@ -40,22 +36,22 @@ export const VisaApplication = ({ navigation }) => {
         title="Visa Application"
       />
       <ScrollView>
-        <StyledImageBackground
-          style={{ backgroundColor: 'lightgrey' }}
+        <ImageBackground
+          style={styles.imageBackground}
           source={{ uri: 'https://picsum.photos/700' }}
         >
-          <ImageTextWrapper>
+          <View style={styles.imageTextWrapper}>
             <Text
               variant="headlineLarge"
               style={{ color: 'white', fontWeight: 'bold' }}
             >
               {visaCountryData?.title}
             </Text>
-          </ImageTextWrapper>
-        </StyledImageBackground>
+          </View>
+        </ImageBackground>
         <Layout>
           <StyledCard>
-            <StyledCard.Content>
+            <Card.Content>
               <Text variant="labelLarge" style={{ marginBottom: 8 }}>
                 Information
               </Text>
@@ -114,13 +110,13 @@ export const VisaApplication = ({ navigation }) => {
                 route={ROUTES.VISA_INFORMATION.agreement}
                 isProgessCompleted={false}
               />
-            </StyledCard.Content>
-            <StyledCard.Content>
+            </Card.Content>
+            <Card.Content>
               <PrimaryButton disabled> Submit </PrimaryButton>
-            </StyledCard.Content>
+            </Card.Content>
           </StyledCard>
           {visaCountryData?.notice ? (
-            <StyledWarningInformationCard>
+            <View style={styles.informationCardWarning}>
               <Text
                 variant="labelLarge"
                 style={{ padding: 16, fontWeight: 'bold' }}
@@ -129,10 +125,10 @@ export const VisaApplication = ({ navigation }) => {
                   id: 'visaApplication.steps.information.note',
                 })}
               </Text>
-              <StyledCard.Content>
+              <Card.Content>
                 <Text>{visaCountryData?.notice}</Text>
-              </StyledCard.Content>
-            </StyledWarningInformationCard>
+              </Card.Content>
+            </View>
           ) : null}
 
           <StyledCard>
@@ -170,3 +166,31 @@ export const VisaApplication = ({ navigation }) => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  imageTextWrapper: {
+    position: 'absolute',
+    bottom: 16,
+    left: '5%'
+  },
+  imageBackground: {
+    flex: 1,
+    backgroundColor: 'lightgrey',
+    width: '100%',
+    height: 175,
+    marginBottom: 8,
+  },
+  informationCardWarning: {
+    backgroundColor: MyTheme.colors.primaryBackground,
+    width: '100%',
+    minHeight: 100,
+    height: 'auto',
+    marginTop: MyTheme.marginTop,
+    padding: 16,
+    borderRadius: MyTheme.borderRadius,
+    backgroundColor: MyTheme.colors.warningBackground,
+    borderWidth: 2,
+    borderColor: MyTheme.colors.warningBorder,
+    borderStyle: 'solid',
+  }
+})

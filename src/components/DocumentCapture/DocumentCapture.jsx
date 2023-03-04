@@ -1,32 +1,18 @@
 import React, {
-  useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Layout } from 'components/general/Layout/Layout';
 import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { PrimaryButton } from 'components/general/Buttons';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
-export const DocumentCapture = ({ next, fieldValue }) => {
-  const sheetReference = useRef(null);
-  const snapPoints = useMemo(() => ['75%'], []);
-
-  const handleSnapPress = useCallback(index => {
-    sheetReference.current?.snapToIndex(index);
-  }, []);
-  const handleClosePress = useCallback(() => {
-    sheetReference.current?.close();
-  }, []);
+export const DocumentCaptureRaw = ({ next, fieldValue }) => {
 
   const navigation = useNavigation();
   const cameraReference = useRef(null);
@@ -89,28 +75,13 @@ export const DocumentCapture = ({ next, fieldValue }) => {
       />
       <CaptureDocument
         cameraReference={cameraReference}
-        handleSnapPress={handleSnapPress}
         takePic={takePic}
       />
-      <BottomSheet
-        style={[style.shadow, style.sheetContainer]}
-        ref={sheetReference}
-        snapPoints={snapPoints}
-        bottomInset={46}
-        detached
-      >
-        <Layout style={style.container}>
-          <View style={style.container}>
-            <Text>test</Text>
-          </View>
-          <View>
-            <PrimaryButton onPress={handleClosePress}>Got it!</PrimaryButton>
-          </View>
-        </Layout>
-      </BottomSheet>
     </>
   );
 };
+
+export const DocumentCapture = React.memo(DocumentCaptureRaw);
 
 const style = StyleSheet.create({
   shadow: {
@@ -122,9 +93,6 @@ const style = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
-  },
-  sheetContainer: {
-    marginHorizontal: 24,
   },
   container: {
     flex: 1,

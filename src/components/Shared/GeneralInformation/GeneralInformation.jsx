@@ -5,7 +5,7 @@ import CountryPicker from 'react-native-country-picker-modal';
 
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
-import { Dialog, HelperText, RadioButton, Text } from 'react-native-paper';
+import { Card, Dialog, HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView, TouchableWithoutFeedback, View } from 'react-native';
@@ -99,7 +99,7 @@ const GeneralInformationRaw = ({ navigation }) => {
                 touched,
               }) => (
                 <StyledCard>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <StyledTextInput
                       name="fullname"
                       label="Full Name*"
@@ -112,8 +112,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.fullname && touched.fullname && (
                       <HelperText type="error">{errors.fullname}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  </Card.Content>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <Text variant="labelMedium">Gender*</Text>
 
                     <StyledTextInput
@@ -164,9 +164,9 @@ const GeneralInformationRaw = ({ navigation }) => {
                         </Dialog.Content>
                       </ScrollView>
                     </ModalSheet>
-                  </StyledCard.Content>
+                  </Card.Content>
 
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <Text variant="labelMedium">Marital Status*</Text>
 
                     <StyledTextInput
@@ -222,9 +222,9 @@ const GeneralInformationRaw = ({ navigation }) => {
                         </Dialog.Content>
                       </ScrollView>
                     </ModalSheet>
-                  </StyledCard.Content>
+                  </Card.Content>
 
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <Text variant="labelMedium">Address*</Text>
                     <StyledTextInput
                       name="street"
@@ -239,8 +239,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.street && touched.street && (
                       <HelperText type="error">{errors.street}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  </Card.Content>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <View style={{ flexDirection: 'row' }}>
                       <StyledTextInput
                         style={{ flex: 0.5, marginRight: 16 }}
@@ -271,8 +271,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.city && touched.city && (
                       <HelperText type="error">{errors.city}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  </Card.Content>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <Text variant="labelMedium">Country*</Text>
                     <CountryPicker
                       withFilter
@@ -303,8 +303,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.country && touched.country && (
                       <HelperText type="error">{errors.country}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  </Card.Content>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <StyledTextInput
                       mode="outlined"
                       name="email"
@@ -319,8 +319,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.email && touched.email && (
                       <HelperText type="error">{errors.email}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content style={{ marginBottom: 16 }}>
+                  </Card.Content>
+                  <Card.Content style={{ marginBottom: 16 }}>
                     <StyledTextInput
                       mode="outlined"
                       name="phone"
@@ -335,8 +335,8 @@ const GeneralInformationRaw = ({ navigation }) => {
                     {errors.phone && touched.phone && (
                       <HelperText type="error">{errors.phone}</HelperText>
                     )}
-                  </StyledCard.Content>
-                  <StyledCard.Content>
+                  </Card.Content>
+                  <Card.Content>
                     <PrimaryButton
                       onPress={handleSubmit}
                       style={{ marginBottom: 10 }}
@@ -344,7 +344,7 @@ const GeneralInformationRaw = ({ navigation }) => {
                     >
                       Save
                     </PrimaryButton>
-                  </StyledCard.Content>
+                  </Card.Content>
                 </StyledCard>
               )}
             </Formik>

@@ -11,7 +11,6 @@ import { Rates } from 'screens/Rates';
 import { GeneralInformation } from 'components/Shared/GeneralInformation';
 import { VisaInformation } from 'components/VisaInformation';
 import { FlightInformation } from 'components/FlightInformation';
-import { CaptureDocuments } from 'components/Passport';
 import { Agreement } from 'components/Agreement';
 import { Passport } from 'components/Shared/Passport';
 

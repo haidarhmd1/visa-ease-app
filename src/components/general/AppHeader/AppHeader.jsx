@@ -3,8 +3,7 @@ import React from 'react';
 import { ROUTES } from 'res/constants/routes';
 import { VisaStarLogo } from 'assets/images';
 import { Appbar, Badge, Text } from 'react-native-paper';
-import { View } from 'react-native';
-import { HeaderLogo } from './AppHeader.styled';
+import { StyleSheet, View } from 'react-native';
 import { ModalSheet } from '../ModalSheet';
 
 export const AppHeader = ({

@@ -16,7 +16,6 @@ import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Fontisto from '@expo/vector-icons/Fontisto';
 
-import { ThemeProvider } from 'styled-components/native';
 import { themeStyle } from 'styles';
 import { MyTheme } from 'styles/theme/theme.extended';
 
@@ -112,7 +111,6 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      <ThemeProvider theme={MyTheme}>
         <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
           <QueryClientProvider client={queryClient}>
             <IntlProvider
@@ -124,7 +122,6 @@ export default function App() {
             </IntlProvider>
           </QueryClientProvider>
         </SafeAreaView>
-      </ThemeProvider>
     </PaperProvider>
   );
 }

@@ -1,12 +1,9 @@
 import React from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { Formik } from 'formik';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
-import {
-  StyledCameraButtonWrapper,
-  StyledImage,
-} from '../DocumentCapture.styled';
+import { styles } from '../DocumentCapture.styled';
 
 export const SaveDocument = ({ photo, setPhoto, submit, fieldValue }) => {
   const savePhoto = async (setFieldValue, handleSubmit) => {
@@ -20,10 +17,10 @@ export const SaveDocument = ({ photo, setPhoto, submit, fieldValue }) => {
       <Formik onSubmit={values => submit(values)}>
         {({ handleSubmit, setFieldValue }) => (
           <>
-            <StyledImage source={photo} />
+            <Image style={styles.image} source={photo} />
 
             <View style={style.content}>
-              <StyledCameraButtonWrapper style={style.buttonWrapper}>
+              <View style={[style.buttonWrapper,styles.cameraWrapper]}>
                 <View>
                   <IconButton
                     icon="restore"
@@ -46,7 +43,7 @@ export const SaveDocument = ({ photo, setPhoto, submit, fieldValue }) => {
                   />
                   <Text variant="labelSmall">Continue</Text>
                 </View>
-              </StyledCameraButtonWrapper>
+              </View>
             </View>
           </>
         )}
