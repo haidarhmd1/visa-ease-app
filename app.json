@@ -24,15 +24,7 @@
         "android.permission.CAMERA"
       ]
     },
-    "plugins": [
-      [
-        "expo-document-picker",
-        {
-          "iCloudContainerEnvironment": "Production"
-        }
-      ],
-      "react-native-vision-camera"
-    ],
+    "plugins": [],
     "extra": {
       "eas": {
         "projectId": "6910cbbc-532d-463a-81df-5433c179439c"
