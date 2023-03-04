@@ -2,10 +2,13 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { DocumentCapture } from 'components/DocumentCapture';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { PrimaryButton } from 'components/general/Buttons';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image, ScrollView } from 'react-native';
 
-import { Layout } from 'components/general/Layout/Layout';
-import { Modal, Portal, Text } from 'react-native-paper';
+import { Layout, Spacer } from 'components/general/Layout/Layout';
+import { Divider, Modal, Portal, Text } from 'react-native-paper';
+import { PassportImage } from 'assets/illustrations';
+
+const blurhash = '00Q12z';
 
 export const Passport = () => {
   const [photo, setPhoto] = useState();
@@ -15,9 +18,6 @@ export const Passport = () => {
 
   const handleClosePress = useCallback(() => {
     sheetReference.current?.close();
-  }, []);
-  const handleSnapPress = useCallback(index => {
-    sheetReference.current?.snapToIndex(index);
   }, []);
 
   const submitDocument = () => {
@@ -29,9 +29,8 @@ export const Passport = () => {
       <DocumentCapture
         photo={photo}
         setPhoto={setPhoto}
-        title="passportImage"
-        handleSnapPress={handleSnapPress}
         submitDocument={submitDocument}
+        title="passportImage"
       />
       <BottomSheet
         style={[style.shadow, style.sheetContainer]}
@@ -42,7 +41,23 @@ export const Passport = () => {
       >
         <Layout style={style.container}>
           <View style={style.container}>
-            <Text>test</Text>
+            <Text variant='headlineMedium' style={style.centerText}>Passport Guidelines</Text>
+            <Spacer />
+            <Divider />
+            <Spacer />
+            <ScrollView>
+              <View style={{ alignItems: 'center' }}>
+                <Image 
+                  source={PassportImage}
+                  style={style.image}
+                  placeholder={blurhash}
+                  contentFit="contain"
+                  transition={1000} />
+                </View>
+                <Spacer />
+              <Text variant='bodyMedium' style={style.centerText}>When taking a picture of your passport for a application, it's important to ensure that the picture is clear and focused. This will ensure that the application is processed correctly and without any delays. Be sure to double-check the image before submitting it to ensure that it meets the necessary requirements.</Text>
+              <Spacer />
+            </ScrollView>
           </View>
           <View>
             <PrimaryButton onPress={handleClosePress}>Got it!</PrimaryButton>
@@ -69,5 +84,13 @@ const style = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  centerText: {
+    textAlign: 'center'
+  },
+  image: {
+    width: 250,
+    height: 250,
+    backgroundColor: '#fff',
   },
 });

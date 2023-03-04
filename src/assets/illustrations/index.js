@@ -15,3 +15,6 @@ export { default as PersonWaitPlaneIllustration } from './10966.jpg';
 
 // <a href="https://www.freepik.com/free-vector/low-cost-flights-abstract-concept-illustration_11669327.htm#query=visa%20illustrations&position=40&from_view=search&track=ais">Image by vectorjuice</a> on Freepik
 export { default as WorldIllustration } from './20945909.jpg';
+
+// <a href="https://www.freepik.com/free-vector/human-hand-holding-mockup-international-biometric-passport-with-issue-expiry-dates-holders-signature-name-authority-issuing-passport-realistic_6847251.htm#query=passport&position=9&from_view=search&track=sph">Image by macrovector</a> on Freepik
+export { default as PassportImage } from './27956.jpg';
