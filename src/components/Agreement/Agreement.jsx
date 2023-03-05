@@ -7,7 +7,7 @@ import { PrimaryButton } from 'components/general/Buttons';
 import { Card, HelperText, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { agreementValidationSchema } from './Agreement.schema';
 import { styles } from './Agreement.styled';
 

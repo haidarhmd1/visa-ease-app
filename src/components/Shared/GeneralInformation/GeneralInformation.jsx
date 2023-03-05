@@ -22,7 +22,7 @@ import { NotificationToast } from 'components/general/NotificationToast/Notifica
 import { ModalSheet } from 'components/general/ModalSheet';
 import { generalInformationValidationSchema } from './GeneralInformation.schema';
 
-const GeneralInformationRaw = ({ navigation }) => {
+export const GeneralInformation = ({ navigation }) => {
   const queryClient = useQueryClient();
   const userId = useAuthenticationStore(state => state.id);
 
@@ -367,5 +367,3 @@ const GeneralInformationRaw = ({ navigation }) => {
     </>
   );
 };
-
-export const GeneralInformation = React.memo(GeneralInformationRaw);
