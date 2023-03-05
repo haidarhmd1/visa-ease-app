@@ -3,8 +3,8 @@ import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { useIntl } from 'react-intl';
 import { Card, Divider, Text } from 'react-native-paper';
-import { styles } from './Information.styled';
 import { ImageBackground, View } from 'react-native';
+import { styles } from './Information.styled';
 
 const visaCountryData = {
   id: 1,
@@ -27,7 +27,9 @@ export const Information = ({ next }) => {
 
   return (
     <>
-      <ImageBackground style={[styles.imageBackground,{ backgroundColor: 'lightgrey' }]}>
+      <ImageBackground
+        style={[styles.imageBackground, { backgroundColor: 'lightgrey' }]}
+      >
         <View style={styles.imageTextWrapper}>
           <Text
             variant="headlineLarge"

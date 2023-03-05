@@ -6,13 +6,13 @@ export const styles = StyleSheet.create({
     backgroundColor: MyTheme.colors.primaryBackground,
     width: '100%',
     height: 250,
-    position: 'relative'
+    position: 'relative',
   },
   imageBackground: {
     flex: 1,
     width: '100%',
     height: 175,
-    marginBottom: 8
+    marginBottom: 8,
   },
   informationCard: {
     backgroundColor: MyTheme.colors.primaryBackground,
@@ -24,10 +24,9 @@ export const styles = StyleSheet.create({
     paddingLeft: 8,
     paddingRight: 8,
     paddingBottom: 21,
-    borderRadius: MyTheme.borderRadius
+    borderRadius: MyTheme.borderRadius,
   },
   warningInformationCard: {
-    backgroundColor: MyTheme.colors.primaryBackground,
     width: '100%',
     minHeight: 100,
     height: 'auto',
@@ -41,12 +40,11 @@ export const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: MyTheme.colors.warningBorder,
     backgroundColor: MyTheme.colors.warningBackground,
-    marginTop: 0,
     marginBottom: 8,
   },
   imageTextWrapper: {
     position: 'absolute',
     bottom: 16,
     left: '5%',
-  }
-})
+  },
+});

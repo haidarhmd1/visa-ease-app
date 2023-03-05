@@ -5,9 +5,9 @@ import { useIntl } from 'react-intl';
 import { Card, Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import { ROUTES } from 'res/constants/routes';
-import { VisaItemButton } from './VisaItemButton';
 import { StyleSheet, ScrollView, View, ImageBackground } from 'react-native';
 import { MyTheme } from 'styles/theme/theme.extended';
+import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {
   id: 1,
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   imageTextWrapper: {
     position: 'absolute',
     bottom: 16,
-    left: '5%'
+    left: '5%',
   },
   imageBackground: {
     flex: 1,
@@ -181,7 +181,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   informationCardWarning: {
-    backgroundColor: MyTheme.colors.primaryBackground,
     width: '100%',
     minHeight: 100,
     height: 'auto',
@@ -192,5 +191,5 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: MyTheme.colors.warningBorder,
     borderStyle: 'solid',
-  }
-})
+  },
+});

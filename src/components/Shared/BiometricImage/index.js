@@ -1,1 +1,1 @@
-export { BiometricImage } from './BiometricImage'
+export { BiometricImage } from './BiometricImage';

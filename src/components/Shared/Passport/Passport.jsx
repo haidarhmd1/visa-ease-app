@@ -41,21 +41,31 @@ export const Passport = () => {
       >
         <Layout style={style.container}>
           <View style={style.container}>
-            <Text variant='headlineMedium' style={style.centerText}>Passport Guidelines</Text>
+            <Text variant="headlineMedium" style={style.centerText}>
+              Passport Guidelines
+            </Text>
             <Spacer />
             <Divider />
             <Spacer />
             <ScrollView>
               <View style={{ alignItems: 'center' }}>
-                <Image 
+                <Image
                   source={PassportImage}
                   style={style.image}
                   placeholder={blurhash}
                   contentFit="contain"
-                  transition={1000} />
-                </View>
-                <Spacer />
-              <Text variant='bodyMedium' style={style.centerText}>When taking a picture of your passport for a application, it's important to ensure that the picture is clear and focused. This will ensure that the application is processed correctly and without any delays. Be sure to double-check the image before submitting it to ensure that it meets the necessary requirements.</Text>
+                  transition={1000}
+                />
+              </View>
+              <Spacer />
+              <Text variant="bodyMedium" style={style.centerText}>
+                When taking a picture of your passport for a application, it is
+                important to ensure that the picture is clear and focused. This
+                will ensure that the application is processed correctly and
+                without any delays. Be sure to double-check the image before
+                submitting it to ensure that it meets the necessary
+                requirements.
+              </Text>
               <Spacer />
             </ScrollView>
           </View>
@@ -86,7 +96,7 @@ const style = StyleSheet.create({
     flex: 1,
   },
   centerText: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   image: {
     width: 250,

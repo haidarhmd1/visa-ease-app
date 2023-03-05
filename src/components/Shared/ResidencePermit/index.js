@@ -1,1 +1,1 @@
-export { ResidencePermit } from './ResidencePermit'
+export { ResidencePermit } from './ResidencePermit';

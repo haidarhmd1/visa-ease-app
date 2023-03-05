@@ -2,13 +2,10 @@ import React from 'react';
 import { Layout } from 'components/general/Layout/Layout';
 import { IconButton, Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import { styles } from '../DocumentCapture.styled';
 import { Camera } from 'expo-camera';
+import { styles } from '../DocumentCapture.styled';
 
-export const CaptureDocument = ({
-  cameraReference,
-  takePic,
-}) => {
+export const CaptureDocument = ({ cameraReference, takePic }) => {
   return (
     <Layout style={style.container}>
       <Camera style={styles.camera} ref={cameraReference} flashMode="on" />

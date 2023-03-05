@@ -1,8 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Camera } from 'expo-camera';
@@ -12,8 +8,13 @@ import { useNavigation } from '@react-navigation/native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
-export const DocumentCaptureRaw = ({ title, submitDocument, photo, setPhoto, fieldValue }) => {
-
+export const DocumentCaptureRaw = ({
+  title,
+  submitDocument,
+  photo,
+  setPhoto,
+  fieldValue,
+}) => {
   const navigation = useNavigation();
   const cameraReference = useRef(null);
   const [hasCameraPermission, setHasCameraPermission] = useState();
@@ -72,28 +73,9 @@ export const DocumentCaptureRaw = ({ title, submitDocument, photo, setPhoto, fie
         goBack={() => navigation.goBack()}
         title={title}
       />
-      <CaptureDocument
-        cameraReference={cameraReference}
-        takePic={takePic}
-      />
+      <CaptureDocument cameraReference={cameraReference} takePic={takePic} />
     </>
   );
 };
 
 export const DocumentCapture = React.memo(DocumentCaptureRaw);
-
-const style = StyleSheet.create({
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
-  },
-  container: {
-    flex: 1,
-  },
-});

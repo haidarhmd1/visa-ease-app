@@ -1,12 +1,11 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
 import { Card } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
-import { StyleSheet } from 'react-native';
 
 const visaCountries = [
   { id: 1, title: 'UAE', image: '' },
@@ -75,6 +74,6 @@ const styles = StyleSheet.create({
   arrowRight: {
     color: '#a3a3a3',
     alignSelf: 'center',
-    marginLeft: 'auto'
-  }
-})
+    marginLeft: 'auto',
+  },
+});

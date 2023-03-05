@@ -15,7 +15,9 @@ export const ProfileOverview = ({ navigation }) => {
         <Avatar.Text label="HH" />
         <View style={styles.profileUserInfo}>
           <Text variant="titleLarge">Test</Text>
-          <Text style={styles.profileSubTitle} variant="labelSmall">Test@test.com</Text>
+          <Text style={styles.profileSubTitle} variant="labelSmall">
+            Test@test.com
+          </Text>
         </View>
         <AntDesign style={styles.arrowRight} name="right" size={18} />
       </Card.Content>
@@ -25,14 +27,14 @@ export const ProfileOverview = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   profileSubTitle: {
-    color: '#a3a3a3'
+    color: '#a3a3a3',
   },
   profileUserInfo: {
-    marginLeft: 18
+    marginLeft: 18,
   },
   arrowRight: {
     color: '#a3a3a3',
     alignSelf: 'center',
-    marginLeft: 'auto'
-  }
-})
+    marginLeft: 'auto',
+  },
+});

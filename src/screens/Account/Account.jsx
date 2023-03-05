@@ -4,12 +4,12 @@ import { ScrollView } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { DangerButton } from 'components/general/Buttons';
 import { useAuthenticationStore } from 'store/zustand';
+import { Card } from 'react-native-paper';
 import { ProfileOverview } from './ProfileOverview';
 import { VisaStatus } from './VisaStatus';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
-import { Card } from 'react-native-paper';
 
 export const Account = ({ navigation }) => {
   const userLogout = useAuthenticationStore(state => state.userLogout);

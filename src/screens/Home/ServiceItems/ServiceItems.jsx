@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
-import { TouchableIconCard } from 'components/general/TouchableCard/TouchableCard';
+import { TouchableIconCard } from 'components/general/TouchableCard';
 import { Text } from 'react-native-paper';
 
 const mainServices = [
