@@ -18,3 +18,9 @@ export { default as WorldIllustration } from './20945909.jpg';
 
 // <a href="https://www.freepik.com/free-vector/human-hand-holding-mockup-international-biometric-passport-with-issue-expiry-dates-holders-signature-name-authority-issuing-passport-realistic_6847251.htm#query=passport&position=9&from_view=search&track=sph">Image by macrovector</a> on Freepik
 export { default as PassportImage } from './27956.jpg';
+
+// <a href="https://www.freepik.com/free-vector/notary-services-isometric-composition-with-paper-agreement-wet-stamp-vector-illustration_23505392.htm#query=document&position=12&from_view=search&track=sph">Image by macrovector</a> on Freepik
+export { default as ResidencePermitIllustration } from './notaryservicesisometric.jpg';
+
+// <a href="https://www.freepik.com/free-vector/group-young-people-characters_5825568.htm#query=avatar%20image&position=47&from_view=search&track=ais">Image by studiogstock</a> on Freepik
+export { default as PassportSelfPortraitImageIllustration } from './56556.jpg';

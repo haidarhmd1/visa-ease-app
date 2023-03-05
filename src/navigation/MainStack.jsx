@@ -13,6 +13,8 @@ import { VisaInformation } from 'components/VisaInformation';
 import { FlightInformation } from 'components/FlightInformation';
 import { Agreement } from 'components/Agreement';
 import { Passport } from 'components/Shared/Passport';
+import { ResidencePermit } from 'components/Shared/ResidencePermit';
+import { BiometricImage } from 'components/Shared/BiometricImage';
 
 const Stack = createStackNavigator();
 
@@ -51,11 +53,11 @@ export const MainStack = () => {
           />
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.residencePermit}
-            component={GeneralInformation}
+            component={ResidencePermit}
           />
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.biometricImage}
-            component={GeneralInformation}
+            component={BiometricImage}
           />
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.agreement}

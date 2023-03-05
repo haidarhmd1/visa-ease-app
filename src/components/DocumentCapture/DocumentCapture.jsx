@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
-export const DocumentCaptureRaw = ({ submitDocument, photo, setPhoto, fieldValue }) => {
+export const DocumentCaptureRaw = ({ title, submitDocument, photo, setPhoto, fieldValue }) => {
 
   const navigation = useNavigation();
   const cameraReference = useRef(null);
@@ -70,7 +70,7 @@ export const DocumentCaptureRaw = ({ submitDocument, photo, setPhoto, fieldValue
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
-        title="Document"
+        title={title}
       />
       <CaptureDocument
         cameraReference={cameraReference}
