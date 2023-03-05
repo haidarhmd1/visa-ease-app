@@ -24,3 +24,6 @@ export { default as ResidencePermitIllustration } from './notaryservicesisometri
 
 // <a href="https://www.freepik.com/free-vector/group-young-people-characters_5825568.htm#query=avatar%20image&position=47&from_view=search&track=ais">Image by studiogstock</a> on Freepik
 export { default as PassportSelfPortraitImageIllustration } from './56556.jpg';
+
+// <a href="https://www.freepik.com/free-vector/user-research-concept-illustration_21532507.htm#page=2&query=profile%20page&position=37&from_view=search&track=ais">Image by storyset</a> on Freepik
+export { default as ProfileEditIllustration } from './6461498.jpg';

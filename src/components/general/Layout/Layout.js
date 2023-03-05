@@ -11,6 +11,7 @@ export const Layout = ({ children, style, ...properties }) => {
   );
 };
 
+// eslint-disable-next-line sonarjs/no-identical-functions
 export const Wrapper = ({ children, style, ...properties }) => {
   return (
     <View {...properties} style={[style, styles.layout]}>

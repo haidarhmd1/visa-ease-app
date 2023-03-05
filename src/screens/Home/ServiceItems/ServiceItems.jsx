@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-identical-functions */
 import React from 'react';
 import { View } from 'react-native';
 import { useIntl } from 'react-intl';
@@ -23,13 +24,13 @@ const services = [
   },
   {
     id: 3,
-    title: 'Übersetzungen',
+    title: 'visastar.home.services.translations',
     route: ROUTES.TRANSLATION,
     icon: '',
   },
   {
     id: 4,
-    title: 'Preise',
+    title: 'visastar.home.services.prices',
     route: ROUTES.RATES,
     icon: '',
   },
