@@ -5,7 +5,13 @@ import CountryPicker from 'react-native-country-picker-modal';
 
 import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
-import { Card, Dialog, HelperText, RadioButton, Text } from 'react-native-paper';
+import {
+  Card,
+  Dialog,
+  HelperText,
+  RadioButton,
+  Text,
+} from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView, TouchableWithoutFeedback, View } from 'react-native';

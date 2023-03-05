@@ -3,11 +3,11 @@ import { MyTheme } from 'styles/theme/theme.extended';
 
 export const styles = StyleSheet.create({
   camera: {
-  position: 'relative',
-  width: 320,
-  height: 440,
-  borderRadius: 18,
-  alignSelf: 'center',
+    position: 'relative',
+    width: 320,
+    height: 440,
+    borderRadius: 18,
+    alignSelf: 'center',
   },
   image: {
     width: 320,
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     width: '100%',
-    margin: 'auto'
+    margin: 'auto',
   },
   informationCard: {
     backgroundColor: MyTheme.colors.primaryBackground,
@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
     borderRadius: MyTheme.borderRadius,
   },
   informationCardWarning: {
-    backgroundColor: MyTheme.colors.primaryBackground,
     width: '100%',
     minHeight: 100,
     height: 'auto',
@@ -51,6 +50,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cameraWrapper: {
-    width: '100%'
-  }
-})
+    width: '100%',
+  },
+});

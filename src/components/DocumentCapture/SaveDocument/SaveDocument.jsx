@@ -5,13 +5,12 @@ import { IconButton, Text } from 'react-native-paper';
 import { styles } from '../DocumentCapture.styled';
 
 export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
-  
   return (
     <Layout style={style.container}>
       <Image style={styles.image} source={photo} />
 
       <View style={style.content}>
-        <View style={[style.buttonWrapper,styles.cameraWrapper]}>
+        <View style={[style.buttonWrapper, styles.cameraWrapper]}>
           <View>
             <IconButton
               icon="restore"

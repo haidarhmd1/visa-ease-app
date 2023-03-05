@@ -6,11 +6,11 @@ import { View, StyleSheet, Image, ScrollView } from 'react-native';
 
 import { Layout, Spacer } from 'components/general/Layout/Layout';
 import { Divider, Text } from 'react-native-paper';
-import { PassportImage } from 'assets/illustrations';
+import { ResidencePermitIllustration } from 'assets/illustrations';
 
 const blurhash = '00Q12z';
 
-export const Passport = () => {
+export const ResidencePermit = () => {
   const [photo, setPhoto] = useState();
   const sheetReference = useRef(null);
 
@@ -30,7 +30,7 @@ export const Passport = () => {
         photo={photo}
         setPhoto={setPhoto}
         submitDocument={submitDocument}
-        title="Passport Image"
+        title="Residence Permit"
       />
       <BottomSheet
         style={[style.shadow, style.sheetContainer]}
@@ -42,7 +42,7 @@ export const Passport = () => {
         <Layout style={style.container}>
           <View style={style.container}>
             <Text variant="headlineMedium" style={style.centerText}>
-              Passport Guidelines
+              Residence Permit Guidelines
             </Text>
             <Spacer />
             <Divider />
@@ -50,7 +50,7 @@ export const Passport = () => {
             <ScrollView>
               <View style={{ alignItems: 'center' }}>
                 <Image
-                  source={PassportImage}
+                  source={ResidencePermitIllustration}
                   style={style.image}
                   placeholder={blurhash}
                   contentFit="contain"
@@ -59,11 +59,11 @@ export const Passport = () => {
               </View>
               <Spacer />
               <Text variant="bodyMedium" style={style.centerText}>
-                When taking a picture of your passport for a application, it is
-                important to ensure that the picture is clear and focused. This
-                will ensure that the application is processed correctly and
-                without any delays. Be sure to double-check the image before
-                submitting it to ensure that it meets the necessary
+                When taking a picture of your Residence Permit for a
+                application, it is important to ensure that the picture is clear
+                and focused. This will ensure that the application is processed
+                correctly and without any delays. Be sure to double-check the
+                image before submitting it to ensure that it meets the necessary
                 requirements.
               </Text>
               <Spacer />

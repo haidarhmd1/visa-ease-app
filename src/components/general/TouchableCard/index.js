@@ -1,1 +1,1 @@
-export { TouchableCard } from './TouchableCard';
+export { TouchableIconCard } from './TouchableCard';
