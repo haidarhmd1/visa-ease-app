@@ -27,3 +27,9 @@ export { default as PassportSelfPortraitImageIllustration } from './56556.jpg';
 
 // <a href="https://www.freepik.com/free-vector/user-research-concept-illustration_21532507.htm#page=2&query=profile%20page&position=37&from_view=search&track=ais">Image by storyset</a> on Freepik
 export { default as ProfileEditIllustration } from './6461498.jpg';
+
+// <a href="https://www.freepik.com/free-vector/forgot-password-concept-illustration_7070631.htm#query=forgot%20password&position=13&from_view=search&track=ais">Image by storyset</a> on Freepik
+export { default as ForgotPasswordIllustration } from './3432677.jpg';
+
+// <a href="https://www.freepik.com/free-vector/forgot-password-concept-illustration_7070631.htm#query=forgot%20password&position=13&from_view=search&track=ais">Image by storyset</a> on Freepik
+export { default as OTPIllustration } from './6325251.jpg';

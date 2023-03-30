@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import axios from 'axios';
 
 export const BASE_URL = 'http://localhost:3000';
@@ -6,6 +7,15 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
+// GENERAL
+export const getCompletedLists = id => {
+  return axios
+    .get(`${BASE_URL}/v1/visa/getStatuses/${id}`, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+// USER
 export const login = data => {
   return axios
     .post(`${BASE_URL}/v1/user/login`, data, { headers })
@@ -32,4 +42,95 @@ export const getUser = id => {
     .get(`${BASE_URL}/v1/user/users/${id}`, { headers })
     .then(response => response)
     .catch(error => error.response);
+};
+
+// VISA
+export const getVisaInformation = id => {
+  return axios
+    .get(`${BASE_URL}/v1/visa/information/${id}`, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const setVisaInformation = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/information/${id}`, data, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const getFlightInformation = id => {
+  return axios
+    .get(`${BASE_URL}/v1/visa/flight/${id}`, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const setFlightInformation = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/flight/${id}`, data, { headers })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+// DOCUMENTS
+export const setPassportDocument = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/documents/passport/${id}`, data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const setResidencePermitDocument = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/documents/residencePermit/${id}`, data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const setBiometricImageDocument = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/documents/biometricImage/${id}`, data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+// Agreement
+export const getAgreement = id => {
+  return axios
+    .get(`${BASE_URL}/v1/visa/agreement/${id}`, {
+      headers,
+    })
+    .then(response => response)
+    .catch(error => error.response);
+};
+
+export const setAgreement = (id, data) => {
+  return axios
+    .post(`${BASE_URL}/v1/visa/agreement/${id}`, data, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(response => response)
+    .catch(error => {
+      console.error(error.data.message);
+      return error.response;
+    });
 };

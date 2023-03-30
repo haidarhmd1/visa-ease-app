@@ -1,7 +1,7 @@
 import { DefaultTheme } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 
-const colorPalette = {
+export const colorPalette = {
   turquoise: {
     t50: '#edf5f4',
     t100: '#ccf0f1',
@@ -61,7 +61,7 @@ export const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    defaultBackgroundColor: colorPalette.gray.g50,
+    defaultBackgroundColor: colorPalette.binary.white,
     primaryBrandBackground: colorPalette.turquoise.t400,
     primaryBrand: colorPalette.turquoise.tstandard,
     brandFont: colorPalette.turquoise.tstandard,
@@ -109,10 +109,20 @@ export const MyTheme = {
 export const themeStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   sectionTitle: {
     paddingTop: 32,
     paddingBottom: 16,
+  },
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
   },
 });

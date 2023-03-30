@@ -11,6 +11,8 @@ const VISA_INFORMATION = {
 export const ROUTES = {
   AUTH: 'auth',
   LOGIN: 'login',
+  FORGOT_PASSWORD: 'forgotPassword',
+  ENTER_OTP: 'enterOTP',
   REGISTRATION: 'registration',
   MAIN: 'homeScreen',
   PROFILE: 'profileScreen',

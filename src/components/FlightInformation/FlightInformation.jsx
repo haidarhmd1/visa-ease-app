@@ -2,17 +2,61 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 
 import { StyledTextInput } from 'components/general/Form';
-import { StyledCard, Wrapper } from 'components/general/Layout/Layout';
+import { Spacer, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { Card, HelperText, RadioButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { NotificationToast } from 'components/general/NotificationToast';
+import { useQuery, useQueryClient } from 'react-query';
+import { getFlightInformation, setFlightInformation } from 'network/api';
+import { useAuthenticationStore } from 'store/zustand';
+import { colorPalette } from 'styles/theme/theme.extended';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
 
 export const FlightInformation = ({ navigation }) => {
+  const userId = useAuthenticationStore(state => state.id);
+  const queryClient = useQueryClient();
+  const [showToast, setShowToast] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedInvoiceRecipient, setSelectedInvoiceRecipient] = useState(
     'yes'
   );
+  const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
+  const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
+  const [radioValue, setRadioValue] = useState('');
+  const [clickedId, setClickedId] = useState(0);
+
+  const { data: getVisaFlightInformation } = useQuery(
+    ['getVisaFlightInformation', userId],
+    () => getFlightInformation(userId)
+  );
+
+  const handleFormSubmit = async values => {
+    setShowToast(true);
+    setIsLoading(true);
+    try {
+      const response = await setFlightInformation(userId, values);
+      if (response.status !== 200) throw Error;
+      queryClient.invalidateQueries('getVisaFlightInformation', userId);
+      queryClient.invalidateQueries('getCompletedLists');
+
+      setIsLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        navigation.goBack();
+      }, 1600);
+    } catch {
+      setIsLoading(false);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 1600);
+    }
+  };
 
   return (
     <>
@@ -21,29 +65,71 @@ export const FlightInformation = ({ navigation }) => {
         goBack={() => navigation.goBack()}
         title="Flight Information"
       />
-      <ScrollView>
-        <Wrapper>
-          <Formik
-            // validationSchema={flightInformationValidationSchema}
-            initialValues={{
-              travelStartDate: '',
-              returnFlightDate: '',
-              isInvoiceRecipientSame: 'yes',
-              invoiceAddress: '',
-            }}
-            onSubmit={values => console.log(1)}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              setFieldValue,
-              values,
-              errors,
-              touched,
-            }) => (
-              <StyledCard>
-                <Card.Content style={{ marginBottom: 16 }}>
+      <Formik
+        enableReinitialize
+        validationSchema={flightInformationValidationSchema}
+        initialValues={{
+          travelStartDate: getVisaFlightInformation?.data.travelStartDate ?? '',
+          returnFlightDate:
+            getVisaFlightInformation?.data.returnFlightDate ?? '',
+          invoiceRecipientSameAsApplicant:
+            getVisaFlightInformation?.data.invoiceRecipientSameAsApplicant ??
+            'yes',
+          invoiceAddress: getVisaFlightInformation?.data.invoiceAddress ?? '',
+          cruise: getVisaFlightInformation?.data.cruise ?? 'yes',
+          kindOfVisa:
+            getVisaFlightInformation?.data.kindOfVisa ?? 'single_entry',
+        }}
+        onSubmit={handleFormSubmit}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          setFieldValue,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={{ flex: 1, position: 'relative' }}>
+            <ScrollView
+              style={{
+                backgroundColor: 'white',
+              }}
+            >
+              <Wrapper>
+                <View>
+                  <Spacer />
+
+                  <View style={{ flex: 1, flexDirection: 'row' }}>
+                    {['inhouse', 'standard'].map((item, index) => {
+                      return (
+                        <TouchableOpacity
+                          onPress={() => setClickedId(index)}
+                          key={index}
+                          style={[
+                            index === clickedId
+                              ? styles.buttonActive
+                              : styles.button,
+                            index === 1
+                              ? styles.buttonBorderRight
+                              : styles.buttonBorderLeft,
+                          ]}
+                        >
+                          <Text
+                            style={[
+                              index === clickedId
+                                ? styles.textActive
+                                : styles.text,
+                            ]}
+                          >
+                            {item}
+                          </Text>
+                        </TouchableOpacity>
+                      );
+                    })}
+                  </View>
+                  <Spacer />
                   <StyledTextInput
                     mode="outlined"
                     name="travelStartDate"
@@ -64,8 +150,7 @@ export const FlightInformation = ({ navigation }) => {
                       {errors.travelStartDate}
                     </HelperText>
                   )}
-                </Card.Content>
-                <Card.Content style={{ marginBottom: 16 }}>
+                  <Spacer />
                   <StyledTextInput
                     mode="outlined"
                     name="returnFlightDate"
@@ -88,15 +173,48 @@ export const FlightInformation = ({ navigation }) => {
                       {errors.returnFlightDate}
                     </HelperText>
                   )}
-                </Card.Content>
-
-                <Card.Content style={{ marginBottom: 16 }}>
+                  <Spacer />
+                  <Text variant="labelMedium">Cruise</Text>
+                  <RadioButton.Group
+                    onValueChange={itemValue => {
+                      setFieldValue('cruise', itemValue);
+                      setSelectedHasCruise(itemValue);
+                    }}
+                    value={selectedHasCruise}
+                  >
+                    <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
+                    <RadioButton.Item color="#00bf80" label="No" value="no" />
+                  </RadioButton.Group>
+                  <Spacer />
+                  <Text variant="labelMedium">Kind of Visa</Text>
+                  <RadioButton.Group
+                    onValueChange={itemValue => {
+                      setFieldValue('kindOfVisa', itemValue);
+                      setSelectedKindOfVisa(itemValue);
+                    }}
+                    value={selectedKindOfVisa}
+                  >
+                    <RadioButton.Item
+                      color="#00bf80"
+                      label="Single Entry"
+                      value="single_entry"
+                    />
+                    <RadioButton.Item
+                      color="#00bf80"
+                      label="Multiple Entry"
+                      value="multiple_entry"
+                    />
+                  </RadioButton.Group>
+                  <Spacer />
                   <Text variant="labelMedium">
                     Invoice Recipient same as Applicant?
                   </Text>
                   <RadioButton.Group
                     onValueChange={(itemValue, itemIndex) => {
-                      setFieldValue('isInvoiceRecipientSame', itemValue);
+                      setFieldValue(
+                        'invoiceRecipientSameAsApplicant',
+                        itemValue
+                      );
                       setSelectedInvoiceRecipient(itemValue);
                     }}
                     value={selectedInvoiceRecipient}
@@ -104,41 +222,80 @@ export const FlightInformation = ({ navigation }) => {
                     <RadioButton.Item color="#00bf80" label="Yes" value="yes" />
                     <RadioButton.Item color="#00bf80" label="No" value="no" />
                   </RadioButton.Group>
-                </Card.Content>
-
-                {selectedInvoiceRecipient === 'no' && (
-                  <Card.Content style={{ marginBottom: 16 }}>
-                    <StyledTextInput
-                      mode="outlined"
-                      label="Invoice Recipient Address"
-                      name="invoiceAddress"
-                      placeholder="Friedrichstr. 95, 10117 Berlin"
-                      value={values?.invoiceAddress}
-                      onChangeText={handleChange('invoiceAddress')}
-                      onBlur={handleBlur('invoiceAddress')}
-                      isError={errors.invoiceAddress && touched.invoiceAddress}
-                    />
-                    {errors.invoiceAddress && touched.invoiceAddress && (
-                      <HelperText type="error">
-                        {errors.invoiceAddress}
-                      </HelperText>
-                    )}
-                  </Card.Content>
-                )}
-
-                <Card.Content>
-                  <PrimaryButton
-                    onPress={handleSubmit}
-                    style={{ marginBottom: 10 }}
-                  >
-                    Next
-                  </PrimaryButton>
-                </Card.Content>
-              </StyledCard>
-            )}
-          </Formik>
-        </Wrapper>
-      </ScrollView>
+                  {selectedInvoiceRecipient === 'no' && (
+                    <View>
+                      <StyledTextInput
+                        mode="outlined"
+                        label="Invoice Recipient Address"
+                        name="invoiceAddress"
+                        placeholder="Friedrichstr. 95, 10117 Berlin"
+                        value={values?.invoiceAddress}
+                        onChangeText={handleChange('invoiceAddress')}
+                        onBlur={handleBlur('invoiceAddress')}
+                        isError={
+                          errors.invoiceAddress && touched.invoiceAddress
+                        }
+                      />
+                      {errors.invoiceAddress && touched.invoiceAddress && (
+                        <HelperText type="error">
+                          {errors.invoiceAddress}
+                        </HelperText>
+                      )}
+                    </View>
+                  )}
+                </View>
+              </Wrapper>
+            </ScrollView>
+            <Card mode="elevated" style={{ backgroundColor: 'white' }}>
+              <Card.Content>
+                <PrimaryButton onPress={handleSubmit}>Submit</PrimaryButton>
+              </Card.Content>
+            </Card>
+          </View>
+        )}
+      </Formik>
+      <NotificationToast
+        type="Top"
+        error={error}
+        isLoading={isLoading}
+        success={success}
+        showToast={showToast}
+      />
     </>
   );
 };
+
+export const styles = StyleSheet.create({
+  buttonBorderLeft: {
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+  },
+  buttonBorderRight: {
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 8,
+  },
+  button: {
+    flex: 1,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderColor: colorPalette.turquoise.tstandard,
+  },
+  buttonActive: {
+    flex: 1,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    backgroundColor: colorPalette.turquoise.tstandard,
+    borderColor: colorPalette.turquoise.tstandard,
+  },
+  text: {
+    color: colorPalette.turquoise.tstandard,
+  },
+  textActive: {
+    color: colorPalette.binary.white,
+  },
+});

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, List } from 'react-native-paper';
+import { colorPalette } from 'styles/theme/theme.extended';
 
 const ProgessSuccess = () => <List.Icon icon="progress-check" color="green" />;
 const ProgessPending = () => (
@@ -16,14 +17,11 @@ export const VisaItemButton = ({
 }) => {
   return (
     <Button
-      mode="outlined"
       style={{
-        borderRadius: 10,
-        borderColor: 'lightgrey',
         color: 'black',
         marginBottom: 14,
       }}
-      buttonColor="white"
+      buttonColor={colorPalette.gray.g50}
       contentStyle={{
         justifyContent: 'flex-start',
       }}

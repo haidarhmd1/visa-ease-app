@@ -17,11 +17,7 @@ export const AppHeader = ({
 
   if (role === 'main') {
     return (
-      <Appbar.Header
-        elevated
-        statusBarHeight={0}
-        style={{ backgroundColor: 'white' }}
-      >
+      <Appbar.Header statusBarHeight={0} style={{ backgroundColor: 'white' }}>
         <Text
           style={{ fontWeight: 'bold', paddingLeft: 16 }}
           variant="headlineSmall"
@@ -46,11 +42,7 @@ export const AppHeader = ({
   }
 
   return (
-    <Appbar.Header
-      elevated
-      statusBarHeight={0}
-      style={{ backgroundColor: 'white' }}
-    >
+    <Appbar.Header statusBarHeight={0} style={{ backgroundColor: 'white' }}>
       <Appbar.Action icon="arrow-left" onPress={goBack} />
       <Appbar.Content title={title} />
     </Appbar.Header>

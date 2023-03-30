@@ -26,13 +26,13 @@ export const styles = StyleSheet.create({
     bottom: 0,
   },
   successStyle: {
-    borderColor: 'green',
-    borderWidth: 2,
-    borderStyle: 'solid',
+    // borderColor: 'green',
+    // borderWidth: 2,
+    // borderStyle: 'solid',
   },
   errorStyle: {
-    borderColor: 'red',
-    borderWidth: 2,
-    borderStyle: 'solid',
+    // borderColor: 'red',
+    // borderWidth: 2,
+    // borderStyle: 'solid',
   },
 });

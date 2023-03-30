@@ -21,7 +21,9 @@ const Stack = createStackNavigator();
 export const MainStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={{ ...noHeader }}
+      screenOptions={{
+        ...noHeader,
+      }}
       initialRouteName={ROUTES.MAIN}
     >
       <>

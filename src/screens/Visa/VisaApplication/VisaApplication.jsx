@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { AppHeader } from 'components/general/AppHeader';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { Card, Divider, List, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
 import { ROUTES } from 'res/constants/routes';
-import { StyleSheet, ScrollView, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, Animated } from 'react-native';
 import { MyTheme } from 'styles/theme/theme.extended';
+import { useAuthenticationStore } from 'store/zustand';
 import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {
@@ -25,9 +26,16 @@ const visaCountryData = {
   slug: 'uae',
 };
 
+const BANNER_H = 350;
 export const VisaApplication = ({ navigation }) => {
   const intl = useIntl();
+  const scrollA = useRef(new Animated.Value(0)).current;
+  const userId = useAuthenticationStore(state => state.id);
 
+  // const { data: completedList } = useQuery(['getCompletedLists', userId], () =>
+  //   getCompletedLists(userId)
+  // );
+  // console.log(Object.keys(completedList.data).length);
   return (
     <>
       <AppHeader
@@ -35,11 +43,21 @@ export const VisaApplication = ({ navigation }) => {
         goBack={() => navigation.goBack()}
         title="Visa Application"
       />
-      <ScrollView>
-        <ImageBackground
-          style={styles.imageBackground}
-          source={{ uri: 'https://picsum.photos/700' }}
-        >
+      <Animated.ScrollView
+        style={{
+          backgroundColor: 'white',
+        }}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        <View style={styles.bannerContainer}>
+          <Animated.Image
+            style={styles.banner(scrollA)}
+            source={{ uri: 'https://picsum.photos/700' }}
+          />
           <View style={styles.imageTextWrapper}>
             <Text
               variant="headlineLarge"
@@ -48,73 +66,60 @@ export const VisaApplication = ({ navigation }) => {
               {visaCountryData?.title}
             </Text>
           </View>
-        </ImageBackground>
+        </View>
         <Layout>
-          <StyledCard>
-            <Card.Content>
-              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-                Information
-              </Text>
-              <VisaItemButton
-                title="General Information"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.generalInformation}
-                isProgessCompleted
-              />
+          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+            Information
+          </Text>
 
-              <VisaItemButton
-                title="Visa Information"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.visaInformation}
-                isProgessCompleted={false}
-              />
+          {/* <VisaItemButton
+            title="Visa Information"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.visaInformation}
+            isProgessCompleted
+          /> */}
 
-              <VisaItemButton
-                title="Flight Information"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.flightInformation}
-                isProgessCompleted
-              />
-              <Divider marginBottom={12} marginTop={12} />
-              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-                Dokumente
-              </Text>
-              <VisaItemButton
-                title="Passport Picture"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.passportPicture}
-                isProgessCompleted
-              />
+          <VisaItemButton
+            title="Flight Information"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.flightInformation}
+            isProgessCompleted
+          />
+          <Divider marginBottom={12} marginTop={12} />
+          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+            Dokumente
+          </Text>
+          <VisaItemButton
+            title="Passport Picture"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.passportPicture}
+            isProgessCompleted
+          />
 
-              <VisaItemButton
-                title="Aufenthaltserlaubnis"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.residencePermit}
-                isProgessCompleted={false}
-              />
+          <VisaItemButton
+            title="Aufenthaltserlaubnis"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.residencePermit}
+            isProgessCompleted
+          />
 
-              <VisaItemButton
-                title="Biometic Image"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.biometricImage}
-                isProgessCompleted={false}
-              />
-              <Divider marginBottom={12} marginTop={12} />
-              <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-                Agreement
-              </Text>
+          <VisaItemButton
+            title="Biometic Image"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.biometricImage}
+            isProgessCompleted
+          />
+          <Divider marginBottom={12} marginTop={12} />
+          <Text variant="labelLarge" style={{ marginBottom: 8 }}>
+            Agreement
+          </Text>
 
-              <VisaItemButton
-                title="Agreement"
-                navigation={navigation}
-                route={ROUTES.VISA_INFORMATION.agreement}
-                isProgessCompleted={false}
-              />
-            </Card.Content>
-            <Card.Content>
-              <PrimaryButton disabled> Submit </PrimaryButton>
-            </Card.Content>
-          </StyledCard>
+          <VisaItemButton
+            title="Agreement"
+            navigation={navigation}
+            route={ROUTES.VISA_INFORMATION.agreement}
+            isProgessCompleted
+          />
           {visaCountryData?.notice ? (
             <View style={styles.informationCardWarning}>
               <Text
@@ -162,7 +167,12 @@ export const VisaApplication = ({ navigation }) => {
             </List.Section>
           </StyledCard>
         </Layout>
-      </ScrollView>
+      </Animated.ScrollView>
+      <Card mode="elevated" style={{ backgroundColor: 'white' }}>
+        <Card.Content>
+          <PrimaryButton disabled>Submit</PrimaryButton>
+        </Card.Content>
+      </Card>
     </>
   );
 };
@@ -186,11 +196,36 @@ const styles = StyleSheet.create({
     height: 'auto',
     marginTop: 8,
     marginBottom: MyTheme.marginBottom,
-    padding: 16,
+    // padding: 16,
+    paddingBottom: 16,
     borderRadius: MyTheme.borderRadius,
-    backgroundColor: MyTheme.colors.warningBackground,
-    borderWidth: 2,
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
+    borderWidth: 1,
     borderColor: MyTheme.colors.warningBorder,
     borderStyle: 'solid',
   },
+  bannerContainer: {
+    marginTop: -1000,
+    paddingTop: 900,
+    alignItems: 'center',
+    overflow: 'hidden',
+  },
+  banner: scrollA => ({
+    height: BANNER_H,
+    width: '200%',
+    transform: [
+      {
+        translateY: scrollA.interpolate({
+          inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+          outputRange: [-BANNER_H / 2, 0, BANNER_H * 0.75, BANNER_H * 0.75],
+        }),
+      },
+      {
+        scale: scrollA.interpolate({
+          inputRange: [-BANNER_H, 0, BANNER_H, BANNER_H + 1],
+          outputRange: [2, 1, 0.5, 0.5],
+        }),
+      },
+    ],
+  }),
 });

@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: MyTheme.borderRadius,
     padding: 15,
     height: 100,
-    width: '48%',
+    width: '32%',
     marginBottom: 16,
   },
   card: {

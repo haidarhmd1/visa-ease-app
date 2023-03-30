@@ -5,7 +5,6 @@ import {
   Spacer,
   StyledScrollView,
 } from 'components/general/Layout/Layout';
-import { Slideshow } from 'components/Slideshow';
 import { ModalSheet } from 'components/general/ModalSheet';
 import { Card, Dialog, Divider, List, Text } from 'react-native-paper';
 import {
@@ -37,6 +36,7 @@ const dataSource = [
   },
 ];
 
+const blurhash = '00Q12z';
 const messageBadgeIcon = properties => (
   <List.Icon {...properties} icon="message-badge-outline" />
 );
@@ -73,7 +73,7 @@ export const Home = ({ navigation }) => {
                 </Card.Actions>
               </Card>
             )}
-            <Slideshow dataSource={dataSource} />
+            {/* <Slideshow dataSource={dataSource} /> */}
             <ServiceItems hideModal={hideModal} navigation={navigation} />
           </Layout>
         </TouchableWithoutFeedback>

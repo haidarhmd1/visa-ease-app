@@ -7,10 +7,51 @@ import { Card, HelperText, RadioButton, Text } from 'react-native-paper';
 import { StyledTextInput } from 'components/general/Form';
 import { AppHeader } from 'components/general/AppHeader';
 import { ScrollView } from 'react-native';
+import { useQuery, useQueryClient } from 'react-query';
+import { getVisaInformation, setVisaInformation } from 'network/api';
+import { NotificationToast } from 'components/general/NotificationToast';
+import { useAuthenticationStore } from 'store/zustand';
+import { visaInformationValidationSchema } from './VisaInformation.schema';
 
 export const VisaInformation = ({ navigation }) => {
+  const userId = useAuthenticationStore(state => state.id);
+  const queryClient = useQueryClient();
+
+  const [showToast, setShowToast] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
   const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
+
+  const { data: getVisaInformationData } = useQuery(
+    ['getVisaInformation', userId],
+    () => getVisaInformation(userId)
+  );
+
+  const handleFormSubmit = async values => {
+    setShowToast(true);
+    setIsLoading(true);
+    try {
+      const response = await setVisaInformation(userId, values);
+      if (response.status !== 200) throw Error;
+      queryClient.invalidateQueries('getVisaInformation', userId);
+      queryClient.invalidateQueries('getCompletedLists', userId);
+
+      setIsLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        navigation.goBack();
+      }, 1600);
+    } catch {
+      setIsLoading(false);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 1600);
+    }
+  };
 
   return (
     <>
@@ -22,17 +63,17 @@ export const VisaInformation = ({ navigation }) => {
       <ScrollView>
         <Wrapper>
           <Formik
+            enableReinitialize
             initialValues={{
-              hasCruise: 'yes',
-              citizenship: 'Germany',
-              residencePermit: '',
-              occupation: '',
-              destinationCountry: '',
-              kindOfVisa: 'single_entry',
-              isInvoiceRecipientSame: 'yes',
+              cruise: getVisaInformationData?.data.cruise ?? 'yes',
+              residencePermit:
+                getVisaInformationData?.data.residencePermit ?? '',
+              occupation: getVisaInformationData?.data.occupation ?? '',
+              kindOfVisa:
+                getVisaInformationData?.data.kindOfVisa ?? 'single_entry',
             }}
-            // validationSchema={visaInformationValidationSchema}
-            onSubmit={values => console.log(values)}
+            validationSchema={visaInformationValidationSchema}
+            onSubmit={handleFormSubmit}
           >
             {({
               handleChange,
@@ -48,7 +89,7 @@ export const VisaInformation = ({ navigation }) => {
                   <Text variant="labelMedium">Cruise</Text>
                   <RadioButton.Group
                     onValueChange={itemValue => {
-                      setFieldValue('hasCruise', itemValue);
+                      setFieldValue('cruise', itemValue);
                       setSelectedHasCruise(itemValue);
                     }}
                     value={selectedHasCruise}
@@ -90,9 +131,6 @@ export const VisaInformation = ({ navigation }) => {
                   )}
                 </Card.Content>
                 <Card.Content style={{ marginBottom: 16 }}>
-                  <Text variant="labelMedium">Destination Country</Text>
-                </Card.Content>
-                <Card.Content style={{ marginBottom: 16 }}>
                   <Text variant="labelMedium">Kind of Visa</Text>
                   <RadioButton.Group
                     onValueChange={itemValue => {
@@ -127,6 +165,13 @@ export const VisaInformation = ({ navigation }) => {
           </Formik>
         </Wrapper>
       </ScrollView>
+      <NotificationToast
+        type="Top"
+        error={error}
+        isLoading={isLoading}
+        success={success}
+        showToast={showToast}
+      />
     </>
   );
 };
