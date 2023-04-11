@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
-import { StyleSheet, View } from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { StyledTextInput } from 'components/general/Form';
 import { Formik } from 'formik';
 import { HelperText } from 'react-native-paper';
@@ -11,6 +17,7 @@ import { useAuthenticationStore } from 'store/zustand';
 import { login } from 'network/api';
 import { LoginIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
+import { colorPalette } from 'styles/theme/theme.extended';
 import { loginSchema } from './Login.schema';
 
 const blurhash = '00Q12z';
@@ -103,13 +110,24 @@ const LoginRaw = ({ navigation }) => {
                   value={values.password}
                   error={errors.password && touched.password}
                 />
-                {/* {errors.password && touched.password && (
-                  <HelperText type="error">{errors.password}</HelperText>
-                )}
-                {errors.email && touched.email && (
-                  <HelperText type="error">{errors.email}</HelperText>
-                )} */}
+                {/* {(errors.password && touched.password) ||
+                  (errors.email && touched.email && (
+                    <HelperText type="error">{errors.password}</HelperText>
+                  ))} */}
               </View>
+
+              <TouchableWithoutFeedback>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: colorPalette.turquoise.t700,
+                    marginBottom: 16,
+                  }}
+                  onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD)}
+                >
+                  Forgot Password ?
+                </Text>
+              </TouchableWithoutFeedback>
 
               <PrimaryButton
                 style={[style.buttonWidth, style.marginBottom]}

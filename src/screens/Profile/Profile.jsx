@@ -13,7 +13,7 @@ export const Profile = ({ navigation }) => {
         goBack={() => navigation.goBack()}
         title="Profile"
       />
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <Layout>
           <ProfileDetails />
           <AccountDelete />

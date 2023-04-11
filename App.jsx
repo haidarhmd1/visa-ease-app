@@ -17,7 +17,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Fontisto from '@expo/vector-icons/Fontisto';
 
 import { themeStyle } from 'styles';
-import { MyTheme } from 'styles/theme/theme.extended';
 
 import RootStack from 'navigation';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -110,18 +109,18 @@ export default function App() {
   if (!appIsReady) return null;
 
   return (
-    <PaperProvider theme={theme}>
-        <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
-          <QueryClientProvider client={queryClient}>
-            <IntlProvider
-              locale={getLanguage()}
-              messages={messages[getLanguage()]}
-              wrapRichTextChunksInFragment
-            >
-              <RootStack />
-            </IntlProvider>
-          </QueryClientProvider>
-        </SafeAreaView>
-    </PaperProvider>
+    <SafeAreaView style={themeStyle.container} onLayout={onLayoutRootView}>
+      <PaperProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
+          <IntlProvider
+            locale={getLanguage()}
+            messages={messages[getLanguage()]}
+            wrapRichTextChunksInFragment
+          >
+            <RootStack />
+          </IntlProvider>
+        </QueryClientProvider>
+      </PaperProvider>
+    </SafeAreaView>
   );
 }

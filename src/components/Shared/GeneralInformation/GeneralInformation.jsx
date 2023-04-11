@@ -52,6 +52,7 @@ export const GeneralInformation = ({ navigation }) => {
       const response = await completeUserProfile(values, userId);
       if (response.status !== 200) throw Error;
       queryClient.invalidateQueries('getUser', userId);
+      queryClient.invalidateQueries('getCompletedLists', userId);
 
       setIsLoading(false);
       setSuccess(true);
@@ -61,6 +62,9 @@ export const GeneralInformation = ({ navigation }) => {
     } catch {
       setIsLoading(false);
       setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 1600);
     }
   };
 
@@ -358,7 +362,7 @@ export const GeneralInformation = ({ navigation }) => {
         </TouchableWithoutFeedback>
       </ScrollView>
       <NotificationToast
-        type="Bottom"
+        type="Top"
         error={error}
         isLoading={isLoading}
         success={success}
