@@ -1,16 +1,10 @@
 import React from 'react';
 
 import { ROUTES } from 'res/constants/routes';
-import { Appbar, Badge, Text } from 'react-native-paper';
+import { Appbar, Text } from 'react-native-paper';
 import { View } from 'react-native';
 
-export const AppHeader = ({
-  goBack = () => {},
-  openNotification = () => {},
-  title,
-  navigation,
-  role,
-}) => {
+export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   const onProfileHandler = () => {
     navigation.navigate(ROUTES.ACCOUNT);
   };
@@ -31,10 +25,6 @@ export const AppHeader = ({
             marginLeft: 'auto',
           }}
         >
-          <View style={{ position: 'relative' }}>
-            <Appbar.Action icon="bell-outline" onPress={openNotification} />
-            <Badge style={{ position: 'absolute' }}>3</Badge>
-          </View>
           <Appbar.Action icon="cog-outline" onPress={onProfileHandler} />
         </View>
       </Appbar.Header>

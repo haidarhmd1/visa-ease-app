@@ -43,9 +43,14 @@ export const TouchableIconCardOpacity = ({
   );
 };
 
-export const StyledCard = ({ children, style, ...properties }) => {
+export const StyledCard = ({
+  children,
+  style,
+  mode = 'contained',
+  ...properties
+}) => {
   return (
-    <Card {...properties} mode="contained" style={[style, styles.card]}>
+    <Card {...properties} mode={mode} style={[style, styles.card]}>
       {children}
     </Card>
   );

@@ -14,6 +14,8 @@ import { PalmImage } from 'assets/images';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { PriceTag } from 'assets/icons';
 import { colorPalette } from 'styles/theme/theme.extended';
+import { VisaStatus } from 'components/VisaStatus';
+import { HomeHeroView } from 'components/HomeHeroView';
 
 const visaCountries = [
   { id: 1, title: 'UAE', image: '' },
@@ -48,10 +50,10 @@ const services = [
   },
 ];
 
-export const ServiceItems = ({ navigation, hideModal }) => {
+export const ServiceItems = ({ navigation }) => {
   const intl = useIntl();
 
-  const onPressViaHandler = route => {
+  const onPressRouteNavigationHandler = route => {
     navigation.navigate(route);
   };
 
@@ -62,51 +64,9 @@ export const ServiceItems = ({ navigation, hideModal }) => {
   };
 
   return (
-    <View style={{ marginTop: 21, marginBottom: 21 }}>
-      <View>
-        <TouchableOpacity
-          onPress={() => {
-            onPressViaHandler(ROUTES.VISA_HOME);
-            hideModal();
-          }}
-          style={{
-            height: 150,
-            position: 'relative',
-            borderRadius: 8,
-            overflow: 'hidden',
-            backgroundColor: 'black',
-          }}
-        >
-          <ImageBackground
-            source={PalmImage}
-            style={{
-              height: 150,
-              width: '100%',
-              opacity: 0.7,
-              position: 'absolute',
-            }}
-          />
-          <View
-            style={{
-              flex: 1,
-              marginLeft: 15,
-              marginBottom: 5,
-              justifyContent: 'flex-end',
-            }}
-          >
-            <Text
-              variant="headlineSmall"
-              style={{ color: 'white', fontWeight: 'bold' }}
-            >
-              Visa
-            </Text>
-            <Text variant="bodyMedium" style={{ color: 'white' }}>
-              Start your Visa Journey!
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <Text variant="titleLarge" style={{ paddingBottom: 16, marginTop: 15 }}>
+    <View style={{ marginBottom: 21 }}>
+      <VisaStatus />
+      <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
         Our Services
       </Text>
 
@@ -115,15 +75,13 @@ export const ServiceItems = ({ navigation, hideModal }) => {
         data={services}
         showsHorizontalScrollIndicator={false}
         style={{
-          paddingTop: 5,
           paddingBottom: 25,
         }}
         renderItem={({ item }) => (
           <TouchableWithoutFeedback
             screenWidth={Dimensions.get('window')}
             onPress={() => {
-              onPressViaHandler(item.route);
-              hideModal();
+              onPressRouteNavigationHandler(item.route);
             }}
           >
             <View
@@ -159,7 +117,7 @@ export const ServiceItems = ({ navigation, hideModal }) => {
         keyExtractor={item => item.id}
       />
       <View>
-        <Text variant="titleLarge" style={{ paddingBottom: 16, marginTop: 15 }}>
+        <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
           Our Top Visa Services
         </Text>
         <FlatList

@@ -6,7 +6,6 @@ import { DangerButton } from 'components/general/Buttons';
 import { useAuthenticationStore } from 'store/zustand';
 import { Card } from 'react-native-paper';
 import { ProfileOverview } from './ProfileOverview';
-import { VisaStatus } from './VisaStatus';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
@@ -24,7 +23,6 @@ export const Account = ({ navigation }) => {
       <ScrollView>
         <Layout>
           <ProfileOverview navigation={navigation} />
-          <VisaStatus />
           <AccountLinks />
           <ContactLinks />
           <SocialMediaLinks />
