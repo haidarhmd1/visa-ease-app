@@ -8,12 +8,13 @@ import { ROUTES } from 'res/constants/routes';
 import { StyleSheet, View, Animated } from 'react-native';
 import { MyTheme } from 'styles/theme/theme.extended';
 import { useAuthenticationStore } from 'store/zustand';
+import { PalmImage } from 'assets/images';
+import { FloatingCard } from 'components/FloatingCard';
 import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {
   id: 1,
   title: 'UAE',
-  notice: `Die Bearbeitungszeiten bei den Behörden/ Konsulaten können naturgemäß nicht garantiert werden, jedoch stehen wir in engem Kontakt und setzen alles daran Ihr Visum rechtzeitig vor Reiseantritt zur Verfügung stellen zu können. Die Gebühren können bei Ablehnung nicht erstattet werden. Sollten Ihre Dokumente nicht den Vorgaben entsprechen, können weitere Kosten zur weiteren Bearbeitung anfallen/ oder die Bearbeitung des Visaantrages kann nicht fortgeführt werden.`,
   information: `Gültigkeit des Visa 2 Monate
     14 Tage einfache Einreise
     30 Tage einfache und mehrfache Einreise (z.B. bei einer Kreuzfahrt notwendig)
@@ -53,21 +54,25 @@ export const VisaApplication = ({ navigation }) => {
         )}
         scrollEventThrottle={16}
       >
-        <View style={styles.bannerContainer}>
-          <Animated.Image
-            style={styles.banner(scrollA)}
-            source={{ uri: 'https://picsum.photos/700' }}
-          />
-          <View style={styles.imageTextWrapper}>
-            <Text
-              variant="headlineLarge"
-              style={{ color: 'white', fontWeight: 'bold' }}
-            >
-              {visaCountryData?.title}
-            </Text>
+        <View style={{ position: 'relative' }}>
+          <View style={styles.bannerContainer}>
+            <Animated.Image style={styles.banner(scrollA)} source={PalmImage} />
           </View>
+          <FloatingCard>
+            <Card.Content>
+              <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
+                HINWEIS:
+              </Text>
+              <Text style={{ marginTop: 8 }}>
+                Bearbeitungszeiten von Visa sind ungewiss, jedoch bemühen wir
+                uns, es vor Reiseantritt zu beschaffen. Bei Ablehnung keine
+                Erstattung. Nicht konforme Dokumente = weitere Kosten oder
+                Ablehnung.
+              </Text>
+            </Card.Content>
+          </FloatingCard>
         </View>
-        <Layout>
+        <Layout style={{ marginTop: 75 }}>
           <Text variant="labelLarge" style={{ marginBottom: 8 }}>
             Information
           </Text>
@@ -120,21 +125,6 @@ export const VisaApplication = ({ navigation }) => {
             route={ROUTES.VISA_INFORMATION.agreement}
             isProgessCompleted
           />
-          {visaCountryData?.notice ? (
-            <View style={styles.informationCardWarning}>
-              <Text
-                variant="labelLarge"
-                style={{ padding: 16, fontWeight: 'bold' }}
-              >
-                {intl.formatMessage({
-                  id: 'visaApplication.steps.information.note',
-                })}
-              </Text>
-              <Card.Content>
-                <Text>{visaCountryData?.notice}</Text>
-              </Card.Content>
-            </View>
-          ) : null}
 
           <StyledCard>
             <List.Section>

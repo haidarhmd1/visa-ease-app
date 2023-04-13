@@ -6,13 +6,28 @@ import { Spacer, Wrapper } from 'components/general/Layout/Layout';
 import { PrimaryButton } from 'components/general/Buttons';
 import { Card, HelperText, RadioButton, Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { NotificationToast } from 'components/general/NotificationToast';
 import { useQuery, useQueryClient } from 'react-query';
 import { getFlightInformation, setFlightInformation } from 'network/api';
 import { useAuthenticationStore } from 'store/zustand';
-import { colorPalette } from 'styles/theme/theme.extended';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
+import { VisaProcessType } from './VisaProcessType';
+
+const processTime = [
+  {
+    id: '1',
+    icon: 'email-fast-outline',
+    title: 'Express',
+    text: '3 Werktage',
+  },
+  {
+    id: '2',
+    icon: 'warehouse',
+    title: 'Standard',
+    text: '7-10 Werktage',
+  },
+];
 
 export const FlightInformation = ({ navigation }) => {
   const userId = useAuthenticationStore(state => state.id);
@@ -27,7 +42,6 @@ export const FlightInformation = ({ navigation }) => {
   );
   const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
   const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
-  const [radioValue, setRadioValue] = useState('');
   const [clickedId, setClickedId] = useState(0);
 
   const { data: getVisaFlightInformation } = useQuery(
@@ -100,32 +114,16 @@ export const FlightInformation = ({ navigation }) => {
               <Wrapper>
                 <View>
                   <Spacer />
-
                   <View style={{ flex: 1, flexDirection: 'row' }}>
-                    {['inhouse', 'standard'].map((item, index) => {
+                    {processTime.map((item, index) => {
                       return (
-                        <TouchableOpacity
-                          onPress={() => setClickedId(index)}
-                          key={index}
-                          style={[
-                            index === clickedId
-                              ? styles.buttonActive
-                              : styles.button,
-                            index === 1
-                              ? styles.buttonBorderRight
-                              : styles.buttonBorderLeft,
-                          ]}
-                        >
-                          <Text
-                            style={[
-                              index === clickedId
-                                ? styles.textActive
-                                : styles.text,
-                            ]}
-                          >
-                            {item}
-                          </Text>
-                        </TouchableOpacity>
+                        <VisaProcessType
+                          key={item.id}
+                          clickedId={clickedId}
+                          setClickedId={setClickedId}
+                          item={item}
+                          index={index}
+                        />
                       );
                     })}
                   </View>
@@ -264,38 +262,3 @@ export const FlightInformation = ({ navigation }) => {
     </>
   );
 };
-
-export const styles = StyleSheet.create({
-  buttonBorderLeft: {
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 8,
-  },
-  buttonBorderRight: {
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 8,
-  },
-  button: {
-    flex: 1,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    borderColor: colorPalette.turquoise.tstandard,
-  },
-  buttonActive: {
-    flex: 1,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    backgroundColor: colorPalette.turquoise.tstandard,
-    borderColor: colorPalette.turquoise.tstandard,
-  },
-  text: {
-    color: colorPalette.turquoise.tstandard,
-  },
-  textActive: {
-    color: colorPalette.binary.white,
-  },
-});

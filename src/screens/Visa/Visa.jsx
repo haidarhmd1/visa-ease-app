@@ -3,9 +3,7 @@ import {
   View,
   StyleSheet,
   ImageBackground,
-  TouchableWithoutFeedback,
   Animated,
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import { Layout, Spacer } from 'components/general/Layout/Layout';
@@ -13,8 +11,9 @@ import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
 import { Avatar, Card, Divider, Text } from 'react-native-paper';
-import { colorPalette, MyTheme, themeStyle } from 'styles/theme/theme.extended';
+import { colorPalette, MyTheme } from 'styles/theme/theme.extended';
 import { PalmImage } from 'assets/images';
+import { FloatingCard } from 'components/FloatingCard';
 
 const visaCountries = [
   { id: 1, title: 'UAE', image: '' },
@@ -76,20 +75,7 @@ export const Visa = ({ navigation }) => {
           <View style={styles.bannerContainer}>
             <Animated.Image style={styles.banner(scrollA)} source={PalmImage} />
           </View>
-          <Card
-            mode="contained"
-            style={[
-              themeStyle.shadow,
-              {
-                position: 'absolute',
-                top: 190,
-                left: Dimensions.get('window').width / 11,
-                width: 320,
-                height: 150,
-                backgroundColor: 'white',
-              },
-            ]}
-          >
+          <FloatingCard>
             <Card.Content>
               <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
                 Visum für Dubai Emirate, Indien, Japan, China, u.v.m. günstig
@@ -102,9 +88,9 @@ export const Visa = ({ navigation }) => {
                 von 24 Stunden.
               </Text>
             </Card.Content>
-          </Card>
+          </FloatingCard>
         </View>
-        <Layout style={{ marginTop: 100 }}>
+        <Layout style={{ marginTop: 75 }}>
           <View>
             <Text variant="headlineSmall">Halten sie Bereit: </Text>
           </View>
