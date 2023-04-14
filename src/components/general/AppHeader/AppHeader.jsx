@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ROUTES } from 'res/constants/routes';
 import { Appbar, Text } from 'react-native-paper';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 
 export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   const onProfileHandler = () => {
@@ -31,8 +31,40 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
     );
   }
 
+  if (role === 'secondary') {
+    return (
+      <Appbar.Header
+        style={{
+          backgroundColor: 'transparent',
+          position: 'absolute',
+          top: 0,
+          width: Dimensions.get('window').width,
+          zIndex: 1,
+        }}
+      >
+        <Appbar.Action
+          icon="arrow-left"
+          onPress={goBack}
+          style={{ backgroundColor: 'white' }}
+        />
+        <Appbar.Content
+          title={title}
+          color="white"
+          titleStyle={{
+            color: 'white',
+          }}
+        />
+      </Appbar.Header>
+    );
+  }
+
   return (
-    <Appbar.Header statusBarHeight={0} style={{ backgroundColor: 'white' }}>
+    <Appbar.Header
+      statusBarHeight={0}
+      style={{
+        backgroundColor: 'white',
+      }}
+    >
       <Appbar.Action icon="arrow-left" onPress={goBack} />
       <Appbar.Content title={title} />
     </Appbar.Header>

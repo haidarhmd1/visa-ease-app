@@ -3,9 +3,8 @@ import React, { useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import { FloatingCard } from 'components/FloatingCard';
 import { StyleSheet, View } from 'react-native';
+import { BANNER_H } from 'res/constants/environment';
 import { AppHeader } from '../AppHeader';
-
-const BANNER_H = 350;
 
 export const StickyHeaderWrapper = ({
   appBarTitle,
@@ -18,8 +17,11 @@ export const StickyHeaderWrapper = ({
   return (
     <>
       <AppHeader
+        // eslint-disable-next-line jsx-a11y/aria-role
+        role="secondary"
         goBack={() => navigation.goBack()}
         title={appBarTitle}
+        scrollA={scrollA}
         navigation={navigation}
       />
       <Animated.ScrollView

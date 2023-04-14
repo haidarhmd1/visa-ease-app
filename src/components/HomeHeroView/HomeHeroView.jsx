@@ -11,56 +11,54 @@ export const HomeHeroView = () => {
   };
 
   return (
-    <View>
-      <TouchableOpacity
-        onPress={() => {
-          onPressHandler(ROUTES.VISA_HOME);
-        }}
+    <View
+      onPress={() => {
+        onPressHandler(ROUTES.VISA_HOME);
+      }}
+      style={{
+        height: 175,
+        position: 'relative',
+        borderBottomEndRadius: 24,
+        borderBottomStartRadius: 24,
+        overflow: 'hidden',
+        backgroundColor: 'black',
+      }}
+    >
+      <ImageBackground
+        source={PalmImage}
         style={{
           height: 175,
-          position: 'relative',
-          borderBottomEndRadius: 24,
-          borderBottomStartRadius: 24,
-          overflow: 'hidden',
-          backgroundColor: 'black',
+          width: '100%',
+          opacity: 0.7,
+          position: 'absolute',
+        }}
+      />
+      <View
+        style={{
+          flex: 1,
+          marginLeft: 15,
+          marginBottom: 5,
+          justifyContent: 'flex-end',
         }}
       >
-        <ImageBackground
-          source={PalmImage}
+        <Text
+          variant="headlineSmall"
           style={{
-            height: 175,
-            width: '100%',
-            opacity: 0.7,
-            position: 'absolute',
-          }}
-        />
-        <View
-          style={{
-            flex: 1,
-            marginLeft: 15,
-            marginBottom: 5,
-            justifyContent: 'flex-end',
+            color: 'white',
+            fontWeight: 'bold',
           }}
         >
-          <Text
-            variant="headlineSmall"
-            style={{
-              color: 'white',
-              fontWeight: 'bold',
-            }}
-          >
-            Visa
-          </Text>
-          <Text
-            variant="bodyMedium"
-            style={{
-              color: 'white',
-            }}
-          >
-            Start your Visa Journey!
-          </Text>
-        </View>
-      </TouchableOpacity>
+          Visa
+        </Text>
+        <Text
+          variant="bodyMedium"
+          style={{
+            color: 'white',
+          }}
+        >
+          Start your Visa Journey!
+        </Text>
+      </View>
     </View>
   );
 };
