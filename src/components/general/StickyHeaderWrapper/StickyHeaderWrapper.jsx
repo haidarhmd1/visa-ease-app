@@ -6,6 +6,24 @@ import { StyleSheet, View } from 'react-native';
 import { BANNER_H } from 'res/constants/environment';
 import { AppHeader } from '../AppHeader';
 
+function Bla(props) {
+  return (
+    <View
+      style={{
+        position: 'relative',
+      }}
+    >
+      <View style={styles.bannerContainer}>
+        <Animated.Image
+          style={styles.banner(props.scrollA)}
+          source={props.imageSrc}
+        />
+      </View>
+      <FloatingCard>{props.floatingCardContent}</FloatingCard>
+    </View>
+  );
+}
+
 export const StickyHeaderWrapper = ({
   appBarTitle,
   navigation,
@@ -34,12 +52,11 @@ export const StickyHeaderWrapper = ({
         )}
         scrollEventThrottle={16}
       >
-        <View style={{ position: 'relative' }}>
-          <View style={styles.bannerContainer}>
-            <Animated.Image style={styles.banner(scrollA)} source={imageSrc} />
-          </View>
-          <FloatingCard>{floatingCardContent}</FloatingCard>
-        </View>
+        <Bla
+          scrollA={scrollA}
+          floatingCardContent={floatingCardContent}
+          imageSrc={imageSrc}
+        />
         {children}
       </Animated.ScrollView>
     </>

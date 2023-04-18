@@ -12,7 +12,6 @@ import { useQuery, useQueryClient } from 'react-query';
 import { getFlightInformation, setFlightInformation } from 'network/api';
 import { useAuthenticationStore } from 'store/zustand';
 import { flightInformationValidationSchema } from './FlightInformation.schema';
-import { VisaProcessType } from './VisaProcessType';
 
 const processTime = [
   {
@@ -37,12 +36,10 @@ export const FlightInformation = ({ navigation }) => {
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [selectedInvoiceRecipient, setSelectedInvoiceRecipient] = useState(
-    'yes'
-  );
+  const [selectedInvoiceRecipient, setSelectedInvoiceRecipient] =
+    useState('yes');
   const [selectedHasCruise, setSelectedHasCruise] = useState('yes');
   const [selectedKindOfVisa, setSelectedKindOfVisa] = useState('single_entry');
-  const [clickedId, setClickedId] = useState(0);
 
   const { data: getVisaFlightInformation } = useQuery(
     ['getVisaFlightInformation', userId],
@@ -113,21 +110,6 @@ export const FlightInformation = ({ navigation }) => {
             >
               <Wrapper>
                 <View>
-                  <Spacer />
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    {processTime.map((item, index) => {
-                      return (
-                        <VisaProcessType
-                          key={item.id}
-                          clickedId={clickedId}
-                          setClickedId={setClickedId}
-                          item={item}
-                          index={index}
-                        />
-                      );
-                    })}
-                  </View>
-                  <Spacer />
                   <StyledTextInput
                     mode="outlined"
                     name="travelStartDate"

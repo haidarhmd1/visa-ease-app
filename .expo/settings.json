@@ -5,6 +5,6 @@
   "minify": false,
   "urlRandomness": "xn-q3j",
   "https": false,
-  "scheme": "org.name.visastarexpoapp",
-  "devClient": true
+  "devClient": true,
+  "scheme": "org.name.visastarexpoapp"
 }

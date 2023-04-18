@@ -60,7 +60,7 @@ export const Agreement = ({ navigation }) => {
   const handleFormSubmit = async values => {
     const formData = new FormData();
     formData.append('signatureFile', {
-      name: `${new Date()}_signature.png`,
+      name: 'signature.png',
       uri: values.signatureFile,
       type: 'image/png',
     });

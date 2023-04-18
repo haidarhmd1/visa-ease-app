@@ -55,7 +55,6 @@ export const ModalSheet = ({
 
 const styles = StyleSheet.create({
   sheetContainer: {
-    // add horizontal space
     marginHorizontal: 24,
   },
   header: {
@@ -76,8 +75,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    // paddingLeft: 16,
-    // paddingRight: 16,
   },
   shadow: {
     shadowColor: '#000',

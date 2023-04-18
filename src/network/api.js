@@ -120,9 +120,11 @@ export const getAgreement = id => {
     .catch(error => error.response);
 };
 
-export const setAgreement = (id, data) => {
+// /visa-application/:visaId/agreement
+export const setAgreement = (visaId, data) => {
+  // console.log('data', data);
   return axios
-    .post(`${BASE_URL}/v1/visa/agreement/${id}`, data, {
+    .post(`${BASE_URL}/v1/visa/visa-application/${visaId}/agreement`, data, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
@@ -130,6 +132,7 @@ export const setAgreement = (id, data) => {
     })
     .then(response => response)
     .catch(error => {
+      console.log('error', error);
       console.error(error.data.message);
       return error.response;
     });
