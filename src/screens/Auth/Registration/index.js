@@ -1,1 +1,1 @@
-export { Registration } from './Registration.react';
+export { Registration } from './Registration';

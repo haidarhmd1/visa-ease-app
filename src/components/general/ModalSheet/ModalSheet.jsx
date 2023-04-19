@@ -13,14 +13,16 @@ export const ModalSheet = ({
   contentMore = false,
   setVisible,
   detached = true,
+  loadFullHeight = false,
   ...properties
 }) => {
   // ref
   const bottomSheetReference = useRef(null);
   // variables
   const snapPoints = useMemo(
-    () => (contentMore ? ['25%', '50%', '90%'] : ['25%']),
-    [contentMore]
+    () =>
+      contentMore ? ['25%', '50%', '90%'] : loadFullHeight ? ['90%'] : ['25%'],
+    [contentMore, loadFullHeight]
   );
 
   useEffect(() => {

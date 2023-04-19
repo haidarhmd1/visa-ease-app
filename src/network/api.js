@@ -137,3 +137,15 @@ export const setAgreement = (visaId, data) => {
       return error.response;
     });
 };
+
+export const getCityofCountry = data => {
+  const cityConfig = {
+    method: 'post',
+    maxBodyLength: Infinity,
+    url: 'https://countriesnow.space/api/v0.1/countries/cities',
+    headers: { 'Content-Type': 'application/json' },
+    data,
+  };
+
+  return axios(cityConfig);
+};

@@ -6,7 +6,7 @@ import { useAuthenticationStore } from 'store/zustand';
 import { MainStack } from './MainStack';
 import { AuthStack } from './AuthStack';
 
-const isLoggedIn = true;
+const isLoggedIn = false;
 
 const RootStack = () => {
   // const isLoggedIn = useAuthenticationStore(state => state.isLoggedIn);

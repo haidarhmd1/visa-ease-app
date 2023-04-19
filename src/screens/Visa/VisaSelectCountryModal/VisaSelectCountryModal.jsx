@@ -8,7 +8,7 @@ import { PrimaryButton } from 'components/general/Buttons';
 import { SpacerDivider } from 'components/SpacerDivider';
 import { ROUTES } from 'res/constants/routes';
 import { useNavigation } from '@react-navigation/native';
-import { StyledDropdown } from 'screens/Visa/VisaSelectCountryModal/StyledDropdown';
+import { StyledDropdown } from 'components/StyledDropdown';
 
 const visaCountries = [
   { value: 'uae', label: 'UAE', image: '' },
@@ -39,7 +39,7 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
       visible={visible}
       setVisible={setVisible}
       detached={false}
-      contentMore
+      loadFullHeight
     >
       <ScrollView>
         <Layout>
