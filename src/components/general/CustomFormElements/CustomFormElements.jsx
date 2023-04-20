@@ -5,6 +5,10 @@ import React from 'react';
 import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from 'screens/Visa/Visa.styled';
 import { Dropdown } from 'react-native-element-dropdown';
+import Checkbox from 'expo-checkbox';
+import { Text } from 'react-native-paper';
+
+// import { Checkbox } from 'components/general/Checkbox';
 
 export const CustomTextInput = ({
   control,
@@ -88,6 +92,33 @@ export const CustomDropdown = ({
           onBlur={onFocus}
           onChange={onChange}
         />
+      )}
+    />
+  );
+};
+
+export const CustomCheckbox = ({ name, control, rules = {}, title }) => {
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      defaultValue={false}
+      render={({ field: { value, onChange } }) => (
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}
+        >
+          <Checkbox
+            value={value}
+            onValueChange={onChange}
+            style={{ marginRight: 8 }}
+            color={value ? MyTheme.colors.primaryBrand : undefined}
+          />
+          <Text>{title}</Text>
+        </View>
       )}
     />
   );

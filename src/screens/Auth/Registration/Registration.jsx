@@ -5,16 +5,16 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider, Text, TextInput } from 'react-native-paper';
 import { BackButton } from 'components/Login';
 import { Layout, Spacer } from 'components/general/Layout/Layout';
-import { Checkbox } from 'components/general/Checkbox';
 import { SpacerDivider } from 'components/SpacerDivider';
 import { RegisterHeader } from 'screens/Auth/Registration/RegisterHeader';
-import { useForm } from 'react-hook-form';
 import {
+  CustomCheckbox,
   CustomDropdown,
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
 import { getCountryDropdown } from 'utils/countryList';
 import { useQuery } from 'react-query';
+import { useForm } from 'react-hook-form';
 
 const defaultValues = {
   fullname: '',
@@ -35,6 +35,7 @@ export const Registration = ({ navigation }) => {
   });
 
   const watchCountry = watch('country') || '';
+  const watchCheck = watch('acceptTermsAndConditions');
 
   const { isLoading, data: cityData } = useQuery(
     ['getCityByCountry', watchCountry?.label],
@@ -44,8 +45,6 @@ export const Registration = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [isPasswordConfirmationSecure, setIsPasswordConfirmationSecure] =
     useState(true);
-
-  const [checkTermsAndConditions, setCheckTermsAndConditions] = useState(false);
 
   const getZipLabel =
     watchCountry?.value === 'DE' || watchCountry?.value === 'US'
@@ -257,23 +256,16 @@ export const Registration = ({ navigation }) => {
                 privacy policies
               </Text>
               <Spacer />
-              <Checkbox
-                name="accTermsAndConditions"
-                // onPress={() => {
-                //   setFieldValue(
-                //     'accetTermsAndConditions',
-                //     !checkTermsAndConditions
-                //   );
-                //   setCheckTermsAndConditions(!checkTermsAndConditions);
-                // }}
+              <CustomCheckbox
+                name="acceptTermsAndConditions"
+                control={control}
                 title="I accept the terms and conditions of VISASTAR"
-                isChecked={checkTermsAndConditions}
               />
               <Spacer />
             </View>
             <View style={[style.inputWidth, style.marginBottom]}>
               <PrimaryButton
-                // disabled={!checkTermsAndConditions}
+                disabled={!watchCheck}
                 onPress={handleSubmit(onSubmit)}
                 style={{ marginBottom: 10 }}
               >

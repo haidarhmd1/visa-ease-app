@@ -17,10 +17,8 @@ export const getCompletedLists = id => {
 
 // USER
 export const login = data => {
-  return axios
-    .post(`${BASE_URL}/v1/user/login`, data, { headers })
-    .then(response => response)
-    .catch(error => error.response);
+  // return axios.post(`${BASE_URL}v1/users/login`, data, { headers });
+  return axios.post('http://localhost:3000/v1/users/login', data, { headers });
 };
 
 export const registerUserProfile = data => {

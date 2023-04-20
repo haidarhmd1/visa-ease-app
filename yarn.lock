@@ -6693,6 +6693,11 @@ expo-camera@~13.1.0:
     "@koale/useworker" "^4.0.2"
     invariant "^2.2.4"
 
+expo-checkbox@~2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/expo-checkbox/-/expo-checkbox-2.2.2.tgz#651c3fbf461e34137e9b49920a8041d9645d8dc8"
+  integrity sha512-0DXbeJdVAPfqiy+RBkGXHYU2dLxdpyaWAaV3+N+/xWEC2ilqrqCiSqsPcbFQer1f9qaqjNeDUi51qPuF5AgTIw==
+
 expo-cli@6.0.8:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-6.0.8.tgz#f5027cb1bcbed637ab5c61e99bf0dac892b45092"
@@ -6900,6 +6905,11 @@ expo-pwa@0.0.124:
     chalk "^4.0.0"
     commander "2.20.0"
     update-check "1.5.3"
+
+expo-secure-store@~12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/expo-secure-store/-/expo-secure-store-12.0.0.tgz#8baec10779708965169df3aa6406a801e4201514"
+  integrity sha512-Rz5lYr2NxrnFvIPwuWcseUSbdUjFxNZG0oVulqM9puuK7t5lDG3/SAy+J22ELBhaltuci2VVO6hCdFwRoRiG/Q==
 
 expo-splash-screen@~0.17.0, expo-splash-screen@~0.17.5:
   version "0.17.5"

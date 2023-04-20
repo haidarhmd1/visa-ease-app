@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
-import { HelperText, IconButton } from 'react-native-paper';
+import { HelperText, TextInput } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
 import { useAuthenticationStore } from 'store/zustand';
 import { login } from 'network/api';
@@ -13,11 +13,32 @@ import { Image } from 'expo-image';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
 import { blurhash } from 'res/constants/global';
-import { TextInput } from 'react-native-paper';
+import { useMutation } from 'react-query';
+import {
+  getSecureAuthTokenValue,
+  saveAuthTokenKey,
+} from 'utils/authSecureStore';
+
+function useGetAuthToken() {
+  useEffect(() => {
+    const getTokenResponse = async () => {
+      const token = await getSecureAuthTokenValue('userToken');
+      console.log(token);
+    };
+
+    getTokenResponse();
+  }, []);
+}
 
 const LoginRaw = ({ navigation }) => {
-  const userAuth = useAuthenticationStore(state => state.userAuth);
+  // const userAuth = useAuthenticationStore(state => state.userAuth);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+  const { mutateAsync, isLoading, error, isError } = useMutation(login, {
+    onSuccess: async data => {
+      await saveAuthTokenKey('userToken', data.data.token);
+      navigation.navigate(ROUTES.MAIN);
+    },
+  });
 
   const {
     control,
@@ -31,25 +52,8 @@ const LoginRaw = ({ navigation }) => {
     enableReinitialize: true,
   });
 
-  console.log(errors);
-
-  const [errorMessage, setErrorMessage] = useState({});
-
   const onSubmit = async values => {
-    try {
-      const { email, password } = values;
-      const response = await login({ email, password });
-      if (response.status !== 200) {
-        setErrorMessage({
-          errStatus: response.status,
-          errMsg: response.data.message,
-        });
-        throw Error;
-      }
-      userAuth(response.data.id, true);
-    } catch (error) {
-      console.log(error);
-    }
+    await mutateAsync(values);
   };
 
   return (
@@ -65,7 +69,9 @@ const LoginRaw = ({ navigation }) => {
         />
       </View>
       <View style={styles.formWrapper}>
-        <HelperText type="error">{errorMessage.errMsg}</HelperText>
+        {isError && (
+          <HelperText type="error">{error?.response.data.message}</HelperText>
+        )}
         <View>
           <View style={[styles.inputWidth, styles.marginBottom]}>
             <CustomTextInput
@@ -104,6 +110,7 @@ const LoginRaw = ({ navigation }) => {
           </TouchableWithoutFeedback>
 
           <PrimaryButton
+            loading={isLoading}
             style={[styles.buttonWidth, styles.marginBottom]}
             mode="contained"
             disabled={errors.password || errors.email}
