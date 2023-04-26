@@ -21,6 +21,15 @@ export const login = data => {
   return axios.post('http://localhost:3000/v1/users/login', data, { headers });
 };
 
+export const verifyToken = data => {
+  return axios.get('http://localhost:3000/v1/users/validate', {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${data}`,
+    },
+  });
+};
+
 export const registerUserProfile = data => {
   return axios
     .post(`${BASE_URL}/v1/user/users`, data, { headers })

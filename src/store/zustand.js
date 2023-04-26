@@ -1,32 +1,24 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
+import * as SecureStore from 'expo-secure-store';
+import omit from 'lodash-es/omit';
+import { USER_TOKEN } from 'res/constants/global';
 
-const initialUserState = {
+const initialUser = {
+  toke: null,
   id: '',
+  email: '',
+  fullname: '',
   isLoggedIn: false,
 };
 
-export const useAuthenticationStore = create(
-  persist(
-    set => ({
-      ...initialUserState,
-      userAuth: (registeredId, isLoggedInState) =>
-        set({ id: registeredId, isLoggedIn: isLoggedInState }),
-      userLogout: () => set(initialUserState),
-    }),
-    {
-      name: 'authentication-store',
-      storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
-);
-
-const initialAppbarTitleState = {
-  title: '',
-};
-
-export const useAppbarTitleStore = create(set => ({
-  ...initialAppbarTitleState,
-  appbarTitle: appTitle => set({ title: appTitle }),
+export const useAuthStore = create(set => ({
+  user: initialUser,
+  signIn: user => set(() => ({ user })),
+  signOut: () => {
+    SecureStore.deleteItemAsync(USER_TOKEN)
+      .then(() => {
+        set(() => ({ user: initialUser }));
+      })
+      .catch(error => console.error(error));
+  },
 }));

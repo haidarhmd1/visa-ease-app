@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
@@ -6,37 +6,32 @@ import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
 import { HelperText, TextInput } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
-import { useAuthenticationStore } from 'store/zustand';
 import { login } from 'network/api';
 import { LoginIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
-import { blurhash } from 'res/constants/global';
+import { USER_TOKEN, blurhash } from 'res/constants/global';
 import { useMutation } from 'react-query';
-import {
-  getSecureAuthTokenValue,
-  saveAuthTokenKey,
-} from 'utils/authSecureStore';
-
-function useGetAuthToken() {
-  useEffect(() => {
-    const getTokenResponse = async () => {
-      const token = await getSecureAuthTokenValue('userToken');
-      console.log(token);
-    };
-
-    getTokenResponse();
-  }, []);
-}
+import { useAuthStore } from 'store/zustand';
+import { setAsyncStorageItem } from 'utils/authSecureStore';
 
 const LoginRaw = ({ navigation }) => {
-  // const userAuth = useAuthenticationStore(state => state.userAuth);
+  const signIn = useAuthStore(state => state.signIn);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const { mutateAsync, isLoading, error, isError } = useMutation(login, {
-    onSuccess: async data => {
-      await saveAuthTokenKey('userToken', data.data.token);
-      navigation.navigate(ROUTES.MAIN);
+    onSuccess: data => {
+      setAsyncStorageItem(USER_TOKEN, data.data.token)
+        .then(() => {
+          signIn({
+            token: data.data.token,
+            id: data.data.user.id,
+            email: data.data.user.email,
+            fullname: data.data.user.fullname,
+            isLoggedIn: true,
+          });
+        })
+        .catch(asyncError => console.error(asyncError));
     },
   });
 
