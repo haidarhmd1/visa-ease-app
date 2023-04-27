@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
-import { getCityofCountry } from 'network/api';
+import { getCityofCountry, registerUserProfile } from 'network/api';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider, Text, TextInput } from 'react-native-paper';
 import { BackButton } from 'components/Login';
@@ -13,7 +13,7 @@ import {
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
 import { getCountryDropdown } from 'utils/countryList';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
 
 const defaultValues = {
@@ -29,6 +29,14 @@ const defaultValues = {
   acceptTermsAndConditions: false,
 };
 export const Registration = ({ navigation }) => {
+  const { mutateAsync, isLoading: isRegisterLoading, isError } = useMutation(
+    registerUserProfile,
+    {
+      onSuccess: data => {
+        console.log('datasss', data);
+      },
+    }
+  );
   const { control, handleSubmit, watch } = useForm({
     defaultValues,
     enableReinitialize: true,
@@ -43,16 +51,19 @@ export const Registration = ({ navigation }) => {
   );
 
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-  const [isPasswordConfirmationSecure, setIsPasswordConfirmationSecure] =
-    useState(true);
+  const [
+    isPasswordConfirmationSecure,
+    setIsPasswordConfirmationSecure,
+  ] = useState(true);
 
   const getZipLabel =
     watchCountry?.value === 'DE' || watchCountry?.value === 'US'
       ? 'ZIP Code*'
       : 'ZIP Code';
 
-  const onSubmit = data => {
+  const onSubmit = async data => {
     console.log(data);
+    await mutateAsync(data);
   };
 
   return (
@@ -75,7 +86,7 @@ export const Registration = ({ navigation }) => {
                 <CustomTextInput
                   control={control}
                   name="email"
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   placeholder="Email Address*"
                   keyboardType="email-address"
                 />
@@ -84,7 +95,7 @@ export const Registration = ({ navigation }) => {
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   name="password"
                   placeholder="Password*"
                   secureTextEntry={isPasswordSecure}
@@ -100,7 +111,7 @@ export const Registration = ({ navigation }) => {
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   name="passwordConfirmation"
                   placeholder="Confirm Password*"
                   secureTextEntry={isPasswordConfirmationSecure}
@@ -124,7 +135,7 @@ export const Registration = ({ navigation }) => {
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   name="fullname"
                   placeholder="Full Name*"
                 />
@@ -133,7 +144,7 @@ export const Registration = ({ navigation }) => {
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   name="dob"
                   placeholder="Date of Birth*"
                 />
@@ -143,7 +154,7 @@ export const Registration = ({ navigation }) => {
                 <Text variant="labelMedium">Gender*</Text>
                 <CustomDropdown
                   name="gender"
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   control={control}
                   selectPlaceholder="Select Gender"
                   data={[
@@ -168,7 +179,7 @@ export const Registration = ({ navigation }) => {
 
                 <CustomDropdown
                   name="maritalStatus"
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   control={control}
                   selectPlaceholder="Select a Marital Status"
                   data={[
@@ -182,7 +193,7 @@ export const Registration = ({ navigation }) => {
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
-                  // rules={{ required: true }}
+                  rules={{ required: true }}
                   name="phone"
                   placeholder="Phone*"
                 />
@@ -227,7 +238,7 @@ export const Registration = ({ navigation }) => {
                   <CustomTextInput
                     style={{ flex: 0.5, marginRight: 16 }}
                     control={control}
-                    // rules={{ required: true }}
+                    rules={{ required: true }}
                     name="zipCode"
                     placeholder={getZipLabel}
                   />
@@ -235,7 +246,7 @@ export const Registration = ({ navigation }) => {
                   <CustomTextInput
                     style={{ flex: 1 }}
                     control={control}
-                    // rules={{ required: true }}
+                    rules={{ required: true }}
                     name="street"
                     placeholder="street*"
                   />
@@ -263,8 +274,14 @@ export const Registration = ({ navigation }) => {
               />
               <Spacer />
             </View>
+            <View>
+              <Text style={{ color: 'red' }}>
+                {isError && 'Error registering user'}
+              </Text>
+            </View>
             <View style={[style.inputWidth, style.marginBottom]}>
               <PrimaryButton
+                isLoading={isRegisterLoading}
                 disabled={!watchCheck}
                 onPress={handleSubmit(onSubmit)}
                 style={{ marginBottom: 10 }}
@@ -275,13 +292,6 @@ export const Registration = ({ navigation }) => {
           </View>
         </Layout>
       </ScrollView>
-      {/*<NotificationToast*/}
-      {/*  type="Top"*/}
-      {/*  error={error}*/}
-      {/*  isLoading={isLoading}*/}
-      {/*  success={success}*/}
-      {/*  showToast={showToast}*/}
-      {/*/>*/}
     </View>
   );
 };

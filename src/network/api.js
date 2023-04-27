@@ -31,10 +31,7 @@ export const verifyToken = data => {
 };
 
 export const registerUserProfile = data => {
-  return axios
-    .post(`${BASE_URL}/v1/user/users`, data, { headers })
-    .then(response => response)
-    .catch(error => error.response);
+  return axios.post(`${BASE_URL}/v1/user/users`, data, { headers });
 };
 
 export const completeUserProfile = (data, id) => {

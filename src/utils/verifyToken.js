@@ -1,38 +1,41 @@
-import * as SecureStore from 'expo-secure-store';
-
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { verifyToken } from 'network/api';
-import { useAuthStore } from 'store/zustand';
-import { USER_TOKEN } from 'res/constants/global';
+import { USER_DATA } from 'res/constants/global';
+import * as SecureStore from 'expo-secure-store';
+import { initialUser } from 'store/zustand';
 
 export const useVerifyToken = () => {
-  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState(initialUser);
 
   useEffect(() => {
-    if (token) return;
+    if (userData.isLoggedIn) return;
 
-    SecureStore.getItemAsync(USER_TOKEN)
+    SecureStore.getItemAsync(USER_DATA)
       .then(response => {
-        setToken(response);
+        setUserData(JSON.parse(response));
       })
-      .catch(error => console.error(error));
-  }, [token]);
+      .catch(() => {});
+  }, [userData]);
 
   const { data, isLoading, isError } = useQuery(
     'validateToken',
     () => {
-      if (!token) {
+      if (!userData.token) {
         throw new Error('No token found');
       }
-      return verifyToken(token);
+      return verifyToken(userData.token);
     },
     {
-      enabled: !!token,
+      enabled: !!userData.token,
       retry: false,
     }
   );
-
-  console.log('data', data);
-  return { isLoading, isError, data, token };
+  return {
+    isLoading,
+    isError,
+    isTokenVerified: data?.status === 200,
+    token: userData.token,
+    userData,
+  };
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
@@ -11,17 +12,25 @@ import { LoginIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
-import { USER_TOKEN, blurhash } from 'res/constants/global';
 import { useMutation } from 'react-query';
 import { useAuthStore } from 'store/zustand';
-import { setAsyncStorageItem } from 'utils/authSecureStore';
+import { USER_DATA, blurhash } from 'res/constants/global';
 
 const LoginRaw = ({ navigation }) => {
   const signIn = useAuthStore(state => state.signIn);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const { mutateAsync, isLoading, error, isError } = useMutation(login, {
     onSuccess: data => {
-      setAsyncStorageItem(USER_TOKEN, data.data.token)
+      SecureStore.setItemAsync(
+        USER_DATA,
+        JSON.stringify({
+          token: data.data.token,
+          id: data.data.user.id,
+          email: data.data.user.email,
+          fullname: data.data.user.fullname,
+          isLoggedIn: true,
+        })
+      )
         .then(() => {
           signIn({
             token: data.data.token,
@@ -31,7 +40,7 @@ const LoginRaw = ({ navigation }) => {
             isLoggedIn: true,
           });
         })
-        .catch(asyncError => console.error(asyncError));
+        .catch(() => navigation.navigate(ROUTES.LOGIN));
     },
   });
 

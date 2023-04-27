@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
-import omit from 'lodash-es/omit';
-import { USER_TOKEN } from 'res/constants/global';
+import { USER_DATA } from 'res/constants/global';
 
-const initialUser = {
-  toke: null,
+export const initialUser = {
+  token: null,
   id: '',
   email: '',
   fullname: '',
@@ -13,9 +12,17 @@ const initialUser = {
 
 export const useAuthStore = create(set => ({
   user: initialUser,
-  signIn: user => set(() => ({ user })),
+  signIn: user => {
+    SecureStore.setItemAsync(USER_DATA, JSON.stringify(user))
+      .then(() => {
+        set(() => ({ user }));
+      })
+      .catch(() => {
+        set(() => ({ user: initialUser }));
+      });
+  },
   signOut: () => {
-    SecureStore.deleteItemAsync(USER_TOKEN)
+    SecureStore.deleteItemAsync(USER_DATA)
       .then(() => {
         set(() => ({ user: initialUser }));
       })
