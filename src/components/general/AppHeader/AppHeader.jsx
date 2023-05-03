@@ -4,8 +4,10 @@ import { ROUTES } from 'res/constants/routes';
 import { Appbar, Text } from 'react-native-paper';
 import { Dimensions, View } from 'react-native';
 import { useUserStore } from 'store/zustand';
+import { useIntl } from 'react-intl';
 
 export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
+  const { formatMessage } = useIntl();
   const userInfo = useUserStore();
   const onProfileHandler = () => {
     navigation.navigate(ROUTES.ACCOUNT);
@@ -18,7 +20,8 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
           style={{ fontWeight: 'bold', paddingLeft: 16 }}
           variant="headlineSmall"
         >
-          Hello, {userInfo.userData.fullname}
+          {formatMessage({ id: 'screen.main.greeting' })}{' '}
+          {userInfo.userData.fullname}
         </Text>
         <View
           style={{

@@ -2,6 +2,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import { StyledCard } from 'components/general/Layout/Layout';
 import { List } from 'react-native-paper';
+import { useIntl } from 'react-intl';
 
 const PhoneIcon = properties => <List.Icon {...properties} icon="phone" />;
 const CellPhoneIcon = properties => (
@@ -18,10 +19,13 @@ const externalLink = (type, value) => {
 };
 
 export const ContactLinks = () => {
+  const { formatMessage } = useIntl();
   return (
     <StyledCard>
       <List.Section>
-        <List.Subheader>Contact</List.Subheader>
+        <List.Subheader>
+          {formatMessage({ id: 'screen.account.contact.title' })}
+        </List.Subheader>
         <List.Item
           onPress={() => externalLink('phone', '+49 030 27578642')}
           title="+49 030 27578642"

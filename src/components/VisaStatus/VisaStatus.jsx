@@ -3,8 +3,10 @@ import { StyledCard } from 'components/general/Layout/Layout';
 import { Card } from 'react-native-paper';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { View } from 'react-native';
+import { useIntl } from 'react-intl';
 
 export const VisaStatus = () => {
+  const { formatMessage } = useIntl();
   return (
     <StyledCard mode="elevated" style={{ marginTop: 12 }}>
       <View
@@ -16,7 +18,7 @@ export const VisaStatus = () => {
       >
         <Card.Title
           style={{ flex: 1 }}
-          title="Visa Status"
+          title={formatMessage({ id: 'visaStatus.title' })}
           subtitle="In Progress..."
         />
         <View style={{ margin: 8 }}>

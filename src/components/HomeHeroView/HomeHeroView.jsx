@@ -1,11 +1,13 @@
 import React from 'react';
 import { PalmImage } from 'assets/images';
-import { ImageBackground, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
 import navigation from 'navigation';
+import { useIntl } from 'react-intl';
 
 export const HomeHeroView = () => {
+  const { formatMessage } = useIntl();
   const onPressHandler = route => {
     navigation.navigate(route);
   };
@@ -56,7 +58,7 @@ export const HomeHeroView = () => {
             color: 'white',
           }}
         >
-          Start your Visa Journey!
+          {formatMessage({ id: 'screen.main.startVisaJourney' })}
         </Text>
       </View>
     </View>

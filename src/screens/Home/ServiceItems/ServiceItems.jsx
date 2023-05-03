@@ -10,12 +10,9 @@ import {
 import { useIntl } from 'react-intl';
 import { ROUTES } from 'res/constants/routes';
 import { List, Text } from 'react-native-paper';
-import { PalmImage } from 'assets/images';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { PriceTag } from 'assets/icons';
 import { colorPalette } from 'styles/theme/theme.extended';
 import { VisaStatus } from 'components/VisaStatus';
-import { HomeHeroView } from 'components/HomeHeroView';
 
 const visaCountries = [
   { id: 1, title: 'UAE', image: '' },
@@ -26,7 +23,7 @@ const visaCountries = [
 const services = [
   {
     id: 1,
-    title: 'Visum',
+    title: 'visastar.home.services.visa',
     route: ROUTES.VISA_HOME,
     icon: 'file-document-multiple-outline',
   },
@@ -51,7 +48,7 @@ const services = [
 ];
 
 export const ServiceItems = ({ navigation }) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
 
   const onPressRouteNavigationHandler = route => {
     navigation.navigate(route);
@@ -67,7 +64,7 @@ export const ServiceItems = ({ navigation }) => {
     <View style={{ marginBottom: 21 }}>
       <VisaStatus />
       <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
-        Our Services
+        {formatMessage({ id: 'screen.main.ourServices' })}
       </Text>
 
       <FlatList
@@ -107,7 +104,7 @@ export const ServiceItems = ({ navigation }) => {
                 variant="labelMedium"
                 style={{ marginTop: 'auto', textAlign: 'center' }}
               >
-                {intl.formatMessage({
+                {formatMessage({
                   id: item.title,
                 })}
               </Text>
@@ -118,7 +115,7 @@ export const ServiceItems = ({ navigation }) => {
       />
       <View>
         <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
-          Our Top Visa Services
+          {formatMessage({ id: 'screen.main.topVisaServices' })}
         </Text>
         <FlatList
           horizontal
@@ -165,7 +162,7 @@ export const ServiceItems = ({ navigation }) => {
                     {item.title}
                   </Text>
                   <Text variant="bodyMedium" style={{ color: 'white' }}>
-                    Start your Visa Journey!
+                    {formatMessage({ id: 'screen.main.startVisaJourney' })}
                   </Text>
                 </View>
               </View>

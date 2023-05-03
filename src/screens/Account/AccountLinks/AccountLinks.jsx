@@ -11,6 +11,7 @@ import {
   VIP_TOUREN,
 } from 'res/constants/links';
 import { List } from 'react-native-paper';
+import { useIntl } from 'react-intl';
 
 const RightContent = properties => <List.Icon {...properties} icon="link" />;
 
@@ -22,43 +23,50 @@ const externalLink = url => {
 };
 
 export const AccountLinks = () => {
+  const { formatMessage } = useIntl();
   return (
     <StyledCard>
       <List.Section>
-        <List.Subheader>External Links</List.Subheader>
+        <List.Subheader>
+          {formatMessage({ id: 'screen.account.externalLinks.title' })}
+        </List.Subheader>
         <List.Item
           onPress={() => externalLink(FAQ)}
-          title="FAQ"
+          title={formatMessage({ id: 'screen.account.externalLinks.faq' })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(NEWS)}
-          title="News"
+          title={formatMessage({ id: 'screen.account.externalLinks.news' })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(VIP_TOUREN)}
-          title="VIP Touren"
+          title={formatMessage({ id: 'screen.account.externalLinks.vipTours' })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(VERSAND)}
-          title="Versand"
+          title={formatMessage({ id: 'screen.account.externalLinks.shipment' })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(PREISE)}
-          title="Preise"
+          title={formatMessage({ id: 'screen.account.externalLinks.prices' })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(TRANSLATION)}
-          title="Übersetzungen"
+          title={formatMessage({
+            id: 'screen.account.externalLinks.translations',
+          })}
           right={RightContent}
         />
         <List.Item
           onPress={() => externalLink(LEGALISIERUNG)}
-          title="Legalisierung"
+          title={formatMessage({
+            id: 'screen.account.externalLinks.legalization',
+          })}
           right={RightContent}
         />
       </List.Section>

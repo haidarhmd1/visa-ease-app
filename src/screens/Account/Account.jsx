@@ -5,29 +5,31 @@ import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { DangerButton } from 'components/general/Buttons';
 import { Card } from 'react-native-paper';
 import { useAuthStore, useUserStore } from 'store/zustand';
+import { useIntl } from 'react-intl';
 import { ProfileOverview } from './ProfileOverview';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
+  const { formatMessage } = useIntl();
   const signOut = useAuthStore(state => state.signOut);
   const removeUserInfo = useUserStore(state => state.removeUserInfo);
 
   const logoutUser = () => {
     Alert.alert(
-      'Logout',
-      'Do you really want to logout?',
+      formatMessage({ id: 'button.logout' }),
+      formatMessage({ id: 'general.logoutConfirmation' }),
       [
         {
-          text: 'Yes',
+          text: formatMessage({ id: 'general.yes' }),
           onPress: () => {
             removeUserInfo();
             signOut();
           },
         },
         {
-          text: 'No',
+          text: formatMessage({ id: 'general.no' }),
           onPress: () => {},
           style: 'cancel',
         },
@@ -41,7 +43,7 @@ export const Account = ({ navigation }) => {
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
-        title="Account"
+        title={formatMessage({ id: 'screen.account.title' })}
       />
       <ScrollView>
         <Layout>
@@ -51,7 +53,9 @@ export const Account = ({ navigation }) => {
           <SocialMediaLinks />
           <StyledCard>
             <Card.Content>
-              <DangerButton onPress={logoutUser}>Log out</DangerButton>
+              <DangerButton onPress={logoutUser}>
+                {formatMessage({ id: 'button.logout' })}
+              </DangerButton>
             </Card.Content>
           </StyledCard>
         </Layout>

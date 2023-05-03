@@ -9,6 +9,7 @@ import { ProfileEditIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { blurhash } from 'res/constants/global';
 import { useUserStore } from 'store/zustand';
+import { useIntl } from 'react-intl';
 
 const onPressHandler = (route, navigation) => navigation.navigate(route);
 
@@ -18,15 +19,14 @@ const getFormattedDate = dataString => {
 };
 
 export const ProfileDetails = () => {
+  const { formatMessage } = useIntl();
   const userInfo = useUserStore();
   const navigation = useNavigation();
-
-  console.log('userInfo', userInfo.userData);
 
   return (
     <View>
       <Text variant="headlineSmall" style={{ marginBottom: 8 }}>
-        Profile Details
+        {formatMessage({ id: 'screen.profile.profileDetails.title' })}
       </Text>
       <View style={{ alignItems: 'center' }}>
         <Image
@@ -40,28 +40,36 @@ export const ProfileDetails = () => {
       <View>
         <View style={styles.layoutView}>
           <Spacer />
-          <Text variant="labelLarge">Fullname: </Text>
+          <Text variant="labelLarge">
+            {formatMessage({ id: 'general.fullname' })}
+          </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
             {userInfo.userData.fullname}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
-          <Text variant="labelLarge">Email Address: </Text>
+          <Text variant="labelLarge">
+            {formatMessage({ id: 'general.email' })}
+          </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
             {userInfo.userData.email}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
-          <Text variant="labelLarge">Date of Birth: </Text>
+          <Text variant="labelLarge">
+            {formatMessage({ id: 'general.dob' })}
+          </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
             {getFormattedDate(userInfo.userData.dob)}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
-          <Text variant="labelLarge">Address: </Text>
+          <Text variant="labelLarge">
+            {formatMessage({ id: 'general.address' })}
+          </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
             {userInfo.userData.street}, {userInfo.userData.zipCode}{' '}
             {userInfo.userData.city}
@@ -71,7 +79,7 @@ export const ProfileDetails = () => {
           <Spacer />
           <View style={{ alignSelf: 'flex-end' }}>
             <Button
-              title="Edit"
+              title={formatMessage({ id: 'button.edit' })}
               onPress={() =>
                 onPressHandler(
                   ROUTES.VISA_INFORMATION.generalInformation,
@@ -84,24 +92,24 @@ export const ProfileDetails = () => {
       </View>
       <Divider marginBottom={12} marginTop={12} />
       <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-        Dokumente
+        {formatMessage({ id: 'general.documents' })}
       </Text>
       <VisaItemButton
-        title="Passport Picture"
+        title={formatMessage({ id: 'general.passportPicture' })}
         navigation={navigation}
         route={ROUTES.VISA_INFORMATION.passportPicture}
         isProgessCompleted
       />
 
       <VisaItemButton
-        title="Aufenthaltserlaubnis"
+        title={formatMessage({ id: 'general.residencePermit' })}
         navigation={navigation}
         route={ROUTES.VISA_INFORMATION.residencePermit}
         isProgessCompleted={false}
       />
 
       <VisaItemButton
-        title="Biometic Image"
+        title={formatMessage({ id: 'general.biometricImage' })}
         navigation={navigation}
         route={ROUTES.VISA_INFORMATION.biometricImage}
         isProgessCompleted={false}
