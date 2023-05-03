@@ -3,8 +3,10 @@ import React from 'react';
 import { ROUTES } from 'res/constants/routes';
 import { Appbar, Text } from 'react-native-paper';
 import { Dimensions, View } from 'react-native';
+import { useUserStore } from 'store/zustand';
 
 export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
+  const userInfo = useUserStore();
   const onProfileHandler = () => {
     navigation.navigate(ROUTES.ACCOUNT);
   };
@@ -16,7 +18,7 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
           style={{ fontWeight: 'bold', paddingLeft: 16 }}
           variant="headlineSmall"
         >
-          Hello, Haidar
+          Hello, {userInfo.userData.fullname}
         </Text>
         <View
           style={{

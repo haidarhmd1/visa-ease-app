@@ -1,5 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import axios from 'axios';
+import { getToken } from 'utils/getToken';
 
 export const BASE_URL = 'http://localhost:3000';
 
@@ -16,22 +17,29 @@ export const getCompletedLists = id => {
 };
 
 // USER
-export const login = data => {
-  // return axios.post(`${BASE_URL}v1/users/login`, data, { headers });
-  return axios.post('http://localhost:3000/v1/users/login', data, { headers });
-};
+export const login = data =>
+  axios.post(`${BASE_URL}/v1/users/login`, data, { headers });
 
-export const verifyToken = data => {
-  return axios.get('http://localhost:3000/v1/users/validate', {
+export const verifyToken = data =>
+  axios.get(`${BASE_URL}/v1/users/validate`, {
     headers: {
       ...headers,
       Authorization: `Bearer ${data}`,
     },
   });
-};
 
 export const registerUserProfile = data => {
-  return axios.post(`${BASE_URL}/v1/user/users`, data, { headers });
+  return axios.post(`${BASE_URL}/v1/users/register`, data, { headers });
+};
+
+export const forgotPassword = data => {
+  return axios.post(`${BASE_URL}/v1/users/forgotPassword`, data, { headers });
+};
+
+export const enterOTP = ({ data, id }) => {
+  return axios.post(`${BASE_URL}/v1/users/verifyAccount/${id}`, data, {
+    headers,
+  });
 };
 
 export const completeUserProfile = (data, id) => {
@@ -41,11 +49,15 @@ export const completeUserProfile = (data, id) => {
     .catch(error => error.response);
 };
 
-export const getUser = id => {
-  return axios
-    .get(`${BASE_URL}/v1/user/users/${id}`, { headers })
-    .then(response => response)
-    .catch(error => error.response);
+export const axiosConfig = async () => {
+  const token = await getToken();
+  return {
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+  };
+};
+
+export const getUser = async () => {
+  return axios.get(`${BASE_URL}/v1/users/user`, await axiosConfig());
 };
 
 // VISA

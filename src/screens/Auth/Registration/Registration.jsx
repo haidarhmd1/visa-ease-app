@@ -15,6 +15,12 @@ import {
 import { getCountryDropdown } from 'utils/countryList';
 import { useMutation, useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
+import { RESPONSE } from 'res/constants/global';
+import { ROUTES } from 'res/constants/routes';
+import { ErrorCard } from 'components/ErrorCard';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useIntl } from 'react-intl';
+import { useRegistrationValidationSchema } from './Registration.schema';
 
 const defaultValues = {
   fullname: '',
@@ -29,17 +35,26 @@ const defaultValues = {
   acceptTermsAndConditions: false,
 };
 export const Registration = ({ navigation }) => {
-  const { mutateAsync, isLoading: isRegisterLoading, isError } = useMutation(
+  const intl = useIntl();
+  const { registrationValidationSchema } = useRegistrationValidationSchema();
+  const { mutate, isLoading: isRegisterLoading, isError, error } = useMutation(
     registerUserProfile,
     {
       onSuccess: data => {
-        console.log('datasss', data);
+        if (data.status !== RESPONSE.OK) return;
+        navigation.navigate(ROUTES.ENTER_OTP, {
+          userId: data.data.id,
+        });
+      },
+      onError: regError => {
+        console.log('error', regError);
       },
     }
   );
   const { control, handleSubmit, watch } = useForm({
     defaultValues,
     enableReinitialize: true,
+    resolver: yupResolver(registrationValidationSchema),
   });
 
   const watchCountry = watch('country') || '';
@@ -58,12 +73,27 @@ export const Registration = ({ navigation }) => {
 
   const getZipLabel =
     watchCountry?.value === 'DE' || watchCountry?.value === 'US'
-      ? 'ZIP Code*'
-      : 'ZIP Code';
+      ? `${intl.formatMessage({ id: 'register.form.zipCode' })}*`
+      : intl.formatMessage({ id: 'register.form.zipCode' });
 
-  const onSubmit = async data => {
-    console.log(data);
-    await mutateAsync(data);
+  const onSubmit = data => {
+    const formData = {
+      email: data.email,
+      password: data.password,
+      fullname: data.fullname,
+      dob: data.dob,
+      gender: data.gender.value,
+      nationality: data.nationality.value,
+      maritalStatus: data.maritalStatus.value,
+      phone: data.phone,
+      profession: data.profession,
+      country: data.country.value,
+      city: data.city.value,
+      zipCode: data.zipCode,
+      street: data.street,
+      acceptTermsAndConditions: data.acceptTermsAndConditions,
+    };
+    mutate(formData);
   };
 
   return (
@@ -80,15 +110,24 @@ export const Registration = ({ navigation }) => {
           <View>
             <Spacer />
             <View>
-              <Text variant="labelLarge">Login Information</Text>
+              <Text variant="labelLarge">
+                {intl.formatMessage({
+                  id: 'register.title.loginInformation',
+                })}
+              </Text>
               <Spacer />
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
                   name="email"
-                  rules={{ required: true }}
-                  placeholder="Email Address*"
                   keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoCompleteType="email"
+                  rules={{ required: true }}
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.email',
+                  })}*`}
                 />
               </View>
 
@@ -97,7 +136,10 @@ export const Registration = ({ navigation }) => {
                   control={control}
                   rules={{ required: true }}
                   name="password"
-                  placeholder="Password*"
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.password',
+                  })}*`}
+                  autoCorrect={false}
                   secureTextEntry={isPasswordSecure}
                   right={
                     <TextInput.Icon
@@ -113,7 +155,9 @@ export const Registration = ({ navigation }) => {
                   control={control}
                   rules={{ required: true }}
                   name="passwordConfirmation"
-                  placeholder="Confirm Password*"
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.passwordConfirmation',
+                  })}*`}
                   secureTextEntry={isPasswordConfirmationSecure}
                   right={
                     <TextInput.Icon
@@ -130,14 +174,21 @@ export const Registration = ({ navigation }) => {
             </View>
             <SpacerDivider />
             <View>
-              <Text variant="lableLarge">Personal Information:</Text>
+              <Text variant="lableLarge">
+                {intl.formatMessage({
+                  id: 'register.title.personalInformation',
+                })}
+              </Text>
               <Spacer />
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomTextInput
                   control={control}
                   rules={{ required: true }}
                   name="fullname"
-                  placeholder="Full Name*"
+                  autoCorrect={false}
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.fullname',
+                  })}*`}
                 />
               </View>
 
@@ -146,46 +197,91 @@ export const Registration = ({ navigation }) => {
                   control={control}
                   rules={{ required: true }}
                   name="dob"
-                  placeholder="Date of Birth*"
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.dob',
+                  })}*`}
                 />
               </View>
 
               <View style={[style.inputWidth, style.marginBottom]}>
-                <Text variant="labelMedium">Gender*</Text>
+                <Text variant="labelMedium">{`${intl.formatMessage({
+                  id: 'register.form.gender',
+                })}*`}</Text>
                 <CustomDropdown
                   name="gender"
                   rules={{ required: true }}
                   control={control}
-                  selectPlaceholder="Select Gender"
+                  selectPlaceholder={`${intl.formatMessage({
+                    id: 'register.form.gender',
+                  })}*`}
                   data={[
-                    { label: 'Male', value: 'male' },
-                    { label: 'Female', value: 'female' },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.gender.male',
+                      }),
+                      value: 'MALE',
+                    },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.gender.female',
+                      }),
+                      value: 'FEMALE',
+                    },
                   ]}
                 />
               </View>
 
               <View style={[style.inputWidth, style.marginBottom]}>
-                <Text variant="labelMedium">Nationality*</Text>
+                <Text variant="labelMedium">{`${intl.formatMessage({
+                  id: 'register.form.nationality',
+                })}*`}</Text>
                 <CustomDropdown
                   name="nationality"
                   control={control}
-                  selectPlaceholder="Select a Nationality"
+                  selectPlaceholder={`${intl.formatMessage({
+                    id: 'register.form.nationality',
+                  })}*`}
                   data={getCountryDropdown}
                 />
               </View>
 
               <View style={[style.inputWidth, style.marginBottom]}>
-                <Text variant="labelMedium">Marital Status*</Text>
+                <Text variant="labelMedium">{`${intl.formatMessage({
+                  id: 'register.form.maritalStatus',
+                })}*`}</Text>
 
                 <CustomDropdown
                   name="maritalStatus"
                   rules={{ required: true }}
                   control={control}
-                  selectPlaceholder="Select a Marital Status"
+                  selectPlaceholder={`${intl.formatMessage({
+                    id: 'register.form.maritalStatus',
+                  })}*`}
                   data={[
-                    { label: 'Single', value: 'single' },
-                    { label: 'Married', value: 'married' },
-                    { label: 'Widowed', value: 'widowed' },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.maritalStatus.single',
+                      }),
+                      value: 'SINGLE',
+                    },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.maritalStatus.married',
+                      }),
+                      value: 'MARRIED',
+                    },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.maritalStatus.widowed',
+                      }),
+                      value: 'WIDOWED',
+                    },
+                    {
+                      label: intl.formatMessage({
+                        id: 'registration.form.maritalStatus.divorced',
+                      }),
+                      value: 'DIVORCED',
+                    },
                   ]}
                 />
               </View>
@@ -195,7 +291,20 @@ export const Registration = ({ navigation }) => {
                   control={control}
                   rules={{ required: true }}
                   name="phone"
-                  placeholder="Phone*"
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.phoneNumber',
+                  })}*`}
+                />
+              </View>
+
+              <View style={[style.inputWidth, style.marginBottom]}>
+                <CustomTextInput
+                  control={control}
+                  rules={{ required: true }}
+                  name="profession"
+                  placeholder={`${intl.formatMessage({
+                    id: 'register.form.profession',
+                  })}*`}
                 />
               </View>
             </View>
@@ -203,14 +312,22 @@ export const Registration = ({ navigation }) => {
             <Divider />
             <Spacer />
             <View>
-              <Text variant="labelLarge">Adress Information</Text>
+              <Text variant="labelLarge">
+                {intl.formatMessage({
+                  id: 'register.title.addressInformation',
+                })}
+              </Text>
               <Spacer />
               <View style={[style.inputWidth, style.marginBottom]}>
-                <Text variant="labelMedium">Country*</Text>
+                <Text variant="labelMedium">{`${intl.formatMessage({
+                  id: 'register.form.country',
+                })}*`}</Text>
                 <CustomDropdown
                   name="country"
                   control={control}
-                  selectPlaceholder="Select a country"
+                  selectPlaceholder={`${intl.formatMessage({
+                    id: 'register.form.country',
+                  })}*`}
                   data={getCountryDropdown}
                 />
               </View>
@@ -220,7 +337,11 @@ export const Registration = ({ navigation }) => {
                   control={control}
                   disabled={isLoading}
                   selectPlaceholder={
-                    isLoading ? 'Loading cities' : 'Select a City'
+                    isLoading
+                      ? 'Loading cities'
+                      : `${intl.formatMessage({
+                          id: 'register.form.city',
+                        })}*`
                   }
                   data={
                     cityData?.data.data.map(list => {
@@ -248,7 +369,9 @@ export const Registration = ({ navigation }) => {
                     control={control}
                     rules={{ required: true }}
                     name="street"
-                    placeholder="street*"
+                    placeholder={`${intl.formatMessage({
+                      id: 'register.form.street',
+                    })}*`}
                   />
                 </View>
               </View>
@@ -259,25 +382,30 @@ export const Registration = ({ navigation }) => {
             <View style={[style.inputWidth, style.marginBottom]}>
               <Spacer />
               <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
-                Your privacy matter to us!
+                {intl.formatMessage({
+                  id: 'register.form.title.privacy',
+                })}
               </Text>
               <Spacer />
               <Text variant="bodyMedium">
-                Your personal information will be processed in accordance to our
-                privacy policies
+                {intl.formatMessage({
+                  id: 'register.form.description.privacy',
+                })}
               </Text>
               <Spacer />
               <CustomCheckbox
                 name="acceptTermsAndConditions"
                 control={control}
-                title="I accept the terms and conditions of VISASTAR"
+                title={intl.formatMessage({
+                  id: 'register.form.acceptTermsAndConditions.title',
+                })}
               />
               <Spacer />
             </View>
             <View>
-              <Text style={{ color: 'red' }}>
-                {isError && 'Error registering user'}
-              </Text>
+              {isError && (
+                <ErrorCard errMessage={error?.response.data.message} />
+              )}
             </View>
             <View style={[style.inputWidth, style.marginBottom]}>
               <PrimaryButton
@@ -286,7 +414,9 @@ export const Registration = ({ navigation }) => {
                 onPress={handleSubmit(onSubmit)}
                 style={{ marginBottom: 10 }}
               >
-                Register
+                {intl.formatMessage({
+                  id: 'register.button',
+                })}
               </PrimaryButton>
             </View>
           </View>

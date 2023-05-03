@@ -4,19 +4,23 @@ import { ROUTES } from 'res/constants/routes';
 import { Avatar, Card, Text } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useUserStore } from 'store/zustand';
+import { userCredentials } from 'utils/userCredentials';
 
 export const ProfileOverview = ({ navigation }) => {
+  const user = useUserStore();
   const onPressHandler = () => {
     navigation.navigate(ROUTES.PROFILE);
   };
+
   return (
     <StyledCard onPress={onPressHandler}>
-      <Card.Content style={{ flexDirection: 'row' }}>
-        <Avatar.Text label="HH" />
+      <Card.Content style={styles.flexRow}>
+        <Avatar.Text label={userCredentials(user.userData.fullname)} />
         <View style={styles.profileUserInfo}>
-          <Text variant="titleLarge">Test</Text>
+          <Text variant="titleLarge">{user.userData.fullname}</Text>
           <Text style={styles.profileSubTitle} variant="labelSmall">
-            Test@test.com
+            {user.userData.email}
           </Text>
         </View>
         <AntDesign style={styles.arrowRight} name="right" size={18} />
@@ -37,4 +41,5 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 'auto',
   },
+  flexRow: { flexDirection: 'row' },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native-paper';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const PrimaryButton = ({ children, style, ...properties }) => {
   return (
@@ -19,6 +20,7 @@ export const SecondaryButton = ({ children, style, ...properties }) => {
     <Button
       mode="contained"
       buttonColor="white"
+      textColor={MyTheme.colors.brandFont}
       {...properties}
       style={[
         style,

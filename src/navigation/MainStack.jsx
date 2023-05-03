@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
@@ -15,10 +15,33 @@ import { Agreement } from 'components/Agreement';
 import { Passport } from 'components/Shared/Passport';
 import { ResidencePermit } from 'components/Shared/ResidencePermit';
 import { BiometricImage } from 'components/Shared/BiometricImage';
+import { useQuery } from 'react-query';
+import { getUser } from 'network/api';
+import { ActivityIndicator } from 'react-native-paper';
+import { MyTheme } from 'styles/theme/theme.extended';
+import { useAuthStore, useUserStore } from 'store/zustand';
 
 const Stack = createStackNavigator();
 
 export const MainStack = () => {
+  const signOut = useAuthStore(state => state.signOut);
+  const setUserInfo = useUserStore(state => state.setUserInfo);
+
+  const { isLoading, isError, data } = useQuery('getUser', getUser);
+
+  useEffect(() => {
+    if (!data) return;
+    setUserInfo(data.data);
+  }, [data, setUserInfo]);
+
+  if (isLoading) {
+    return <ActivityIndicator animating color={MyTheme.colors.primaryBrand} />;
+  }
+
+  if (isError) {
+    signOut();
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{

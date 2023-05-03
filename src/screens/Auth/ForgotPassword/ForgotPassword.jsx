@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { SecondaryButton } from 'components/general/Buttons';
-import { BackButton, Background, Logo } from 'components/Login';
-import { StyleSheet, View } from 'react-native';
-import { StyledTextInput } from 'components/general/Form';
-import { Formik } from 'formik';
-import { HelperText } from 'react-native-paper';
-import {
-  ForgotPasswordIllustration,
-  LoginIllustration,
-} from 'assets/illustrations';
+import { BackButton } from 'components/Login';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Text, TextInput } from 'react-native-paper';
+import { ForgotPasswordIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
-
-const blurhash = '00Q12z';
+import { useIntl } from 'react-intl';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
+import { useMutation } from 'react-query';
+import { ErrorCard } from 'components/ErrorCard';
+import { blurhash } from 'res/constants/global';
+import { forgotPassword } from 'network/api';
+import { SuccessCard } from 'components/SuccessCard';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { ROUTES } from 'res/constants/routes';
+import { useForgotPasswordSchema } from './ForgotPassword.schema';
 
 const ForgotPasswordRaw = ({ navigation }) => {
-  const [errorMessage, setErrorMessage] = useState({});
+  const { formatMessage } = useIntl();
+  const { forgotPasswordSchema } = useForgotPasswordSchema();
 
-  const handleFormSubmit = values => {
-    console.log(values);
+  const { mutate, isLoading, isSuccess, isError, error } = useMutation(
+    forgotPassword
+  );
+
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: '',
+    },
+    enableReinitialize: true,
+    resolver: yupResolver(forgotPasswordSchema),
+  });
+
+  const onSubmit = values => {
+    mutate(values);
   };
 
   return (
@@ -29,65 +47,72 @@ const ForgotPasswordRaw = ({ navigation }) => {
       }}
     >
       <BackButton goBack={() => navigation.goBack()} />
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <View
-          style={{
-            alignItems: 'center',
-          }}
-        >
-          <Image
-            style={style.image}
-            source={ForgotPasswordIllustration}
-            placeholder={blurhash}
-            contentFit="contain"
-            transition={1000}
-          />
-        </View>
-        <View style={{ width: 340, alignSelf: 'center' }}>
-          <HelperText type="error">{errorMessage.errMsg}</HelperText>
-          <Formik
-            initialValues={{
-              forgotPassword: '',
+      <ScrollView>
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <View
+            style={{
+              alignItems: 'center',
             }}
-            onSubmit={handleFormSubmit}
-            enableReinitialize
           >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-            }) => (
-              <>
-                <View style={[style.inputWidth, style.marginBottom]}>
-                  <StyledTextInput
-                    label="Forgot Password"
-                    name="forgotPassword"
-                    mode="outlined"
-                    onChange={() => setErrorMessage({})}
-                    onChangeText={handleChange('forgotPassword')}
-                    onBlur={handleBlur('forgotPassword')}
-                    value={values.forgotPassword}
-                    error={errors.forgotPassword && touched.forgotPassword}
-                    left={
-                      <StyledTextInput.Icon icon="account-circle-outline" />
-                    }
-                  />
-                </View>
-                <SecondaryButton
-                  style={style.buttonWidth}
-                  mode="outlined"
-                  onPress={handleSubmit}
+            <Image
+              style={style.image}
+              source={ForgotPasswordIllustration}
+              placeholder={blurhash}
+              contentFit="contain"
+              transition={1000}
+            />
+          </View>
+          <View style={{ width: 340, alignSelf: 'center' }}>
+            {isError && <ErrorCard errMessage={error?.response.data.message} />}
+            {isSuccess && (
+              <SuccessCard
+                successMsg={formatMessage({
+                  id: 'forgotPassword.success.message',
+                })}
+              >
+                <TouchableWithoutFeedback
+                  onPress={() => navigation.navigate(ROUTES.LOGIN)}
                 >
-                  Send New Password
-                </SecondaryButton>
-              </>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontWeight: 'bold',
+                      textDecorationLine: 'underline',
+                    }}
+                  >
+                    {formatMessage({
+                      id: 'forgotPassword.success.returnLogin',
+                    })}
+                  </Text>
+                </TouchableWithoutFeedback>
+              </SuccessCard>
             )}
-          </Formik>
+            <View style={[style.inputWidth, style.marginBottom]}>
+              <CustomTextInput
+                name="email"
+                placeholder={formatMessage({
+                  id: 'login.input.email.placeholder',
+                })}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoCompleteType="email"
+                rules={{ required: true }}
+                control={control}
+                left={<TextInput.Icon icon="account-circle-outline" />}
+              />
+            </View>
+            <SecondaryButton
+              isLoading={isLoading}
+              style={style.buttonWidth}
+              mode="outlined"
+              onPress={handleSubmit(onSubmit)}
+            >
+              {formatMessage({ id: 'forgotPassword.resendButton' })}
+            </SecondaryButton>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

@@ -7,13 +7,21 @@ import { ROUTES } from 'res/constants/routes';
 import { Button, StyleSheet, View } from 'react-native';
 import { ProfileEditIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
+import { blurhash } from 'res/constants/global';
+import { useUserStore } from 'store/zustand';
 
 const onPressHandler = (route, navigation) => navigation.navigate(route);
 
-const blurhash = '00Q12z';
+const getFormattedDate = dataString => {
+  const date = new Date(dataString);
+  return date.toISOString().slice(0, 10);
+};
 
 export const ProfileDetails = () => {
+  const userInfo = useUserStore();
   const navigation = useNavigation();
+
+  console.log('userInfo', userInfo.userData);
 
   return (
     <View>
@@ -34,28 +42,29 @@ export const ProfileDetails = () => {
           <Spacer />
           <Text variant="labelLarge">Fullname: </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-            test
+            {userInfo.userData.fullname}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
           <Text variant="labelLarge">Email Address: </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-            test
+            {userInfo.userData.email}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
           <Text variant="labelLarge">Date of Birth: </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-            test
+            {getFormattedDate(userInfo.userData.dob)}
           </Text>
           <Spacer />
           <Divider />
           <Spacer />
           <Text variant="labelLarge">Address: </Text>
           <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-            test
+            {userInfo.userData.street}, {userInfo.userData.zipCode}{' '}
+            {userInfo.userData.city}
           </Text>
           <Spacer />
           <Divider />

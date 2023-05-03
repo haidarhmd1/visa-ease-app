@@ -4,16 +4,18 @@ import { Image } from 'expo-image';
 import { PlaneStartingIllustration } from 'assets/illustrations';
 import { Spacer } from 'components/general/Layout/Layout';
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 const blurhash = '00Q12z';
 export const RegisterHeader = () => {
+  const { formatMessage } = useIntl();
   return (
     <View>
       <Text
         variant="bodyLarge"
         style={{ fontWeight: 'bold', textAlign: 'center' }}
       >
-        Register for Visastar
+        {formatMessage({ id: 'registration.screen.title' })}
       </Text>
       <View style={{ alignSelf: 'center' }}>
         <Image
@@ -25,12 +27,11 @@ export const RegisterHeader = () => {
         />
       </View>
       <Text variant="bodyMedium" style={{ fontWeight: 'bold' }}>
-        This will only take a couple of minutes
+        {formatMessage({ id: 'registration.screen.subtitle' })}
       </Text>
       <Spacer />
       <Text variant="bodyMedium">
-        Entspannen Sie sich und freuen Sie sich auf Ihren Urlaub, Ihre
-        Kreuzfahrt oder Ihre Geschäftsreise, um das Visum kümmern wir uns.
+        {formatMessage({ id: 'registration.screen.description' })}
       </Text>
       <Spacer />
     </View>

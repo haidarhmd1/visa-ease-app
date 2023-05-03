@@ -1,47 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { SecondaryButton } from 'components/general/Buttons';
 import { BackButton } from 'components/Login';
-import {
-  Button,
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Text,
-} from 'react-native';
-import { StyledTextInput } from 'components/general/Form';
-import { Formik } from 'formik';
-import { HelperText } from 'react-native-paper';
-import {
-  ForgotPasswordIllustration,
-  OTPIllustration,
-} from 'assets/illustrations';
+import { StyleSheet, View, TouchableWithoutFeedback, Text } from 'react-native';
+import { HelperText, TextInput } from 'react-native-paper';
+import { OTPIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { colorPalette } from 'styles/theme/theme.extended';
+import { useForm } from 'react-hook-form';
+import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
+import { useMutation } from 'react-query';
+import { enterOTP } from 'network/api';
+import { ROUTES } from 'res/constants/routes';
+import { useIntl } from 'react-intl';
+import { blurhash } from 'res/constants/global';
 
-const blurhash = '00Q12z';
+const defaultValues = {
+  token: '',
+};
 
-const EnterOTPRaw = ({ navigation }) => {
-  const [errorMessage, setErrorMessage] = useState({});
+const EnterOTPRaw = ({ route, navigation }) => {
+  const { formatMessage } = useIntl();
+  const { userId } = route.params;
+  useEffect(() => {
+    if (userId) return;
+    navigation.navigate(ROUTES.LOGIN);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const handleFormSubmit = values => {
-    console.log(values);
+  const { mutateAsync, isLoading, isError } = useMutation({
+    mutationFn: ({ data }) => enterOTP({ data, id: userId }),
+    onSuccess: () => {
+      navigation.navigate(ROUTES.LOGIN);
+    },
+  });
+
+  const { control, handleSubmit } = useForm({
+    defaultValues,
+    enableReinitialize: true,
+  });
+
+  const onSubmit = async values => {
+    await mutateAsync({ data: values });
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-      }}
-    >
-      <BackButton goBack={() => navigation.goBack()} />
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <View
-          style={{
-            alignItems: 'center',
-          }}
-        >
+    <View style={style.enterOTPWrapper}>
+      <BackButton
+        goBack={() =>
+          navigation.reset({
+            index: 0,
+            routes: [{ name: ROUTES.LOGIN }],
+          })
+        }
+      />
+      <View style={style.flexContentCenter}>
+        <View style={style.center}>
           <Image
             style={style.image}
             source={OTPIllustration}
@@ -50,59 +64,36 @@ const EnterOTPRaw = ({ navigation }) => {
             transition={1000}
           />
         </View>
-        <View style={{ width: 340, alignSelf: 'center' }}>
-          <HelperText type="error">{errorMessage.errMsg}</HelperText>
-          <Formik
-            initialValues={{
-              OTP: '',
-            }}
-            onSubmit={handleFormSubmit}
-            enableReinitialize
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-            }) => (
-              <>
-                <View style={[style.inputWidth, style.marginBottom]}>
-                  <StyledTextInput
-                    label="Enter OTP"
-                    name="OTP"
-                    mode="outlined"
-                    onChange={() => setErrorMessage({})}
-                    onChangeText={handleChange('OTP')}
-                    onBlur={handleBlur('OTP')}
-                    value={values.OTP}
-                    error={errors.OTP && touched.OTP}
-                    left={
-                      <StyledTextInput.Icon icon="account-circle-outline" />
-                    }
-                  />
-                </View>
-                <SecondaryButton
-                  style={style.buttonWidth}
-                  mode="outlined"
-                  onPress={handleSubmit}
-                >
-                  Submit
-                </SecondaryButton>
-              </>
-            )}
-          </Formik>
-          <TouchableWithoutFeedback>
-            <Text
-              style={{
-                fontSize: 12,
-                textAlign: 'center',
-                color: colorPalette.turquoise.t700,
-                marginTop: 8,
-              }}
+        <View style={style.formWrapper}>
+          <HelperText type="error">
+            {isError && formatMessage({ id: 'enterOTP.input.error' })}
+          </HelperText>
+          <>
+            <View style={[style.inputWidth, style.marginBottom]}>
+              <CustomTextInput
+                control={control}
+                name="token"
+                placeholder={formatMessage({
+                  id: 'enterOTP.input.placeholder',
+                })}
+                autoCapitalize="none"
+                autoCorrect={false}
+                rules={{ required: true }}
+                left={<TextInput.Icon icon="account-circle-outline" />}
+              />
+            </View>
+            <SecondaryButton
+              isLoading={isLoading}
+              style={style.buttonWidth}
+              mode="outlined"
+              onPress={handleSubmit(onSubmit)}
             >
-              Did not get the Link? Resend confirmation code
+              {formatMessage({ id: 'button.submit' })}
+            </SecondaryButton>
+          </>
+          <TouchableWithoutFeedback>
+            <Text style={style.resendTokenStyles}>
+              {formatMessage({ id: 'enterOTP.resendCode' })}
             </Text>
           </TouchableWithoutFeedback>
         </View>
@@ -112,6 +103,12 @@ const EnterOTPRaw = ({ navigation }) => {
 };
 
 const style = StyleSheet.create({
+  enterOTPWrapper: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  formWrapper: { width: 340, alignSelf: 'center' },
+  flexContentCenter: { flex: 1, justifyContent: 'center' },
   inputWidth: {
     width: 340,
   },
@@ -131,6 +128,12 @@ const style = StyleSheet.create({
     width: 250,
     height: 250,
     backgroundColor: '#fff',
+  },
+  resendTokenStyles: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: colorPalette.turquoise.t700,
+    marginTop: 8,
   },
 });
 

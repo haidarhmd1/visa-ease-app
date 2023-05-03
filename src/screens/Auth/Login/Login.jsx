@@ -5,7 +5,6 @@ import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
-import { HelperText, TextInput } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
 import { login } from 'network/api';
 import { LoginIllustration } from 'assets/illustrations';
@@ -15,32 +14,46 @@ import { CustomTextInput } from 'components/general/CustomFormElements/CustomFor
 import { useMutation } from 'react-query';
 import { useAuthStore } from 'store/zustand';
 import { USER_DATA, blurhash } from 'res/constants/global';
+import { ErrorCard } from 'components/ErrorCard';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { TextInput } from 'react-native-paper';
+import { useIntl } from 'react-intl';
+import { useLoginSchema } from './Login.schema';
 
 const LoginRaw = ({ navigation }) => {
+  const { formatMessage } = useIntl();
+  const { loginSchema } = useLoginSchema();
   const signIn = useAuthStore(state => state.signIn);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-  const { mutateAsync, isLoading, error, isError } = useMutation(login, {
+  const { mutate, isLoading, error, isError } = useMutation(login, {
     onSuccess: data => {
       SecureStore.setItemAsync(
         USER_DATA,
         JSON.stringify({
           token: data.data.token,
-          id: data.data.user.id,
-          email: data.data.user.email,
-          fullname: data.data.user.fullname,
           isLoggedIn: true,
         })
       )
         .then(() => {
           signIn({
             token: data.data.token,
-            id: data.data.user.id,
-            email: data.data.user.email,
-            fullname: data.data.user.fullname,
             isLoggedIn: true,
           });
         })
-        .catch(() => navigation.navigate(ROUTES.LOGIN));
+        .catch(() => {
+          navigation.navigate(ROUTES.LOGIN);
+        });
+    },
+    onError: loginError => {
+      if (
+        loginError.response.data.message !==
+        'You must confirm your email in order to sign in'
+      ) {
+        return;
+      }
+      navigation.navigate(ROUTES.ENTER_OTP, {
+        userId: loginError.response.data.userId,
+      });
     },
   });
 
@@ -54,10 +67,11 @@ const LoginRaw = ({ navigation }) => {
       password: '',
     },
     enableReinitialize: true,
+    resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async values => {
-    await mutateAsync(values);
+  const onSubmit = values => {
+    mutate(values);
   };
 
   return (
@@ -73,14 +87,18 @@ const LoginRaw = ({ navigation }) => {
         />
       </View>
       <View style={styles.formWrapper}>
-        {isError && (
-          <HelperText type="error">{error?.response.data.message}</HelperText>
-        )}
+        {isError && <ErrorCard errMessage={error?.response.data.message} />}
         <View>
           <View style={[styles.inputWidth, styles.marginBottom]}>
             <CustomTextInput
               name="email"
-              placeholder="Email"
+              placeholder={formatMessage({
+                id: 'login.input.email.placeholder',
+              })}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+              autoCompleteType="email"
               rules={{ required: true }}
               control={control}
               left={<TextInput.Icon icon="account-circle-outline" />}
@@ -90,7 +108,9 @@ const LoginRaw = ({ navigation }) => {
           <View style={[styles.inputWidth, styles.marginBottom]}>
             <CustomTextInput
               name="password"
-              placeholder="Password"
+              placeholder={formatMessage({
+                id: 'login.input.password.placeholder',
+              })}
               control={control}
               secureTextEntry={isPasswordSecure}
               rules={{ required: true }}
@@ -109,7 +129,7 @@ const LoginRaw = ({ navigation }) => {
               style={styles.forgotPasswordButton}
               onPress={() => navigation.navigate(ROUTES.FORGOT_PASSWORD)}
             >
-              Forgot Password ?
+              {formatMessage({ id: 'button.forgotPassword' })}
             </Text>
           </TouchableWithoutFeedback>
 
@@ -120,14 +140,14 @@ const LoginRaw = ({ navigation }) => {
             disabled={errors.password || errors.email}
             onPress={handleSubmit(onSubmit)}
           >
-            Login
+            {formatMessage({ id: 'button.login' })}
           </PrimaryButton>
           <SecondaryButton
             style={styles.buttonWidth}
             mode="outlined"
             onPress={() => navigation.navigate(ROUTES.REGISTRATION)}
           >
-            Sign Up
+            {formatMessage({ id: 'register.button' })}
           </SecondaryButton>
         </View>
       </View>
