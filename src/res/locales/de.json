@@ -130,5 +130,10 @@
     "screen.profile.deleteAccount": "Konto löschen",
     "button.delete": "Löschen",
     "general.deleteConfirmation": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion ist nicht rückgängig zu machen und alle Ihre Daten werden dauerhaft gelöscht. Wenn Sie fortfahren, müssen Sie ein neues Konto erstellen, wenn Sie unsere Dienste wieder nutzen möchten.",
-    "general.cancel": "Abbrechen"
+    "general.cancel": "Abbrechen",
+    "screen.visa.keepReady.title": "Halten sie Bereit:",
+    "screen.visa.applyCard.title": "Hier klicken, um sich für ein Visum zu bewerben.",
+    "general.healthInsurance": "Krankenversicherung",
+    "screen.visa.floatingCard.title": "Visum für Dubai Emirate, Indien, Japan, China, u.v.m. günstig und schnell!",
+    "screen.visa.floatingCard.description": "Sie benötigen ein Visum für Ihre Reise? Wir bieten einen Visa-Service an allen Botschaften in Berlin an. Wir ermöglichen auch ein Express-Visum! In den meisten Fällen sogar innerhalb von 24 Stunden."
 }

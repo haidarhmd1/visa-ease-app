@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Layout, Spacer } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { Text } from 'react-native-paper';
@@ -23,9 +23,11 @@ export const Visa = ({ navigation }) => {
       navigation={navigation}
       floatingCardContent={<VisaFloatingCardContent />}
     >
-      <Layout style={{ marginTop: 75 }}>
+      <Layout style={styles.marginTop}>
         <View>
-          <Text variant="headlineSmall">Halten sie Bereit: </Text>
+          <Text variant="headlineSmall">
+            {formatMessage({ id: 'screen.visa.keepReady.title' })}
+          </Text>
         </View>
         <Spacer />
         <VisaIconWrapper />
@@ -33,8 +35,8 @@ export const Visa = ({ navigation }) => {
         <VisaApplyButton
           setVisible={setVisible}
           imageSrc={WorldIllustration}
-          title="Apply for a Visa"
-          description="Start your Journey!"
+          title={formatMessage({ id: 'screen.visa.applyCard.title' })}
+          description={formatMessage({ id: 'screen.main.startVisaJourney' })}
         />
       </Layout>
 
@@ -42,3 +44,7 @@ export const Visa = ({ navigation }) => {
     </StickyHeaderWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  marginTop: { marginTop: 75 },
+});

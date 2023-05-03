@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Appbar } from 'react-native-paper';
-import { Dimensions } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { BANNER_H, TOPNAVI_H } from 'res/constants/environment';
 import { useSafeArea } from 'react-native-safe-area-context';
 
@@ -28,30 +28,38 @@ export const StickyAppHeader = ({ goBack = () => {}, title, scrollA }) => {
 
   return (
     <Appbar.Header
-      style={{
-        backgroundColor: isTransparent ? 'transparent' : '#FFF',
-        marginBottom: isFloating ? -TOPNAVI_H - safeArea.top : 0,
-        position: 'absolute',
-        top: 0,
-        height: TOPNAVI_H + safeArea.top,
-        width: Dimensions.get('window').width,
-        zIndex: 1,
-        shadowOpacity: isTransparent ? 0 : 0.5,
-        elevation: isTransparent ? 0.01 : 5,
-      }}
+      style={styles.appHeader(isTransparent, isFloating, safeArea)}
     >
       <Appbar.Action
         icon="arrow-left"
         onPress={goBack}
-        style={{ backgroundColor: 'white' }}
+        style={styles.backgroundWhite}
       />
       <Appbar.Content
         title={title}
         color="white"
-        titleStyle={{
-          color: isTransparent ? '#FFF' : '#000',
-        }}
+        titleStyle={styles.text(isTransparent)}
       />
     </Appbar.Header>
   );
 };
+
+const styles = StyleSheet.create({
+  appHeader: (isTransparent, isFloating, safeArea) => ({
+    backgroundColor: isTransparent ? 'transparent' : '#FFF',
+    marginBottom: isFloating ? -TOPNAVI_H - safeArea.top : 0,
+    position: 'absolute',
+    top: 0,
+    height: TOPNAVI_H + safeArea.top,
+    width: Dimensions.get('window').width,
+    zIndex: 1,
+    shadowOpacity: isTransparent ? 0 : 0.5,
+    elevation: isTransparent ? 0.01 : 5,
+  }),
+  backgroundWhite: {
+    backgroundColor: 'white',
+  },
+  text: isTransparent => ({
+    color: isTransparent ? '#FFF' : '#000',
+  }),
+});

@@ -130,5 +130,10 @@
     "screen.profile.deleteAccount": "Delete Account",
     "button.delete": "Delete",
     "general.deleteConfirmation": "Are you sure you want to delete your account? This action is irreversible and all your data will be permanently deleted. If you proceed, you will need to create a new account if you want to use our services again.",
-    "general.cancel": "Cancel"
+    "general.cancel": "Cancel",
+    "screen.visa.keepReady.title": "Have ready:",
+    "screen.visa.applyCard.title": "Click here to apply for a Visa",
+    "general.healthInsurance": "Health Insurance",
+    "screen.visa.floatingCard.title": "Visa for Dubai Emirates, India, Japan, China, and many more, cheap and fast!",
+    "screen.visa.floatingCard.description": "Do you need a visa for your trip? We offer a visa service at all embassies in Berlin. We also provide an express visa! In most cases, even within 24 hours."
 }

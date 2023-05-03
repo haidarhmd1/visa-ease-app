@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import { View, Animated } from 'react-native';
+import { View, Animated, StyleSheet } from 'react-native';
 import { StickyHeaderWrapperImageContent } from './StickyHeaderWrapperImageContent';
 import { StickyAppHeader } from '../AppHeader/StickyAppHeader';
 
@@ -21,9 +21,7 @@ export const StickyHeaderWrapper = ({
         title={appBarTitle}
       />
       <Animated.ScrollView
-        style={{
-          backgroundColor: 'white',
-        }}
+        style={styles.whiteBackground}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollA } } }],
           { useNativeDriver: true }
@@ -40,3 +38,9 @@ export const StickyHeaderWrapper = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  whiteBackground: {
+    backgroundColor: 'white',
+  },
+});

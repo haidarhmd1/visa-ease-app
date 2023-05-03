@@ -1,5 +1,10 @@
 import React from 'react';
-import { ImageBackground, TouchableOpacity, View } from 'react-native';
+import {
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 
 export const VisaApplyButton = ({
@@ -11,43 +16,13 @@ export const VisaApplyButton = ({
 }) => {
   return (
     <TouchableOpacity onPress={() => setVisible(true)}>
-      <View
-        style={{
-          height,
-          marginBottom: 24,
-          position: 'relative',
-          borderRadius: 14,
-          overflow: 'hidden',
-          backgroundColor: 'white',
-          borderStyle: 'solid',
-          borderColor: 'lightgrey',
-          borderWidth: 2,
-        }}
-      >
-        <ImageBackground
-          source={imageSrc}
-          style={{
-            height,
-            width: 150,
-            position: 'absolute',
-            right: 0,
-          }}
-        />
-        <View
-          style={{
-            flex: 1,
-            marginLeft: 15,
-            marginBottom: 5,
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Text
-            variant="headlineSmall"
-            style={{ color: 'black', fontWeight: 'bold' }}
-          >
+      <View style={styles.wrapper(height)}>
+        <ImageBackground source={imageSrc} style={styles.image(height)} />
+        <View style={styles.textWrapper}>
+          <Text variant="headlineSmall" style={styles.headline}>
             {title}
           </Text>
-          <Text variant="bodyMedium" style={{ color: 'black' }}>
+          <Text variant="bodyMedium" style={styles.colorBlack}>
             {description}
           </Text>
         </View>
@@ -55,3 +30,32 @@ export const VisaApplyButton = ({
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: height => ({
+    height,
+    marginBottom: 24,
+    position: 'relative',
+    borderRadius: 14,
+    overflow: 'hidden',
+    backgroundColor: 'white',
+    borderStyle: 'solid',
+    borderColor: 'lightgrey',
+    borderWidth: 2,
+  }),
+  image: height => ({
+    height,
+    width: 150,
+    position: 'absolute',
+    right: 0,
+  }),
+  textWrapper: {
+    paddingTop: 24,
+    width: 175,
+    marginLeft: 14,
+    marginBottom: 4,
+    justifyContent: 'flex-end',
+  },
+  headline: { color: 'black', fontWeight: 'bold' },
+  colorBlack: { color: 'black' },
+});
