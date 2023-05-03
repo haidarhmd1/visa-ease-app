@@ -13,12 +13,12 @@ import { SpacerDivider } from 'components/SpacerDivider';
 import { VisaSelectCountryModal } from './VisaSelectCountryModal';
 
 export const Visa = ({ navigation }) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
   const [visible, setVisible] = useState(false);
 
   return (
     <StickyHeaderWrapper
-      appBarTitle={intl.formatMessage({ id: 'visastar.home.services.visa' })}
+      appBarTitle={formatMessage({ id: 'visastar.home.services.visa' })}
       imageSrc={PalmImage}
       navigation={navigation}
       floatingCardContent={<VisaFloatingCardContent />}

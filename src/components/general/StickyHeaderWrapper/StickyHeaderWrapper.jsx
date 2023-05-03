@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 
-import Animated from 'react-native-reanimated';
-import { AppHeader } from '../AppHeader';
+import { View, Animated } from 'react-native';
 import { StickyHeaderWrapperImageContent } from './StickyHeaderWrapperImageContent';
+import { StickyAppHeader } from '../AppHeader/StickyAppHeader';
 
 export const StickyHeaderWrapper = ({
   appBarTitle,
@@ -12,15 +12,13 @@ export const StickyHeaderWrapper = ({
   imageSrc,
 }) => {
   const scrollA = useRef(new Animated.Value(0)).current;
+
   return (
-    <>
-      <AppHeader
-        // eslint-disable-next-line jsx-a11y/aria-role
-        role="secondary"
+    <View>
+      <StickyAppHeader
+        scrollA={scrollA}
         goBack={() => navigation.goBack()}
         title={appBarTitle}
-        scrollA={scrollA}
-        navigation={navigation}
       />
       <Animated.ScrollView
         style={{
@@ -39,6 +37,6 @@ export const StickyHeaderWrapper = ({
         />
         {children}
       </Animated.ScrollView>
-    </>
+    </View>
   );
 };
