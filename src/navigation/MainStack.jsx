@@ -27,7 +27,7 @@ export const MainStack = () => {
   const signOut = useAuthStore(state => state.signOut);
   const setUserInfo = useUserStore(state => state.setUserInfo);
 
-  const { isLoading, isError, data } = useQuery('getUser', getUser);
+  const { isLoading, error, data } = useQuery('getUser', getUser);
 
   useEffect(() => {
     if (!data) return;
@@ -37,8 +37,7 @@ export const MainStack = () => {
   if (isLoading) {
     return <ActivityIndicator animating color={MyTheme.colors.primaryBrand} />;
   }
-
-  if (isError) {
+  if (error?.response.status === 404) {
     signOut();
   }
 

@@ -18,7 +18,9 @@ const RootStack = () => {
       .then(response => {
         setIsUserLoggedIn(JSON.parse(response).isLoggedIn);
       })
-      .catch(() => setIsUserLoggedIn(false));
+      .catch(() => {
+        setIsUserLoggedIn(false);
+      });
   }, [user]);
 
   return (

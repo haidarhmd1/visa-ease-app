@@ -7,13 +7,19 @@ const ProgessPending = () => (
   <List.Icon icon="progress-pencil" color="lightgray" />
 );
 
-const onPressHandler = (route, navigation) => navigation.navigate(route);
+const onPressHandler = (route, navigation, visaId, visaItem) =>
+  navigation.navigate(route, {
+    visaId,
+    item: visaItem,
+  });
 
 export const VisaItemButton = ({
   route,
   navigation,
   title,
+  visaId = '',
   isProgessCompleted = false,
+  visaItem,
 }) => {
   return (
     <Button
@@ -26,7 +32,7 @@ export const VisaItemButton = ({
         justifyContent: 'flex-start',
       }}
       textColor="black"
-      onPress={() => onPressHandler(route, navigation)}
+      onPress={() => onPressHandler(route, navigation, visaId, visaItem)}
       icon={isProgessCompleted ? ProgessSuccess : ProgessPending}
     >
       {title}

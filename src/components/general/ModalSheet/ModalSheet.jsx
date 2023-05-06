@@ -5,6 +5,7 @@ import {
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
 import { Portal, Text } from 'react-native-paper';
+import { useIntl } from 'react-intl';
 
 export const ModalSheet = ({
   title,
@@ -16,6 +17,7 @@ export const ModalSheet = ({
   loadFullHeight = false,
   ...properties
 }) => {
+  const { formatMessage } = useIntl();
   // ref
   const bottomSheetReference = useRef(null);
   // variables
@@ -46,7 +48,10 @@ export const ModalSheet = ({
         >
           <View style={title ? styles.header : styles.noTitleHeader}>
             {title && <Text variant="labelMedium">{title}</Text>}
-            <Button title="close" onPress={() => setVisible(false)} />
+            <Button
+              title={formatMessage({ id: 'general.close' })}
+              onPress={() => setVisible(false)}
+            />
           </View>
           <View style={styles.contentContainer}>{children}</View>
         </BottomSheetModal>

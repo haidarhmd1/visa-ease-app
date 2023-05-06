@@ -6,6 +6,8 @@ import { DangerButton } from 'components/general/Buttons';
 import { Card } from 'react-native-paper';
 import { useAuthStore, useUserStore } from 'store/zustand';
 import { useIntl } from 'react-intl';
+import { ROUTES } from 'res/constants/routes';
+import { useQueryClient } from 'react-query';
 import { ProfileOverview } from './ProfileOverview';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
@@ -13,6 +15,7 @@ import { SocialMediaLinks } from './SocialMediaLinks';
 
 export const Account = ({ navigation }) => {
   const { formatMessage } = useIntl();
+  const queryClient = useQueryClient();
   const signOut = useAuthStore(state => state.signOut);
   const removeUserInfo = useUserStore(state => state.removeUserInfo);
 
@@ -26,6 +29,7 @@ export const Account = ({ navigation }) => {
           onPress: () => {
             removeUserInfo();
             signOut();
+            queryClient.invalidateQueries();
           },
         },
         {

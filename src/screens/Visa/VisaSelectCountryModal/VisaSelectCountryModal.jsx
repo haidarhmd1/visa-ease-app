@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styles } from 'screens/Visa/Visa.styled';
 import { ModalSheet } from 'components/general/ModalSheet';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { Layout, Spacer, StyledCard } from 'components/general/Layout/Layout';
 import { Card, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/general/Buttons';
@@ -9,20 +9,49 @@ import { SpacerDivider } from 'components/SpacerDivider';
 import { ROUTES } from 'res/constants/routes';
 import { useNavigation } from '@react-navigation/native';
 import { StyledDropdown } from 'components/StyledDropdown';
+import { useIntl } from 'react-intl';
+import { useMutation, useQueryClient } from 'react-query';
+import { startVisaProcess } from 'network/api';
+import { ErrorCard } from 'components/ErrorCard';
 
-const visaCountries = [
-  { value: 'uae', label: 'UAE', image: '' },
-  { value: 'china', label: 'China', image: '' },
-  { value: 'cuba', label: 'Cuba', image: '' },
-];
+const useVisaSelectDDL = () => {
+  const { formatMessage } = useIntl();
+  const visaCountries = [
+    { value: 'uae', label: 'UAE', image: '' },
+    { value: 'thailand', label: 'Thailand', image: '' },
+    { value: 'cuba', label: 'Cuba', image: '' },
+  ];
 
-const visaType = [
-  { value: 'standard', label: 'Standard (7-10 Werktage)' },
-  { value: 'express', label: 'Express (3 Werktage)' },
-];
+  const visaType = [
+    {
+      value: 'STANDARD',
+      label: formatMessage({ id: 'screen.visa.bottomSheet.process.standard' }),
+    },
+    {
+      value: 'EXPRESS',
+      label: formatMessage({ id: 'screen.visa.bottomSheet.process.express' }),
+    },
+  ];
+
+  return { visaCountries, visaType };
+};
 
 export const VisaSelectCountryModal = ({ visible, setVisible }) => {
+  const { formatMessage } = useIntl();
+  const queryClient = useQueryClient();
+  const { visaCountries, visaType } = useVisaSelectDDL();
   const navigation = useNavigation();
+
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: data => startVisaProcess(data),
+    onSuccess: response => {
+      setVisible(false);
+      queryClient.invalidateQueries({ queryKey: ['getAllVisaApplications'] });
+      navigation.navigate(ROUTES.VISA_APP, {
+        visaId: response.data.id,
+      });
+    },
+  });
 
   const [countryValue, setCountryValue] = useState(null);
   const [isCountryDDLFocus, setIsCountryDDLFocus] = useState(false);
@@ -31,9 +60,9 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
   const [isVisaTypeDDLFocus, setIsVisaTypeDDLFocus] = useState(false);
 
   const onCountrySelectedHandler = () => {
-    setVisible(false);
-    navigation.navigate(ROUTES.VISA_APP);
+    mutate({ country: countryValue, visaProcessingType: visaTypeValue });
   };
+
   return (
     <ModalSheet
       visible={visible}
@@ -45,20 +74,24 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
         <Layout>
           <StyledCard mode="elevated">
             <Card.Content>
-              <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-                HINWEIS:
+              <Text variant="labelLarge" style={style.fontBold}>
+                {formatMessage({ id: 'general.attention' })}
               </Text>
-              <Text style={{ marginTop: 8 }}>
-                Bearbeitungszeiten von Visa sind ungewiss, jedoch bemühen wir
-                uns, es vor Reiseantritt zu beschaffen. Bei Ablehnung keine
-                Erstattung. Nicht konforme Dokumente = weitere Kosten oder
-                Ablehnung.
+              <Text style={style.marginTop}>
+                {formatMessage({ id: 'general.attention.visaProcess' })}
               </Text>
             </Card.Content>
           </StyledCard>
           <SpacerDivider />
           <View>
-            <Text variant="headlineSmall">Choose a country to apply on:</Text>
+            <Text variant="headlineSmall">
+              {formatMessage({ id: 'screen.visa.bottomSheet.title' })}
+            </Text>
+            {isError && (
+              <ErrorCard
+                errMessage={formatMessage({ id: 'general.error.message' })}
+              />
+            )}
             <Spacer />
             <View style={styles.container}>
               <StyledDropdown
@@ -81,21 +114,15 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
               )}
             </View>
             <Spacer />
-            <StyledCard>
-              <Card.Content>
-                <Text style={{ marginTop: 8 }}>
-                  By pressing Start, you agree to our secure storage of your
-                  data in accordance with DVSG guidelines. Your information will
-                  only be used for the intended purpose.
-                </Text>
-              </Card.Content>
-            </StyledCard>
             <Spacer />
             <PrimaryButton
+              isLoading={isLoading}
               disabled={countryValue === null || visaTypeValue === null}
               onPress={onCountrySelectedHandler}
             >
-              <Text style={{ color: 'white' }}>Start</Text>
+              <Text style={style.colorWhite}>
+                {formatMessage({ id: 'general.start' })}
+              </Text>
             </PrimaryButton>
           </View>
         </Layout>
@@ -103,3 +130,11 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
     </ModalSheet>
   );
 };
+
+const style = StyleSheet.create({
+  colorWhite: { color: 'white' },
+  fontBold: {
+    fontWeight: 'bold',
+  },
+  marginTop: { marginTop: 8 },
+});

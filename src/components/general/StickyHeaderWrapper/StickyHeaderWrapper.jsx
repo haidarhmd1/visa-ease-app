@@ -7,9 +7,10 @@ import { StickyAppHeader } from '../AppHeader/StickyAppHeader';
 export const StickyHeaderWrapper = ({
   appBarTitle,
   navigation,
-  floatingCardContent,
+  floatingCardContent = null,
   children,
   imageSrc,
+  title,
 }) => {
   const scrollA = useRef(new Animated.Value(0)).current;
 
@@ -32,6 +33,7 @@ export const StickyHeaderWrapper = ({
           scrollA={scrollA}
           floatingCardContent={floatingCardContent}
           imageSrc={imageSrc}
+          title={title}
         />
         {children}
       </Animated.ScrollView>

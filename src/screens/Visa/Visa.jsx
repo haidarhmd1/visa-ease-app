@@ -11,6 +11,7 @@ import { VisaIconWrapper } from 'screens/Visa/VisaIconWrapper';
 import { VisaFloatingCardContent } from 'screens/Visa/VisaFloatingCardContent';
 import { SpacerDivider } from 'components/SpacerDivider';
 import { VisaSelectCountryModal } from './VisaSelectCountryModal';
+import { VisaApplicationList } from './VisaApplicationList';
 
 export const Visa = ({ navigation }) => {
   const { formatMessage } = useIntl();
@@ -31,6 +32,7 @@ export const Visa = ({ navigation }) => {
         </View>
         <Spacer />
         <VisaIconWrapper />
+        <VisaApplicationList navigation={navigation} />
         <SpacerDivider />
         <VisaApplyButton
           setVisible={setVisible}

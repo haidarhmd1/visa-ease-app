@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import * as SecureStore from 'expo-secure-store';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
@@ -13,7 +12,7 @@ import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
 import { useMutation } from 'react-query';
 import { useAuthStore } from 'store/zustand';
-import { USER_DATA, blurhash } from 'res/constants/global';
+import { blurhash } from 'res/constants/global';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextInput } from 'react-native-paper';
@@ -27,22 +26,10 @@ const LoginRaw = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const { mutate, isLoading, error, isError } = useMutation(login, {
     onSuccess: data => {
-      SecureStore.setItemAsync(
-        USER_DATA,
-        JSON.stringify({
-          token: data.data.token,
-          isLoggedIn: true,
-        })
-      )
-        .then(() => {
-          signIn({
-            token: data.data.token,
-            isLoggedIn: true,
-          });
-        })
-        .catch(() => {
-          navigation.navigate(ROUTES.LOGIN);
-        });
+      signIn({
+        token: data.data.token,
+        isLoggedIn: true,
+      });
     },
     onError: loginError => {
       if (

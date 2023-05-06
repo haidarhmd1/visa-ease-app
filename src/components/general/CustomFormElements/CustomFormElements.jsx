@@ -6,7 +6,7 @@ import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from 'screens/Visa/Visa.styled';
 import { Dropdown } from 'react-native-element-dropdown';
 import Checkbox from 'expo-checkbox';
-import { HelperText, Text } from 'react-native-paper';
+import { HelperText, RadioButton, Text } from 'react-native-paper';
 
 export const CustomTextInput = ({
   control,
@@ -45,9 +45,11 @@ export const CustomTextInput = ({
               right={right}
               {...properties}
             />
-            <HelperText type="error" visible={error}>
-              {error?.message}
-            </HelperText>
+            {error && (
+              <HelperText type="error" visible={error}>
+                {error?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />
@@ -62,6 +64,7 @@ export const CustomDropdown = ({
   selectPlaceholder,
   data,
   disabled = false,
+  search = true,
 }) => {
   return (
     <Controller
@@ -91,7 +94,7 @@ export const CustomDropdown = ({
             maxHeight={300}
             labelField="label"
             valueField="value"
-            search
+            search={search}
             placeholder={!onFocus ? selectPlaceholder : '...'}
             searchPlaceholder="Search..."
             value={value}
@@ -99,9 +102,11 @@ export const CustomDropdown = ({
             onBlur={onFocus}
             onChange={onChange}
           />
-          <HelperText type="error" visible={error}>
-            {error?.message}
-          </HelperText>
+          {error && (
+            <HelperText type="error" visible={error}>
+              {error?.message}
+            </HelperText>
+          )}
         </View>
       )}
     />
@@ -131,9 +136,11 @@ export const CustomCheckbox = ({ name, control, rules = {}, title }) => {
             />
             <Text>{title}</Text>
           </View>
-          <HelperText type="error" visible={error}>
-            {error?.message}
-          </HelperText>
+          {error && (
+            <HelperText type="error" visible={error}>
+              {error?.message}
+            </HelperText>
+          )}
         </View>
       )}
     />

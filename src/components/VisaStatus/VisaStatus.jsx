@@ -5,10 +5,16 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 import { View } from 'react-native';
 import { useIntl } from 'react-intl';
 
-export const VisaStatus = () => {
+export const VisaStatus = ({
+  isVisaApplicationScreen = false,
+  percentage = 0,
+}) => {
   const { formatMessage } = useIntl();
   return (
-    <StyledCard mode="elevated" style={{ marginTop: 12 }}>
+    <StyledCard
+      mode={isVisaApplicationScreen ? '' : 'elevated'}
+      style={{ marginTop: 12 }}
+    >
       <View
         style={{
           flexDirection: 'row',
@@ -23,7 +29,7 @@ export const VisaStatus = () => {
         />
         <View style={{ margin: 8 }}>
           <CircularProgress
-            value={50}
+            value={percentage}
             valueSuffix="%"
             radius={32}
             progressValueColor="#000"

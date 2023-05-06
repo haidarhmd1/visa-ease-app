@@ -61,12 +61,21 @@ export const getUser = async () => {
 };
 
 // VISA
-export const getVisaInformation = id => {
-  return axios
-    .get(`${BASE_URL}/v1/visa/information/${id}`, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
+export const startVisaProcess = async data =>
+  axios.post(`${BASE_URL}/v1/visa/visa-application`, data, await axiosConfig());
+
+export const updateVisaApplication = async (data, id) =>
+  axios.put(
+    `${BASE_URL}/v1/visa/visa-application/${id}`,
+    data,
+    await axiosConfig()
+  );
+
+export const getAllVisaApplicationByUser = async () =>
+  axios.get(`${BASE_URL}/v1/visa/visa-application`, await axiosConfig());
+
+export const getSingleVisaInformation = async id =>
+  axios.get(`${BASE_URL}/v1/visa/visa-application/${id}`, await axiosConfig());
 
 export const setVisaInformation = (id, data) => {
   return axios
@@ -75,19 +84,18 @@ export const setVisaInformation = (id, data) => {
     .catch(error => error.response);
 };
 
-export const getFlightInformation = id => {
-  return axios
-    .get(`${BASE_URL}/v1/visa/flight/${id}`, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
+export const getFlightInformation = async id =>
+  axios.get(
+    `${BASE_URL}/v1/visa/visa-application/flight-information/${id}`,
+    await axiosConfig()
+  );
 
-export const setFlightInformation = (id, data) => {
-  return axios
-    .post(`${BASE_URL}/v1/visa/flight/${id}`, data, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
+export const setFlightInformation = async (id, data) =>
+  axios.post(
+    `${BASE_URL}/v1/visa/visa-application/${id}/flight-information`,
+    data,
+    await axiosConfig()
+  );
 
 // DOCUMENTS
 export const setPassportDocument = (id, data) => {

@@ -1,15 +1,18 @@
 import React from 'react';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
-import { Card, Divider, List, Text } from 'react-native-paper';
+import { ActivityIndicator, Divider, List, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
-import { View } from 'react-native';
+import { Alert, StyleSheet } from 'react-native';
 import { PalmImage } from 'assets/images';
 import { StickyHeaderWrapper } from 'components/general/StickyHeaderWrapper';
+import { DangerButton } from 'components/general/Buttons';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getSingleVisaInformation, updateVisaApplication } from 'network/api';
 import { VisaItemButton } from './VisaItemButton';
 
 const visaCountryData = {
-  id: 1,
+  id: '102cb0ca-9163-4230-bec0-6a50056dbc10',
   title: 'UAE',
   information: `Gültigkeit des Visa 2 Monate
     14 Tage einfache Einreise
@@ -23,79 +26,115 @@ const visaCountryData = {
   slug: 'uae',
 };
 
-export const VisaApplication = ({ navigation }) => {
-  const intl = useIntl();
+export const VisaApplication = ({ navigation, route }) => {
+  const { formatMessage } = useIntl();
+  const queryClient = useQueryClient();
+  const { visaId } = route.params;
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: data => updateVisaApplication(data, visaId),
+  });
+
+  const {
+    data: singleVisaApplication,
+    isLoading: isSignleVisaApplicationLoading,
+  } = useQuery('getSingleVisaApplication', () =>
+    getSingleVisaInformation(visaId)
+  );
+
+  const cancelVisaProcess = () => {
+    Alert.alert(
+      formatMessage({ id: 'general.cancel' }),
+      formatMessage({ id: 'general.cancelConfirmation' }),
+      [
+        {
+          text: formatMessage({ id: 'general.yes' }),
+          onPress: () => {
+            mutate({ status: 'CANCELLED' });
+            queryClient.invalidateQueries({
+              queryKey: ['getAllVisaApplications'],
+            });
+            navigation.goBack();
+          },
+        },
+        {
+          text: formatMessage({ id: 'general.no' }),
+          onPress: () => {},
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  if (isSignleVisaApplicationLoading) {
+    return <ActivityIndicator animating size={12} />;
+  }
+
+  if (isError) {
+    Alert.alert('Error', formatMessage({ id: 'general.error.message' }));
+  }
+
   return (
     <StickyHeaderWrapper
+      appBarTitle={formatMessage({ id: 'screen.visaApplication.title' })}
       navigation={navigation}
       imageSrc={PalmImage}
-      floatingCardContent={
-        <View style={{ marginTop: 14 }}>
-          <Card.Content>
-            <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
-              HINWEIS:
-            </Text>
-            <Text style={{ marginTop: 8 }}>
-              Bearbeitungszeiten von Visa sind ungewiss, jedoch bemühen wir uns,
-              es vor Reiseantritt zu beschaffen. Bei Ablehnung keine Erstattung.
-              Nicht konforme Dokumente = weitere Kosten oder Ablehnung.
-            </Text>
-          </Card.Content>
-        </View>
-      }
+      title={singleVisaApplication?.data.country.toUpperCase()}
     >
-      <Layout style={{ marginTop: 75 }}>
-        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-          Information
+      <Layout style={styles.marginTop(12)}>
+        <Text variant="labelLarge" style={styles.marginBottom(8)}>
+          {formatMessage({ id: 'visaApplication.steps.information.infoTitle' })}
         </Text>
 
         <VisaItemButton
-          title="Flight Information"
+          title={formatMessage({ id: 'general.flightInformation' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.flightInformation}
-          isProgessCompleted
+          isProgessCompleted={singleVisaApplication?.data.FlightInformation}
+          visaId={visaId}
+          visaItem={singleVisaApplication?.data.FlightInformation}
         />
         <Divider marginBottom={12} marginTop={12} />
-        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-          Dokumente
+        <Text variant="labelLarge" style={styles.marginBottom(8)}>
+          {formatMessage({ id: 'general.documents' })}
         </Text>
         <VisaItemButton
-          title="Passport Picture"
+          title={formatMessage({ id: 'general.passportPicture' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.passportPicture}
-          isProgessCompleted
+          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
         />
 
         <VisaItemButton
-          title="Aufenthaltserlaubnis"
+          title={formatMessage({ id: 'general.residencePermit' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.residencePermit}
-          isProgessCompleted
+          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
         />
 
         <VisaItemButton
-          title="Biometic Image"
+          title={formatMessage({ id: 'general.biometricImage' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.biometricImage}
-          isProgessCompleted
+          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
         />
         <Divider marginBottom={12} marginTop={12} />
-        <Text variant="labelLarge" style={{ marginBottom: 8 }}>
-          Agreement
+        <Text variant="labelLarge" style={styles.marginBottom(8)}>
+          {formatMessage({ id: 'general.agreement' })}
         </Text>
 
         <VisaItemButton
-          title="Agreement"
+          title={formatMessage({ id: 'general.agreement' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.agreement}
-          isProgessCompleted
+          isProgessCompleted={singleVisaApplication?.data.Agreement}
         />
 
         <StyledCard>
           <List.Section>
             <List.Accordion
-              style={{ backgroundColor: 'white' }}
-              title={intl.formatMessage({
+              style={styles.backgroundWhite}
+              title={formatMessage({
                 id: 'visaApplication.steps.information.infoTitle',
               })}
             >
@@ -108,8 +147,8 @@ export const VisaApplication = ({ navigation }) => {
 
             <Divider marginBottom={12} marginTop={12} />
             <List.Accordion
-              style={{ backgroundColor: 'white' }}
-              title={intl.formatMessage({
+              style={styles.backgroundWhite}
+              title={formatMessage({
                 id: 'visaApplication.steps.information.whatWeNeedBox.title',
               })}
             >
@@ -121,7 +160,16 @@ export const VisaApplication = ({ navigation }) => {
             </List.Accordion>
           </List.Section>
         </StyledCard>
+        <DangerButton isLoading={isLoading} onPress={cancelVisaProcess}>
+          {formatMessage({ id: 'screen.visaApplication.cancel.visa' })}
+        </DangerButton>
       </Layout>
     </StickyHeaderWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  marginTop: units => ({ marginTop: units }),
+  marginBottom: units => ({ marginBottom: units }),
+  backgroundWhite: { backgroundColor: 'white' },
+});

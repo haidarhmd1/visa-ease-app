@@ -2,34 +2,49 @@ import React from 'react';
 import { FloatingCard } from 'components/FloatingCard';
 import { Animated, StyleSheet, View } from 'react-native';
 import { BANNER_H } from 'res/constants/environment';
+import { Text } from 'react-native-paper';
 
 export const StickyHeaderWrapperImageContent = ({
   scrollA,
   imageSrc,
   floatingCardContent,
+  title,
 }) => {
   return (
-    <View
-      style={{
-        position: 'relative',
-      }}
-    >
+    <View style={styles.relative}>
       <View style={styles.bannerContainer}>
         <Animated.Image style={styles.banner(scrollA)} source={imageSrc} />
       </View>
-      <FloatingCard>{floatingCardContent}</FloatingCard>
+      {title && (
+        <Text variant="headlineMedium" style={styles.text}>
+          {title}
+        </Text>
+      )}
+      {floatingCardContent && (
+        <FloatingCard>{floatingCardContent}</FloatingCard>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  relative: {
+    position: 'relative',
+  },
+  text: {
+    position: 'absolute',
+    bottom: 0,
+    padding: 24,
+    color: 'white',
+    fontWeight: 'bold',
+  },
   bannerContainer: {
     marginTop: -1000,
     paddingTop: 900,
     alignItems: 'center',
     overflow: 'hidden',
-    borderBottomEndRadius: 24,
-    borderBottomStartRadius: 24,
+    borderBottomEndRadius: 12,
+    borderBottomStartRadius: 12,
   },
   banner: scrollA => ({
     height: BANNER_H,
