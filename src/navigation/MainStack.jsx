@@ -11,7 +11,6 @@ import { Rates } from 'screens/Rates';
 import { GeneralInformation } from 'components/Shared/GeneralInformation';
 import { VisaInformation } from 'components/VisaInformation';
 import { FlightInformation } from 'components/FlightInformation';
-import { Agreement } from 'components/Agreement';
 import { Passport } from 'components/Shared/Passport';
 import { ResidencePermit } from 'components/Shared/ResidencePermit';
 import { BiometricImage } from 'components/Shared/BiometricImage';
@@ -82,10 +81,6 @@ export const MainStack = () => {
           <Stack.Screen
             name={ROUTES.VISA_INFORMATION.biometricImage}
             component={BiometricImage}
-          />
-          <Stack.Screen
-            name={ROUTES.VISA_INFORMATION.agreement}
-            component={Agreement}
           />
         </Stack.Group>
         <Stack.Group>

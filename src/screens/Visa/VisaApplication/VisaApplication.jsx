@@ -1,15 +1,17 @@
 import React from 'react';
-import { Layout, StyledCard } from 'components/general/Layout/Layout';
+import { Layout, Spacer, StyledCard } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { ActivityIndicator, Divider, List, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
-import { Alert, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { PalmImage } from 'assets/images';
 import { StickyHeaderWrapper } from 'components/general/StickyHeaderWrapper';
-import { DangerButton } from 'components/general/Buttons';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getSingleVisaInformation, updateVisaApplication } from 'network/api';
+import { useQuery } from 'react-query';
+import { getSingleVisaInformation } from 'network/api';
 import { VisaItemButton } from './VisaItemButton';
+import { CancelVisa } from './CancelVisa';
+import { SubmitVisa } from './SubmitVisa';
+import { RevokeVisa } from './RevokeVisa';
 
 const visaCountryData = {
   id: '102cb0ca-9163-4230-bec0-6a50056dbc10',
@@ -26,14 +28,31 @@ const visaCountryData = {
   slug: 'uae',
 };
 
+const filterSpecificDocumentType = (type, visaItem) => {
+  if (!visaItem.length) return false;
+  const filteredVisaItem = visaItem.filter(
+    item => item.documentNameType === type
+  );
+  if (!filteredVisaItem.length) return false;
+  return filteredVisaItem;
+};
+const useIsVisaApplicationComplete = () => {
+  const isVisaApplicationComplete = visaApplication =>
+    !!visaApplication.FlightInformation &&
+    !!filterSpecificDocumentType('PASSPORT', visaApplication.Documents) &&
+    !!filterSpecificDocumentType(
+      'RESIDENCE_PERMIT',
+      visaApplication.Documents
+    ) &&
+    !!filterSpecificDocumentType('BIOMETRIC_IMAGE', visaApplication.Documents);
+
+  return { isVisaApplicationComplete };
+};
+
 export const VisaApplication = ({ navigation, route }) => {
   const { formatMessage } = useIntl();
-  const queryClient = useQueryClient();
+  const { isVisaApplicationComplete } = useIsVisaApplicationComplete();
   const { visaId } = route.params;
-  const { mutate, isLoading, isError } = useMutation({
-    mutationFn: data => updateVisaApplication(data, visaId),
-  });
-
   const {
     data: singleVisaApplication,
     isLoading: isSignleVisaApplicationLoading,
@@ -41,38 +60,14 @@ export const VisaApplication = ({ navigation, route }) => {
     getSingleVisaInformation(visaId)
   );
 
-  const cancelVisaProcess = () => {
-    Alert.alert(
-      formatMessage({ id: 'general.cancel' }),
-      formatMessage({ id: 'general.cancelConfirmation' }),
-      [
-        {
-          text: formatMessage({ id: 'general.yes' }),
-          onPress: () => {
-            mutate({ status: 'CANCELLED' });
-            queryClient.invalidateQueries({
-              queryKey: ['getAllVisaApplications'],
-            });
-            navigation.goBack();
-          },
-        },
-        {
-          text: formatMessage({ id: 'general.no' }),
-          onPress: () => {},
-          style: 'cancel',
-        },
-      ],
-      { cancelable: false }
-    );
-  };
-
   if (isSignleVisaApplicationLoading) {
     return <ActivityIndicator animating size={12} />;
   }
 
-  if (isError) {
-    Alert.alert('Error', formatMessage({ id: 'general.error.message' }));
-  }
+  const checkIfCompleted =
+    singleVisaApplication?.data.status === 'READY' ||
+    singleVisaApplication?.data.status === 'COMPLETED' ||
+    singleVisaApplication?.data.status === 'PAID';
 
   return (
     <StickyHeaderWrapper
@@ -102,32 +97,45 @@ export const VisaApplication = ({ navigation, route }) => {
           title={formatMessage({ id: 'general.passportPicture' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.passportPicture}
-          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
+          visaId={visaId}
+          visaItem={filterSpecificDocumentType(
+            'PASSPORT',
+            singleVisaApplication?.data.Documents
+          )}
+          isProgessCompleted={filterSpecificDocumentType(
+            'PASSPORT',
+            singleVisaApplication?.data.Documents
+          )}
         />
 
         <VisaItemButton
           title={formatMessage({ id: 'general.residencePermit' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.residencePermit}
-          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
+          visaId={visaId}
+          visaItem={filterSpecificDocumentType(
+            'RESIDENCE_PERMIT',
+            singleVisaApplication?.data.Documents
+          )}
+          isProgessCompleted={filterSpecificDocumentType(
+            'RESIDENCE_PERMIT',
+            singleVisaApplication?.data.Documents
+          )}
         />
 
         <VisaItemButton
           title={formatMessage({ id: 'general.biometricImage' })}
           navigation={navigation}
           route={ROUTES.VISA_INFORMATION.biometricImage}
-          isProgessCompleted={singleVisaApplication?.data.Documents.length > 0}
-        />
-        <Divider marginBottom={12} marginTop={12} />
-        <Text variant="labelLarge" style={styles.marginBottom(8)}>
-          {formatMessage({ id: 'general.agreement' })}
-        </Text>
-
-        <VisaItemButton
-          title={formatMessage({ id: 'general.agreement' })}
-          navigation={navigation}
-          route={ROUTES.VISA_INFORMATION.agreement}
-          isProgessCompleted={singleVisaApplication?.data.Agreement}
+          visaId={visaId}
+          visaItem={filterSpecificDocumentType(
+            'BIOMETRIC_IMAGE',
+            singleVisaApplication?.data.Documents
+          )}
+          isProgessCompleted={filterSpecificDocumentType(
+            'BIOMETRIC_IMAGE',
+            singleVisaApplication?.data.Documents
+          )}
         />
 
         <StyledCard>
@@ -160,9 +168,30 @@ export const VisaApplication = ({ navigation, route }) => {
             </List.Accordion>
           </List.Section>
         </StyledCard>
-        <DangerButton isLoading={isLoading} onPress={cancelVisaProcess}>
-          {formatMessage({ id: 'screen.visaApplication.cancel.visa' })}
-        </DangerButton>
+        {!checkIfCompleted && (
+          <View>
+            <SubmitVisa
+              isVisaApplicationComplete={isVisaApplicationComplete(
+                singleVisaApplication?.data
+              )}
+              isCancelled={singleVisaApplication?.data.status === 'CANCELLED'}
+              navigation={navigation}
+              visaId={singleVisaApplication?.data.id}
+            />
+            <Spacer />
+          </View>
+        )}
+        {singleVisaApplication?.data.status === 'CANCELLED' ? (
+          <RevokeVisa
+            navigation={navigation}
+            isVisaApplicationComplete={isVisaApplicationComplete(
+              singleVisaApplication?.data
+            )}
+            visaId={singleVisaApplication?.data.id}
+          />
+        ) : (
+          <CancelVisa navigation={navigation} route={route} />
+        )}
       </Layout>
     </StickyHeaderWrapper>
   );

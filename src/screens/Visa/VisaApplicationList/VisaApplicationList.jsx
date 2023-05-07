@@ -44,7 +44,20 @@ export const VisaApplicationList = ({ navigation }) => {
             style={[styles.padding, styles.list]}
             onPress={() => moveToVisaScreenHandler(applications.id)}
             title={applications.country.toUpperCase()}
-            description={visaStatus(applications.status)}
+            description={
+              <View>
+                <Text style={styles.marginTop}>
+                  {visaStatus(applications.status)}
+                </Text>
+                {applications.status === 'CANCELLED' && (
+                  <Text variant="labelSmall" style={styles.secondaryFontColor}>
+                    {formatMessage({
+                      id: 'screen.visa.visaApplicationList.revoke.description',
+                    })}
+                  </Text>
+                )}
+              </View>
+            }
             // eslint-disable-next-line react/no-unstable-nested-components
             left={() => (
               <Badge style={styles.badgeStyle(applications)} size={8} />
@@ -63,6 +76,9 @@ export const VisaApplicationList = ({ navigation }) => {
 const styles = StyleSheet.create({
   padding: {
     padding: 16,
+  },
+  marginTop: {
+    marginTop: 8,
   },
   card: {
     backgroundColor: 'white',
@@ -94,6 +110,7 @@ const styles = StyleSheet.create({
     borderColor: MyTheme.colors.primaryBrand,
     borderRadius: 12,
   },
+  secondaryFontColor: { color: '#808080' },
   badgeStyle: applications => {
     return {
       backgroundColor: badgeProcess(applications.status),

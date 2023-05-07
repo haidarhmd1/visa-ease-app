@@ -8,24 +8,41 @@ import { Layout, Spacer } from 'components/general/Layout/Layout';
 import { Divider, Text } from 'react-native-paper';
 import { ResidencePermitIllustration } from 'assets/illustrations';
 import { NotificationToast } from 'components/general/NotificationToast';
-import { useAuthenticationStore } from 'store/zustand';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigation } from '@react-navigation/native';
-import { setResidencePermitDocument } from 'network/api';
+import { uploadDocument } from 'network/api';
+import { blurhash } from 'res/constants/global';
+import { useIntl } from 'react-intl';
 
-const blurhash = '00Q12z';
-
-export const ResidencePermit = () => {
-  const userId = useAuthenticationStore(state => state.id);
+export const ResidencePermit = ({ route }) => {
+  const { visaId, item } = route.params;
+  const { formatMessage } = useIntl();
   const queryClient = useQueryClient();
   const [showToast, setShowToast] = useState(false);
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation();
 
   const [photo, setPhoto] = useState();
   const sheetReference = useRef(null);
+
+  const { mutateAsync, isLoading, isError, isSuccess } = useMutation({
+    mutationFn: data => {
+      uploadDocument(visaId, data);
+    },
+    onSuccess: () => {
+      setShowToast(true);
+      setTimeout(() => {
+        queryClient.invalidateQueries(['getSingleVisaApplication']);
+        setShowToast(false);
+        navigation.goBack();
+      }, 1600);
+    },
+    onError: () => {
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 1600);
+    },
+  });
 
   const snapPoints = useMemo(() => ['75%'], []);
 
@@ -35,30 +52,14 @@ export const ResidencePermit = () => {
 
   const submitDocument = async () => {
     const formData = new FormData();
-    formData.append('residencePermit', {
+    formData.append('uploadFile', {
       name: `${new Date()}_residencePermit.jpg`,
       uri: photo.uri,
       type: 'image/jpg',
     });
-    setShowToast(true);
-    setIsLoading(true);
-    try {
-      const response = await setResidencePermitDocument(userId, formData);
-      if (response.status !== 200) throw Error;
-      queryClient.invalidateQueries('getCompletedLists');
-
-      setIsLoading(false);
-      setSuccess(true);
-      setTimeout(() => {
-        navigation.goBack();
-      }, 1600);
-    } catch {
-      setIsLoading(false);
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 1600);
-    }
+    formData.append('documentNameType', 'RESIDENCE_PERMIT');
+    formData.append('documentId', item[0]?.id);
+    await mutateAsync(formData);
   };
 
   return (
@@ -79,7 +80,9 @@ export const ResidencePermit = () => {
         <Layout style={style.container}>
           <View style={style.container}>
             <Text variant="headlineMedium" style={style.centerText}>
-              Residence Permit Guidelines
+              {formatMessage({
+                id: 'screen.documents.residencePermit.title',
+              })}
             </Text>
             <Spacer />
             <Divider />
@@ -96,26 +99,27 @@ export const ResidencePermit = () => {
               </View>
               <Spacer />
               <Text variant="bodyMedium">
-                When taking a picture of your Residence Permit for a
-                application, it is important to ensure that the picture is clear
-                and focused. This will ensure that the application is processed
-                correctly and without any delays. Be sure to double-check the
-                image before submitting it to ensure that it meets the necessary
-                requirements.
+                {formatMessage({
+                  id: 'screen.documents.residencePermit.title',
+                })}
               </Text>
               <Spacer />
             </ScrollView>
           </View>
           <View>
-            <PrimaryButton onPress={handleClosePress}>Got it!</PrimaryButton>
+            <PrimaryButton onPress={handleClosePress}>
+              {formatMessage({
+                id: 'general.button.gotIt',
+              })}
+            </PrimaryButton>
           </View>
         </Layout>
       </BottomSheet>
       <NotificationToast
         type="Top"
-        error={error}
+        error={isError}
         isLoading={isLoading}
-        success={success}
+        success={isSuccess}
         showToast={showToast}
       />
     </>

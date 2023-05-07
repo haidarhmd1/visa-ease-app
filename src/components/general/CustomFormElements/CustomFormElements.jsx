@@ -6,7 +6,7 @@ import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from 'screens/Visa/Visa.styled';
 import { Dropdown } from 'react-native-element-dropdown';
 import Checkbox from 'expo-checkbox';
-import { HelperText, RadioButton, Text } from 'react-native-paper';
+import { HelperText, Text } from 'react-native-paper';
 
 export const CustomTextInput = ({
   control,
@@ -17,6 +17,7 @@ export const CustomTextInput = ({
   left,
   right,
   style,
+  label,
   ...properties
 }) => {
   return (
@@ -34,7 +35,8 @@ export const CustomTextInput = ({
               value={value}
               onChangeText={onChange}
               onBlur={onBlur}
-              label={placeholder}
+              label={label || placeholder}
+              placeholder={placeholder || label}
               name={name}
               outlineColor={
                 error ? MyTheme.colors.error : MyTheme.colors.primaryBrand

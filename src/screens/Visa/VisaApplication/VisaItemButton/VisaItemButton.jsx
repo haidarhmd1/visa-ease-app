@@ -19,7 +19,7 @@ export const VisaItemButton = ({
   title,
   visaId = '',
   isProgessCompleted = false,
-  visaItem,
+  visaItem = {},
 }) => {
   return (
     <Button

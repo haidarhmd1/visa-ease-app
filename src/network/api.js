@@ -8,6 +8,24 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
+export const axiosConfig = async () => {
+  const token = await getToken();
+  return {
+    headers: { ...headers, Authorization: `Bearer ${token}` },
+  };
+};
+
+export const axiosDocumentConfig = async () => {
+  const token = await getToken();
+  return {
+    headers: {
+      ...headers,
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+};
+
 // GENERAL
 export const getCompletedLists = id => {
   return axios
@@ -47,13 +65,6 @@ export const completeUserProfile = (data, id) => {
     .patch(`${BASE_URL}/v1/user/users/${id}`, data, { headers })
     .then(response => response)
     .catch(error => error.response);
-};
-
-export const axiosConfig = async () => {
-  const token = await getToken();
-  return {
-    headers: { ...headers, Authorization: `Bearer ${token}` },
-  };
 };
 
 export const getUser = async () => {
@@ -98,17 +109,12 @@ export const setFlightInformation = async (id, data) =>
   );
 
 // DOCUMENTS
-export const setPassportDocument = (id, data) => {
-  return axios
-    .post(`${BASE_URL}/v1/visa/documents/passport/${id}`, data, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => response)
-    .catch(error => error.response);
-};
+export const uploadDocument = async (visaId, data) =>
+  axios.post(
+    `${BASE_URL}/v1/visa/visa-application/${visaId}/documents`,
+    data,
+    await axiosDocumentConfig()
+  );
 
 export const setResidencePermitDocument = (id, data) => {
   return axios
@@ -145,22 +151,12 @@ export const getAgreement = id => {
 };
 
 // /visa-application/:visaId/agreement
-export const setAgreement = (visaId, data) => {
-  // console.log('data', data);
-  return axios
-    .post(`${BASE_URL}/v1/visa/visa-application/${visaId}/agreement`, data, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => response)
-    .catch(error => {
-      console.log('error', error);
-      console.error(error.data.message);
-      return error.response;
-    });
-};
+export const setAgreement = async (visaId, data) =>
+  axios.post(
+    `${BASE_URL}/v1/visa/visa-application/${visaId}/agreement`,
+    data,
+    await axiosConfig()
+  );
 
 export const getCityofCountry = data => {
   const cityConfig = {

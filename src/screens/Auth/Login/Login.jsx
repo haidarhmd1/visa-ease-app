@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
@@ -46,6 +46,7 @@ const LoginRaw = ({ navigation }) => {
 
   const {
     control,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -56,6 +57,11 @@ const LoginRaw = ({ navigation }) => {
     enableReinitialize: true,
     resolver: yupResolver(loginSchema),
   });
+
+  useEffect(() => {
+    reset({ email: '', password: '' });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = values => {
     mutate(values);

@@ -5,7 +5,6 @@ const VISA_INFORMATION = {
   passportPicture: 'passportPicture',
   residencePermit: 'residencePermit',
   biometricImage: 'biometricImage',
-  agreement: 'agreement',
 };
 
 export const ROUTES = {

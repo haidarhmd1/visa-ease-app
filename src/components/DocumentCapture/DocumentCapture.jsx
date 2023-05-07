@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet } from 'react-native';
 
 import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
