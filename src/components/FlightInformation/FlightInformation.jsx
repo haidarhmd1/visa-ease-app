@@ -8,6 +8,7 @@ import { Alert, ScrollView, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
+  CustomDatePicker,
   CustomDropdown,
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
@@ -20,7 +21,6 @@ import { useValidationSchema } from './FlightInformation.schema';
 export const FlightInformation = ({ route, navigation }) => {
   const { visaId, item } = route.params;
   const { flightInformationValidationSchema } = useValidationSchema();
-
   const { formatMessage } = useIntl();
   const queryClient = useQueryClient();
 
@@ -48,11 +48,11 @@ export const FlightInformation = ({ route, navigation }) => {
 
   const defaultValues = {
     travelStartDate: item?.expectedTravelStartDate
-      ? moment(item?.expectedTravelStartDate).format('MM/DD/YYYY')
-      : '',
+      ? moment(item?.expectedTravelStartDate).toDate()
+      : moment().toDate(),
     returnFlightDate: item?.expectedReturnFlightDate
-      ? moment(item?.expectedReturnFlightDate).format('MM/DD/YYYY')
-      : '',
+      ? moment(item?.expectedReturnFlightDate).toDate()
+      : moment().toDate(),
     cruise: item?.cruise ?? '',
     recipientSameAsApplicant: item?.invoiceRecipientSameAsApplicant || '',
     invoiceAddress: item?.additionalAddress || '',
@@ -88,7 +88,7 @@ export const FlightInformation = ({ route, navigation }) => {
         >
           <Wrapper>
             <View>
-              <CustomTextInput
+              <CustomDatePicker
                 control={control}
                 name="travelStartDate"
                 placeholder={formatMessage({
@@ -97,7 +97,7 @@ export const FlightInformation = ({ route, navigation }) => {
                 })}
               />
               <Spacer />
-              <CustomTextInput
+              <CustomDatePicker
                 control={control}
                 name="returnFlightDate"
                 placeholder={formatMessage({
@@ -199,7 +199,7 @@ export const FlightInformation = ({ route, navigation }) => {
                   },
                 ]}
               />
-              {(watch('recipientSameAsApplicant')?.value ||
+              {(!watch('recipientSameAsApplicant')?.value ||
                 item?.invoiceRecipientSameAsApplicant) && (
                 <View>
                   <CustomTextInput

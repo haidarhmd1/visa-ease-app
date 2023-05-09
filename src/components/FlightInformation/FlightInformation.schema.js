@@ -6,52 +6,52 @@ export const useValidationSchema = () => {
   const { formatMessage } = useIntl();
 
   const flightInformationValidationSchema = yup.object().shape({
-    travelStartDate: yup
-      .date()
-      .transform(value => {
-        return value ? moment(value).toDate() : value;
-      })
-      .required(
-        formatMessage({
-          id:
-            'screen.visa.flightInformation.input.error.general.travelStartDate',
-        })
-      )
-      .min(
-        new Date(Date.now()),
-        formatMessage({
-          id:
-            'screen.visa.flightInformation.input.error.validateDate.travelStartDate',
-        })
-      )
-      .typeError(
-        formatMessage({
-          id: 'general.invalidDateFormat',
-        })
-      ),
-    returnFlightDate: yup
-      .date()
-      .transform(value => {
-        return value ? moment(value).toDate() : value;
-      })
-      .min(
-        yup.ref('travelStartDate'),
-        formatMessage({
-          id:
-            'screen.visa.flightInformation.input.error.validateDate.returnFlightDate',
-        })
-      )
-      .required(
-        formatMessage({
-          id:
-            'screen.visa.flightInformation.input.error.general.returnFlightDate',
-        })
-      )
-      .typeError(
-        formatMessage({
-          id: 'general.invalidDateFormat',
-        })
-      ),
+    // travelStartDate: yup
+    //   .date()
+    //   .transform(value => {
+    //     return value ? moment(value).toDate() : value;
+    //   })
+    //   .required(
+    //     formatMessage({
+    //       id:
+    //         'screen.visa.flightInformation.input.error.general.travelStartDate',
+    //     })
+    //   )
+    //   .min(
+    //     new Date(),
+    //     formatMessage({
+    //       id:
+    //         'screen.visa.flightInformation.input.error.validateDate.travelStartDate',
+    //     })
+    //   )
+    //   .typeError(
+    //     formatMessage({
+    //       id: 'general.invalidDateFormat',
+    //     })
+    //   ),
+    // returnFlightDate: yup
+    //   .date()
+    //   .transform(value => {
+    //     return value ? moment(value).toDate() : value;
+    //   })
+    //   .min(
+    //     yup.ref('travelStartDate'),
+    //     formatMessage({
+    //       id:
+    //         'screen.visa.flightInformation.input.error.validateDate.returnFlightDate',
+    //     })
+    //   )
+    //   .required(
+    //     formatMessage({
+    //       id:
+    //         'screen.visa.flightInformation.input.error.general.returnFlightDate',
+    //     })
+    //   )
+    //   .typeError(
+    //     formatMessage({
+    //       id: 'general.invalidDateFormat',
+    //     })
+    //   ),
     cruise: yup
       .object()
       .shape({

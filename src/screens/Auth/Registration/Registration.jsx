@@ -9,6 +9,7 @@ import { SpacerDivider } from 'components/SpacerDivider';
 import { RegisterHeader } from 'screens/Auth/Registration/RegisterHeader';
 import {
   CustomCheckbox,
+  CustomDatePicker,
   CustomDropdown,
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
@@ -20,6 +21,7 @@ import { ROUTES } from 'res/constants/routes';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
+import moment from 'moment';
 import { useRegistrationValidationSchema } from './Registration.schema';
 
 const defaultValues = {
@@ -28,6 +30,7 @@ const defaultValues = {
   maritalStatus: null,
   password: '',
   passwordConfirmation: '',
+  dob: moment().toDate(),
   nationality: null,
   country: null,
   email: '',
@@ -83,12 +86,12 @@ export const Registration = ({ navigation }) => {
       fullname: data.fullname,
       dob: data.dob,
       gender: data.gender.value,
-      nationality: data.nationality.value,
+      nationality: data.nationality.label,
       maritalStatus: data.maritalStatus.value,
       phone: data.phone,
       profession: data.profession,
-      country: data.country.value,
-      city: data.city.value,
+      country: data.country.label,
+      city: data.city.label,
       zipCode: data.zipCode,
       street: data.street,
       acceptTermsAndConditions: data.acceptTermsAndConditions,
@@ -193,9 +196,8 @@ export const Registration = ({ navigation }) => {
               </View>
 
               <View style={[style.inputWidth, style.marginBottom]}>
-                <CustomTextInput
+                <CustomDatePicker
                   control={control}
-                  rules={{ required: true }}
                   name="dob"
                   placeholder={`${intl.formatMessage({
                     id: 'register.form.dob',

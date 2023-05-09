@@ -7,6 +7,12 @@ const VISA_INFORMATION = {
   biometricImage: 'biometricImage',
 };
 
+const PROFILE_EDIT = {
+  loginInformation: 'loginInformation',
+  personalInformation: 'personalInformation',
+  addressInformation: 'adressInformation',
+};
+
 export const ROUTES = {
   AUTH: 'auth',
   LOGIN: 'login',
@@ -15,6 +21,7 @@ export const ROUTES = {
   REGISTRATION: 'registration',
   MAIN: 'homeScreen',
   PROFILE: 'profileScreen',
+  PROFILE_EDIT,
   ACCOUNT: 'accountScreen',
   VISA_HOME: 'visaHome',
   VISA_APP: 'visaApplicationScreen',

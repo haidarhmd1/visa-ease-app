@@ -19,6 +19,9 @@ import { getUser } from 'network/api';
 import { ActivityIndicator } from 'react-native-paper';
 import { MyTheme } from 'styles/theme/theme.extended';
 import { useAuthStore, useUserStore } from 'store/zustand';
+import { PersonalInformation } from 'screens/Profile/ProfileDetails/PersonalInformation';
+import { AddressInformation } from 'screens/Profile/ProfileDetails/AddressInformation';
+import { LoginInformation } from 'screens/Profile/ProfileDetails/LoginInformation';
 
 const Stack = createStackNavigator();
 
@@ -59,10 +62,6 @@ export const MainStack = () => {
 
         <Stack.Group>
           <Stack.Screen
-            name={ROUTES.VISA_INFORMATION.generalInformation}
-            component={GeneralInformation}
-          />
-          <Stack.Screen
             name={ROUTES.VISA_INFORMATION.visaInformation}
             component={VisaInformation}
           />
@@ -86,6 +85,20 @@ export const MainStack = () => {
         <Stack.Group>
           <Stack.Screen name={ROUTES.ACCOUNT} component={Account} />
           <Stack.Screen name={ROUTES.PROFILE} component={Profile} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen
+            name={ROUTES.PROFILE_EDIT.personalInformation}
+            component={PersonalInformation}
+          />
+          <Stack.Screen
+            name={ROUTES.PROFILE_EDIT.addressInformation}
+            component={AddressInformation}
+          />
+          <Stack.Screen
+            name={ROUTES.PROFILE_EDIT.loginInformation}
+            component={LoginInformation}
+          />
         </Stack.Group>
       </>
     </Stack.Navigator>

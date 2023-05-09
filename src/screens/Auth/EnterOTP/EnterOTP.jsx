@@ -10,7 +10,7 @@ import { colorPalette } from 'styles/theme/theme.extended';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
 import { useMutation } from 'react-query';
-import { enterOTP } from 'network/api';
+import { enterOTP, reSendOTP } from 'network/api';
 import { ROUTES } from 'res/constants/routes';
 import { useIntl } from 'react-intl';
 import { blurhash } from 'res/constants/global';
@@ -33,6 +33,10 @@ const EnterOTPRaw = ({ route, navigation }) => {
     onSuccess: () => {
       navigation.navigate(ROUTES.LOGIN);
     },
+  });
+
+  const { mutate, isLoading: isResendLoading } = useMutation({
+    mutationFn: () => reSendOTP(userId),
   });
 
   const { control, handleSubmit } = useForm({
@@ -83,7 +87,7 @@ const EnterOTPRaw = ({ route, navigation }) => {
               />
             </View>
             <SecondaryButton
-              isLoading={isLoading}
+              isLoading={isLoading || isResendLoading}
               style={style.buttonWidth}
               mode="outlined"
               onPress={handleSubmit(onSubmit)}
@@ -91,7 +95,7 @@ const EnterOTPRaw = ({ route, navigation }) => {
               {formatMessage({ id: 'button.submit' })}
             </SecondaryButton>
           </>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={mutate}>
             <Text style={style.resendTokenStyles}>
               {formatMessage({ id: 'enterOTP.resendCode' })}
             </Text>

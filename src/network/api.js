@@ -60,6 +60,9 @@ export const enterOTP = ({ data, id }) => {
   });
 };
 
+export const reSendOTP = id =>
+  axios.get(`${BASE_URL}/v1/users/resendToken/${id}`, { headers });
+
 export const completeUserProfile = (data, id) => {
   return axios
     .patch(`${BASE_URL}/v1/user/users/${id}`, data, { headers })
@@ -70,6 +73,15 @@ export const completeUserProfile = (data, id) => {
 export const getUser = async () => {
   return axios.get(`${BASE_URL}/v1/users/user`, await axiosConfig());
 };
+
+export const updateUser = async data =>
+  axios.put(`${BASE_URL}/v1/users/user`, data, await axiosConfig());
+
+export const deleteUser = async () =>
+  axios.delete(`${BASE_URL}/v1/users/user/delete`, await axiosConfig());
+
+export const changePassword = async data =>
+  axios.post(`${BASE_URL}/v1/users/changePassword`, data, await axiosConfig());
 
 // VISA
 export const startVisaProcess = async data =>

@@ -193,5 +193,9 @@
     "general.button.gotIt": "Got it!",
     "screen.visa.visaApplicationList.revoke.description": "If you do not revoke your visa application within 7 days, it will be automatically deleted from our system.",
     "general.revokeVisa.prompt.title": "Revoke",
-    "general.revokeVisa.prompt.description": "If you click on 'revoke', we will revoke the visa process and return the visa status to 'in progress'."
+    "general.revokeVisa.prompt.description": "If you click on 'revoke', we will revoke the visa process and return the visa status to 'in progress'.",
+    "general.error.get.message": "Sorry, we were unable to get your data at this time. Please try again later.",
+    "screen.loginEdit.passwordError.405": "The old password does not match.",
+    "screen.loginEdit.passwordError.401": "The setup of the new password was not possible due to a server error.",
+    "screen.loginEdit.passwordError.default": "An error occurred while updating the password."
 }

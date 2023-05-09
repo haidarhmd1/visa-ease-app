@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { Spacer } from 'components/general/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { ActivityIndicator, Badge, List, Text } from 'react-native-paper';
@@ -17,10 +17,14 @@ export const VisaApplicationList = ({ navigation }) => {
   const { visaStatus } = useVisaStatus();
   const { formatMessage } = useIntl();
 
-  const { data: visaApplications, isLoading } = useQuery(
+  const { data: visaApplications, isLoading, isError } = useQuery(
     'getAllVisaApplications',
     getAllVisaApplicationByUser
   );
+
+  if (isError) {
+    Alert.alert(formatMessage({ id: 'general.error.get.message' }));
+  }
 
   if (isLoading) return <ActivityIndicator size="large" />;
 
