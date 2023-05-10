@@ -22,8 +22,12 @@ import { useAuthStore, useUserStore } from 'store/zustand';
 import { PersonalInformation } from 'screens/Profile/ProfileDetails/PersonalInformation';
 import { AddressInformation } from 'screens/Profile/ProfileDetails/AddressInformation';
 import { LoginInformation } from 'screens/Profile/ProfileDetails/LoginInformation';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Main from 'react-native-country-picker-modal';
+import { ProfileDetails } from 'screens/Profile/ProfileDetails';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export const MainStack = () => {
   const signOut = useAuthStore(state => state.signOut);
@@ -51,6 +55,10 @@ export const MainStack = () => {
       initialRouteName={ROUTES.MAIN}
     >
       <>
+        {/* <Tab.Navigator>
+          <Tab.Screen name={ROUTES.ACCOUNT} component={Account} />
+          <Tab.Screen name={ROUTES.PROFILE} component={Profile} />
+        </Tab.Navigator> */}
         <Stack.Group>
           <Stack.Screen name={ROUTES.MAIN} component={Home} />
           <Stack.Screen name={ROUTES.VISA_HOME} component={Visa} />
@@ -83,8 +91,8 @@ export const MainStack = () => {
           />
         </Stack.Group>
         <Stack.Group>
-          <Stack.Screen name={ROUTES.ACCOUNT} component={Account} />
-          <Stack.Screen name={ROUTES.PROFILE} component={Profile} />
+          {/* <Stack.Screen name={ROUTES.ACCOUNT} component={Account} /> */}
+          {/* <Stack.Screen name={ROUTES.PROFILE} component={Profile} /> */}
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen
