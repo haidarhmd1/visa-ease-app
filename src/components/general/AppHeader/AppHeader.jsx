@@ -6,7 +6,13 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import { useUserStore } from 'store/zustand';
 import { useIntl } from 'react-intl';
 
-export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
+export const AppHeader = ({
+  goBack = () => {},
+  showBackButton = true,
+  title,
+  navigation,
+  role,
+}) => {
   const { formatMessage } = useIntl();
   const userInfo = useUserStore();
   const onProfileHandler = () => {
@@ -30,11 +36,13 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
   if (role === 'secondary') {
     return (
       <Appbar.Header style={styles.secondaryAppHeaderContainer}>
-        <Appbar.Action
-          icon="arrow-left"
-          onPress={goBack}
-          style={styles.backgroundWhite}
-        />
+        {showBackButton && (
+          <Appbar.Action
+            icon="arrow-left"
+            onPress={goBack}
+            style={styles.backgroundWhite}
+          />
+        )}
         <Appbar.Content
           title={title}
           color="white"
@@ -46,7 +54,7 @@ export const AppHeader = ({ goBack = () => {}, title, navigation, role }) => {
 
   return (
     <Appbar.Header statusBarHeight={0} style={styles.backgroundWhite}>
-      <Appbar.Action icon="arrow-left" onPress={goBack} />
+      {showBackButton && <Appbar.Action icon="arrow-left" onPress={goBack} />}
       <Appbar.Content title={title} />
     </Appbar.Header>
   );

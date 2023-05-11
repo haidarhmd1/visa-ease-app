@@ -5,6 +5,7 @@ import { StickyHeaderWrapperImageContent } from './StickyHeaderWrapperImageConte
 import { StickyAppHeader } from '../AppHeader/StickyAppHeader';
 
 export const StickyHeaderWrapper = ({
+  showBackButton = true,
   appBarTitle,
   navigation,
   floatingCardContent = null,
@@ -17,6 +18,7 @@ export const StickyHeaderWrapper = ({
   return (
     <View>
       <StickyAppHeader
+        showBackButton={showBackButton}
         scrollA={scrollA}
         goBack={() => navigation.goBack()}
         title={appBarTitle}

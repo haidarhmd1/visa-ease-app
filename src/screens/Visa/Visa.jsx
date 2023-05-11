@@ -19,12 +19,13 @@ export const Visa = ({ navigation }) => {
 
   return (
     <StickyHeaderWrapper
+      showBackButton={false}
       appBarTitle={formatMessage({ id: 'visastar.home.services.visa' })}
       imageSrc={PalmImage}
       navigation={navigation}
       floatingCardContent={<VisaFloatingCardContent />}
     >
-      <Layout style={styles.marginTop}>
+      <Layout style={styles.margin}>
         <View>
           <Text variant="headlineSmall">
             {formatMessage({ id: 'screen.visa.keepReady.title' })}
@@ -48,5 +49,5 @@ export const Visa = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  marginTop: { marginTop: 75 },
+  margin: { marginTop: 75, marginBottom: 75 },
 });

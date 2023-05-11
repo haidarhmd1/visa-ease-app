@@ -94,7 +94,7 @@ export const PersonalInformation = ({ navigation }) => {
       <StyledScrollView style={{ backgroundColor: 'white' }}>
         <Layout>
           <View>
-            <Text variant="lableLarge">
+            <Text variant="labelLarge">
               {intl.formatMessage({
                 id: 'register.title.personalInformation',
               })}

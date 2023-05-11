@@ -5,7 +5,12 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { BANNER_H, TOPNAVI_H } from 'res/constants/environment';
 import { useSafeArea } from 'react-native-safe-area-context';
 
-export const StickyAppHeader = ({ goBack = () => {}, title, scrollA }) => {
+export const StickyAppHeader = ({
+  showBackButton,
+  goBack = () => {},
+  title,
+  scrollA,
+}) => {
   const safeArea = useSafeArea();
 
   const isFloating = !!scrollA;
@@ -30,11 +35,13 @@ export const StickyAppHeader = ({ goBack = () => {}, title, scrollA }) => {
     <Appbar.Header
       style={styles.appHeader(isTransparent, isFloating, safeArea)}
     >
-      <Appbar.Action
-        icon="arrow-left"
-        onPress={goBack}
-        style={styles.backgroundWhite}
-      />
+      {showBackButton && (
+        <Appbar.Action
+          icon="arrow-left"
+          onPress={goBack}
+          style={styles.backgroundWhite}
+        />
+      )}
       <Appbar.Content
         title={title}
         color="white"

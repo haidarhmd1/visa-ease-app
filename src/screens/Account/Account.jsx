@@ -12,35 +12,10 @@ import { ProfileOverview } from './ProfileOverview';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
 import { SocialMediaLinks } from './SocialMediaLinks';
+import { AccountDelete } from './AccountDelete';
 
 export const Account = ({ navigation }) => {
   const { formatMessage } = useIntl();
-  const queryClient = useQueryClient();
-  const signOut = useAuthStore(state => state.signOut);
-  const removeUserInfo = useUserStore(state => state.removeUserInfo);
-
-  const logoutUser = () => {
-    Alert.alert(
-      formatMessage({ id: 'button.logout' }),
-      formatMessage({ id: 'general.logoutConfirmation' }),
-      [
-        {
-          text: formatMessage({ id: 'general.yes' }),
-          onPress: () => {
-            removeUserInfo();
-            signOut();
-            queryClient.invalidateQueries();
-          },
-        },
-        {
-          text: formatMessage({ id: 'general.no' }),
-          onPress: () => {},
-          style: 'cancel',
-        },
-      ],
-      { cancelable: false }
-    );
-  };
 
   return (
     <>
@@ -56,11 +31,7 @@ export const Account = ({ navigation }) => {
           <ContactLinks />
           <SocialMediaLinks />
           <StyledCard>
-            <Card.Content>
-              <DangerButton onPress={logoutUser}>
-                {formatMessage({ id: 'button.logout' })}
-              </DangerButton>
-            </Card.Content>
+            <AccountDelete />
           </StyledCard>
         </Layout>
       </ScrollView>

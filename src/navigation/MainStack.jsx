@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
 import { ROUTES } from 'res/constants/routes';
 import { Account, Home, Profile, VisaApplication } from 'screens';
 import { noHeader } from 'utils/screenOptions';
@@ -8,7 +7,6 @@ import { Visa } from 'screens/Visa';
 import { Legalization } from 'screens/Legalization';
 import { Translation } from 'screens/Translation';
 import { Rates } from 'screens/Rates';
-import { GeneralInformation } from 'components/Shared/GeneralInformation';
 import { VisaInformation } from 'components/VisaInformation';
 import { FlightInformation } from 'components/FlightInformation';
 import { Passport } from 'components/Shared/Passport';
@@ -22,12 +20,10 @@ import { useAuthStore, useUserStore } from 'store/zustand';
 import { PersonalInformation } from 'screens/Profile/ProfileDetails/PersonalInformation';
 import { AddressInformation } from 'screens/Profile/ProfileDetails/AddressInformation';
 import { LoginInformation } from 'screens/Profile/ProfileDetails/LoginInformation';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Main from 'react-native-country-picker-modal';
-import { ProfileDetails } from 'screens/Profile/ProfileDetails';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MainTabScreen } from './TabStack';
 
-const Stack = createStackNavigator();
-const Tab = createMaterialBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export const MainStack = () => {
   const signOut = useAuthStore(state => state.signOut);
@@ -55,13 +51,8 @@ export const MainStack = () => {
       initialRouteName={ROUTES.MAIN}
     >
       <>
-        {/* <Tab.Navigator>
-          <Tab.Screen name={ROUTES.ACCOUNT} component={Account} />
-          <Tab.Screen name={ROUTES.PROFILE} component={Profile} />
-        </Tab.Navigator> */}
+        <Stack.Screen name="MAIN" component={MainTabScreen} />
         <Stack.Group>
-          <Stack.Screen name={ROUTES.MAIN} component={Home} />
-          <Stack.Screen name={ROUTES.VISA_HOME} component={Visa} />
           <Stack.Screen name={ROUTES.LEGALIZATION} component={Legalization} />
           <Stack.Screen name={ROUTES.TRANSLATION} component={Translation} />
           <Stack.Screen name={ROUTES.RATES} component={Rates} />
@@ -91,8 +82,7 @@ export const MainStack = () => {
           />
         </Stack.Group>
         <Stack.Group>
-          {/* <Stack.Screen name={ROUTES.ACCOUNT} component={Account} /> */}
-          {/* <Stack.Screen name={ROUTES.PROFILE} component={Profile} /> */}
+          <Stack.Screen name={ROUTES.ACCOUNT} component={Account} />
         </Stack.Group>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen

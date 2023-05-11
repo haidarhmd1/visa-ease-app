@@ -6,8 +6,12 @@ import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuthStore } from 'store/zustand';
 import { USER_DATA } from 'res/constants/global';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { noHeader } from 'utils/screenOptions';
 import { MainStack } from './MainStack';
 import { AuthStack } from './AuthStack';
+
+const RootStackScreen = createNativeStackNavigator();
 
 const RootStack = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -26,7 +30,17 @@ const RootStack = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" translucent={false} hidden={false} />
-      {isUserLoggedIn ? <MainStack /> : <AuthStack />}
+      <RootStackScreen.Navigator
+        screenOptions={{
+          ...noHeader,
+        }}
+      >
+        {isUserLoggedIn ? (
+          <RootStackScreen.Screen name="MAIN" component={MainStack} />
+        ) : (
+          <RootStackScreen.Screen name="AUTHENTICATION" component={AuthStack} />
+        )}
+      </RootStackScreen.Navigator>
     </NavigationContainer>
   );
 };
