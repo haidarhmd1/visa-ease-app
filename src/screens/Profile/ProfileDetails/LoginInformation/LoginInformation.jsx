@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
 import { changePassword } from 'network/api';
 import { Card, Text, TextInput } from 'react-native-paper';
@@ -14,10 +14,10 @@ import { useForm } from 'react-hook-form';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
-import { useUserStore } from 'store/zustand';
 import { AppHeader } from 'components/general/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/general/NotificationToast';
+import AuthContext from 'provider/AuthProvider';
 import { useLoginInformation } from './LoginPersonalInformation.schema';
 
 const usePassErrorResponseMessage = () => {
@@ -39,7 +39,7 @@ const usePassErrorResponseMessage = () => {
 export const LoginInformation = ({ navigation }) => {
   const queryClient = useQueryClient();
   const intl = useIntl();
-  const userInfo = useUserStore();
+  const { userData } = useContext(AuthContext);
   const { schema } = useLoginInformation();
   const { passErrorResponseMessage } = usePassErrorResponseMessage();
 
@@ -67,7 +67,7 @@ export const LoginInformation = ({ navigation }) => {
   });
 
   const defaultValues = {
-    email: userInfo.userData.email,
+    email: userData?.email,
     oldPassword: '',
     newPassword: '',
   };
@@ -97,7 +97,6 @@ export const LoginInformation = ({ navigation }) => {
       }}
     >
       <AppHeader
-        navigation={navigation}
         goBack={() => navigation.goBack()}
         title={intl.formatMessage({
           id: 'register.title.loginInformation',

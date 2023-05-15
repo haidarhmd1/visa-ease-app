@@ -3,7 +3,7 @@ import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { ROUTES } from 'res/constants/routes';
-import { Home, Profile } from 'screens';
+import { Account, Home } from 'screens';
 import { Visa } from 'screens/Visa';
 import { MyTheme } from 'styles/theme/theme.extended';
 
@@ -35,9 +35,10 @@ export const MainTabScreen = () => {
           elevation: 7,
         },
       }}
+      initialRouteName={ROUTES.HOME}
     >
       <Tab.Screen
-        name={ROUTES.MAIN}
+        name={ROUTES.HOME}
         component={Home}
         options={{
           tabBarLabel: 'Home',
@@ -57,8 +58,8 @@ export const MainTabScreen = () => {
         }}
       />
       <Tab.Screen
-        name={ROUTES.PROFILE}
-        component={Profile}
+        name={ROUTES.ACCOUNT}
+        component={Account}
         options={{
           tabBarLabel: 'Account',
           tabBarIcon: ({ color, size }) => (

@@ -76,7 +76,6 @@ export const FlightInformation = ({ route, navigation }) => {
   return (
     <>
       <AppHeader
-        navigation={navigation}
         goBack={() => navigation.goBack()}
         title={formatMessage({ id: 'screen.visa.flightInformation.title' })}
       />

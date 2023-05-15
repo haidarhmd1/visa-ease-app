@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, List, Text } from 'react-native-paper';
+import { Divider, List } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { ROUTES } from 'res/constants/routes';
 import { StyleSheet, View } from 'react-native';
@@ -16,9 +16,6 @@ export const ProfileDetails = () => {
 
   return (
     <View>
-      <Text variant="headlineSmall" style={{ marginBottom: 8 }}>
-        {formatMessage({ id: 'screen.profile.profileDetails.title' })}
-      </Text>
       <View style={{ alignItems: 'center' }}>
         <Image
           style={styles.image}

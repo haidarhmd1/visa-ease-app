@@ -60,7 +60,6 @@ export const Legalization = ({ navigation }) => {
         title={intl.formatMessage({
           id: 'visastar.home.services.legalization',
         })}
-        navigation={navigation}
         goBack={() => navigation.goBack()}
       />
       <ScrollView>

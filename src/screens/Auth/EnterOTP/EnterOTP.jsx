@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { SecondaryButton } from 'components/general/Buttons';
 import { BackButton } from 'components/Login';
@@ -14,6 +14,7 @@ import { enterOTP, reSendOTP } from 'network/api';
 import { ROUTES } from 'res/constants/routes';
 import { useIntl } from 'react-intl';
 import { blurhash } from 'res/constants/global';
+import AuthContext from 'provider/AuthProvider';
 
 const defaultValues = {
   token: '',
@@ -21,6 +22,7 @@ const defaultValues = {
 
 const EnterOTPRaw = ({ route, navigation }) => {
   const { formatMessage } = useIntl();
+  const { setIsEmailConfirmed } = useContext(AuthContext);
   const { userId } = route.params;
   useEffect(() => {
     if (userId) return;
@@ -31,6 +33,7 @@ const EnterOTPRaw = ({ route, navigation }) => {
   const { mutateAsync, isLoading, isError } = useMutation({
     mutationFn: ({ data }) => enterOTP({ data, id: userId }),
     onSuccess: () => {
+      setIsEmailConfirmed(true);
       navigation.navigate(ROUTES.LOGIN);
     },
   });

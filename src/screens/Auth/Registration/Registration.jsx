@@ -177,7 +177,7 @@ export const Registration = ({ navigation }) => {
             </View>
             <SpacerDivider />
             <View>
-              <Text variant="lableLarge">
+              <Text variant="labelLarge">
                 {intl.formatMessage({
                   id: 'register.title.personalInformation',
                 })}

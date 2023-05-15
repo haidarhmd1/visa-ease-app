@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyledCard } from 'components/general/Layout/Layout';
 import { ROUTES } from 'res/constants/routes';
 import { Avatar, Card, Text } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { useUserStore } from 'store/zustand';
 import { userCredentials } from 'utils/userCredentials';
+import AuthContext from 'provider/AuthProvider';
 
 export const ProfileOverview = ({ navigation }) => {
-  const user = useUserStore();
+  const { userData } = useContext(AuthContext);
   const onPressHandler = () => {
     navigation.navigate(ROUTES.PROFILE);
   };
@@ -16,11 +16,11 @@ export const ProfileOverview = ({ navigation }) => {
   return (
     <StyledCard onPress={onPressHandler}>
       <Card.Content style={styles.flexRow}>
-        <Avatar.Text label={userCredentials(user.userData.fullname)} />
+        <Avatar.Text label={userCredentials(userData?.fullname)} />
         <View style={styles.profileUserInfo}>
-          <Text variant="titleLarge">{user.userData.fullname}</Text>
+          <Text variant="titleLarge">{userData?.fullname}</Text>
           <Text style={styles.profileSubTitle} variant="labelSmall">
-            {user.userData.email}
+            {userData?.email}
           </Text>
         </View>
         <AntDesign style={styles.arrowRight} name="right" size={18} />

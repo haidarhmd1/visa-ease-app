@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
 import { updateUser } from 'network/api';
 import { Text } from 'react-native-paper';
@@ -18,16 +18,16 @@ import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { useUserStore } from 'store/zustand';
 import { AppHeader } from 'components/general/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/general/NotificationToast';
+import AuthContext from 'provider/AuthProvider';
 import { usePersonalInformation } from './PersonalInformation.schema';
 
 export const PersonalInformation = ({ navigation }) => {
   const queryClient = useQueryClient();
   const intl = useIntl();
-  const userInfo = useUserStore();
+  const { userData } = useContext(AuthContext);
   const { schema } = usePersonalInformation();
 
   const [showToast, setShowToast] = useState(false);
@@ -48,13 +48,13 @@ export const PersonalInformation = ({ navigation }) => {
   });
 
   const defaultValues = {
-    fullname: userInfo.userData.fullname,
-    dob: moment(userInfo.userData.dob).toDate(),
-    gender: userInfo.userData.gender,
-    nationality: userInfo.userData.nationality,
-    maritalStatus: userInfo.userData.maritalStatus,
-    phone: userInfo.userData.phone,
-    profession: userInfo.userData.profession,
+    fullname: userData?.fullname,
+    dob: moment(userData?.dob).toDate(),
+    gender: userData?.gender,
+    nationality: userData?.nationality,
+    maritalStatus: userData?.maritalStatus,
+    phone: userData?.phone,
+    profession: userData?.profession,
   };
 
   const { control, handleSubmit } = useForm({
@@ -85,7 +85,6 @@ export const PersonalInformation = ({ navigation }) => {
       }}
     >
       <AppHeader
-        navigation={navigation}
         goBack={() => navigation.goBack()}
         title={intl.formatMessage({
           id: 'register.title.personalInformation',
@@ -158,7 +157,7 @@ export const PersonalInformation = ({ navigation }) => {
               <CustomTextInput
                 control={control}
                 name="nationality"
-                placeholder={userInfo.userData.nationality}
+                placeholder={userData?.nationality}
                 disabled
               />
             </View>

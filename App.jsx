@@ -23,6 +23,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { getLanguage } from 'helpers/language';
 import { messages } from 'res/locales/locales';
+import { AuthProvider } from 'provider/AuthProvider';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -117,7 +118,9 @@ export default function App() {
             messages={messages[getLanguage()]}
             wrapRichTextChunksInFragment
           >
-            <RootStack />
+            <AuthProvider>
+              <RootStack />
+            </AuthProvider>
           </IntlProvider>
         </QueryClientProvider>
       </PaperProvider>

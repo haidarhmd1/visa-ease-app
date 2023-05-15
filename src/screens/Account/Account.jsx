@@ -1,13 +1,8 @@
 import React from 'react';
 import { AppHeader } from 'components/general/AppHeader';
-import { Alert, ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Layout, StyledCard } from 'components/general/Layout/Layout';
-import { DangerButton } from 'components/general/Buttons';
-import { Card } from 'react-native-paper';
-import { useAuthStore, useUserStore } from 'store/zustand';
 import { useIntl } from 'react-intl';
-import { ROUTES } from 'res/constants/routes';
-import { useQueryClient } from 'react-query';
 import { ProfileOverview } from './ProfileOverview';
 import { AccountLinks } from './AccountLinks';
 import { ContactLinks } from './ContactLinks';
@@ -18,14 +13,13 @@ export const Account = ({ navigation }) => {
   const { formatMessage } = useIntl();
 
   return (
-    <>
+    <View>
       <AppHeader
-        navigation={navigation}
-        goBack={() => navigation.goBack()}
+        showBackButton={false}
         title={formatMessage({ id: 'screen.account.title' })}
       />
       <ScrollView>
-        <Layout>
+        <Layout style={{ marginBottom: 128 }}>
           <ProfileOverview navigation={navigation} />
           <AccountLinks />
           <ContactLinks />
@@ -35,6 +29,6 @@ export const Account = ({ navigation }) => {
           </StyledCard>
         </Layout>
       </ScrollView>
-    </>
+    </View>
   );
 };

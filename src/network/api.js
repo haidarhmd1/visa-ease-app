@@ -1,6 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import axios from 'axios';
-import { getToken } from 'utils/getToken';
 
 export const BASE_URL = 'http://localhost:3000';
 
@@ -8,19 +7,16 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-export const axiosConfig = async () => {
-  const token = await getToken();
+export const axiosConfig = () => {
   return {
-    headers: { ...headers, Authorization: `Bearer ${token}` },
+    headers: { ...headers },
   };
 };
 
-export const axiosDocumentConfig = async () => {
-  const token = await getToken();
+export const axiosDocumentConfig = () => {
   return {
     headers: {
       ...headers,
-      Authorization: `Bearer ${token}`,
       'Content-Type': 'multipart/form-data',
     },
   };
@@ -35,7 +31,7 @@ export const getCompletedLists = id => {
 };
 
 // USER
-export const login = data =>
+export const userLogin = data =>
   axios.post(`${BASE_URL}/v1/users/login`, data, { headers });
 
 export const verifyToken = data =>
@@ -70,35 +66,31 @@ export const completeUserProfile = (data, id) => {
     .catch(error => error.response);
 };
 
-export const getUser = async () => {
-  return axios.get(`${BASE_URL}/v1/users/user`, await axiosConfig());
+export const getUser = () => {
+  return axios.get(`${BASE_URL}/v1/users/user`, axiosConfig());
 };
 
-export const updateUser = async data =>
-  axios.put(`${BASE_URL}/v1/users/user`, data, await axiosConfig());
+export const updateUser = data =>
+  axios.put(`${BASE_URL}/v1/users/user`, data, axiosConfig());
 
-export const deleteUser = async () =>
-  axios.delete(`${BASE_URL}/v1/users/user/delete`, await axiosConfig());
+export const deleteUser = () =>
+  axios.delete(`${BASE_URL}/v1/users/user/delete`, axiosConfig());
 
-export const changePassword = async data =>
-  axios.post(`${BASE_URL}/v1/users/changePassword`, data, await axiosConfig());
+export const changePassword = data =>
+  axios.post(`${BASE_URL}/v1/users/changePassword`, data, axiosConfig());
 
 // VISA
-export const startVisaProcess = async data =>
-  axios.post(`${BASE_URL}/v1/visa/visa-application`, data, await axiosConfig());
+export const startVisaProcess = data =>
+  axios.post(`${BASE_URL}/v1/visa/visa-application`, data, axiosConfig());
 
-export const updateVisaApplication = async (data, id) =>
-  axios.put(
-    `${BASE_URL}/v1/visa/visa-application/${id}`,
-    data,
-    await axiosConfig()
-  );
+export const updateVisaApplication = (data, id) =>
+  axios.put(`${BASE_URL}/v1/visa/visa-application/${id}`, data, axiosConfig());
 
-export const getAllVisaApplicationByUser = async () =>
-  axios.get(`${BASE_URL}/v1/visa/visa-application`, await axiosConfig());
+export const getAllVisaApplicationByUser = () =>
+  axios.get(`${BASE_URL}/v1/visa/visa-application`, axiosConfig());
 
-export const getSingleVisaInformation = async id =>
-  axios.get(`${BASE_URL}/v1/visa/visa-application/${id}`, await axiosConfig());
+export const getSingleVisaInformation = id =>
+  axios.get(`${BASE_URL}/v1/visa/visa-application/${id}`, axiosConfig());
 
 export const setVisaInformation = (id, data) => {
   return axios
@@ -107,25 +99,25 @@ export const setVisaInformation = (id, data) => {
     .catch(error => error.response);
 };
 
-export const getFlightInformation = async id =>
+export const getFlightInformation = id =>
   axios.get(
     `${BASE_URL}/v1/visa/visa-application/flight-information/${id}`,
-    await axiosConfig()
+    axiosConfig()
   );
 
-export const setFlightInformation = async (id, data) =>
+export const setFlightInformation = (id, data) =>
   axios.post(
     `${BASE_URL}/v1/visa/visa-application/${id}/flight-information`,
     data,
-    await axiosConfig()
+    axiosConfig()
   );
 
 // DOCUMENTS
-export const uploadDocument = async (visaId, data) =>
+export const uploadDocument = (visaId, data) =>
   axios.post(
     `${BASE_URL}/v1/visa/visa-application/${visaId}/documents`,
     data,
-    await axiosDocumentConfig()
+    axiosDocumentConfig()
   );
 
 export const setResidencePermitDocument = (id, data) => {
@@ -163,11 +155,11 @@ export const getAgreement = id => {
 };
 
 // /visa-application/:visaId/agreement
-export const setAgreement = async (visaId, data) =>
+export const setAgreement = (visaId, data) =>
   axios.post(
     `${BASE_URL}/v1/visa/visa-application/${visaId}/agreement`,
     data,
-    await axiosConfig()
+    axiosConfig()
   );
 
 export const getCityofCountry = data => {

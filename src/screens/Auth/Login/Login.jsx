@@ -1,48 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
 import { Background, Logo } from 'components/Login';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
 import { ROUTES } from 'res/constants/routes';
-import { login } from 'network/api';
 import { LoginIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
-import { useMutation } from 'react-query';
-import { useAuthStore } from 'store/zustand';
 import { blurhash } from 'res/constants/global';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextInput } from 'react-native-paper';
 import { useIntl } from 'react-intl';
+import AuthContext from 'provider/AuthProvider';
 import { useLoginSchema } from './Login.schema';
 
 const LoginRaw = ({ navigation }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    isAuthenticated,
+    login,
+    isLoginLoading,
+    IsLoginError,
+    loginError,
+    isEmailConfirmed,
+  } = useContext(AuthContext);
   const { loginSchema } = useLoginSchema();
-  const signIn = useAuthStore(state => state.signIn);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-  const { mutate, isLoading, error, isError } = useMutation(login, {
-    onSuccess: data => {
-      signIn({
-        token: data.data.token,
-        isLoggedIn: true,
-      });
-    },
-    onError: loginError => {
-      if (
-        loginError.response.data.message !==
-        'You must confirm your email in order to sign in'
-      ) {
-        return;
-      }
-      navigation.navigate(ROUTES.ENTER_OTP, {
-        userId: loginError.response.data.userId,
-      });
-    },
-  });
 
   const {
     control,
@@ -64,8 +51,14 @@ const LoginRaw = ({ navigation }) => {
   }, []);
 
   const onSubmit = values => {
-    mutate(values);
+    login(values);
   };
+
+  if (!isEmailConfirmed && isAuthenticated) {
+    return navigation.navigate(ROUTES.ENTER_OTP, {
+      userId: loginError?.response.data.userId,
+    });
+  }
 
   return (
     <Background>
@@ -80,7 +73,9 @@ const LoginRaw = ({ navigation }) => {
         />
       </View>
       <View style={styles.formWrapper}>
-        {isError && <ErrorCard errMessage={error?.response.data.message} />}
+        {IsLoginError && (
+          <ErrorCard errMessage={loginError?.response.data.message} />
+        )}
         <View>
           <View style={[styles.inputWidth, styles.marginBottom]}>
             <CustomTextInput
@@ -127,7 +122,7 @@ const LoginRaw = ({ navigation }) => {
           </TouchableWithoutFeedback>
 
           <PrimaryButton
-            loading={isLoading}
+            loading={isLoginLoading}
             style={[styles.buttonWidth, styles.marginBottom]}
             mode="contained"
             disabled={errors.password || errors.email}

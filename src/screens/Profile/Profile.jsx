@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, StyledScrollView } from 'components/general/Layout/Layout';
 import { Alert, View } from 'react-native';
 import { AppHeader } from 'components/general/AppHeader';
 import { useIntl } from 'react-intl';
 import { DangerButton } from 'components/general/Buttons';
-import { useQueryClient } from 'react-query';
-import { useAuthStore, useUserStore } from 'store/zustand';
+import { useNavigation } from '@react-navigation/native';
+import AuthContext from 'provider/AuthProvider';
 import { ProfileDetails } from './ProfileDetails';
 
-export const Profile = ({ navigation }) => {
+export const Profile = () => {
   const { formatMessage } = useIntl();
-
-  const queryClient = useQueryClient();
-  const signOut = useAuthStore(state => state.signOut);
-  const removeUserInfo = useUserStore(state => state.removeUserInfo);
+  const navigation = useNavigation();
+  const { logout } = useContext(AuthContext);
 
   const logoutUser = () => {
     Alert.alert(
@@ -23,9 +21,7 @@ export const Profile = ({ navigation }) => {
         {
           text: formatMessage({ id: 'general.yes' }),
           onPress: () => {
-            removeUserInfo();
-            signOut();
-            queryClient.invalidateQueries();
+            logout();
           },
         },
         {
@@ -37,11 +33,11 @@ export const Profile = ({ navigation }) => {
       { cancelable: false }
     );
   };
+
   return (
     <View style={{ flex: 1 }}>
       <AppHeader
-        navigation={navigation}
-        showBackButton={false}
+        goBack={() => navigation.goBack()}
         title={formatMessage({ id: 'screen.profile.title' })}
       />
       <StyledScrollView>

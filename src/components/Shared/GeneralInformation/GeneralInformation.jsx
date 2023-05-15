@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
-import { getCityofCountry, updateUser } from 'network/api';
+import { updateUser } from 'network/api';
 import { Divider, Text } from 'react-native-paper';
 import {
   Layout,
@@ -12,23 +12,22 @@ import {
   CustomDropdown,
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
-import { getCountryDropdown } from 'utils/countryList';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { useUserStore } from 'store/zustand';
 import { AppHeader } from 'components/general/AppHeader';
 import { StyledTextInput } from 'components/general/Form';
 import { StyleSheet, View } from 'react-native';
+import AuthContext from 'provider/AuthProvider';
 import { useGeneralInformation } from './GeneralInformation.schema';
 
 export const GeneralInformation = ({ navigation }) => {
   const queryClient = useQueryClient();
+  const { userData } = useContext(AuthContext);
   const intl = useIntl();
-  const userInfo = useUserStore();
   const { schema } = useGeneralInformation();
 
   const { mutate, isLoading: isRegisterLoading, isError, error } = useMutation({
@@ -40,12 +39,12 @@ export const GeneralInformation = ({ navigation }) => {
   });
 
   const defaultValues = {
-    fullname: userInfo.userData.fullname,
-    gender: userInfo.userData.gender,
-    maritalStatus: userInfo.userData.maritalStatus,
-    dob: moment(userInfo.userData.dob).toDate(),
-    profession: userInfo.userData.profession,
-    phone: userInfo.userData.phone,
+    fullname: userData?.fullname,
+    gender: userData?.gender,
+    maritalStatus: userData?.maritalStatus,
+    dob: moment(userData?.dob).toDate(),
+    profession: userData?.profession,
+    phone: userData?.phone,
   };
 
   const { control, handleSubmit } = useForm({
@@ -59,16 +58,15 @@ export const GeneralInformation = ({ navigation }) => {
   }, []);
 
   const onSubmit = data => {
-    // const formData = {
-    //   fullname: data.fullname,
-    //   dob: data.dob,
-    //   gender: data.gender.value,
-    //   maritalStatus: data.maritalStatus.value,
-    //   phone: data.phone,
-    //   profession: data.profession,
-    // };
-    // mutate(formData);
-    console.log('data', data);
+    const formData = {
+      fullname: data.fullname,
+      dob: data.dob,
+      gender: data.gender.value,
+      maritalStatus: data.maritalStatus.value,
+      phone: data.phone,
+      profession: data.profession,
+    };
+    mutate(formData);
   };
 
   return (
@@ -78,7 +76,6 @@ export const GeneralInformation = ({ navigation }) => {
       }}
     >
       <AppHeader
-        navigation={navigation}
         goBack={() => navigation.goBack()}
         title="General Information"
       />
@@ -147,10 +144,7 @@ export const GeneralInformation = ({ navigation }) => {
                 <Text variant="labelMedium">{`${intl.formatMessage({
                   id: 'register.form.nationality',
                 })}*`}</Text>
-                <StyledTextInput
-                  disabled
-                  placeholder={userInfo.userData.nationality}
-                />
+                <StyledTextInput disabled placeholder={userData?.nationality} />
               </View>
 
               <View style={[style.inputWidth, style.marginBottom]}>

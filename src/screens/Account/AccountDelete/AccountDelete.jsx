@@ -1,24 +1,21 @@
 import { DangerButton } from 'components/general/Buttons';
 import { StyledCard } from 'components/general/Layout/Layout';
 import { deleteUser } from 'network/api';
-import React from 'react';
+import AuthContext from 'provider/AuthProvider';
+import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';
 import { Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useMutation } from 'react-query';
-import { useAuthStore, useUserStore } from 'store/zustand';
 
 export const AccountDelete = () => {
   const { formatMessage } = useIntl();
-
-  const removeUserInfo = useUserStore(state => state.removeUserInfo);
-  const signOut = useAuthStore(state => state.signOut);
+  const { logout } = useContext(AuthContext);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      removeUserInfo();
-      signOut();
+      logout();
     },
     onError: () => {
       Alert.alert(formatMessage({ id: 'general.error.message' }));

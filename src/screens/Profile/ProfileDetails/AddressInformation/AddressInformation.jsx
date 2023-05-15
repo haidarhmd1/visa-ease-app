@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PrimaryButton } from 'components/general/Buttons';
 import { getCityofCountry, updateUser } from 'network/api';
 import { Text } from 'react-native-paper';
@@ -8,7 +8,6 @@ import {
   StyledScrollView,
 } from 'components/general/Layout/Layout';
 import {
-  CustomDropdown,
   CustomSelectCountryDropdown,
   CustomTextInput,
 } from 'components/general/CustomFormElements/CustomFormElements';
@@ -18,16 +17,16 @@ import { useForm } from 'react-hook-form';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
-import { useUserStore } from 'store/zustand';
 import { AppHeader } from 'components/general/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/general/NotificationToast';
+import AuthContext from 'provider/AuthProvider';
 import { useAddressInformation } from './AddressInformation.schema';
 
 export const AddressInformation = ({ navigation }) => {
   const queryClient = useQueryClient();
   const intl = useIntl();
-  const userInfo = useUserStore();
+  const { userData } = useContext(AuthContext);
   const { schema } = useAddressInformation();
   const [showToast, setShowToast] = useState(false);
 
@@ -52,13 +51,11 @@ export const AddressInformation = ({ navigation }) => {
     },
   });
 
-  console.log('userInfo.userData.country', userInfo.userData.country);
-
   const defaultValues = {
-    country: userInfo.userData.country,
-    city: userInfo.userData.city,
-    zipCode: userInfo.userData.zipCode,
-    street: userInfo.userData.street,
+    country: userData?.country,
+    city: userData?.city,
+    zipCode: userData?.zipCode,
+    street: userData?.street,
   };
 
   const { control, handleSubmit, watch } = useForm({
@@ -72,7 +69,7 @@ export const AddressInformation = ({ navigation }) => {
     () =>
       getCityofCountry(
         JSON.stringify({
-          country: watchCountry?.label || userInfo.userData.country,
+          country: watchCountry?.label || userData?.country,
         })
       )
   );
@@ -93,7 +90,7 @@ export const AddressInformation = ({ navigation }) => {
       city: data.city.label,
       zipCode: data.zipCode,
       street: data.street,
-      dob: userInfo.userData.dob,
+      dob: userData?.dob,
     };
     mutate(formData);
   };
@@ -105,7 +102,6 @@ export const AddressInformation = ({ navigation }) => {
       }}
     >
       <AppHeader
-        navigation={navigation}
         goBack={() => navigation.goBack()}
         title={intl.formatMessage({
           id: 'register.title.addressInformation',

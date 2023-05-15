@@ -4,6 +4,7 @@ import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/general/AppHeader';
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
@@ -49,31 +50,27 @@ export const DocumentCaptureRaw = ({
 
   if (photo) {
     return (
-      <>
-        <AppHeader
-          navigation={navigation}
-          goBack={() => navigation.goBack()}
-          title="Save Document"
-        />
+      <View>
+        <AppHeader goBack={() => navigation.goBack()} title="Save Document" />
         <SaveDocument
           photo={photo}
           setPhoto={setPhoto}
           submitDocument={submitDocument}
           fieldValue={fieldValue}
         />
-      </>
+      </View>
     );
   }
 
   return (
-    <>
+    <View>
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
         title={title}
       />
       <CaptureDocument cameraReference={cameraReference} takePic={takePic} />
-    </>
+    </View>
   );
 };
 

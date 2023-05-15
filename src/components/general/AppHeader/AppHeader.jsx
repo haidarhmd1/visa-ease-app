@@ -1,33 +1,58 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { ROUTES } from 'res/constants/routes';
-import { Appbar, Text } from 'react-native-paper';
-import { Dimensions, StyleSheet, View } from 'react-native';
-import { useUserStore } from 'store/zustand';
+import { ActivityIndicator, Appbar, Text } from 'react-native-paper';
+import { Alert, Dimensions, StyleSheet, View } from 'react-native';
 import { useIntl } from 'react-intl';
+import AuthContext from 'provider/AuthProvider';
 
 export const AppHeader = ({
   goBack = () => {},
   showBackButton = true,
   title,
-  navigation,
   role,
 }) => {
   const { formatMessage } = useIntl();
-  const userInfo = useUserStore();
-  const onProfileHandler = () => {
-    navigation.navigate(ROUTES.ACCOUNT);
+  const { userData, logout } = useContext(AuthContext);
+
+  const logoutUser = () => {
+    Alert.alert(
+      formatMessage({ id: 'button.logout' }),
+      formatMessage({ id: 'general.logoutConfirmation' }),
+      [
+        {
+          text: formatMessage({ id: 'general.yes' }),
+          onPress: () => {
+            logout();
+          },
+        },
+        {
+          text: formatMessage({ id: 'general.no' }),
+          onPress: () => {},
+          style: 'cancel',
+        },
+      ],
+      { cancelable: false }
+    );
   };
+
+  if (!userData) return <ActivityIndicator animating size="large" />;
 
   if (role === 'main') {
     return (
       <Appbar.Header statusBarHeight={0} style={styles.backgroundWhite}>
-        <Text style={styles.mainAppHeaderText} variant="headlineSmall">
-          {formatMessage({ id: 'screen.main.greeting' })}{' '}
-          {userInfo.userData.fullname}
-        </Text>
+        <View>
+          <Text style={styles.mainAppHeaderText} variant="headlineSmall">
+            {formatMessage({ id: 'screen.main.greeting' })}
+          </Text>
+          <Text
+            style={[styles.mainAppHeaderText, styles.fontWeightBold]}
+            variant="headlineMedium"
+          >
+            {userData?.fullname}
+          </Text>
+        </View>
         <View style={styles.mainAppHeaderActionContainer}>
-          <Appbar.Action icon="cog-outline" onPress={onProfileHandler} />
+          <Appbar.Action icon="logout" onPress={logoutUser} />
         </View>
       </Appbar.Header>
     );
@@ -64,7 +89,8 @@ const styles = StyleSheet.create({
   backgroundWhite: {
     backgroundColor: 'white',
   },
-  mainAppHeaderText: { fontWeight: 'bold', paddingLeft: 16 },
+  mainAppHeaderText: { paddingLeft: 16 },
+  fontWeightBold: { fontWeight: 'bold' },
   mainAppHeaderActionContainer: {
     flexDirection: 'row',
     alignSelf: 'center',

@@ -16,11 +16,7 @@ const externalLink = (type, value) => {
 export const Translation = ({ navigation }) => {
   return (
     <>
-      <AppHeader
-        navigation={navigation}
-        goBack={() => navigation.goBack()}
-        title="Translation"
-      />
+      <AppHeader goBack={() => navigation.goBack()} title="Translation" />
       <ScrollView>
         <Layout>
           <StyledCard>

@@ -31,11 +31,7 @@ export const Rates = ({ navigation }) => {
 
   return (
     <>
-      <AppHeader
-        navigation={navigation}
-        goBack={() => navigation.goBack()}
-        title="Rates"
-      />
+      <AppHeader goBack={() => navigation.goBack()} title="Rates" />
       <ScrollView>
         <Layout>
           <StyledCard>

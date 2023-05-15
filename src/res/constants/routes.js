@@ -1,6 +1,5 @@
 const VISA_INFORMATION = {
   generalInformation: 'generalInformation',
-  visaInformation: 'visaInformation',
   flightInformation: 'flightInformation',
   passportPicture: 'passportPicture',
   residencePermit: 'residencePermit',
@@ -14,6 +13,8 @@ const PROFILE_EDIT = {
 };
 
 export const ROUTES = {
+  HOME_TAB_SCREEN: 'homeTabScreen',
+  HOME: 'home',
   AUTH: 'auth',
   LOGIN: 'login',
   FORGOT_PASSWORD: 'forgotPassword',
