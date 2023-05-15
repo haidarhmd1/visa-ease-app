@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { StyledCard } from 'components/general/Layout/Layout';
-import { ROUTES } from 'res/constants/routes';
+import { StyledCard } from 'components/Layout/Layout';
+import { ROUTES } from 'helpers/constants/routes';
 import { Avatar, Card, Text } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { userCredentials } from 'utils/userCredentials';
 import AuthContext from 'provider/AuthProvider';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const ProfileOverview = ({ navigation }) => {
   const { userData } = useContext(AuthContext);
@@ -16,7 +17,15 @@ export const ProfileOverview = ({ navigation }) => {
   return (
     <StyledCard onPress={onPressHandler}>
       <Card.Content style={styles.flexRow}>
-        <Avatar.Text label={userCredentials(userData?.fullname)} />
+        <Avatar.Text
+          label={userCredentials(userData?.fullname)}
+          color={MyTheme.colors.primaryBrand}
+          style={{
+            backgroundColor: 'white',
+            borderColor: MyTheme.colors.primaryBrand,
+            borderWidth: 2,
+          }}
+        />
         <View style={styles.profileUserInfo}>
           <Text variant="titleLarge">{userData?.fullname}</Text>
           <Text style={styles.profileSubTitle} variant="labelSmall">

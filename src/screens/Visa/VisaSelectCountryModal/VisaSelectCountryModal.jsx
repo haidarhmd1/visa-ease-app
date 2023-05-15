@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { styles } from 'screens/Visa/Visa.styled';
-import { ModalSheet } from 'components/general/ModalSheet';
+import { ModalSheet } from 'components/ModalSheet';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Layout, Spacer, StyledCard } from 'components/general/Layout/Layout';
+import { Layout, Spacer, StyledCard } from 'components/Layout/Layout';
 import { Card, Text } from 'react-native-paper';
-import { PrimaryButton } from 'components/general/Buttons';
+import { PrimaryButton } from 'components/Buttons';
 import { SpacerDivider } from 'components/SpacerDivider';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { useNavigation } from '@react-navigation/native';
 import { StyledDropdown } from 'components/StyledDropdown';
 import { useIntl } from 'react-intl';
 import { useMutation, useQueryClient } from 'react-query';
-import { startVisaProcess } from 'network/api';
+import { startVisaProcess } from 'services/api';
 import { ErrorCard } from 'components/ErrorCard';
 
 const useVisaSelectDDL = () => {

@@ -1,7 +1,7 @@
 import { NativeModules } from 'react-native';
-import { isIOS } from 'res/constants/environment';
+import { isIOS } from 'helpers/constants/environment';
 
-import { messages } from 'res/locales/locales';
+import { messages } from 'helpers/locales/locales';
 
 export const getLanguage = () => {
   let deviceLanguage = isIOS

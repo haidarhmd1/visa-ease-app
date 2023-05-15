@@ -1,5 +1,5 @@
 import { TransitionPresets } from '@react-navigation/stack';
-import { isIOS } from 'res/constants/environment';
+import { isIOS } from 'helpers/constants/environment';
 
 export const stackScreenOptions = {
   headerShown: false,

@@ -1,6 +1,6 @@
-import { DangerButton } from 'components/general/Buttons';
-import { StyledCard } from 'components/general/Layout/Layout';
-import { deleteUser } from 'network/api';
+import { DangerButton } from 'components/Buttons';
+import { StyledCard } from 'components/Layout/Layout';
+import { deleteUser } from 'services/api';
 import AuthContext from 'provider/AuthProvider';
 import React, { useContext } from 'react';
 import { useIntl } from 'react-intl';

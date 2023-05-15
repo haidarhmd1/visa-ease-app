@@ -1,9 +1,9 @@
 import React from 'react';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { ScrollView, View, Linking, Platform } from 'react-native';
-import { Layout, StyledCard } from 'components/general/Layout/Layout';
+import { Layout, StyledCard } from 'components/Layout/Layout';
 import { Card, Divider, List, Snackbar, Text } from 'react-native-paper';
-import { PrimaryButton } from 'components/general/Buttons';
+import { PrimaryButton } from 'components/Buttons';
 import * as FileSystem from 'expo-file-system';
 
 export const Rates = ({ navigation }) => {

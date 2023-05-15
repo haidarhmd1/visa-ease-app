@@ -1,26 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { PrimaryButton } from 'components/general/Buttons';
-import { updateUser } from 'network/api';
+import { PrimaryButton } from 'components/Buttons';
+import { updateUser } from 'services/api';
 import { Text } from 'react-native-paper';
-import {
-  Layout,
-  Spacer,
-  StyledScrollView,
-} from 'components/general/Layout/Layout';
+import { Layout, Spacer, StyledScrollView } from 'components/Layout/Layout';
 import {
   CustomDatePicker,
   CustomDropdown,
   CustomTextInput,
-} from 'components/general/CustomFormElements/CustomFormElements';
+} from 'components/CustomFormElements/CustomFormElements';
 import { useMutation, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { StyleSheet, View } from 'react-native';
-import { NotificationToast } from 'components/general/NotificationToast';
+import { NotificationToast } from 'components/NotificationToast';
 import AuthContext from 'provider/AuthProvider';
 import { usePersonalInformation } from './PersonalInformation.schema';
 

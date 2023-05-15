@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledCard } from 'components/general/Layout/Layout';
+import { StyledCard } from 'components/Layout/Layout';
 import { Linking } from 'react-native';
 import {
   FAQ,
@@ -9,7 +9,7 @@ import {
   TRANSLATION,
   VERSAND,
   VIP_TOUREN,
-} from 'res/constants/links';
+} from 'helpers/constants/links';
 import { List } from 'react-native-paper';
 import { useIntl } from 'react-intl';
 

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Layout, StyledScrollView } from 'components/general/Layout/Layout';
+import { Layout, StyledScrollView } from 'components/Layout/Layout';
 import { Alert, View } from 'react-native';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { useIntl } from 'react-intl';
-import { DangerButton } from 'components/general/Buttons';
+import { DangerButton } from 'components/Buttons';
 import { useNavigation } from '@react-navigation/native';
 import AuthContext from 'provider/AuthProvider';
 import { ProfileDetails } from './ProfileDetails';

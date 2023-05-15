@@ -2,23 +2,15 @@
 import React from 'react';
 import {
   View,
-  ImageBackground,
   Dimensions,
   FlatList,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { useIntl } from 'react-intl';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { List, Text } from 'react-native-paper';
 import { PriceTag } from 'assets/icons';
 import { colorPalette } from 'styles/theme/theme.extended';
-import { VisaStatus } from 'components/VisaStatus';
-
-const visaCountries = [
-  { id: 1, title: 'UAE', image: '' },
-  { id: 2, title: 'China', image: '' },
-  { id: 3, title: 'Cuba', image: '' },
-];
 
 const services = [
   {
@@ -52,12 +44,6 @@ export const ServiceItems = ({ navigation }) => {
 
   const onPressRouteNavigationHandler = route => {
     navigation.navigate(route);
-  };
-
-  const onPressHandler = id => {
-    navigation.navigate(ROUTES.VISA_APP, {
-      id,
-    });
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { ScrollView, View } from 'react-native';
-import { Layout, StyledCard } from 'components/general/Layout/Layout';
+import { Layout, StyledCard } from 'components/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { ProfileOverview } from './ProfileOverview';
 import { AccountLinks } from './AccountLinks';

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Layout, Spacer } from 'components/general/Layout/Layout';
+import { Layout, Spacer } from 'components/Layout/Layout';
 import { useIntl } from 'react-intl';
 import { Text } from 'react-native-paper';
 import { PalmImage } from 'assets/images';
-import { StickyHeaderWrapper } from 'components/general/StickyHeaderWrapper';
+import { StickyHeaderWrapper } from 'components/StickyHeaderWrapper';
 import { WorldIllustration } from 'assets/illustrations';
 import { VisaApplyButton } from 'screens/Visa/VisaApplyButton';
 import { VisaIconWrapper } from 'screens/Visa/VisaIconWrapper';
 import { VisaFloatingCardContent } from 'screens/Visa/VisaFloatingCardContent';
 import { SpacerDivider } from 'components/SpacerDivider';
 import { VisaSelectCountryModal } from './VisaSelectCountryModal';
-import { VisaApplicationList } from './VisaApplicationList';
+import { VisaApplicationList } from '../../components/VisaApplicationList';
 
 export const Visa = ({ navigation }) => {
   const { formatMessage } = useIntl();
@@ -33,7 +33,10 @@ export const Visa = ({ navigation }) => {
         </View>
         <Spacer />
         <VisaIconWrapper />
-        <VisaApplicationList navigation={navigation} />
+        <VisaApplicationList
+          title="screen.visa.visaApplicationList.title"
+          navigation={navigation}
+        />
         <SpacerDivider />
         <VisaApplyButton
           setVisible={setVisible}

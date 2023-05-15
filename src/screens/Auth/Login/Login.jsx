@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 
-import { PrimaryButton, SecondaryButton } from 'components/general/Buttons';
+import { PrimaryButton, SecondaryButton } from 'components/Buttons';
 import { Background, Logo } from 'components/Login';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { LoginIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { useForm } from 'react-hook-form';
-import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
-import { blurhash } from 'res/constants/global';
+import { CustomTextInput } from 'components/CustomFormElements/CustomFormElements';
+import { blurhash } from 'helpers/constants/global';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextInput } from 'react-native-paper';

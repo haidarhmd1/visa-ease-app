@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SecondaryButton } from 'components/general/Buttons';
+import { SecondaryButton } from 'components/Buttons';
 import { BackButton } from 'components/Login';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Text, TextInput } from 'react-native-paper';
@@ -9,14 +9,14 @@ import { Image } from 'expo-image';
 import { useIntl } from 'react-intl';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
+import { CustomTextInput } from 'components/CustomFormElements/CustomFormElements';
 import { useMutation } from 'react-query';
 import { ErrorCard } from 'components/ErrorCard';
-import { blurhash } from 'res/constants/global';
-import { forgotPassword } from 'network/api';
+import { blurhash } from 'helpers/constants/global';
+import { forgotPassword } from 'services/api';
 import { SuccessCard } from 'components/SuccessCard';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { useForgotPasswordSchema } from './ForgotPassword.schema';
 
 const ForgotPasswordRaw = ({ navigation }) => {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Divider, List } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { StyleSheet, View } from 'react-native';
 import { ProfileEditIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
-import { blurhash } from 'res/constants/global';
+import { blurhash } from 'helpers/constants/global';
 import { useIntl } from 'react-intl';
 
 const leftIcon = icon => <List.Icon icon={icon} />;

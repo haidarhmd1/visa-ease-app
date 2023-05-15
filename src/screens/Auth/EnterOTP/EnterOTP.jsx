@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { SecondaryButton } from 'components/general/Buttons';
+import { SecondaryButton } from 'components/Buttons';
 import { BackButton } from 'components/Login';
 import { StyleSheet, View, TouchableWithoutFeedback, Text } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
@@ -8,12 +8,12 @@ import { OTPIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { colorPalette } from 'styles/theme/theme.extended';
 import { useForm } from 'react-hook-form';
-import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
+import { CustomTextInput } from 'components/CustomFormElements/CustomFormElements';
 import { useMutation } from 'react-query';
-import { enterOTP, reSendOTP } from 'network/api';
-import { ROUTES } from 'res/constants/routes';
+import { enterOTP, reSendOTP } from 'services/api';
+import { ROUTES } from 'helpers/constants/routes';
 import { useIntl } from 'react-intl';
-import { blurhash } from 'res/constants/global';
+import { blurhash } from 'helpers/constants/global';
 import AuthContext from 'provider/AuthProvider';
 
 const defaultValues = {

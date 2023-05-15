@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { verifyToken } from 'network/api';
-import { USER_DATA } from 'res/constants/global';
+import { verifyToken } from 'services/api';
+import { USER_DATA } from 'helpers/constants/global';
 import * as SecureStore from 'expo-secure-store';
 import { initialUser } from 'store/zustand';
 

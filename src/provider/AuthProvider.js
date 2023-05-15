@@ -7,9 +7,9 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
-import { userLogin } from 'network/api';
+import { userLogin } from 'services/api';
 import { useMutation, useQueryClient } from 'react-query';
-import { USER_DATA } from 'res/constants/global';
+import { USER_DATA } from 'helpers/constants/global';
 
 const AuthContext = createContext();
 

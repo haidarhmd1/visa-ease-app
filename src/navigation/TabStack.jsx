@@ -2,7 +2,7 @@
 import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { Account, Home } from 'screens';
 import { Visa } from 'screens/Visa';
 import { MyTheme } from 'styles/theme/theme.extended';

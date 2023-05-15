@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { PrimaryButton } from 'components/general/Buttons';
-import { changePassword } from 'network/api';
+import { PrimaryButton } from 'components/Buttons';
+import { changePassword } from 'services/api';
 import { Card, Text, TextInput } from 'react-native-paper';
 import {
   Layout,
   Spacer,
   StyledCard,
   StyledScrollView,
-} from 'components/general/Layout/Layout';
-import { CustomTextInput } from 'components/general/CustomFormElements/CustomFormElements';
+} from 'components/Layout/Layout';
+import { CustomTextInput } from 'components/CustomFormElements/CustomFormElements';
 import { useMutation, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { StyleSheet, View } from 'react-native';
-import { NotificationToast } from 'components/general/NotificationToast';
+import { NotificationToast } from 'components/NotificationToast';
 import AuthContext from 'provider/AuthProvider';
 import { useLoginInformation } from './LoginPersonalInformation.schema';
 

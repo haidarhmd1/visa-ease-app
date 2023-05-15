@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
-import { AppHeader } from 'components/general/AppHeader';
+import { AppHeader } from 'components/AppHeader';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
 import { SaveDocument } from './SaveDocument';

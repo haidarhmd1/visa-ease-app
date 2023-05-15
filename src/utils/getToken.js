@@ -1,5 +1,5 @@
 import * as SecureStore from 'expo-secure-store';
-import { USER_DATA } from 'res/constants/global';
+import { USER_DATA } from 'helpers/constants/global';
 
 // eslint-disable-next-line consistent-return
 export const getToken = async () => {

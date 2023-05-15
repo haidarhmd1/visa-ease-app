@@ -22,7 +22,7 @@ import RootStack from 'navigation';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { getLanguage } from 'helpers/language';
-import { messages } from 'res/locales/locales';
+import { messages } from 'helpers/locales/locales';
 import { AuthProvider } from 'provider/AuthProvider';
 
 // Keep the splash screen visible while we fetch resources

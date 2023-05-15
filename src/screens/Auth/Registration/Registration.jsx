@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { PrimaryButton } from 'components/general/Buttons';
-import { getCityofCountry, registerUserProfile } from 'network/api';
+import { PrimaryButton } from 'components/Buttons';
+import { getCityofCountry, registerUserProfile } from 'services/api';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { Divider, Text, TextInput } from 'react-native-paper';
 import { BackButton } from 'components/Login';
-import { Layout, Spacer } from 'components/general/Layout/Layout';
+import { Layout, Spacer } from 'components/Layout/Layout';
 import { SpacerDivider } from 'components/SpacerDivider';
 import { RegisterHeader } from 'screens/Auth/Registration/RegisterHeader';
 import {
@@ -12,12 +12,12 @@ import {
   CustomDatePicker,
   CustomDropdown,
   CustomTextInput,
-} from 'components/general/CustomFormElements/CustomFormElements';
+} from 'components/CustomFormElements/CustomFormElements';
 import { getCountryDropdown } from 'utils/countryList';
 import { useMutation, useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
-import { RESPONSE } from 'res/constants/global';
-import { ROUTES } from 'res/constants/routes';
+import { RESPONSE } from 'helpers/constants/global';
+import { ROUTES } from 'helpers/constants/routes';
 import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';

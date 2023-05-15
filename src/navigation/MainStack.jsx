@@ -1,22 +1,22 @@
 import React, { useContext } from 'react';
 
-import { ROUTES } from 'res/constants/routes';
+import { ROUTES } from 'helpers/constants/routes';
 import { Profile, VisaApplication } from 'screens';
 import { noHeader } from 'utils/screenOptions';
 import { Legalization } from 'screens/Legalization';
 import { Translation } from 'screens/Translation';
 import { Rates } from 'screens/Rates';
-import { FlightInformation } from 'components/FlightInformation';
-import { Passport } from 'components/Shared/Passport';
-import { ResidencePermit } from 'components/Shared/ResidencePermit';
-import { BiometricImage } from 'components/Shared/BiometricImage';
+import { FlightInformation } from 'screens/VisaApplication/Form/FlightInformation';
+import { Passport } from 'screens/VisaApplication/Form/Passport';
+import { ResidencePermit } from 'screens/VisaApplication/Form/ResidencePermit';
+import { BiometricImage } from 'screens/VisaApplication/Form/BiometricImage';
 import { PersonalInformation } from 'screens/Profile/ProfileDetails/PersonalInformation';
 import { AddressInformation } from 'screens/Profile/ProfileDetails/AddressInformation';
 import { LoginInformation } from 'screens/Profile/ProfileDetails/LoginInformation';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AuthContext from 'provider/AuthProvider';
 import { useQuery } from 'react-query';
-import { getUser } from 'network/api';
+import { getUser } from 'services/api';
 import { ActivityIndicator } from 'react-native-paper';
 import { MainTabScreen } from './TabStack';
 

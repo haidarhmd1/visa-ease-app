@@ -1,1 +1,0 @@
-export { TouchableIconCard } from './TouchableCard';

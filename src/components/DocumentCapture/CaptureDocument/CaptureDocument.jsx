@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from 'components/general/Layout/Layout';
+import { Layout } from 'components/Layout/Layout';
 import { IconButton, Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';

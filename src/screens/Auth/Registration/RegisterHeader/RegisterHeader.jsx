@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 import { Image } from 'expo-image';
 import { PlaneStartingIllustration } from 'assets/illustrations';
-import { Spacer } from 'components/general/Layout/Layout';
+import { Spacer } from 'components/Layout/Layout';
 import React from 'react';
 import { useIntl } from 'react-intl';
 

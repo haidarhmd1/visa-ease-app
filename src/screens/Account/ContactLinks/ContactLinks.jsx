@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking } from 'react-native';
-import { StyledCard } from 'components/general/Layout/Layout';
+import { StyledCard } from 'components/Layout/Layout';
 import { List } from 'react-native-paper';
 import { useIntl } from 'react-intl';
 

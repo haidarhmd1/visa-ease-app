@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledCard } from 'components/general/Layout/Layout';
+import { StyledCard } from 'components/Layout/Layout';
 import { Card } from 'react-native-paper';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { View } from 'react-native';
