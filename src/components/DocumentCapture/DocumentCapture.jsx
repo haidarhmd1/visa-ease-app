@@ -4,7 +4,7 @@ import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
 import { AppHeader } from 'components/AppHeader';
 import { useNavigation } from '@react-navigation/native';
-import { View } from 'react-native';
+import { useIntl } from 'react-intl';
 import { SaveDocument } from './SaveDocument';
 import { CaptureDocument } from './CaptureDocument';
 
@@ -15,6 +15,7 @@ export const DocumentCaptureRaw = ({
   setPhoto,
   fieldValue,
 }) => {
+  const { formatMessage } = useIntl();
   const navigation = useNavigation();
   const cameraReference = useRef(null);
   const [hasCameraPermission, setHasCameraPermission] = useState();
@@ -27,12 +28,16 @@ export const DocumentCaptureRaw = ({
   }, []);
 
   if (hasCameraPermission === undefined) {
-    return <Text variant="labelLarge">Requesting permissions...</Text>;
+    return (
+      <Text variant="labelLarge">
+        {formatMessage({ id: 'request.cameraPermission.status.loading' })}
+      </Text>
+    );
   }
   if (!hasCameraPermission) {
     return (
       <Text variant="labelLarge">
-        Permission for camera not granted. Please change this in settings.
+        {formatMessage({ id: 'request.cameraPermission.status.notGranted' })}
       </Text>
     );
   }
@@ -50,27 +55,30 @@ export const DocumentCaptureRaw = ({
 
   if (photo) {
     return (
-      <View>
-        <AppHeader goBack={() => navigation.goBack()} title="Save Document" />
+      <>
+        <AppHeader
+          goBack={() => navigation.goBack()}
+          title={formatMessage({ id: 'documentCapture.saveDocument.title' })}
+        />
         <SaveDocument
           photo={photo}
           setPhoto={setPhoto}
           submitDocument={submitDocument}
           fieldValue={fieldValue}
         />
-      </View>
+      </>
     );
   }
 
   return (
-    <View>
+    <>
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
         title={title}
       />
       <CaptureDocument cameraReference={cameraReference} takePic={takePic} />
-    </View>
+    </>
   );
 };
 

@@ -22,25 +22,9 @@ export const axiosDocumentConfig = () => {
   };
 };
 
-// GENERAL
-export const getCompletedLists = id => {
-  return axios
-    .get(`${BASE_URL}/v1/visa/getStatuses/${id}`, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
-
 // USER
 export const userLogin = data =>
   axios.post(`${BASE_URL}/v1/users/login`, data, { headers });
-
-export const verifyToken = data =>
-  axios.get(`${BASE_URL}/v1/users/validate`, {
-    headers: {
-      ...headers,
-      Authorization: `Bearer ${data}`,
-    },
-  });
 
 export const registerUserProfile = data => {
   return axios.post(`${BASE_URL}/v1/users/register`, data, { headers });
@@ -58,13 +42,6 @@ export const enterOTP = ({ data, id }) => {
 
 export const reSendOTP = id =>
   axios.get(`${BASE_URL}/v1/users/resendToken/${id}`, { headers });
-
-export const completeUserProfile = (data, id) => {
-  return axios
-    .patch(`${BASE_URL}/v1/user/users/${id}`, data, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
 
 export const getUser = () => {
   return axios.get(`${BASE_URL}/v1/users/user`, axiosConfig());
@@ -92,19 +69,6 @@ export const getAllVisaApplicationByUser = () =>
 export const getSingleVisaInformation = id =>
   axios.get(`${BASE_URL}/v1/visa/visa-application/${id}`, axiosConfig());
 
-export const setVisaInformation = (id, data) => {
-  return axios
-    .post(`${BASE_URL}/v1/visa/information/${id}`, data, { headers })
-    .then(response => response)
-    .catch(error => error.response);
-};
-
-export const getFlightInformation = id =>
-  axios.get(
-    `${BASE_URL}/v1/visa/visa-application/flight-information/${id}`,
-    axiosConfig()
-  );
-
 export const setFlightInformation = (id, data) =>
   axios.post(
     `${BASE_URL}/v1/visa/visa-application/${id}/flight-information`,
@@ -119,40 +83,6 @@ export const uploadDocument = (visaId, data) =>
     data,
     axiosDocumentConfig()
   );
-
-export const setResidencePermitDocument = (id, data) => {
-  return axios
-    .post(`${BASE_URL}/v1/visa/documents/residencePermit/${id}`, data, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => response)
-    .catch(error => error.response);
-};
-
-export const setBiometricImageDocument = (id, data) => {
-  return axios
-    .post(`${BASE_URL}/v1/visa/documents/biometricImage/${id}`, data, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then(response => response)
-    .catch(error => error.response);
-};
-
-// Agreement
-export const getAgreement = id => {
-  return axios
-    .get(`${BASE_URL}/v1/visa/agreement/${id}`, {
-      headers,
-    })
-    .then(response => response)
-    .catch(error => error.response);
-};
 
 // /visa-application/:visaId/agreement
 export const setAgreement = (visaId, data) =>

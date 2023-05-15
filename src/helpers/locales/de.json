@@ -158,7 +158,7 @@
     "visaApplication.status.PAYMENT_PENDING": "Zahlung ausstehend",
     "visaApplication.status.COMPLETED": "Abgeschlossen",
     "visaApplication.status.READY": "Ihr Visum steht Bereit",
-    "general.cancelConfirmation": "Sind Sie sicher, dass Sie den Prozess zur Beantragung Ihres Visums abbrechen möchten? Alle eingegebenen Daten gehen verloren und Sie müssen den Prozess erneut beginnen, wenn Sie es sich später anders überlegen.",
+    "general.cancelConfirmation": "Sind Sie sicher, dass Sie den Prozess zur Beantragung Ihres Visums abbrechen möchten?",
     "screen.visa.flightInformation.input.placeholder.travelStartDate": "Voraussichtliches Flugstartdatum",
     "screen.visa.flightInformation.input.placeholder.returnFlightDate": "Voraussichtliches Rückflugdatum",
     "screen.visa.flightInformation.input.placeholder.kindOfVisa": "Art des Visums",
@@ -198,5 +198,14 @@
     "screen.loginEdit.passwordError.405": "Das alte Passwort stimmt nicht überein.",
     "screen.loginEdit.passwordError.401": "Die Einrichtung des neuen Passworts war aufgrund eines Serverfehlers nicht möglich.",
     "screen.loginEdit.passwordError.default": "Es ist ein Fehler aufgetreten beim Aktualisieren des Passworts.",
-    "home.visa.history.title": "Kürzlich gestellte Visa-Anträge"
+    "home.visa.history.title": "Kürzlich gestellte Visa-Anträge",
+    "visa.ddl.visaSelectCountry": "Wählen Sie ein Land aus",
+    "visa.ddl.visaProcessingType": "Visa Bearbeitungstyp wählen",
+    "visa.list.noVisaInProgress": "Derzeit gibt es keine laufenden Visaanträge.",
+    "general.currentVisaStatus": "Aktueller Visastatus",
+    "documentCapture.saveDocument.title": "Dokument speichern",
+    "documentCapture.retake": "Erneut aufnehmen",
+    "request.cameraPermission.status.loading": "Berechtigungen anfordern...",
+    "request.cameraPermission.status.notGranted": "Die Berechtigung für die Kamera wurde nicht erteilt. Bitte ändern Sie dies in den Einstellungen.",
+    "documentCapture.continue": "Fortfahren"
 }

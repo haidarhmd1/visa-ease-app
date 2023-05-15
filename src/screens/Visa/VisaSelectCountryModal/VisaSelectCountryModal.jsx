@@ -46,10 +46,12 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
     mutationFn: data => startVisaProcess(data),
     onSuccess: response => {
       setVisible(false);
-      queryClient.invalidateQueries({ queryKey: ['getAllVisaApplications'] });
-      navigation.navigate(ROUTES.VISA_APP, {
-        visaId: response.data.id,
-      });
+      queryClient.invalidateQueries('getAllVisaApplications');
+      setTimeout(() => {
+        navigation.navigate(ROUTES.VISA_APP, {
+          visaId: response.data.id,
+        });
+      }, 800);
     },
   });
 
@@ -95,7 +97,9 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
             <Spacer />
             <View style={styles.container}>
               <StyledDropdown
-                selectPlaceholder="Select a Country"
+                selectPlaceholder={formatMessage({
+                  id: 'visa.ddl.visaSelectCountry',
+                })}
                 isFocus={isCountryDDLFocus}
                 setIsFocus={setIsCountryDDLFocus}
                 value={countryValue}
@@ -104,7 +108,9 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
               />
               {countryValue !== null && (
                 <StyledDropdown
-                  selectPlaceholder="Select Visa Type"
+                  selectPlaceholder={formatMessage({
+                    id: 'visa.ddl.visaProcessingType',
+                  })}
                   isFocus={isVisaTypeDDLFocus}
                   setIsFocus={setIsVisaTypeDDLFocus}
                   value={visaTypeValue}

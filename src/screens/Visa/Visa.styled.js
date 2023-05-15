@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   },
   dropdown: {
     borderStyle: 'solid',
+    borderColor: MyTheme.colors.primaryBrand,
     borderWidth: 1,
     marginTop: 16,
     height: 50,

@@ -100,7 +100,7 @@ export const ResidencePermit = ({ route }) => {
               <Spacer />
               <Text variant="bodyMedium">
                 {formatMessage({
-                  id: 'screen.documents.residencePermit.title',
+                  id: 'screen.documents.residencePermit.description',
                 })}
               </Text>
               <Spacer />

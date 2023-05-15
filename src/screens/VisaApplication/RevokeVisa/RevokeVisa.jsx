@@ -26,7 +26,7 @@ export const RevokeVisa = ({
           text: formatMessage({ id: 'general.revokeVisa.prompt.title' }),
           onPress: () => {
             mutate({
-              status: isVisaApplicationComplete ? 'COMPLETED' : 'IN_PROGRESS',
+              status: isVisaApplicationComplete ? 'PENDING' : 'IN_PROGRESS',
             });
             queryClient.invalidateQueries('getAllVisaApplications');
             setTimeout(() => {

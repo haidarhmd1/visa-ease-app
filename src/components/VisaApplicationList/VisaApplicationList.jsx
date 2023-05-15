@@ -12,16 +12,17 @@ import { AntDesign } from '@expo/vector-icons';
 import { ROUTES } from 'helpers/constants/routes';
 import { useVisaStatus } from 'utils/useVisaStatus';
 import { badgeProcess } from 'utils/BadgeStatus';
+import { useRefreshOnFocus } from 'utils/useRefetchOnFocus';
 
 export const VisaApplicationList = ({ title, navigation }) => {
   const { visaStatus } = useVisaStatus();
   const { formatMessage } = useIntl();
 
-  const { data: visaApplications, isLoading, isError } = useQuery(
+  const { data: visaApplications, refetch, isLoading, isError } = useQuery(
     'getAllVisaApplications',
     getAllVisaApplicationByUser
   );
-
+  useRefreshOnFocus(refetch);
   if (isError) {
     Alert.alert(formatMessage({ id: 'general.error.get.message' }));
   }
@@ -34,13 +35,13 @@ export const VisaApplicationList = ({ title, navigation }) => {
     });
   };
 
-  return visaApplications?.data.length > 0 ? (
+  return (
     <View>
       <SpacerDivider />
       <Text variant="bodyLarge">{formatMessage({ id: title })}</Text>
       <Spacer />
-      {visaApplications.data.map(applications => {
-        return (
+      {visaApplications?.data.length > 0 ? (
+        visaApplications.data.map(applications => (
           <List.Item
             key={applications.id}
             style={[styles.padding, styles.list]}
@@ -69,10 +70,16 @@ export const VisaApplicationList = ({ title, navigation }) => {
               <AntDesign style={styles.alignCenter} name="right" size={14} />
             )}
           />
-        );
-      })}
+        ))
+      ) : (
+        <List.Item
+          style={[styles.padding, styles.list]}
+          title={formatMessage({ id: 'screen.visa.visaApplicationList.title' })}
+          description={formatMessage({ id: 'visa.list.noVisaInProgress' })}
+        />
+      )}
     </View>
-  ) : null;
+  );
 };
 
 const styles = StyleSheet.create({

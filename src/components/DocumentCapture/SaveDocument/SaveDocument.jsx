@@ -2,9 +2,11 @@ import React from 'react';
 import { Layout } from 'components/Layout/Layout';
 import { View, StyleSheet, Image } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
+import { useIntl } from 'react-intl';
 import { styles } from '../DocumentCapture.styled';
 
 export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
+  const { formatMessage } = useIntl();
   return (
     <Layout style={style.container}>
       <Image style={styles.image} source={photo} />
@@ -20,7 +22,7 @@ export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
               onPress={() => setPhoto()}
             />
             <Text variant="labelSmall" style={style.textCenter}>
-              retake
+              {formatMessage({ id: 'documentCapture.retake' })}
             </Text>
           </View>
           <View>
@@ -31,7 +33,9 @@ export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
               size={24}
               onPress={() => submitDocument()}
             />
-            <Text variant="labelSmall">Continue</Text>
+            <Text variant="labelSmall">
+              {formatMessage({ id: 'documentCapture.continue' })}
+            </Text>
           </View>
         </View>
       </View>

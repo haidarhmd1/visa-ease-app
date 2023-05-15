@@ -47,7 +47,7 @@ export const ServiceItems = ({ navigation }) => {
   };
 
   return (
-    <View style={{ marginBottom: 21 }}>
+    <View>
       <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
         {formatMessage({ id: 'screen.main.ourServices' })}
       </Text>

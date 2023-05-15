@@ -8,6 +8,9 @@ import { PalmImage } from 'assets/images';
 import { StickyHeaderWrapper } from 'components/StickyHeaderWrapper';
 import { useQuery } from 'react-query';
 import { getSingleVisaInformation } from 'services/api';
+import { SpacerDivider } from 'components/SpacerDivider';
+import { MyTheme } from 'styles/theme/theme.extended';
+import { useVisaStatus } from 'utils/useVisaStatus';
 import { VisaItemButton } from './VisaItemButton';
 import { CancelVisa } from './CancelVisa';
 import { SubmitVisa } from './SubmitVisa';
@@ -52,6 +55,7 @@ const useIsVisaApplicationComplete = () => {
 export const VisaApplication = ({ navigation, route }) => {
   const { formatMessage } = useIntl();
   const { isVisaApplicationComplete } = useIsVisaApplicationComplete();
+  const { visaStatus } = useVisaStatus();
   const { visaId } = route.params;
   const {
     data: singleVisaApplication,
@@ -76,11 +80,17 @@ export const VisaApplication = ({ navigation, route }) => {
       imageSrc={PalmImage}
       title={singleVisaApplication?.data.country.toUpperCase()}
     >
+      <Spacer />
+      <List.Item
+        style={[styles.list, { margin: 12 }]}
+        title={formatMessage({ id: 'general.currentVisaStatus' })}
+        description={visaStatus(singleVisaApplication?.data.status)}
+      />
+      <SpacerDivider />
       <Layout style={styles.marginTop(12)}>
         <Text variant="labelLarge" style={styles.marginBottom(8)}>
           {formatMessage({ id: 'visaApplication.steps.information.infoTitle' })}
         </Text>
-
         <VisaItemButton
           title={formatMessage({ id: 'general.flightInformation' })}
           navigation={navigation}
@@ -174,7 +184,10 @@ export const VisaApplication = ({ navigation, route }) => {
               isVisaApplicationComplete={isVisaApplicationComplete(
                 singleVisaApplication?.data
               )}
-              isCancelled={singleVisaApplication?.data.status === 'CANCELLED'}
+              isCancelled={
+                singleVisaApplication?.data.status === 'CANCELLED' ||
+                singleVisaApplication?.data.status === 'PENDING'
+              }
               navigation={navigation}
               visaId={singleVisaApplication?.data.id}
             />
@@ -201,4 +214,11 @@ const styles = StyleSheet.create({
   marginTop: units => ({ marginTop: units }),
   marginBottom: units => ({ marginBottom: units }),
   backgroundWhite: { backgroundColor: 'white' },
+
+  list: {
+    borderWidth: 1,
+    marginBottom: 8,
+    borderColor: MyTheme.colors.primaryBrand,
+    borderRadius: 12,
+  },
 });

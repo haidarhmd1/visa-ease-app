@@ -158,7 +158,7 @@
     "visaApplication.status.PAYMENT_PENDING": "Payment Pending",
     "visaApplication.status.COMPLETED": "Completed",
     "visaApplication.status.READY": "Your Visa is Ready",
-    "general.cancelConfirmation": "Are you sure you want to cancel your visa application process? All the data you have entered will be lost and you will need to start the process again if you change your mind later.",
+    "general.cancelConfirmation": "Are you sure you want to cancel your visa application process?",
     "screen.visa.flightInformation.input.placeholder.travelStartDate": "Expected flight start date",
     "screen.visa.flightInformation.input.placeholder.returnFlightDate": "Expected return flight date",
     "screen.visa.flightInformation.input.placeholder.kindOfVisa": "Kind of Visa",
@@ -198,5 +198,14 @@
     "screen.loginEdit.passwordError.405": "The old password does not match.",
     "screen.loginEdit.passwordError.401": "The setup of the new password was not possible due to a server error.",
     "screen.loginEdit.passwordError.default": "An error occurred while updating the password.",
-    "home.visa.history.title": "Recent Visa Application"
+    "home.visa.history.title": "Recent Visa Application",
+    "visa.ddl.visaSelectCountry": "Select a Country",
+    "visa.ddl.visaProcessingType": "Visa processing type",
+    "visa.list.noVisaInProgress": "There are currently no ongoing visa applications.",
+    "general.currentVisaStatus": "Current visa status",
+    "documentCapture.saveDocument.title": "Save Document",
+    "documentCapture.retake": "Retake",
+    "request.cameraPermission.status.loading": "Requesting permissions...",
+    "request.cameraPermission.status.notGranted": "Permission for camera not granted. Please change this in settings.",
+    "documentCapture.continue": "Continue"
 }

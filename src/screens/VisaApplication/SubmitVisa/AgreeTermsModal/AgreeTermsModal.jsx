@@ -38,7 +38,8 @@ export const AgreeTermsModal = ({
     onSuccess: () => {
       setTimeout(() => {
         setVisible(false);
-        queryClient.invalidateQueries(['getSingleVisaApplication']);
+        queryClient.invalidateQueries('getSingleVisaApplication');
+        queryClient.invalidateQueries('getAllVisaApplications');
         navigation.goBack();
       }, 800);
     },

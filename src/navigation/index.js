@@ -12,7 +12,7 @@ const RootStackScreen = createNativeStackNavigator();
 
 const RootStack = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  console.log('isAuthenticated', isAuthenticated);
+
   return (
     <NavigationContainer>
       <StatusBar barStyle="dark-content" translucent={false} hidden={false} />
