@@ -71,8 +71,8 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
     setUserData(null);
     axios.defaults.headers.common.Authorization = '';
-    queryClient.invalidateQueries();
     await SecureStore.deleteItemAsync('authToken');
+    queryClient.invalidateQueries();
   }, [queryClient]);
 
   const value = useMemo(

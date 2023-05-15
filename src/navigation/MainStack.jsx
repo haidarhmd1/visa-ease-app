@@ -31,7 +31,7 @@ export const MainStack = () => {
 
   if (isLoading) return <ActivityIndicator animating size="large" />;
 
-  setUserData(data.data);
+  setUserData(data?.data);
 
   return (
     <Stack.Navigator
