@@ -112,64 +112,6 @@ export const ServiceItems = ({ navigation }) => {
         )}
         keyExtractor={item => item.id}
       />
-      <View>
-        <Text variant="titleLarge" style={{ paddingBottom: 16 }}>
-          {formatMessage({ id: 'screen.main.topVisaServices' })}
-        </Text>
-        <FlatList
-          horizontal
-          data={visaCountries}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                onPressHandler(item.id);
-              }}
-            >
-              <View
-                style={{
-                  height: 150,
-                  width: 250,
-                  marginRight: 20,
-                  position: 'relative',
-                  borderRadius: 14,
-                  overflow: 'hidden',
-                  backgroundColor: 'black',
-                }}
-              >
-                <ImageBackground
-                  source={{ uri: 'https://picsum.photos/700' }}
-                  style={{
-                    height: 150,
-                    width: '100%',
-                    opacity: 0.7,
-                    position: 'absolute',
-                  }}
-                />
-                <View
-                  style={{
-                    flex: 1,
-                    marginLeft: 15,
-                    marginBottom: 5,
-                    justifyContent: 'flex-end',
-                  }}
-                >
-                  <Text
-                    variant="headlineSmall"
-                    style={{ color: 'white', fontWeight: 'bold' }}
-                  >
-                    {item.title}
-                  </Text>
-                  <Text variant="bodyMedium" style={{ color: 'white' }}>
-                    {formatMessage({ id: 'screen.main.startVisaJourney' })}
-                  </Text>
-                </View>
-              </View>
-            </TouchableWithoutFeedback>
-          )}
-          keyExtractor={item => item.id}
-        />
-      </View>
     </View>
   );
 };

@@ -1,10 +1,11 @@
 import React from 'react';
 import { PalmImage } from 'assets/images';
 import { ImageBackground, View } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Avatar, Text } from 'react-native-paper';
 import { ROUTES } from 'res/constants/routes';
 import navigation from 'navigation';
 import { useIntl } from 'react-intl';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const HomeHeroView = () => {
   const { formatMessage } = useIntl();
@@ -50,7 +51,7 @@ export const HomeHeroView = () => {
             fontWeight: 'bold',
           }}
         >
-          Visa
+          VisaStar
         </Text>
         <Text
           variant="bodyMedium"

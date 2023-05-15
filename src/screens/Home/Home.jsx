@@ -7,7 +7,7 @@ import { ServiceItems } from './ServiceItems';
 
 export const Home = ({ navigation }) => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <AppHeader navigation={navigation} role="main" />
       <HomeHeroView />
       <StyledScrollView>

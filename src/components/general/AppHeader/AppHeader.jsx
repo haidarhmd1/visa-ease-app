@@ -39,7 +39,10 @@ export const AppHeader = ({
 
   if (role === 'main') {
     return (
-      <Appbar.Header statusBarHeight={0} style={styles.backgroundWhite}>
+      <Appbar.Header
+        statusBarHeight={0}
+        style={[styles.backgroundWhite, { marginBottom: 8 }]}
+      >
         <View>
           <Text style={styles.mainAppHeaderText} variant="headlineSmall">
             {formatMessage({ id: 'screen.main.greeting' })}
