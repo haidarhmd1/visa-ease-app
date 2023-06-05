@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { ROUTES } from 'helpers/constants/routes';
 import { Profile, VisaApplication } from 'screens';
@@ -27,11 +27,17 @@ export const MainStack = () => {
 
   const { data, isLoading, isError } = useQuery('getUser', getUser);
 
+  useEffect(() => {
+    if (isError) {
+      setUserData(null);
+    }
+    setUserData(data?.data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isLoading, isError]);
+
   if (isError) logout();
 
   if (isLoading) return <ActivityIndicator animating size="large" />;
-
-  setUserData(data?.data);
 
   return (
     <Stack.Navigator
