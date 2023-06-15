@@ -35,9 +35,13 @@ export const MainStack = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading, isError]);
 
-  if (isError) logout();
+  if (isError) {
+    logout();
+  }
 
-  if (isLoading) return <ActivityIndicator animating size="large" />;
+  if (isLoading) {
+    return <ActivityIndicator animating size="large" />;
+  }
 
   return (
     <Stack.Navigator

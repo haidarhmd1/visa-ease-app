@@ -7,15 +7,19 @@ import { useIntl } from 'react-intl';
 import { Alert } from 'react-native';
 import { Card } from 'react-native-paper';
 import { useMutation } from 'react-query';
+import { useNavigation } from '@react-navigation/native';
+import { ROUTES } from 'helpers/constants/routes';
 
 export const AccountDelete = () => {
   const { formatMessage } = useIntl();
   const { logout } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
       logout();
+      navigation.navigate(ROUTES.LOGIN);
     },
     onError: () => {
       Alert.alert(formatMessage({ id: 'general.error.message' }));
