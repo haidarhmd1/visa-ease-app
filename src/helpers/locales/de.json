@@ -19,8 +19,8 @@
     "visaApplication.steps.information.processing.title": "Bearbeitung bei uns im Haus:",
     "visaApplication.general.visaType.express": "Express",
     "visaApplication.general.visaType.standard": "Standard",
-    "visastar.home.welcome.title": "Willkommen bei Visa Star",
-    "visastar.home.welcome.description": "Wir pflegen Kontakte zu allen Botschaften in Berlin und Konsulaten deutschlandweit. Wir beraten Sie umfassend und liefern Ihnen für viele Länder Ihr Visum. VISA STAR bietet eine erstklassige Erreichbarkeit rund um die Uhr und absolut faire und transparente Preise.",
+    "visastar.home.welcome.title": "Willkommen",
+    "visastar.home.welcome.description": "Wir pflegen Kontakte zu allen Botschaften in Berlin und Konsulaten deutschlandweit. Wir beraten Sie umfassend und liefern Ihnen für viele Länder Ihr Visum. Wir bieten eine erstklassige Erreichbarkeit rund um die Uhr und absolut faire und transparente Preise.",
     "visastar.home.welcome.subDescription": "Ihr zuverlässiger Partner für...",
     "visastar.home.services.headline": "Dienstleistungen",
     "visastar.home.services.visa": "Visa",
@@ -48,7 +48,7 @@
     "register.form.title.privacy": "Deine Privatsphäre ist uns wichtig!",
     "register.form.description.privacy": "Deine persönlichen Informationen werden gemäß unserer Datenschutzrichtlinien verarbeitet.",
     "register.button": "Registrieren",
-    "register.form.acceptTermsAndConditions.title": "Ich akzeptiere die Geschäftsbedingungen von VISASTAR.",
+    "register.form.acceptTermsAndConditions.title": "Ich akzeptiere die Geschäftsbedingungen",
     "register.form.error.fullname": "Ups! Sie haben vergessen, Ihren vollständigen Namen einzugeben.",
     "register.form.error.email": "Hoppla! Sie haben vergessen, Ihre E-Mail-Adresse einzugeben.",
     "register.form.error.password": "Vergessen Sie nicht, ein Passwort zu erstellen.",
@@ -77,7 +77,7 @@
     "registration.form.maritalStatus.married": "Verheiratet",
     "registration.form.maritalStatus.widowed": "Verwitwet",
     "registration.form.maritalStatus.divorced": "Geschieden",
-    "registration.screen.title": "Registriere dich für Visastar",
+    "registration.screen.title": "Registrierung",
     "registration.screen.subtitle": "Das wird nur ein paar Minuten dauern",
     "registration.screen.description": "Entspannen Sie sich und freuen Sie sich auf Ihren Urlaub, Ihre Kreuzfahrt oder Ihre Geschäftsreise. Wir kümmern uns um Ihr Visum.",
     "register.input.dob.error.invalid": "Das Geburtsdatum muss im Format MM-DD-YYYY sein",
@@ -207,5 +207,7 @@
     "documentCapture.retake": "Erneut aufnehmen",
     "request.cameraPermission.status.loading": "Berechtigungen anfordern...",
     "request.cameraPermission.status.notGranted": "Die Berechtigung für die Kamera wurde nicht erteilt. Bitte ändern Sie dies in den Einstellungen.",
-    "documentCapture.continue": "Fortfahren"
+    "documentCapture.continue": "Fortfahren",
+    "screen.main.services": "Hauptservices",
+    "screen.main.externalServices": "Externe Services"
 }

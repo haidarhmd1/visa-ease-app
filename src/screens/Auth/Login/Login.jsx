@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { PrimaryButton, SecondaryButton } from 'components/Buttons';
-import { Background, Logo } from 'components/Login';
+import { Background } from 'components/Login';
 import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import { styles } from 'screens/Auth/Login/Login.styled';
 import { ROUTES } from 'helpers/constants/routes';
@@ -63,7 +63,6 @@ const LoginRaw = ({ navigation }) => {
   return (
     <Background>
       <View style={styles.centerItems}>
-        <Logo />
         <Image
           style={styles.image}
           source={LoginIllustration}

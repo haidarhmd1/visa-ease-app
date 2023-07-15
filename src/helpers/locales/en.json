@@ -19,8 +19,8 @@
     "visaApplication.steps.information.processing.title": "In-house processing:",
     "visaApplication.general.visaType.express": "Express",
     "visaApplication.general.visaType.standard": "Standard",
-    "visastar.home.welcome.title": "Welcome to Visa Star",
-    "visastar.home.welcome.description": "We maintain contacts with all embassies in Berlin and consulates throughout Germany. We advise you comprehensively and provide you with your visa for many countries. VISA STAR offers first-class accessibility around the clock and absolutely fair and transparent prices.",
+    "visastar.home.welcome.title": "WelcomeVisa Star",
+    "visastar.home.welcome.description": "We maintain contacts with all embassies in Berlin and consulates throughout Germany. We advise you comprehensively and provide you with your visa for many countries. We offer first-class accessibility around the clock and absolutely fair and transparent prices.",
     "visastar.home.welcome.subDescription": "Your reliable partner for...",
     "visastar.home.services.headline": "Services",
     "visastar.home.services.visa": "Visa",
@@ -48,7 +48,7 @@
     "register.form.title.privacy": "Your privacy matter to us!",
     "register.form.description.privacy": "Your personal information will be processed in accordance to our privacy policies.",
     "register.button": "Register",
-    "register.form.acceptTermsAndConditions.title": "I accept the terms and conditions of VISASTAR.",
+    "register.form.acceptTermsAndConditions.title": "I accept the terms and conditions",
     "register.form.error.fullname": "Oops! You forgot to enter your full name.",
     "register.form.error.email": "Whoops! You forgot to enter your email address.",
     "register.form.error.password": "Don't forget to create a password.",
@@ -77,7 +77,7 @@
     "registration.form.maritalStatus.married": "Married",
     "registration.form.maritalStatus.widowed": "Widowed",
     "registration.form.maritalStatus.divorced": "Divorced",
-    "registration.screen.title": "Register for Visastar",
+    "registration.screen.title": "Registration",
     "registration.screen.subtitle": "This will only take a couple of minutes",
     "registration.screen.description": "Relax and look forward to your vacation, cruise, or business trip. We'll take care of your visa.",
     "register.input.dob.error.invalid": "Date of birth must be in the format MM-DD-YYYY",
@@ -207,5 +207,7 @@
     "documentCapture.retake": "Retake",
     "request.cameraPermission.status.loading": "Requesting permissions...",
     "request.cameraPermission.status.notGranted": "Permission for camera not granted. Please change this in settings.",
-    "documentCapture.continue": "Continue"
+    "documentCapture.continue": "Continue",
+    "screen.main.services": "Main Services",
+    "screen.main.externalServices": "External Services"
 }
