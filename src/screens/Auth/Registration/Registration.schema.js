@@ -20,13 +20,6 @@ export const useRegistrationValidationSchema = () => {
     profession: yup
       .string()
       .required(formatMessage({ id: 'register.form.error.profession' })),
-    // dob: yup
-    //   .string()
-    //   .required(formatMessage({ id: 'register.form.error.dob' }))
-    //   .matches(
-    //     /^\d{2}\/\d{2}\/\d{4}$/,
-    //     formatMessage({ id: 'register.input.dob.error.invalid' })
-    //   ),
     password: yup
       .string()
       .min(8, formatMessage({ id: 'register.form.error.password.full' }))

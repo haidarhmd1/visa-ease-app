@@ -28,12 +28,12 @@ export const SocialMediaLinks = () => {
           {formatMessage({ id: 'screen.account.socialMedia.title' })}
         </List.Subheader>
         <List.Item
-          onPress={() => externalLink('phone', '+49 030 27578642')}
+          onPress={() => externalLink('phone', '+49 030 12345678')}
           title={formatMessage({ id: 'screen.account.socialMedia.instagram' })}
           right={InstagramIcon}
         />
         <List.Item
-          onPress={() => externalLink('phone', '+49 170 8 90 8 770')}
+          onPress={() => externalLink('phone', '+49 170 1 23 4 567')}
           title={formatMessage({ id: 'screen.account.socialMedia.facebook' })}
           right={FacebookIcon}
         />

@@ -18,10 +18,10 @@ export const Legalization = ({ navigation }) => {
 
   const downloadPDF = documentLang => {
     FileSystem.downloadAsync(
-      `https://visastar.de/wp-content/uploads/${
+      `https://dummy-visa-link.de/wp-content/uploads/${
         documentLang === 'DE'
           ? '2020/01/Auftragsformular-Order-Formular'
-          : '2020/07/Auftragsformular-Order-Formular-visastar-EN.pdf'
+          : '2020/07/Auftragsformular-Order-Formular-dummy-visa-link-EN.pdf'
       }.pdf`,
       `${downloadPath}Auftragsformular-Order-Formular${
         documentLang === 'DE' ? '_de' : '_en'
@@ -58,7 +58,7 @@ export const Legalization = ({ navigation }) => {
     <>
       <AppHeader
         title={intl.formatMessage({
-          id: 'visastar.home.services.legalization',
+          id: 'dummy-visa-link.home.services.legalization',
         })}
         goBack={() => navigation.goBack()}
       />
@@ -124,9 +124,9 @@ export const Legalization = ({ navigation }) => {
                         </Text>
                         <View style={{ marginTop: 6, marginBottom: 6 }} />
                         <Text variant="labelMedium">
-                          2. Then simply send it by mail to VISASTAR,
+                          2. Then simply send it by mail to dummy-visa-link,
                           Friedrichstr. 95, 10117 Berlin or scan it and send it
-                          as .pdf or .jpeg file to info@visastar.de{' '}
+                          as .pdf or .jpeg file to info@dummy-visa-link.de{' '}
                         </Text>
                       </View>
                     }
@@ -164,7 +164,7 @@ export const Legalization = ({ navigation }) => {
                           Senden Sie uns alle (vorbeglaubigten) Dokumente auf
                           dem Postweg zu. Auch das Auftragsformular, sollten Sie
                           es nicht schon vorab per Mail an uns verschickt haben.
-                          VISASTAR, Friedrichstr. 95, 10117 Berlin
+                          dummy-visa-link, Friedrichstr. 95, 10117 Berlin
                         </Text>
                         <Divider style={{ marginTop: 21, marginBottom: 21 }} />
                         <Text>

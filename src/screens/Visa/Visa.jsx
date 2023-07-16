@@ -20,7 +20,7 @@ export const Visa = ({ navigation }) => {
   return (
     <StickyHeaderWrapper
       showBackButton={false}
-      appBarTitle={formatMessage({ id: 'visastar.home.services.visa' })}
+      appBarTitle={formatMessage({ id: 'visa.home.services.visa' })}
       imageSrc={PalmImage}
       navigation={navigation}
       floatingCardContent={<VisaFloatingCardContent />}

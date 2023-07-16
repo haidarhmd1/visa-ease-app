@@ -27,18 +27,18 @@ export const ContactLinks = () => {
           {formatMessage({ id: 'screen.account.contact.title' })}
         </List.Subheader>
         <List.Item
-          onPress={() => externalLink('phone', '+49 030 27578642')}
+          onPress={() => externalLink('phone', '+49 030 12345678')}
           title="+49 030 27578642"
           right={PhoneIcon}
         />
         <List.Item
-          onPress={() => externalLink('phone', '+49 170 8 90 8 770')}
-          title="+49 170 8 90 8 770"
+          onPress={() => externalLink('phone', '+49 170 1 23 4 567')}
+          title="+49 170 1 23 4 567"
           right={CellPhoneIcon}
         />
         <List.Item
-          onPress={() => externalLink('email', 'contactus@visastar.de')}
-          title="contactus@visastar.de"
+          onPress={() => externalLink('email', 'contactus@dummy-visa-link.de')}
+          title="contactus@dummy-visa-link.de"
           right={MailIcon}
         />
       </List.Section>

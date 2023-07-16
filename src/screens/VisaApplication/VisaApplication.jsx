@@ -27,7 +27,7 @@ const visaCountryData = {
     Kopie Aufenthaltserlaubnis
     Passbild (biometrisch)
     ausgefülltes Formular
-    alle Dokumente eingescannt per E-Mail an visa@visastar.de`,
+    alle Dokumente eingescannt per E-Mail an visa@dummy-visa-link.de`,
   slug: 'uae',
 };
 

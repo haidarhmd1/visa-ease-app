@@ -15,7 +15,7 @@ import { colorPalette } from 'styles/theme/theme.extended';
 const services = [
   {
     id: 1,
-    title: 'visastar.home.services.visa',
+    title: 'visa.home.services.visa',
     route: ROUTES.VISA_HOME,
     icon: 'file-document-multiple-outline',
   },

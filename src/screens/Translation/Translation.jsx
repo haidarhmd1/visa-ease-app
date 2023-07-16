@@ -38,8 +38,8 @@ export const Translation = ({ navigation }) => {
               </Text>
               <View style={{ marginTop: 12, marginBottom: 12 }} />
               <Text>
-                Die Legalisierung/ Beglaubigung wird anschließend durch VISASTAR
-                realisiert.
+                Die Legalisierung/ Beglaubigung wird anschließend durch
+                dummy-visa-link realisiert.
               </Text>
               <Divider style={{ marginTop: 21, marginBottom: 21 }} />
               <Text variant="labelLarge" style={{ fontWeight: 'bold' }}>
@@ -49,8 +49,8 @@ export const Translation = ({ navigation }) => {
               </Text>
               <View style={{ marginTop: 12, marginBottom: 12 }} />
               <Text variant="labelLarge">
-                Die Legalisierung/ Beglaubigung wird anschließend durch VISASTAR
-                realisiert.
+                Die Legalisierung/ Beglaubigung wird anschließend durch
+                dummy-visa-link realisiert.
               </Text>
               <List.Section>
                 <List.Item title="englisch" />
@@ -63,7 +63,7 @@ export const Translation = ({ navigation }) => {
               </List.Section>
               <Divider style={{ marginTop: 21, marginBottom: 21 }} />
               <PrimaryButton
-                onPress={() => externalLink('email', 'info@visastar.de')}
+                onPress={() => externalLink('email', 'info@dummy-visa-link.de')}
               >
                 Direkt Anfragen
               </PrimaryButton>

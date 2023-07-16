@@ -50,7 +50,7 @@ export const HomeHeroView = () => {
             fontWeight: 'bold',
           }}
         >
-          VisaStar
+          VisaEase
         </Text>
         <Text
           variant="bodyMedium"

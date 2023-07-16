@@ -13,8 +13,8 @@ export const Rates = ({ navigation }) => {
 
   const downloadPDF = () => {
     FileSystem.downloadAsync(
-      'https://visastar.de/wp-content/uploads/2020/07/Auftragsformular-Order-Formular-visastar-EN.pdf',
-      `${downloadPath}Auftragsformular-Order-Formular-visastar-EN.pdf`
+      'https://dummy-visa-link.de/wp-content/uploads/2020/07/Auftragsformular-Order-Formular-dummy-visa-link-EN.pdf',
+      `${downloadPath}Auftragsformular-Order-Formular-dummy-visa-link-EN.pdf`
     )
       .then(({ uri }) => {
         console.log('Finished downloading to', uri);
@@ -58,7 +58,7 @@ export const Rates = ({ navigation }) => {
 
               <Text variant="labelLarge">Eigene Gebühren</Text>
               <Text variant="titleMedium">
-                Dienstleistungsgebühren VisaStar
+                Dienstleistungsgebühren dummy-visa-link
               </Text>
               <View style={{ marginTop: 12, marginBottom: 12 }} />
               <Text variant="labelLarge">
