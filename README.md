@@ -1,7 +1,14 @@
 # VisaEase
 Simplifying Visa Applications with Digital Efficiency
 
-![VisaEase Demo](/path/to/visa_ease_demo.gif)
+# Preview [Screenshots]
+
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 17 30-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/86100d85-32b8-476d-8e58-a3184c0ada02)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 40 14-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/723fb72d-abbf-43a9-b7d7-28b2cdb9b80f)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 43 19-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/83363edc-fd8d-4162-a7e9-c881b561d705)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 43 27-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/dbf88449-58af-46a8-8f52-5f1b5e48abd8)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 43 32-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/b178edbf-2cd9-4b20-9747-4d49def350c4)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-07-16 at 14 43 35-min](https://github.com/haidarhmd1/visa-ease-app/assets/30661408/120b0222-6cec-4cd4-854d-81ef7e7dad41)
 
 ### Description
 Welcome to VisaEase, your one-stop solution for streamlining the cumbersome process of applying for visas. Whether you're planning a dream vacation, pursuing higher education abroad, or exploring international job opportunities, VisaEase is here to simplify and expedite your visa application experience.
