@@ -129,7 +129,6 @@ export const AddressInformation = ({ navigation }) => {
               </View>
               <View style={[style.inputWidth, style.marginBottom]}>
                 <CustomSelectCountryDropdown
-                  // search={false}
                   rules={{ required: true }}
                   name="city"
                   control={control}

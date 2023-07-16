@@ -230,7 +230,6 @@ export const Legalization = ({ navigation }) => {
               <PrimaryButton
                 style={{ marginBottom: 21 }}
                 icon="file-download-outline"
-                // onPress={documentUpload}
                 onPress={() => downloadPDF('DE')}
               >
                 Download Auftragsformular-Order Formular

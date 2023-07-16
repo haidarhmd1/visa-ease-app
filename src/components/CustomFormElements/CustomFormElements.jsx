@@ -207,7 +207,6 @@ export const CustomCheckbox = ({ name, control, rules = {}, title }) => {
   );
 };
 
-//  onChange?: (event: DateTimePickerEvent, date?: Date) => void;
 export const CustomDatePicker = ({
   name,
   control,
