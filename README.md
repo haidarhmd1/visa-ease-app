@@ -15,12 +15,12 @@ Welcome to VisaEase, your one-stop solution for streamlining the cumbersome proc
 
 ### Key Features:
 
-- Intuitive User Interface: VisaEase boasts a user-friendly interface, ensuring a smooth and hassle-free navigation throughout the application process. Say goodbye to confusing forms and lengthy paperwork!
-- Personalised Guidance: Our application offers tailored guidelines for each visa category, helping you understand specific requirements and increasing the chances of a successful application.
-- Real-Time Application Tracking: Stay informed about the progress of your visa application with real-time updates. You'll receive notifications at each stage, from submission to approval.
-- Document Verification Assistance: VisaEase provides support in verifying your documents, ensuring that they meet the necessary criteria before submission.
-- Multi-Language Support: VisaEase caters to a global audience, offering language options that make the application accessible to users worldwide.
-- Smart Document Autofill: Save time by letting VisaEase automatically populate common information across various application forms.
+- **Intuitive User Interface:** VisaEase boasts a user-friendly interface, ensuring a smooth and hassle-free navigation throughout the application process. Say goodbye to confusing forms and lengthy paperwork!
+- **Personalised Guidance:** Our application offers tailored guidelines for each visa category, helping you understand specific requirements and increasing the chances of a successful application.
+- **Real-Time Application Tracking:** Stay informed about the progress of your visa application with real-time updates. You'll receive notifications at each stage, from submission to approval.
+- **Document Verification Assistance:** VisaEase provides support in verifying your documents, ensuring that they meet the necessary criteria before submission.
+- **Multi-Language Support:** VisaEase caters to a global audience, offering language options that make the application accessible to users worldwide.
+- **Smart Document Autofill:** Save time by letting VisaEase automatically populate common information across various application forms.
 
 
 Save yourself from the tedium of traditional visa applications and embrace the future of digital efficiency with VisaEase. Your journey begins here. Let's make your visa application process swift, stress-free, and successful!
@@ -30,13 +30,13 @@ Save yourself from the tedium of traditional visa applications and embrace the f
 
 Before you start setting up the project, make sure you have the following software installed on your system:
 
-1. Node.js: React Native requires Node.js to run JavaScript on the server and build the application. You can download Node.js from the official website: [Node.js](https://nodejs.org/)
+1. **Node.js:** React Native requires Node.js to run JavaScript on the server and build the application. You can download Node.js from the official website: [Node.js](https://nodejs.org/)
 
-2. npm (Node Package Manager): npm comes bundled with Node.js, so once you have Node.js installed, npm will be available automatically.
+2. **npm (Node Package Manager):** npm comes bundled with Node.js, so once you have Node.js installed, npm will be available automatically.
 
-3. Java Development Kit (JDK): React Native requires JDK to build and run the Android version of the application. Download and install JDK from the official Oracle website: [Java SE Downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
+3. **Java Development Kit (JDK):** React Native requires JDK to build and run the Android version of the application. Download and install JDK from the official Oracle website: [Java SE Downloads](https://www.oracle.com/java/technologies/javase-downloads.html)
 
-4. Android Studio: For Android development, you'll need to install Android Studio and set up an Android Virtual Device (AVD) to run the application on an Android emulator. Download Android Studio from here: [Android Studio](https://developer.android.com/studio)
+4. **Android Studio:** For Android development, you'll need to install Android Studio and set up an Android Virtual Device (AVD) to run the application on an Android emulator. Download Android Studio from here: [Android Studio](https://developer.android.com/studio)
 
 ## Installation
 
