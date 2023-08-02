@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const Checkbox = ({ isChecked, onPress, title }) => {
   const iconName = isChecked ? 'checkbox-marked' : 'checkbox-blank-outline';
@@ -8,7 +9,11 @@ export const Checkbox = ({ isChecked, onPress, title }) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={onPress}>
-        <MaterialCommunityIcons name={iconName} size={24} color="#00bf80" />
+        <MaterialCommunityIcons
+          name={iconName}
+          size={24}
+          color={MyTheme.colors.primaryBrand}
+        />
       </Pressable>
       <Text style={styles.title}>{title}</Text>
     </View>

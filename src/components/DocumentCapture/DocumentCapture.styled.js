@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     margin: 'auto',
   },
   informationCard: {
-    backgroundColor: MyTheme.colors.primaryBackground,
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
     width: '100%',
     minHeight: 100,
     height: 'auto',

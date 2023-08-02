@@ -64,26 +64,12 @@ export const MyTheme = {
     defaultBackgroundColor: colorPalette.binary.white,
     primaryBrandBackground: colorPalette.turquoise.t400,
     primaryBrand: colorPalette.turquoise.tstandard,
-    brandFont: colorPalette.turquoise.tstandard,
 
-    backgroundIcon: colorPalette.turquoise.tstandard,
-    brandIcon: colorPalette.binary.white,
-
-    primaryFont: colorPalette.binary.black,
-    secondaryFont: colorPalette.binary.white,
+    secondaryFont: '#808080',
     error: colorPalette.red.r600,
 
-    primaryBackground: colorPalette.binary.white,
     warningBackground: colorPalette.orange.o50,
     warningBorder: colorPalette.orange.o300,
-
-    primaryButtonBackground: colorPalette.turquoise.tstandard,
-    primaryButtonFont: colorPalette.binary.white,
-
-    ButtonBorder: colorPalette.turquoise.tstandard,
-
-    secondaryButtonBackground: colorPalette.binary.white,
-    secondaryButtonFont: colorPalette.turquoise.tstandard,
   },
   fontSize: {
     largeTitle: 34,

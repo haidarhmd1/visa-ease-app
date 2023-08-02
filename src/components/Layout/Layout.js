@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   touchableIconCardOpacity: {
-    backgroundColor: MyTheme.colors.primaryBackground,
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
     borderRadius: MyTheme.borderRadius,
     padding: 15,
     height: 100,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 8,
-    backgroundColor: MyTheme.colors.primaryBackground,
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   scrollView: {
     backgroundColor: MyTheme.colors.defaultBackgroundColor,

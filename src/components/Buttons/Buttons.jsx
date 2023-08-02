@@ -6,7 +6,7 @@ export const PrimaryButton = ({ children, style, ...properties }) => {
   return (
     <Button
       mode="contained"
-      buttonColor="#00bf80"
+      buttonColor={MyTheme.colors.primaryBrand}
       {...properties}
       style={[style, { borderRadius: 14 }]}
     >
@@ -20,14 +20,14 @@ export const SecondaryButton = ({ children, style, ...properties }) => {
     <Button
       mode="contained"
       buttonColor="white"
-      textColor={MyTheme.colors.brandFont}
+      textColor={MyTheme.colors.primaryBrand}
       {...properties}
       style={[
         style,
         {
           borderWidth: 2,
           borderStyle: 'solid',
-          borderColor: '#00bf80',
+          borderColor: MyTheme.colors.primaryBrand,
           borderRadius: 14,
         },
       ]}

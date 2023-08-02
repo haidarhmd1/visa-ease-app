@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     borderColor: MyTheme.colors.primaryBrand,
     borderRadius: 12,
   },
-  secondaryFontColor: { color: '#808080' },
+  secondaryFontColor: { color: MyTheme.colors.secondaryFont },
   badgeStyle: applications => {
     return {
       backgroundColor: badgeProcess(applications.status),

@@ -3,6 +3,7 @@ import { Layout } from 'components/Layout/Layout';
 import { IconButton } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from '../DocumentCapture.styled';
 
 export const CaptureDocument = ({ cameraReference, takePic }) => {
@@ -14,7 +15,7 @@ export const CaptureDocument = ({ cameraReference, takePic }) => {
           <IconButton
             mode="contained"
             icon="plus"
-            containerColor="#00bf80"
+            containerColor={MyTheme.colors.primaryBrand}
             iconColor="white"
             size={48}
             onPress={takePic}
