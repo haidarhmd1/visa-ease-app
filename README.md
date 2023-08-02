@@ -70,5 +70,8 @@ npx react-native run-ios
 ```
 Make sure you have set up the iOS development environment correctly if you intend to run the application on iOS. The React Native CLI will bundle the code and launch the application on the selected emulator or connected device.
 
+### License
+All rights reserved. See LICENSE.txt for more information.
+
 ### Contact
 For any questions or want to reach out: Haidar.hmd1@gmail.com
