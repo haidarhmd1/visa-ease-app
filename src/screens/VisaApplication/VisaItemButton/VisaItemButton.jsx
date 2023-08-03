@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, List } from 'react-native-paper';
-import { MyTheme, colorPalette } from 'styles/theme/theme.extended';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 const ProgessSuccess = () => <List.Icon icon="progress-check" color="green" />;
 const ProgessPending = () => (
