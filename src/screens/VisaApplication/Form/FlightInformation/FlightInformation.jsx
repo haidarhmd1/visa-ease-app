@@ -16,6 +16,7 @@ import { useIntl } from 'react-intl';
 import { useMutation, useQueryClient } from 'react-query';
 import { setFlightInformation } from 'services/api';
 import moment from 'moment';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useValidationSchema } from './FlightInformation.schema';
 
 export const FlightInformation = ({ route, navigation }) => {
@@ -82,7 +83,7 @@ export const FlightInformation = ({ route, navigation }) => {
       <View style={{ flex: 1, position: 'relative' }}>
         <ScrollView
           style={{
-            backgroundColor: 'white',
+            backgroundColor: MyTheme.colors.defaultBackgroundColor,
           }}
         >
           <Wrapper>
@@ -214,7 +215,10 @@ export const FlightInformation = ({ route, navigation }) => {
             </View>
           </Wrapper>
         </ScrollView>
-        <Card mode="elevated" style={{ backgroundColor: 'white' }}>
+        <Card
+          mode="elevated"
+          style={{ backgroundColor: MyTheme.colors.defaultBackgroundColor }}
+        >
           <Card.Content>
             <PrimaryButton
               isLoading={isLoading}

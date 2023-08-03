@@ -4,6 +4,7 @@ import { Card } from 'react-native-paper';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import { View } from 'react-native';
 import { useIntl } from 'react-intl';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const VisaStatus = ({
   isVisaApplicationScreen = false,
@@ -32,7 +33,7 @@ export const VisaStatus = ({
             value={percentage}
             valueSuffix="%"
             radius={32}
-            progressValueColor="#000"
+            progressValueColor={MyTheme.colors.black}
             strokeColorConfig={[
               { color: 'red', value: 0 },
               { color: 'skyblue', value: 50 },

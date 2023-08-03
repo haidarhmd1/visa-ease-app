@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     alignSelf: 'center',
-    color: '#000',
+    color: MyTheme.colors.black,
     marginLeft: 5,
   },
 });

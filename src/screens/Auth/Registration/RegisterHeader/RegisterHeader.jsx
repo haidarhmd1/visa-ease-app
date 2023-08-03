@@ -5,8 +5,9 @@ import { PlaneStartingIllustration } from 'assets/illustrations';
 import { Spacer } from 'components/Layout/Layout';
 import React from 'react';
 import { useIntl } from 'react-intl';
+import { blurhash } from 'helpers/constants/global';
+import { MyTheme } from 'styles/theme/theme.extended';
 
-const blurhash = '00Q12z';
 export const RegisterHeader = () => {
   const { formatMessage } = useIntl();
   return (
@@ -41,6 +42,6 @@ const style = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
 });

@@ -8,7 +8,7 @@ export const PrimaryButton = ({ children, style, ...properties }) => {
       mode="contained"
       buttonColor={MyTheme.colors.primaryBrand}
       {...properties}
-      style={[style, { borderRadius: 14 }]}
+      style={[style, { borderRadius: MyTheme.borderRadius }]}
     >
       {children}
     </Button>
@@ -28,7 +28,7 @@ export const SecondaryButton = ({ children, style, ...properties }) => {
           borderWidth: 2,
           borderStyle: 'solid',
           borderColor: MyTheme.colors.primaryBrand,
-          borderRadius: 14,
+          borderRadius: MyTheme.borderRadius,
         },
       ]}
     >
@@ -44,7 +44,7 @@ export const DangerButton = ({ children, style, ...properties }) => {
       buttonColor="#ff0000"
       textColor="white"
       {...properties}
-      style={[style, { borderRadius: 14 }]}
+      style={[style, { borderRadius: MyTheme.borderRadius }]}
     >
       {children}
     </Button>

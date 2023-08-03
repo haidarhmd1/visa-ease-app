@@ -13,6 +13,7 @@ import { useIntl } from 'react-intl';
 import { useMutation, useQueryClient } from 'react-query';
 import { startVisaProcess } from 'services/api';
 import { ErrorCard } from 'components/ErrorCard';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 const useVisaSelectDDL = () => {
   const { formatMessage } = useIntl();
@@ -126,7 +127,7 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
               disabled={countryValue === null || visaTypeValue === null}
               onPress={onCountrySelectedHandler}
             >
-              <Text style={style.colorWhite}>
+              <Text style={MyTheme.colors.white}>
                 {formatMessage({ id: 'general.start' })}
               </Text>
             </PrimaryButton>
@@ -138,7 +139,6 @@ export const VisaSelectCountryModal = ({ visible, setVisible }) => {
 };
 
 const style = StyleSheet.create({
-  colorWhite: { color: 'white' },
   fontBold: {
     fontWeight: 'bold',
   },

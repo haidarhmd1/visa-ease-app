@@ -4,6 +4,7 @@ import { Appbar } from 'react-native-paper';
 import { Dimensions, StyleSheet } from 'react-native';
 import { BANNER_H, TOPNAVI_H } from 'helpers/constants/environment';
 import { useSafeArea } from 'react-native-safe-area-context';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const StickyAppHeader = ({
   showBackButton,
@@ -44,7 +45,7 @@ export const StickyAppHeader = ({
       )}
       <Appbar.Content
         title={title}
-        color="white"
+        color={MyTheme.colors.white}
         titleStyle={styles.text(isTransparent)}
       />
     </Appbar.Header>
@@ -53,7 +54,7 @@ export const StickyAppHeader = ({
 
 const styles = StyleSheet.create({
   appHeader: (isTransparent, isFloating, safeArea) => ({
-    backgroundColor: isTransparent ? 'transparent' : '#FFF',
+    backgroundColor: isTransparent ? 'transparent' : MyTheme.colors.white,
     marginBottom: isFloating ? -TOPNAVI_H - safeArea.top : 0,
     position: 'absolute',
     top: 0,
@@ -64,9 +65,9 @@ const styles = StyleSheet.create({
     elevation: isTransparent ? 0.01 : 5,
   }),
   backgroundWhite: {
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.white,
   },
   text: isTransparent => ({
-    color: isTransparent ? '#FFF' : '#000',
+    color: isTransparent ? MyTheme.colors.white : MyTheme.colors.black,
   }),
 });

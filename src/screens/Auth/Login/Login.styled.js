@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colorPalette } from 'styles/theme/theme.extended';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const styles = StyleSheet.create({
   inputWidth: {
@@ -24,11 +24,11 @@ export const styles = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   forgotPasswordButton: {
     fontSize: 12,
-    color: colorPalette.turquoise.t700,
+    color: MyTheme.colors.primaryBrand,
     marginBottom: 16,
   },
 });

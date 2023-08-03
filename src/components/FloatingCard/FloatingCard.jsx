@@ -2,6 +2,7 @@ import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { themeStyle } from 'styles';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const FloatingCard = ({ children }) => {
   return (
@@ -23,6 +24,6 @@ const styles = StyleSheet.create({
     height: 140,
     marginLeft: 24,
     marginRight: 24,
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.white,
   },
 });

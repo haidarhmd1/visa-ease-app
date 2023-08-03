@@ -65,7 +65,13 @@ export const MyTheme = {
     primaryBrandBackground: colorPalette.turquoise.t400,
     primaryBrand: colorPalette.turquoise.tstandard,
 
+    white: colorPalette.binary.white,
+    black: colorPalette.binary.black,
+
+    borderColor: '#D3D3D3',
+
     secondaryFont: '#808080',
+    disabled: '#f0f0f0',
     error: colorPalette.red.r600,
 
     warningBackground: colorPalette.orange.o50,

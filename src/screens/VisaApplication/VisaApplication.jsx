@@ -151,7 +151,7 @@ export const VisaApplication = ({ navigation, route }) => {
         <StyledCard>
           <List.Section>
             <List.Accordion
-              style={styles.backgroundWhite}
+              style={MyTheme.colors.defaultBackgroundColor}
               title={formatMessage({
                 id: 'visaApplication.steps.information.infoTitle',
               })}
@@ -165,7 +165,7 @@ export const VisaApplication = ({ navigation, route }) => {
 
             <Divider marginBottom={12} marginTop={12} />
             <List.Accordion
-              style={styles.backgroundWhite}
+              style={MyTheme.colors.defaultBackgroundColor}
               title={formatMessage({
                 id: 'visaApplication.steps.information.whatWeNeedBox.title',
               })}
@@ -213,7 +213,6 @@ export const VisaApplication = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   marginTop: units => ({ marginTop: units }),
   marginBottom: units => ({ marginBottom: units }),
-  backgroundWhite: { backgroundColor: 'white' },
 
   list: {
     borderWidth: 1,

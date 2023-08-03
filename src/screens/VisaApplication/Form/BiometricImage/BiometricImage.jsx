@@ -13,6 +13,8 @@ import { useNavigation } from '@react-navigation/native';
 import { uploadDocument } from 'services/api';
 import { blurhash } from 'helpers/constants/global';
 import { useIntl } from 'react-intl';
+import { themeStyle } from 'styles';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const BiometricImage = ({ route }) => {
   const { visaId, item } = route.params;
@@ -126,14 +128,7 @@ export const BiometricImage = ({ route }) => {
 
 const style = StyleSheet.create({
   shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
+    ...themeStyle.shadow,
   },
   sheetContainer: {
     marginHorizontal: 24,
@@ -147,6 +142,6 @@ const style = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
 });

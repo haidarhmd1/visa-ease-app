@@ -88,7 +88,7 @@ export const CustomDropdown = ({
                 ? { borderColor: MyTheme.colors.error }
                 : { borderColor: MyTheme.colors.primaryBrand },
               onFocus && { borderColor: MyTheme.colors.primaryBrand },
-              disabled && { backgroundColor: '#f0f0f0' },
+              disabled && { backgroundColor: MyTheme.colors.disabled },
             ]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
@@ -144,7 +144,7 @@ export const CustomSelectCountryDropdown = ({
                 ? { borderColor: MyTheme.colors.error }
                 : { borderColor: MyTheme.colors.primaryBrand },
               onFocus && { borderColor: MyTheme.colors.primaryBrand },
-              disabled && { backgroundColor: '#f0f0f0' },
+              disabled && { backgroundColor: MyTheme.colors.disabled },
             ]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}

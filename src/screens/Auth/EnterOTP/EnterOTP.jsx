@@ -6,7 +6,7 @@ import { StyleSheet, View, TouchableWithoutFeedback, Text } from 'react-native';
 import { HelperText, TextInput } from 'react-native-paper';
 import { OTPIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
-import { colorPalette } from 'styles/theme/theme.extended';
+import { MyTheme, colorPalette } from 'styles/theme/theme.extended';
 import { useForm } from 'react-hook-form';
 import { CustomTextInput } from 'components/CustomFormElements/CustomFormElements';
 import { useMutation } from 'react-query';
@@ -112,7 +112,7 @@ const EnterOTPRaw = ({ route, navigation }) => {
 const style = StyleSheet.create({
   enterOTPWrapper: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   formWrapper: { width: 340, alignSelf: 'center' },
   flexContentCenter: { flex: 1, justifyContent: 'center' },
@@ -134,12 +134,12 @@ const style = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   resendTokenStyles: {
     fontSize: 12,
     textAlign: 'center',
-    color: colorPalette.turquoise.t700,
+    color: MyTheme.colors.primaryBrand,
     marginTop: 8,
   },
 });

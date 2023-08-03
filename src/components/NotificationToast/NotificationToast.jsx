@@ -6,6 +6,7 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from './NotificationToast.styled';
 
 const ToastType = {
@@ -93,7 +94,7 @@ export const NotificationToast = ({
         {error && (
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <IconButton
-              iconColor="red"
+              iconColor={MyTheme.colors.error}
               icon="alert-circle-outline"
               size={32}
               style={{ alignSelf: 'center' }}

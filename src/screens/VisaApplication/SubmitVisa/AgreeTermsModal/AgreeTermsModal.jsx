@@ -15,6 +15,7 @@ import {
 } from 'components/CustomFormElements/CustomFormElements';
 import moment from 'moment';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useAgreeTermsSchema } from './AgreeTerms.schema';
 
 const defaultValues = {
@@ -122,7 +123,7 @@ export const AgreeTermsModal = ({
               onPress={handleSubmit(onSubmit)}
               disabled={!watchCheck}
             >
-              <Text style={[style.colorWhite, style.fontBold]}>
+              <Text style={[MyTheme.colors.white, style.fontBold]}>
                 {formatMessage({ id: 'general.submit.visa' })}
               </Text>
             </PrimaryButton>
@@ -134,7 +135,6 @@ export const AgreeTermsModal = ({
 };
 
 const style = StyleSheet.create({
-  colorWhite: { color: 'white' },
   fontBold: {
     fontWeight: 'bold',
   },

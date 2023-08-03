@@ -18,6 +18,7 @@ import { AppHeader } from 'components/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/NotificationToast';
 import AuthContext from 'provider/AuthProvider';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useLoginInformation } from './LoginPersonalInformation.schema';
 
 const usePassErrorResponseMessage = () => {
@@ -102,7 +103,9 @@ export const LoginInformation = ({ navigation }) => {
           id: 'register.title.loginInformation',
         })}
       />
-      <StyledScrollView style={{ backgroundColor: 'white' }}>
+      <StyledScrollView
+        style={{ backgroundColor: MyTheme.colors.defaultBackgroundColor }}
+      >
         <Layout>
           <View>
             <View>

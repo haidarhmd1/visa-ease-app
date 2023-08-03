@@ -17,6 +17,7 @@ import { forgotPassword } from 'services/api';
 import { SuccessCard } from 'components/SuccessCard';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { ROUTES } from 'helpers/constants/routes';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useForgotPasswordSchema } from './ForgotPassword.schema';
 
 const ForgotPasswordRaw = ({ navigation }) => {
@@ -43,7 +44,7 @@ const ForgotPasswordRaw = ({ navigation }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: MyTheme.colors.defaultBackgroundColor,
       }}
     >
       <BackButton goBack={() => navigation.goBack()} />
@@ -75,7 +76,7 @@ const ForgotPasswordRaw = ({ navigation }) => {
                 >
                   <Text
                     style={{
-                      color: 'white',
+                      color: MyTheme.colors.white,
                       fontWeight: 'bold',
                       textDecorationLine: 'underline',
                     }}
@@ -136,7 +137,7 @@ const style = StyleSheet.create({
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
 });
 

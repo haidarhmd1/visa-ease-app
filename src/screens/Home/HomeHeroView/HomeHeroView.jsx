@@ -5,6 +5,7 @@ import { Text } from 'react-native-paper';
 import { ROUTES } from 'helpers/constants/routes';
 import navigation from 'navigation';
 import { useIntl } from 'react-intl';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const HomeHeroView = () => {
   const { formatMessage } = useIntl();
@@ -23,7 +24,7 @@ export const HomeHeroView = () => {
         borderBottomEndRadius: 24,
         borderBottomStartRadius: 24,
         overflow: 'hidden',
-        backgroundColor: 'black',
+        backgroundColor: MyTheme.colors.black,
       }}
     >
       <ImageBackground
@@ -46,7 +47,7 @@ export const HomeHeroView = () => {
         <Text
           variant="headlineSmall"
           style={{
-            color: 'white',
+            color: MyTheme.colors.white,
             fontWeight: 'bold',
           }}
         >
@@ -55,7 +56,7 @@ export const HomeHeroView = () => {
         <Text
           variant="bodyMedium"
           style={{
-            color: 'white',
+            color: MyTheme.colors.white,
           }}
         >
           {formatMessage({ id: 'screen.main.startVisaJourney' })}

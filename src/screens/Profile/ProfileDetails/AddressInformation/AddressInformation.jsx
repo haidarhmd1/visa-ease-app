@@ -17,6 +17,7 @@ import { AppHeader } from 'components/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/NotificationToast';
 import AuthContext from 'provider/AuthProvider';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useAddressInformation } from './AddressInformation.schema';
 
 export const AddressInformation = ({ navigation }) => {
@@ -103,7 +104,9 @@ export const AddressInformation = ({ navigation }) => {
           id: 'register.title.addressInformation',
         })}
       />
-      <StyledScrollView style={{ backgroundColor: 'white' }}>
+      <StyledScrollView
+        style={{ backgroundColor: MyTheme.colors.defaultBackgroundColor }}
+      >
         <Layout>
           <View>
             <View>

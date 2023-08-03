@@ -18,6 +18,7 @@ import { AppHeader } from 'components/AppHeader';
 import { StyleSheet, View } from 'react-native';
 import { NotificationToast } from 'components/NotificationToast';
 import AuthContext from 'provider/AuthProvider';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { usePersonalInformation } from './PersonalInformation.schema';
 
 export const PersonalInformation = ({ navigation }) => {
@@ -86,7 +87,9 @@ export const PersonalInformation = ({ navigation }) => {
           id: 'register.title.personalInformation',
         })}
       />
-      <StyledScrollView style={{ backgroundColor: 'white' }}>
+      <StyledScrollView
+        style={{ backgroundColor: MyTheme.colors.defaultBackgroundColor }}
+      >
         <Layout>
           <View>
             <Text variant="labelLarge">

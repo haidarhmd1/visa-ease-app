@@ -5,7 +5,7 @@ import React from 'react';
 import { ROUTES } from 'helpers/constants/routes';
 import { Account, Home } from 'screens';
 import { Visa } from 'screens/Visa';
-import { MyTheme } from 'styles/theme/theme.extended';
+import { MyTheme, themeStyle } from 'styles/theme/theme.extended';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ export const MainTabScreen = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: MyTheme.colors.primaryBrand,
-        tabBarInactiveTintColor: 'gray',
+        tabBarInactiveTintColor: MyTheme.colors.disabled,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -22,17 +22,10 @@ export const MainTabScreen = () => {
           height: 56,
           bottom: 15,
           borderRadius: 14,
-          borderTopColor: 'white',
+          borderTopColor: MyTheme.colors.white,
           left: 20,
           right: 20,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 3,
-          },
-          shadowOpacity: 0.29,
-          shadowRadius: 4.65,
-          elevation: 7,
+          ...themeStyle.shadow,
         },
       }}
       initialRouteName={ROUTES.HOME}

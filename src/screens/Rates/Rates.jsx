@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppHeader } from 'components/AppHeader';
-import { ScrollView, View, Linking, Platform } from 'react-native';
+import { ScrollView, View, Platform } from 'react-native';
 import { Layout, StyledCard } from 'components/Layout/Layout';
 import { Card, Divider, List, Snackbar, Text } from 'react-native-paper';
 import { PrimaryButton } from 'components/Buttons';

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 
 import { View, Animated, StyleSheet } from 'react-native';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { StickyHeaderWrapperImageContent } from './StickyHeaderWrapperImageContent';
 import { StickyAppHeader } from '../AppHeader/StickyAppHeader';
 
@@ -45,6 +46,6 @@ export const StickyHeaderWrapper = ({
 
 const styles = StyleSheet.create({
   whiteBackground: {
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
 });

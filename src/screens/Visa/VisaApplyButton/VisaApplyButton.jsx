@@ -6,6 +6,7 @@ import {
   View,
 } from 'react-native';
 import { Text } from 'react-native-paper';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const VisaApplyButton = ({
   setVisible,
@@ -22,7 +23,7 @@ export const VisaApplyButton = ({
           <Text variant="headlineSmall" style={styles.headline}>
             {title}
           </Text>
-          <Text variant="bodyMedium" style={styles.colorBlack}>
+          <Text variant="bodyMedium" style={MyTheme.colors.black}>
             {description}
           </Text>
         </View>
@@ -38,9 +39,9 @@ const styles = StyleSheet.create({
     position: 'relative',
     borderRadius: 14,
     overflow: 'hidden',
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
     borderStyle: 'solid',
-    borderColor: 'lightgrey',
+    borderColor: MyTheme.colors.borderColor,
     borderWidth: 2,
   }),
   image: height => ({
@@ -56,6 +57,5 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     justifyContent: 'flex-end',
   },
-  headline: { color: 'black', fontWeight: 'bold' },
-  colorBlack: { color: 'black' },
+  headline: { color: MyTheme.colors.black, fontWeight: 'bold' },
 });

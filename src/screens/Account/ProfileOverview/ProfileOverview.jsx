@@ -21,7 +21,7 @@ export const ProfileOverview = ({ navigation }) => {
           label={userCredentials(userData?.fullname)}
           color={MyTheme.colors.primaryBrand}
           style={{
-            backgroundColor: 'white',
+            backgroundColor: MyTheme.colors.defaultBackgroundColor,
             borderColor: MyTheme.colors.primaryBrand,
             borderWidth: 2,
           }}

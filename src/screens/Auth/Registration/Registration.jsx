@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useState } from 'react';
 import { PrimaryButton } from 'components/Buttons';
 import { getCityofCountry, registerUserProfile } from 'services/api';
@@ -22,6 +23,7 @@ import { ErrorCard } from 'components/ErrorCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useIntl } from 'react-intl';
 import moment from 'moment';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { useRegistrationValidationSchema } from './Registration.schema';
 
 const defaultValues = {
@@ -103,7 +105,7 @@ export const Registration = ({ navigation }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: MyTheme.colors.defaultBackgroundColor,
       }}
     >
       <BackButton goBack={() => navigation.goBack()} />

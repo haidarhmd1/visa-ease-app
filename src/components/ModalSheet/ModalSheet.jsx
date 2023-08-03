@@ -6,6 +6,7 @@ import {
 } from '@gorhom/bottom-sheet';
 import { Portal, Text } from 'react-native-paper';
 import { useIntl } from 'react-intl';
+import { themeStyle } from 'styles';
 
 export const ModalSheet = ({
   title,
@@ -83,14 +84,5 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
-  },
+  shadow: themeStyle.shadow,
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextInput } from 'react-native-paper';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const StyledTextInput = ({
   children,
@@ -14,7 +15,7 @@ export const StyledTextInput = ({
       outlineColor={outlineColor}
       activeOutlineColor={outlineColor}
       style={style}
-      outlineStyle={{ borderRadius: 14, borderWidth: 1 }}
+      outlineStyle={{ borderRadius: MyTheme.borderRadius, borderWidth: 1 }}
     />
   );
 };

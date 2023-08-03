@@ -16,7 +16,7 @@ export const CaptureDocument = ({ cameraReference, takePic }) => {
             mode="contained"
             icon="plus"
             containerColor={MyTheme.colors.primaryBrand}
-            iconColor="white"
+            iconColor={MyTheme.colors.white}
             size={48}
             onPress={takePic}
           />

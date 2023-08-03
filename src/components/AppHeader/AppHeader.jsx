@@ -4,6 +4,7 @@ import { ActivityIndicator, Appbar, Text } from 'react-native-paper';
 import { Alert, Dimensions, StyleSheet, View } from 'react-native';
 import { useIntl } from 'react-intl';
 import AuthContext from 'provider/AuthProvider';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 export const AppHeader = ({
   goBack = () => {},
@@ -73,8 +74,8 @@ export const AppHeader = ({
         )}
         <Appbar.Content
           title={title}
-          color="white"
-          titleStyle={styles.colorWhite}
+          color={MyTheme.colors.white}
+          titleStyle={MyTheme.colors.white}
         />
       </Appbar.Header>
     );
@@ -90,7 +91,7 @@ export const AppHeader = ({
 
 const styles = StyleSheet.create({
   backgroundWhite: {
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
   mainAppHeaderText: { paddingLeft: 16 },
   fontWeightBold: { fontWeight: 'bold' },
@@ -105,8 +106,5 @@ const styles = StyleSheet.create({
     top: 0,
     width: Dimensions.get('window').width,
     zIndex: 1,
-  },
-  colorWhite: {
-    color: 'white',
   },
 });

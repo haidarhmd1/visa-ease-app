@@ -3,6 +3,7 @@ import { Layout } from 'components/Layout/Layout';
 import { View, StyleSheet, Image } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
 import { useIntl } from 'react-intl';
+import { MyTheme } from 'styles/theme/theme.extended';
 import { styles } from '../DocumentCapture.styled';
 
 export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
@@ -16,8 +17,8 @@ export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
           <View>
             <IconButton
               icon="restore"
-              containerColor="white"
-              iconColor="black"
+              containerColor={MyTheme.colors.white}
+              iconColor={MyTheme.colors.black}
               size={24}
               onPress={() => setPhoto()}
             />
@@ -28,8 +29,8 @@ export const SaveDocument = ({ photo, setPhoto, submitDocument }) => {
           <View>
             <IconButton
               icon="arrow-right-thin"
-              containerColor="white"
-              iconColor="black"
+              containerColor={MyTheme.colors.white}
+              iconColor={MyTheme.colors.black}
               size={24}
               onPress={() => submitDocument()}
             />

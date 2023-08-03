@@ -90,13 +90,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
     borderWidth: 2,
     borderColor: MyTheme.colors.primaryBrand,
   },
   cardContent: {
     flexDirection: 'row',
-    backgroundColor: 'red',
+    backgroundColor: MyTheme.colors.error,
     flex: 1,
     justifyContent: 'space-between',
   },

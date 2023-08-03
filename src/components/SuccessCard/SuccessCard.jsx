@@ -19,5 +19,5 @@ const styles = StyleSheet.create({
     backgroundColor: MyTheme.colors.primaryBrandBackground,
     marginBottom: 24,
   },
-  textStyle: { color: 'white', fontWeight: 'bold' },
+  textStyle: { color: MyTheme.colors.white, fontWeight: 'bold' },
 });

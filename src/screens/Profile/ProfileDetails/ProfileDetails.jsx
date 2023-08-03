@@ -7,6 +7,7 @@ import { ProfileEditIllustration } from 'assets/illustrations';
 import { Image } from 'expo-image';
 import { blurhash } from 'helpers/constants/global';
 import { useIntl } from 'react-intl';
+import { MyTheme } from 'styles/theme/theme.extended';
 
 const leftIcon = icon => <List.Icon icon={icon} />;
 
@@ -72,13 +73,13 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     borderRadius: 10,
-    borderColor: 'lightgrey',
+    borderColor: MyTheme.colors.borderColor,
     borderStyle: 'solid',
     borderWidth: 1,
   },
   image: {
     width: 250,
     height: 250,
-    backgroundColor: '#fff',
+    backgroundColor: MyTheme.colors.defaultBackgroundColor,
   },
 });
