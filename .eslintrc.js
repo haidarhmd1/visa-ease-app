@@ -91,6 +91,7 @@ module.exports = {
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-useless-escape': 1,
     'react/jsx-props-no-spreading': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
   overrides: [
     {
