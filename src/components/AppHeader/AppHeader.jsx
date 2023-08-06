@@ -46,27 +46,28 @@ export const AppHeader = ({
   if (role === 'main') {
     return (
       <Appbar.Header
-        testID="mainAppHeader"
+        testID="mainAppbarHeader"
         statusBarHeight={0}
         style={[styles.backgroundWhite, { marginBottom: 8 }]}
       >
         <View>
-          <Text
-            testID="appbarHeaderGreeting"
-            style={styles.mainAppHeaderText}
-            variant="headlineSmall"
-          >
+          <Text style={styles.mainAppHeaderText} variant="headlineSmall">
             {formatMessage({ id: 'screen.main.greeting' })}
           </Text>
           <Text
             style={[styles.mainAppHeaderText, styles.fontWeightBold]}
             variant="headlineMedium"
+            testID="appbarHeaderGreeting"
           >
             {userData?.fullname}
           </Text>
         </View>
         <View style={styles.mainAppHeaderActionContainer}>
-          <Appbar.Action icon="logout" onPress={logoutUser} />
+          <Appbar.Action
+            testID="appbar-logout"
+            icon="logout"
+            onPress={logoutUser}
+          />
         </View>
       </Appbar.Header>
     );
@@ -75,7 +76,7 @@ export const AppHeader = ({
   if (role === 'secondary') {
     return (
       <Appbar.Header
-        testID="secondaryAppHeader"
+        testID="secondaryAppbarHeader"
         style={styles.secondaryAppHeaderContainer}
       >
         {showBackButton && (
@@ -96,7 +97,7 @@ export const AppHeader = ({
 
   return (
     <Appbar.Header
-      testID="defaultAppHeader"
+      testID="defaultAppbarHeader"
       statusBarHeight={0}
       style={styles.backgroundWhite}
     >
