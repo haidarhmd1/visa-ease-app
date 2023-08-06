@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { ActivityIndicator, Appbar, Text } from 'react-native-paper';
 import { Alert, Dimensions, StyleSheet, View } from 'react-native';
@@ -36,16 +36,26 @@ export const AppHeader = ({
     );
   };
 
-  if (!userData) return <ActivityIndicator animating size="large" />;
+  if (!userData)
+    return (
+      <View testID="loading-indicator">
+        <ActivityIndicator animating size="large" />
+      </View>
+    );
 
   if (role === 'main') {
     return (
       <Appbar.Header
+        testID="mainAppHeader"
         statusBarHeight={0}
         style={[styles.backgroundWhite, { marginBottom: 8 }]}
       >
         <View>
-          <Text style={styles.mainAppHeaderText} variant="headlineSmall">
+          <Text
+            testID="appbarHeaderGreeting"
+            style={styles.mainAppHeaderText}
+            variant="headlineSmall"
+          >
             {formatMessage({ id: 'screen.main.greeting' })}
           </Text>
           <Text
@@ -64,7 +74,10 @@ export const AppHeader = ({
 
   if (role === 'secondary') {
     return (
-      <Appbar.Header style={styles.secondaryAppHeaderContainer}>
+      <Appbar.Header
+        testID="secondaryAppHeader"
+        style={styles.secondaryAppHeaderContainer}
+      >
         {showBackButton && (
           <Appbar.Action
             icon="arrow-left"
@@ -82,7 +95,11 @@ export const AppHeader = ({
   }
 
   return (
-    <Appbar.Header statusBarHeight={0} style={styles.backgroundWhite}>
+    <Appbar.Header
+      testID="defaultAppHeader"
+      statusBarHeight={0}
+      style={styles.backgroundWhite}
+    >
       {showBackButton && <Appbar.Action icon="arrow-left" onPress={goBack} />}
       <Appbar.Content title={title} />
     </Appbar.Header>
