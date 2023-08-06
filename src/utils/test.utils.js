@@ -3,18 +3,18 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from '@testing-library/react-native';
 import { IntlProvider } from 'react-intl';
-import { AuthProvider } from 'provider/AuthProvider'; // Import your AuthProvider here if needed
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const TestProviders = ({ children }) => {
   const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <IntlProvider locale="en">
-        <AuthProvider>{children}</AuthProvider>
-      </IntlProvider>
-    </QueryClientProvider>
+    <SafeAreaProvider>
+      <QueryClientProvider client={queryClient}>
+        <IntlProvider locale="en">{children}</IntlProvider>
+      </QueryClientProvider>
+    </SafeAreaProvider>
   );
 };
 
