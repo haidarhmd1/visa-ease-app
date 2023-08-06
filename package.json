@@ -6,7 +6,9 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest",
+    "test": "jest --watch --coverage=false --changedSince=origin/main",
+    "testDebug": "jest -o --watch --coverage=false",
+    "testFinal": "jest",
     "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write $PWD/'src/**/*.{js,jsx}'",
     "lint": "yarn eslint && yarn stylelint",
     "update:locales": "./scripts/updateLocales.sh",
@@ -58,6 +60,8 @@
     "formik": "^2.2.9",
     "global": "^4.4.0",
     "install": "0.13.0",
+    "jest": "^26.6.3",
+    "jest-expo": "49.0.0",
     "metro-config": "0.75.1",
     "moment": "2.29.4",
     "npm": "9.5.1",
@@ -84,7 +88,7 @@
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.1",
     "react-query": "3.39.2",
-    "react-test-renderer": "18.2.0",
+    "react-test-renderer": "18.1.0",
     "recompose": "npm:react-recompose",
     "yup": "^0.32.11",
     "zustand": "4.3.3"
@@ -94,6 +98,7 @@
     "@testing-library/jest-native": "5.4.2",
     "@testing-library/react-native": "12.2.0",
     "@types/jest": "29.5.3",
+    "@types/react-test-renderer": "18.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -114,21 +119,40 @@
     "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-recommended": "4.0.0",
-    "stylelint-prettier": "1.2.0"
+    "stylelint-prettier": "1.2.0",
+    "ts-jest": "^26.5.6"
   },
   "private": true,
   "name": "visastar-expo-app",
   "version": "1.0.0",
   "jest": {
-    "preset": "react-native",
+    "verbose": true,
+    "preset": "jest-expo",
+    "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
+      "^.+\\.(js|jsx)$": "babel-jest",
+      "^.+\\.(ts|tsx)$": "ts-jest"
     },
-    "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)|@react-native-async-storage/async-storage"
-    ],
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    },
     "setupFilesAfterEnv": [
       "@testing-library/jest-native/extend-expect"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js",
+      "./src/utils/mock.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@react-navigation/.*|@unimodules/.*|@react-navigation|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@react-native-community|react-navigation-tabs|react-native-splash-screen|react-native-screens|react-native-reanimated)"
     ]
   }
 }
