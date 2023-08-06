@@ -5,6 +5,7 @@ import { render } from '@testing-library/react-native';
 import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { messages } from 'helpers/locales/locales';
 
 const TestProviders = ({ children }) => {
   const queryClient = new QueryClient();
@@ -12,7 +13,13 @@ const TestProviders = ({ children }) => {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <IntlProvider locale="en">{children}</IntlProvider>
+        <IntlProvider
+          locale="en"
+          messages={messages.en}
+          wrapRichTextChunksInFragment
+        >
+          {children}
+        </IntlProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
   );
