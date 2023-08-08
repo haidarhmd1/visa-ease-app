@@ -5,6 +5,7 @@ import { MyTheme } from 'styles/theme/theme.extended';
 export const PrimaryButton = ({ children, style, ...properties }) => {
   return (
     <Button
+      testID="primary-button"
       mode="contained"
       buttonColor={MyTheme.colors.primaryBrand}
       {...properties}
@@ -18,6 +19,7 @@ export const PrimaryButton = ({ children, style, ...properties }) => {
 export const SecondaryButton = ({ children, style, ...properties }) => {
   return (
     <Button
+      testID="secondary-button"
       mode="contained"
       buttonColor="white"
       textColor={MyTheme.colors.primaryBrand}
@@ -40,6 +42,7 @@ export const SecondaryButton = ({ children, style, ...properties }) => {
 export const DangerButton = ({ children, style, ...properties }) => {
   return (
     <Button
+      testID="danger-button"
       mode="contained"
       buttonColor="#ff0000"
       textColor="white"
