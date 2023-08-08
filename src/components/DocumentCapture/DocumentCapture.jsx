@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { View } from 'react-native';
 
 import { Camera } from 'expo-camera';
 import { Text } from 'react-native-paper';
@@ -29,14 +30,14 @@ export const DocumentCaptureRaw = ({
 
   if (hasCameraPermission === undefined) {
     return (
-      <Text variant="labelLarge">
+      <Text testID="camera-permission-loading" variant="labelLarge">
         {formatMessage({ id: 'request.cameraPermission.status.loading' })}
       </Text>
     );
   }
   if (!hasCameraPermission) {
     return (
-      <Text variant="labelLarge">
+      <Text testID="camera-permission-notGranted" variant="labelLarge">
         {formatMessage({ id: 'request.cameraPermission.status.notGranted' })}
       </Text>
     );
@@ -55,7 +56,7 @@ export const DocumentCaptureRaw = ({
 
   if (photo) {
     return (
-      <>
+      <View testID="photo-preview-save">
         <AppHeader
           goBack={() => navigation.goBack()}
           title={formatMessage({ id: 'documentCapture.saveDocument.title' })}
@@ -66,19 +67,19 @@ export const DocumentCaptureRaw = ({
           submitDocument={submitDocument}
           fieldValue={fieldValue}
         />
-      </>
+      </View>
     );
   }
 
   return (
-    <>
+    <View testID="capute-photo-screen">
       <AppHeader
         navigation={navigation}
         goBack={() => navigation.goBack()}
         title={title}
       />
       <CaptureDocument cameraReference={cameraReference} takePic={takePic} />
-    </>
+    </View>
   );
 };
 
