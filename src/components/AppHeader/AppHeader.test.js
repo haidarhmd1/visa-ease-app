@@ -4,7 +4,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react-native';
 import { render } from 'utils/test.utils';
 import AuthContext, { AuthProvider } from 'provider/AuthProvider';
-import { AppHeader } from '../AppHeader';
+import { AppHeader } from './AppHeader';
 
 const userData = { fullname: 'John Doe' };
 
