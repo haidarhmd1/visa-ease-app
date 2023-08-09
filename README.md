@@ -4,12 +4,12 @@ Simplifying Visa Applications with Digital Efficiency
 
 # Preview [Screenshots]
 
-  <img src="./screenshots/visa-ease-login-min.png" width="256">
-  <img src="./screenshots/visa-ease-registration-min.png" width="256">
-  <img src="./screenshots/visa-ease-main-min.png" width="256">
-  <img src="./screenshots/visa-ease-visa-min.png" width="256">
-  <img src="./screenshots/visa-ease-settings-min.png" width="256">
-  <img src="./screenshots/visa-ease-account-min.png" width="256">
+  <img src="./screenshots/visa-ease-login-min.png" width="225">
+  <img src="./screenshots/visa-ease-registration-min.png" width="225">
+  <img src="./screenshots/visa-ease-main-min.png" width="225">
+  <img src="./screenshots/visa-ease-visa-min.png" width="225">
+  <img src="./screenshots/visa-ease-settings-min.png" width="225">
+  <img src="./screenshots/visa-ease-account-min.png" width="225">
 
 ### Description
 
@@ -111,4 +111,5 @@ All rights reserved. See LICENSE.txt for more information.
 
 ### Contact
 
-For any questions or want to reach out: Haidar.hmd1@gmail.com
+For any questions or want to reach out: Haidar.hmd1@gmail.com | on
+<a href="https://www.linkedin.com/in/haidar-hammoud-775602124/">LinkedIn</a>
