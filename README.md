@@ -9,6 +9,11 @@ Simplifying Visa Applications with Digital Efficiency
 - [ ] Remove static content and replace it with dynamic content from the DB
       (e.g. countryList)
 
+### Note:
+
+In order to run it with the API endpoint, clone the following Repo:
+https://github.com/haidarhmd1/visa-ease-web
+
 # Preview [Screenshots]
 
   <img src="./screenshots/visa-ease-login-min.png" width="225">
