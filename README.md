@@ -2,6 +2,13 @@
 
 Simplifying Visa Applications with Digital Efficiency
 
+### TODO
+
+- [ ] Add jest tests for component
+- [ ] Add gitHub CI/CD
+- [ ] Remove static content and replace it with dynamic content from the DB
+      (e.g. countryList)
+
 # Preview [Screenshots]
 
   <img src="./screenshots/visa-ease-login-min.png" width="225">
