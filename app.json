@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "visastar-expo-app",
-    "slug": "visastar-expo-app",
+    "name": "visaease-app",
+    "slug": "visaease-app",
     "privacy": "unisted",
     "version": "1.0.0",
     "splash": {
@@ -9,11 +9,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "org.name.visastarexpoapp",
+      "bundleIdentifier": "org.name.visaeaseapp",
       "config": {
         "usesNonExemptEncryption": false
       },
@@ -22,10 +20,8 @@
       }
     },
     "android": {
-      "package": "org.name.visastarexpoapp",
-      "permissions": [
-        "android.permission.CAMERA"
-      ]
+      "package": "org.name.visaeaseapp",
+      "permissions": ["android.permission.CAMERA"]
     },
     "plugins": [],
     "extra": {
@@ -38,5 +34,5 @@
       "url": "https://u.expo.dev/6910cbbc-532d-463a-81df-5433c179439c"
     }
   },
-  "name": "visastar-expo-app"
+  "name": "visaease-app"
 }
