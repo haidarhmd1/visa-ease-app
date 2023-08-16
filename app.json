@@ -9,7 +9,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "org.name.visaeaseapp",
       "config": {
@@ -21,12 +23,14 @@
     },
     "android": {
       "package": "org.name.visaeaseapp",
-      "permissions": ["android.permission.CAMERA"]
+      "permissions": [
+        "android.permission.CAMERA"
+      ]
     },
     "plugins": [],
     "extra": {
       "eas": {
-        "projectId": "6910cbbc-532d-463a-81df-5433c179439c"
+        "projectId": "535bb004-ee63-45cd-bc7f-8947e285fbc5"
       }
     },
     "runtimeVersion": "1.0.0",
