@@ -1,0 +1,31 @@
+name: Jest Tests
+
+on:
+  push:
+    branches:
+      - main # Change this to the default branch of your repository
+  pull_request:
+    branches:
+      - main # Change this to the default branch of your repository
+
+jobs:
+  test:
+    name: Run Jest Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js and Yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16 # Change this to your desired Node.js version
+          registry-url: https://registry.npmjs.org
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run Jest tests
+        run: yarn test
